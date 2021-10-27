@@ -3,7 +3,7 @@
 ## Introduction
 This repo contains our project in "Introduction to Software Engineering" at Hanoi University of Science and Technology.  
 
-## Contribute
+## Contributors
 Class: Talented in Computer Science - K64
 + Tạ Hữu Bình
 + Trần Trọng Hiệp
