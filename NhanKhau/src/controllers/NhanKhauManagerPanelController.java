@@ -9,9 +9,13 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -30,7 +34,10 @@ import views.infoViews.InfoJframe;
 public class NhanKhauManagerPanelController {
     
     private JPanel jpnView;
+    private JPopupMenu tablepopupMenu;
     private JTextField jtfSearch;
+    private JTextField diachiSearchtextField;
+    private JButton locButton;
     private NhanKhauService nhanKhauService;
     private List<NhanKhauBean> listNhanKhauBeans;
     private ClassTableModel classTableModel = null;
@@ -46,34 +53,46 @@ public class NhanKhauManagerPanelController {
         initAction();
     }
 
+    public NhanKhauManagerPanelController(JPanel jpnView, JPopupMenu tablepopupMenu, JTextField jtfSearch, JTextField diachiSearchtextField, JButton locButton) {
+        this.jpnView = jpnView;
+        this.jtfSearch = jtfSearch;
+        this.tablepopupMenu = tablepopupMenu;
+        this.diachiSearchtextField = diachiSearchtextField;
+        this.locButton = locButton;
+        classTableModel = new ClassTableModel();
+        this.nhanKhauService = new NhanKhauService();
+        this.listNhanKhauBeans = this.nhanKhauService.getListNhanKhau();
+        initAction();
+    }
+    
     public NhanKhauManagerPanelController() {
     }
     
     
     //
     public void initAction(){
-        this.jtfSearch.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                String key = jtfSearch.getText();
-                listNhanKhauBeans = nhanKhauService.search(key.trim());
-                setDataTable();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                String key = jtfSearch.getText();
-                listNhanKhauBeans = nhanKhauService.search(key.trim());
-                setDataTable();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                String key = jtfSearch.getText();
-                listNhanKhauBeans = nhanKhauService.search(key.trim());
-                setDataTable();
-            }
-        });
+//        this.jtfSearch.getDocument().addDocumentListener(new DocumentListener() {
+//            @Override
+//            public void insertUpdate(DocumentEvent e) {
+//                String key = jtfSearch.getText();
+//                listNhanKhauBeans = nhanKhauService.search(key.trim());
+//                setDataTable();
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) {
+//                String key = jtfSearch.getText();
+//                listNhanKhauBeans = nhanKhauService.search(key.trim());
+//                setDataTable();
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) {
+//                String key = jtfSearch.getText();
+//                listNhanKhauBeans = nhanKhauService.search(key.trim());
+//                setDataTable();
+//            }
+//        });
     }
     
     public void setDataTable() {
@@ -89,6 +108,24 @@ public class NhanKhauManagerPanelController {
             }
             
         };
+
+//        JPopupMenu tablepopupMenu;
+//        JMenuItem vangMenuItem;
+//        JMenuItem xemchitietvasuaMenuItem;
+//        JMenuItem xoaMenuItem;
+//        tablepopupMenu = new JPopupMenu();
+//        //addPopup(tablePanel, tablepopupMenu);
+//        
+//        xemchitietvasuaMenuItem = new JMenuItem("Xem chi tiết và sửa");
+//        tablepopupMenu.add(xemchitietvasuaMenuItem);
+//        
+//        vangMenuItem = new JMenuItem("Đăng ký tạm vắng");
+//        tablepopupMenu.add(vangMenuItem);
+//        
+//        xoaMenuItem = new JMenuItem("Xóa");
+//        tablepopupMenu.add(xoaMenuItem);
+
+        table.setComponentPopupMenu(tablepopupMenu);
         
         // thiet ke bang
         

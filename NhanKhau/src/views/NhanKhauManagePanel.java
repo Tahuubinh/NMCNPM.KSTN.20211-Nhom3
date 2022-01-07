@@ -2,9 +2,32 @@ package views;
 
 import controllers.NhanKhauManagerPanelController;
 import views.NhanKhauManagerFrame.AddNewPeopleJFrame;
+import views.NhanKhauManagerFrame.ThemMoiNhanKhau;
+import views.NhanKhauManagerFrame.XemChiTietChinhSuaNhanKhau;
+import views.NhanKhauManagerFrame.XoaNhanKhau;
 import views.NhanKhauManagerFrame.DangKyTamTruJFrame;
 import views.NhanKhauManagerFrame.DangKyTamVangJFrame;
 import views.NhanKhauManagerFrame.KhaiTuJFrame;
+import javax.swing.border.LineBorder;
+import javax.swing.plaf.ColorUIResource;
+
+import org.jcp.xml.dsig.internal.MacOutputStream;
+
+import java.awt.Color;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
+import javax.swing.JTextField;
 
 import javax.swing.JFrame;
 
@@ -21,9 +44,10 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     private JFrame parentJFrame;
     
     public NhanKhauManagePanel(JFrame parentFrame) {
+    	setBorder(new LineBorder(new Color(0, 0, 0)));
         this.parentJFrame = parentFrame;
         initComponents();
-        controller = new NhanKhauManagerPanelController(tablePanel, jtfSearch);
+        controller = new NhanKhauManagerPanelController(tablePanel, tablepopupMenu, jtfSearch, diachiSearchtextField, locButton);
         controller.setParentJFrame(parentJFrame);
         controller.setDataTable();
     }
@@ -37,7 +61,7 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tamVangBtn = new javax.swing.JButton();
+        //tamVangBtn = new javax.swing.JButton();
         tablePanel = new javax.swing.JPanel();
         addNewBtn = new javax.swing.JButton();
         tamTruBtn = new javax.swing.JButton();
@@ -46,13 +70,40 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        tamVangBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        tamVangBtn.setText("ĐK tạm vắng");
-        tamVangBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tamVangBtnActionPerformed(evt);
-            }
+//        tamVangBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+//        tamVangBtn.setText("ĐK tạm vắng");
+//        tamVangBtn.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                tamVangBtnActionPerformed(evt);
+//            }
+//        });
+        
+        tablepopupMenu = new JPopupMenu();
+        addPopup(tablePanel, tablepopupMenu);
+        
+        xemchitietvasuaMenuItem = new JMenuItem("Xem chi tiết và sửa");
+        xemchitietvasuaMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		ChinhSuaActionPerformed(e);
+        	}
         });
+        tablepopupMenu.add(xemchitietvasuaMenuItem);
+        
+        vangMenuItem = new JMenuItem("Đăng ký tạm vắng");
+        vangMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		tamVangBtnActionPerformed(e);
+        	}
+        });
+        tablepopupMenu.add(vangMenuItem);
+        
+        xoaMenuItem = new JMenuItem("Xóa");
+        xoaMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		xoaActionPerformed(e);
+        	}
+        });
+        tablepopupMenu.add(xoaMenuItem);
 
         javax.swing.GroupLayout tablePanelLayout = new javax.swing.GroupLayout(tablePanel);
         tablePanel.setLayout(tablePanelLayout);
@@ -91,59 +142,117 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
         });
 
         jtfSearch.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtfSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfSearchActionPerformed(evt);
-            }
+//        jtfSearch.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jtfSearchActionPerformed(evt);
+//            }
+//        });
+        
+        hotenNewLabel = new JLabel("Họ và tên");
+        hotenNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        
+        locButton = new JButton("Lọc");
+        locButton.setFont(new Font("Tahoma", Font.BOLD, 14));
+        locButton.setBackground(new java.awt.Color(0, 160, 50));
+        locButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
         });
+        locButton.setForeground(Color.WHITE);
+        
+        diachiSearchtextField = new JTextField();
+        diachiSearchtextField.setFont(new Font("Arial", Font.PLAIN, 14));
+        
+        JLabel lblaCh = new JLabel("Địa chỉ");
+        lblaCh.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 434, Short.MAX_VALUE))
-                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addNewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tamTruBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tamVangBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(khaiTuBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+        	layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(lblaCh, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(diachiSearchtextField, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        				.addGroup(layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(hotenNewLabel)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(jtfSearch, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(18)
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(tamTruBtn, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
+        					.addContainerGap())
+        				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
+        					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        					.addComponent(locButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+        					.addGap(37))))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jtfSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tablePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(addNewBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tamVangBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(tamTruBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(khaiTuBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(hotenNewLabel)
+        						.addComponent(jtfSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblaCh, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(diachiSearchtextField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+        					.addGap(8))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(locButton)
+        					.addGap(18)))
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addGap(36)
+        					.addComponent(tamTruBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					.addGap(18, 131, Short.MAX_VALUE))))
         );
+        this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
 
     private void addNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
-        AddNewPeopleJFrame addNewPeopleJFrame = new AddNewPeopleJFrame(this.controller, this.parentJFrame);
+//        AddNewPeopleJFrame addNewPeopleJFrame = new AddNewPeopleJFrame(this.controller, this.parentJFrame);
+//        addNewPeopleJFrame.setLocationRelativeTo(null);
+//        addNewPeopleJFrame.setResizable(false);
+//        addNewPeopleJFrame.setVisible(true);
+    	
+        ThemMoiNhanKhau addNewPeopleJFrame = new ThemMoiNhanKhau(this.controller, this.parentJFrame);
         addNewPeopleJFrame.setLocationRelativeTo(null);
         addNewPeopleJFrame.setResizable(false);
         addNewPeopleJFrame.setVisible(true);
+    	
+        
     }//GEN-LAST:event_addNewBtnActionPerformed
+    
+    private void ChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
+//      AddNewPeopleJFrame addNewPeopleJFrame = new AddNewPeopleJFrame(this.controller, this.parentJFrame);
+//      addNewPeopleJFrame.setLocationRelativeTo(null);
+//      addNewPeopleJFrame.setResizable(false);
+//      addNewPeopleJFrame.setVisible(true);
+  	
+      XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame);
+      addNewPeopleJFrame.setLocationRelativeTo(null);
+      addNewPeopleJFrame.setResizable(false);
+      addNewPeopleJFrame.setVisible(true);
+  	
+      
+    }
 
     private void tamVangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tamVangBtnActionPerformed
         // hien jframe dang ky tam vang
+    	System.out.println("Hello");
         DangKyTamVangJFrame dangKyTamVangJFrame = new DangKyTamVangJFrame(this.parentJFrame);
         dangKyTamVangJFrame.setLocationRelativeTo(null);
         dangKyTamVangJFrame.setResizable(false);
@@ -163,6 +272,13 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
         khaiTuJFrame.setResizable(false);
         khaiTuJFrame.setVisible(true);
     }//GEN-LAST:event_khaiTuBtnActionPerformed
+    
+    private void xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_khaiTuBtnActionPerformed
+    	XoaNhanKhau xoaNhanKhau = new XoaNhanKhau(this.parentJFrame);
+    	xoaNhanKhau.setLocationRelativeTo(null);
+    	xoaNhanKhau.setResizable(false);
+    	xoaNhanKhau.setVisible(true);
+    }//GEN-LAST:event_khaiTuBtnActionPerformed
 
     private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed
         // TODO add your handling code here:
@@ -175,6 +291,30 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     private javax.swing.JButton khaiTuBtn;
     private javax.swing.JPanel tablePanel;
     private javax.swing.JButton tamTruBtn;
-    private javax.swing.JButton tamVangBtn;
+    //private javax.swing.JButton tamVangBtn;
+    private JLabel hotenNewLabel;
+    private JButton locButton;
+    private JPopupMenu tablepopupMenu;
+    private JMenuItem vangMenuItem;
+    private JMenuItem xemchitietvasuaMenuItem;
+    private JMenuItem xoaMenuItem;
+    private JTextField diachiSearchtextField;
     // End of variables declaration//GEN-END:variables
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }
