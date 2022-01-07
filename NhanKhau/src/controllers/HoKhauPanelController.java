@@ -8,8 +8,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
 import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -25,9 +28,13 @@ import views.infoViews.InfoJframe;
  * @author Hai
  */
 public class HoKhauPanelController {
-    private List<HoKhauBean> list;
+	private List<HoKhauBean> list;
     private JTextField searchJtf;
+    private JTextField chuhotextField;
+    private JTextField diachitextField;
+    private JButton locButton;
     private JPanel tableJpn;
+    private JPopupMenu tablepopupMenu;
     private final HoKhauService hoKhauService = new HoKhauService();
     private final TableModelHoKhau tableModelHoKhau = new TableModelHoKhau();
     private final String COLUNMS[] = {"Mã hộ khẩu", "Họ tên chủ hộ", "Địa chỉ"}; 
@@ -41,41 +48,54 @@ public class HoKhauPanelController {
         initAction();
     }
     
+    public HoKhauPanelController(JTextField searchJtf, JPanel tableJpn, JTextField chuhotextField, JTextField diachitextField, 
+    		JButton locButton, JPopupMenu tablepopupMenu) {
+        this.searchJtf = searchJtf;
+        this.tableJpn = tableJpn;
+        this.chuhotextField = chuhotextField;
+        this.diachitextField = diachitextField;
+        this.locButton = locButton;
+        this.tablepopupMenu = tablepopupMenu;
+        this.list = hoKhauService.getListHoKhau();
+        setData();
+        initAction();
+    }
+    
     public void initAction() {
-        this.searchJtf.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                String key = searchJtf.getText().trim();
-                if (key.isEmpty()) {
-                    list = hoKhauService.getListHoKhau();
-                } else {
-                    list = hoKhauService.search(key);
-                }
-                setData();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                String key = searchJtf.getText().trim();
-                if (key.isEmpty()) {
-                    list = hoKhauService.getListHoKhau();
-                } else {
-                    list = hoKhauService.search(key);
-                }
-                setData();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                String key = searchJtf.getText().trim();
-                if (key.isEmpty()) {
-                    list = hoKhauService.getListHoKhau();
-                } else {
-                    list = hoKhauService.search(key);
-                }
-                setData();
-            }
-        });
+//        this.searchJtf.getDocument().addDocumentListener(new DocumentListener() {
+//            @Override
+//            public void insertUpdate(DocumentEvent e) {
+//                String key = searchJtf.getText().trim();
+//                if (key.isEmpty()) {
+//                    list = hoKhauService.getListHoKhau();
+//                } else {
+//                    list = hoKhauService.search(key);
+//                }
+//                setData();
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) {
+//                String key = searchJtf.getText().trim();
+//                if (key.isEmpty()) {
+//                    list = hoKhauService.getListHoKhau();
+//                } else {
+//                    list = hoKhauService.search(key);
+//                }
+//                setData();
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) {
+//                String key = searchJtf.getText().trim();
+//                if (key.isEmpty()) {
+//                    list = hoKhauService.getListHoKhau();
+//                } else {
+//                    list = hoKhauService.search(key);
+//                }
+//                setData();
+//            }
+//        });
     }
 
     public void setData() {
@@ -88,6 +108,7 @@ public class HoKhauPanelController {
             }
             
         };
+        table.setComponentPopupMenu(tablepopupMenu);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));
         table.setRowHeight(50);

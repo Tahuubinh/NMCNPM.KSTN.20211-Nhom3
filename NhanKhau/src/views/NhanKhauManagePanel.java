@@ -28,6 +28,7 @@ import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JTextField;
 
 /**
  *
@@ -45,7 +46,7 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     	setBorder(new LineBorder(new Color(0, 0, 0)));
         this.parentJFrame = parentFrame;
         initComponents();
-        controller = new NhanKhauManagerPanelController(tablePanel, jtfSearch, tablepopupMenu);
+        controller = new NhanKhauManagerPanelController(tablePanel, tablepopupMenu, jtfSearch, diachiSearchtextField, locButton);
         controller.setParentJFrame(parentJFrame);
         controller.setDataTable();
     }
@@ -140,70 +141,82 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
         });
 
         jtfSearch.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jtfSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfSearchActionPerformed(evt);
-            }
-        });
+//        jtfSearch.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jtfSearchActionPerformed(evt);
+//            }
+//        });
         
         hotenNewLabel = new JLabel("Họ và tên");
-        hotenNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        hotenNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         
         locButton = new JButton("Lọc");
-        locButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        locButton.setFont(new Font("Tahoma", Font.BOLD, 14));
         locButton.setBackground(new java.awt.Color(0, 160, 50));
         locButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         	}
         });
         locButton.setForeground(Color.WHITE);
+        
+        diachiSearchtextField = new JTextField();
+        diachiSearchtextField.setFont(new Font("Arial", Font.PLAIN, 14));
+        
+        JLabel lblaCh = new JLabel("Địa chỉ");
+        lblaCh.setFont(new Font("Tahoma", Font.PLAIN, 12));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
+        	layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addComponent(lblaCh, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(diachiSearchtextField, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+        				.addGroup(layout.createSequentialGroup()
         					.addContainerGap()
         					.addComponent(hotenNewLabel)
         					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(jtfSearch, GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
-        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
+        					.addComponent(jtfSearch, GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)))
         			.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
         				.addGroup(layout.createSequentialGroup()
         					.addGap(18)
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
         						.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(tamTruBtn, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-        						//.addComponent(tamVangBtn, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-        						//.addComponent(khaiTuBtn, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-        						)
+        						.addComponent(tamTruBtn, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
         					.addContainerGap())
         				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
         					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        					.addComponent(locButton)
-        					.addGap(44))))
+        					.addComponent(locButton, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
+        					.addGap(37))))
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
-        			.addGap(28)
-        			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        				.addComponent(jtfSearch, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(hotenNewLabel)
-        				.addComponent(locButton))
-        			.addGap(18)
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(hotenNewLabel)
+        						.addComponent(jtfSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        						.addComponent(lblaCh, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(diachiSearchtextField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+        					.addGap(8))
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(locButton)
+        					.addGap(18)))
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
         				.addGroup(layout.createSequentialGroup()
         					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					//.addComponent(tamVangBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
+        					.addGap(36)
         					.addComponent(tamTruBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addGap(18)
-        					//.addComponent(khaiTuBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-        					.addGap(0, 49, Short.MAX_VALUE))))
+        					.addGap(18, 131, Short.MAX_VALUE))))
         );
         this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
@@ -284,6 +297,7 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     private JMenuItem vangMenuItem;
     private JMenuItem xemchitietvasuaMenuItem;
     private JMenuItem xoaMenuItem;
+    private JTextField diachiSearchtextField;
     // End of variables declaration//GEN-END:variables
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
