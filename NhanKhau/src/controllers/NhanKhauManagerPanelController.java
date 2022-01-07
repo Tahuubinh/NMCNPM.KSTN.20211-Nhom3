@@ -10,8 +10,10 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -30,6 +32,7 @@ import views.infoViews.InfoJframe;
 public class NhanKhauManagerPanelController {
     
     private JPanel jpnView;
+    private JPopupMenu tablepopupMenu;
     private JTextField jtfSearch;
     private NhanKhauService nhanKhauService;
     private List<NhanKhauBean> listNhanKhauBeans;
@@ -46,6 +49,16 @@ public class NhanKhauManagerPanelController {
         initAction();
     }
 
+    public NhanKhauManagerPanelController(JPanel jpnView, JTextField jtfSearch, JPopupMenu tablepopupMenu) {
+        this.jpnView = jpnView;
+        this.jtfSearch = jtfSearch;
+        this.tablepopupMenu = tablepopupMenu;
+        classTableModel = new ClassTableModel();
+        this.nhanKhauService = new NhanKhauService();
+        this.listNhanKhauBeans = this.nhanKhauService.getListNhanKhau();
+        initAction();
+    }
+    
     public NhanKhauManagerPanelController() {
     }
     
@@ -89,6 +102,24 @@ public class NhanKhauManagerPanelController {
             }
             
         };
+
+//        JPopupMenu tablepopupMenu;
+//        JMenuItem vangMenuItem;
+//        JMenuItem xemchitietvasuaMenuItem;
+//        JMenuItem xoaMenuItem;
+//        tablepopupMenu = new JPopupMenu();
+//        //addPopup(tablePanel, tablepopupMenu);
+//        
+//        xemchitietvasuaMenuItem = new JMenuItem("Xem chi tiết và sửa");
+//        tablepopupMenu.add(xemchitietvasuaMenuItem);
+//        
+//        vangMenuItem = new JMenuItem("Đăng ký tạm vắng");
+//        tablepopupMenu.add(vangMenuItem);
+//        
+//        xoaMenuItem = new JMenuItem("Xóa");
+//        tablepopupMenu.add(xoaMenuItem);
+
+        table.setComponentPopupMenu(tablepopupMenu);
         
         // thiet ke bang
         
