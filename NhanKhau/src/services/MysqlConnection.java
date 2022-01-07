@@ -22,7 +22,13 @@ public class MysqlConnection {
         //Class.forName("com.mysql.jdbc.Driver");
         String connectionUrl = "jdbc:postgresql://localhost:5432/quan_ly_nhan_khau";;
         System.out.println(connectionUrl);
-        Connection conn = DriverManager.getConnection(connectionUrl, userName, password);
+        Connection conn = null;
+        try {
+        	conn = DriverManager.getConnection(connectionUrl, userName, password);
+        } catch (Exception e){
+        	System.out.println(e);
+        }
+        
         if(conn != null) System.out.println("Connected!");
         else System.out.println("Failed");
         return conn;
