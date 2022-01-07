@@ -1,4 +1,4 @@
-package quanlynhankhau;
+package quanlynhavanhoa;
 
 import java.util.Calendar;
 import javax.swing.UIManager;
@@ -9,7 +9,7 @@ import views.MainFrame;
  *
  * @author Hai
  */
-public class QuanLyNhanKhau {
+public class QuanLyNhaVanHoa {
 
     public static Calendar calendar = Calendar.getInstance();
     
