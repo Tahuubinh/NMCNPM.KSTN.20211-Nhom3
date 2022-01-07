@@ -4,6 +4,8 @@ import controllers.NhanKhauManagerPanelController;
 import javax.swing.JFrame;
 import views.NhanKhauManagerFrame.AddNewPeopleJFrame;
 import views.NhanKhauManagerFrame.ThemMoiNhanKhau;
+import views.NhanKhauManagerFrame.XemChiTietChinhSuaNhanKhau;
+import views.NhanKhauManagerFrame.XoaNhanKhau;
 import views.NhanKhauManagerFrame.DangKyTamTruJFrame;
 import views.NhanKhauManagerFrame.DangKyTamVangJFrame;
 import views.NhanKhauManagerFrame.KhaiTuJFrame;
@@ -80,6 +82,7 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
         xemchitietvasuaMenuItem = new JMenuItem("Xem chi tiết và sửa");
         xemchitietvasuaMenuItem.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
+        		ChinhSuaActionPerformed(e);
         	}
         });
         tablepopupMenu.add(xemchitietvasuaMenuItem);
@@ -218,6 +221,20 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     	
         
     }//GEN-LAST:event_addNewBtnActionPerformed
+    
+    private void ChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
+//      AddNewPeopleJFrame addNewPeopleJFrame = new AddNewPeopleJFrame(this.controller, this.parentJFrame);
+//      addNewPeopleJFrame.setLocationRelativeTo(null);
+//      addNewPeopleJFrame.setResizable(false);
+//      addNewPeopleJFrame.setVisible(true);
+  	
+      XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame);
+      addNewPeopleJFrame.setLocationRelativeTo(null);
+      addNewPeopleJFrame.setResizable(false);
+      addNewPeopleJFrame.setVisible(true);
+  	
+      
+    }
 
     private void tamVangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tamVangBtnActionPerformed
         // hien jframe dang ky tam vang
@@ -243,7 +260,10 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_khaiTuBtnActionPerformed
     
     private void xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_khaiTuBtnActionPerformed
-        System.err.println("Delete");
+    	XoaNhanKhau xoaNhanKhau = new XoaNhanKhau(this.parentJFrame);
+    	xoaNhanKhau.setLocationRelativeTo(null);
+    	xoaNhanKhau.setResizable(false);
+    	xoaNhanKhau.setVisible(true);
     }//GEN-LAST:event_khaiTuBtnActionPerformed
 
     private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed
