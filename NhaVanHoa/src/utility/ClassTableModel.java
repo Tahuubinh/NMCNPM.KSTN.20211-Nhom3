@@ -1,11 +1,13 @@
 package utility;
 
-import Bean.HoKhauBean;
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
-import models.GiaDinhModel;
-import models.NhanKhauModel;
-import models.TieuSuModel;
+
+import models.CoSoVatChatModel;
+import models.LichSuModel;
+import models.MuonTraModel;
+import models.PhongBanModel;
 
 /**
  *
@@ -13,8 +15,9 @@ import models.TieuSuModel;
  * class dinh nghia cac dang table co trong phan mem
  */
 public class ClassTableModel {
-    // bang cho main frame
-    public DefaultTableModel setTableNhanKhau(List<NhanKhauModel> listItem, String[] listColumn) {
+
+	//table muon tra
+    public DefaultTableModel setTableMuonTra(List<MuonTraModel> listItem, String[] listColumn) {
         final int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel()  {
             @Override
@@ -23,97 +26,28 @@ public class ClassTableModel {
             }
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 5 ? Boolean.class : String.class;
+                return columnIndex == 0 ? Integer.class : String.class;
             }
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
-        listItem.forEach((NhanKhauModel item) -> {
-            obj[0] = item.getID();
-            obj[1] = item.getHoTen();
-            obj[2] = item.getNamSinh();
-            obj[3] = item.getGioiTinh();
-            obj[4] = item.getDiaChiHienNay();
+        listItem.forEach((MuonTraModel item) -> {
+            obj[0] = item.getStt();
+            obj[1] = item.getTenNguoiMuon();
+            obj[2] = item.getid();
+            obj[3] = item.getLienHe();
+            obj[4] = item.getThoiGianMuon();
+            obj[5] = item.getThoiGIanTra();
+            obj[6] = item.getCoSoVatChat();
+            obj[7] = item.getSoLuong();
             dtm.addRow(obj);
         });
-        return dtm;
-    }
-    // table cho tieusu
-    public DefaultTableModel setTableTieuSu(List<TieuSuModel> tieuSu, String[] listColumn) {
-        final int column = listColumn.length;
-        
-        DefaultTableModel dtm = new DefaultTableModel()  {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
-            }
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                 return columnIndex == 5 ? Boolean.class : String.class;
-            }
-        };
-        
-        dtm.setColumnIdentifiers(listColumn);
-        Object[] obj;
-        obj = new Object[column];
-        
-        tieuSu.forEach((TieuSuModel item) -> {
-            obj[0] = item.getTuNgay().toString();
-            obj[1] = item.getDenNgay().toString();
-            obj[2] = item.getDiaChi();
-            obj[3] = item.getNgheNghiep();
-            obj[4] = item.getNoiLamViec();
-            dtm.addRow(obj);
-        });
-        
-        dtm.addRow(new Object[] {"", "", "", "", ""});
-        
-//        dtm.addTableModelListener(new TableModelListener() {
-//            @Override
-//            public void tableChanged(TableModelEvent e) {
-//                int a = dtm.getRowCount();
-//                if ((e.getLastRow() + 1) == dtm.getRowCount()) {
-//                    System.out.println(); 
-//                }
-//                
-//            }
-//        });
-        return dtm;
-    }
-    public DefaultTableModel setTableGiaDinh(List<GiaDinhModel> giaDinh, String[] listColumn) {
-        final int column = listColumn.length;
-        
-        DefaultTableModel dtm = new DefaultTableModel()  {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
-            }
-            @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                 return columnIndex == 6 ? Boolean.class : String.class;
-            }
-        };
-        
-        dtm.setColumnIdentifiers(listColumn);
-        Object[] obj;
-        obj = new Object[column];
-        
-        giaDinh.forEach((GiaDinhModel item) -> {
-            obj[0] = item.getHoTen();
-            obj[1] = item.getNamSinh().toString();
-            obj[2] = item.getGioiTinh();
-            obj[3] = item.getQuanHeVoiNhanKhau();
-            obj[4] = item.getNgheNghiep();
-            obj[5] = item.getDiaChiHienTai();
-            dtm.addRow(obj);
-        });
-        
-        dtm.addRow(new Object[] {"", "", "", "", "", ""});
         return dtm;
     }
     
-    public DefaultTableModel setTableHoKhau(List<HoKhauBean> listItem, String[] listColumn) {
+    // table cho co so vat chat
+    public DefaultTableModel setTableCoSoVatChat(List<CoSoVatChatModel> listItem, String[] listColumn) {
         final int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel()  {
             @Override
@@ -122,18 +56,72 @@ public class ClassTableModel {
             }
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 5 ? Boolean.class : String.class;
+                return columnIndex != 1 ? Integer.class : String.class;
             }
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
-        listItem.forEach((HoKhauBean item) -> {
-            obj[0] = item.getHoKhauModel().getID();
-            obj[1] = item.getHoKhauModel().getMaHoKhau();
-            obj[2] = item.getChuHo().getHoTen();
-            obj[3] = item.getHoKhauModel().getDiaChi();
-            obj[4] = item.getHoKhauModel().getNgayLap();
+        listItem.forEach((CoSoVatChatModel item) -> {
+            obj[0] = item.getId();
+            obj[1] = item.getTenCoSoVatChat();
+            obj[2] = item.getSoLuong();
+            obj[3] = item.getSoLuongMuon();
+            obj[4] = item.getSoLuongTrongKho();
+            dtm.addRow(obj);
+        });
+        return dtm;
+    }
+    
+    // table cho  Phong Ban
+    public DefaultTableModel setTablePhongBan(List<PhongBanModel> listItem, String[] listColumn) {
+        final int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel()  {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnIndex == 1 ? Integer.class : String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        obj = new Object[columns];
+        listItem.forEach((PhongBanModel item) -> {
+            obj[0] = item.getId();
+            obj[1] = item.getTenPhongBan();
+            obj[2] = item.getThoiGianSuDung();
+            dtm.addRow(obj);
+        });
+        return dtm;
+    }
+    
+    // table cho Lich Su
+    public DefaultTableModel setTableLichSu(List<LichSuModel> listItem, String[] listColumn) {
+        final int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel()  {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+            	if(columnIndex == 1 || columnIndex == 3) return Integer.class;
+            	else if (columnIndex == 4) return Date.class;
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        obj = new Object[columns];
+        listItem.forEach((LichSuModel item) -> {
+            obj[0] = item.getStt();
+            obj[1] = item.getLyDo();
+            obj[2] = item.getDungCu();
+            obj[3] = item.getSoLuong();
+            obj[4] = item.getThoiGian();
             dtm.addRow(obj);
         });
         return dtm;

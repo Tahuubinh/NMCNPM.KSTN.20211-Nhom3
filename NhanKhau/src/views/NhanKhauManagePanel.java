@@ -1,7 +1,6 @@
 package views;
 
 import controllers.NhanKhauManagerPanelController;
-import javax.swing.JFrame;
 import views.NhanKhauManagerFrame.AddNewPeopleJFrame;
 import views.NhanKhauManagerFrame.ThemMoiNhanKhau;
 import views.NhanKhauManagerFrame.XemChiTietChinhSuaNhanKhau;
@@ -29,6 +28,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
 import javax.swing.JTextField;
+
+import javax.swing.JFrame;
 
 /**
  *

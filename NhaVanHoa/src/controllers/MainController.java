@@ -13,10 +13,12 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import views.HoKhauManagePanel;
+
+import views.CoSoVatChatPanel;
 import views.HomePagePanel;
-import views.NhanKhauManagePanel;
-import views.ThongKePanel;
+import views.LichSuPanel;
+import views.MuonTraPanel;
+import views.PhongBanPanel;
 import views.TimKiemPanel;
 
 /**
@@ -38,24 +40,24 @@ public class MainController {
     // set panel for root
     public void setView(JPanel jpnItem, JLabel jlbItem, String kind) {
         this.kindSelected = kind;
-        jpnItem.setBackground(new Color(0));
-        jlbItem.setBackground(new Color(0));
+        jpnItem.setBackground(new Color(28, 155, 26));
+        jlbItem.setBackground(new Color(28, 155, 26));
         JPanel view = new  JPanel();
         switch(kind) {
                 case "TrangChu":
                     view = new HomePagePanel();
                     break;
-                case "NhanKhau":
-                    view = new NhanKhauManagePanel(this.jfrMain);
+                case "CoSoVatChat":
+                    view = new CoSoVatChatPanel(this.jfrMain);
                     break;
-                case "HoKhau":
-                    view = new HoKhauManagePanel(this.jfrMain);
+                case "PhongBan":
+                	view = new PhongBanPanel(this.jfrMain);
+                	break;
+                case "MuonTra":
+                    view = new MuonTraPanel(this.jfrMain);
                     break;
-                case "TimKiem":
-                    view = new TimKiemPanel(this.jfrMain);
-                    break;
-                case "ThongKe":
-                    view = new ThongKePanel(this.jfrMain);
+                case "LichSu":
+                    view = new LichSuPanel(this.jfrMain);
                     break;
                 //any more
                 default:
@@ -72,6 +74,7 @@ public class MainController {
     public void setEvent(List<DanhMucBean> listDanhMuc) {
         this.listDanhMuc = listDanhMuc;
         this.listDanhMuc.forEach((item) -> {
+//        	System.out.println(item.getJlb().getText());
             item.getJlb().addMouseListener(new LabelEvent(this.jfrMain, item.getKind(), item.getJpn(), item.getJlb()));
         });
     }
@@ -79,8 +82,8 @@ public class MainController {
     public void setDefaultColor() {
         this.listDanhMuc.forEach((item) -> {
             if (item.getKind().equals("TrangChu")) {
-                item.getJlb().setBackground(new Color(0, 160, 50));
-                item.getJpn().setBackground(new Color(0, 160, 50));
+                item.getJlb().setBackground(Color.BLACK);
+                item.getJpn().setBackground(Color.BLACK);
             } else {
                 item.getJlb().setBackground(new Color(102,102,102));
                 item.getJpn().setBackground(new Color(102,102,102));
@@ -115,17 +118,17 @@ public class MainController {
                 case "TrangChu":
                     view = new HomePagePanel();
                     break;
-                case "NhanKhau":
-                    view = new NhanKhauManagePanel(this.jfrMain);
+                case "CoSoVatChat":
+                    view = new CoSoVatChatPanel(this.jfrMain);
                     break;
-                 case "HoKhau":
-                    view = new HoKhauManagePanel(this.jfrMain);
+                case "PhongBan":
+                	view = new PhongBanPanel(this.jfrMain);
+                	break;
+                case "MuonTra":
+                    view = new MuonTraPanel(this.jfrMain);
                     break;
-                case "TimKiem":
-                    view = new TimKiemPanel(this.jfrMain);
-                    break;
-                case "ThongKe":
-                    view = new ThongKePanel(this.jfrMain);
+                case "LichSu":
+                    view = new LichSuPanel(this.jfrMain);
                     break;
                 default:
                     break;
@@ -137,15 +140,15 @@ public class MainController {
             root.validate();
             root.repaint();
             setDefaultColor();
-            jlbItem.setBackground(new Color(0));
-            jpnItem.setBackground(new Color(0));
+            jlbItem.setBackground(new Color(28, 155, 26));
+            jpnItem.setBackground(new Color(28, 155, 26));
         }        
 
         @Override
         public void mousePressed(MouseEvent e) {
             kindSelected = kind;
-            jlbItem.setBackground(Color.BLACK);
-            jpnItem.setBackground(Color.BLACK);
+            jlbItem.setBackground(new Color(28, 155, 26));
+            jpnItem.setBackground(new Color(28, 155, 26));
         }
 
         @Override
@@ -154,16 +157,16 @@ public class MainController {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            jlbItem.setBackground(Color.BLACK);
-            jpnItem.setBackground(Color.BLACK);
+            jlbItem.setBackground(new Color(28, 155, 26));
+            jpnItem.setBackground(new Color(28, 155, 26));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             if (!kind.equalsIgnoreCase(kindSelected)) {
                 if (kind.equals("TrangChu")) {
-                    jlbItem.setBackground(new Color(0, 160, 50));
-                    jpnItem.setBackground(new Color(0, 160, 50));
+                    jlbItem.setBackground(Color.BLACK);
+                    jpnItem.setBackground(Color.BLACK);
                 } else 
                 {
                     jlbItem.setBackground(new Color(102,102,102));
