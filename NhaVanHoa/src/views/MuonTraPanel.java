@@ -71,7 +71,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
         addNewBtn.setIcon(new ImageIcon(MuonTraPanel.class.getResource("/Icons/add.png")));
         nguoiMuonJtfSearch = new javax.swing.JTextField();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(Color.WHITE);
 
         addNewBtn.setBackground(new java.awt.Color(255, 255, 255));
         addNewBtn.setFont(new java.awt.Font("Arial", 1, 14));
@@ -98,6 +98,8 @@ public class MuonTraPanel extends javax.swing.JPanel {
         SearchTImepanel.setBackground(Color.WHITE);
         
         JButton filterJButton = new JButton("Lọc");
+        filterJButton.setBorder(null);
+        filterJButton.setSelected(true);
         filterJButton.setAlignmentY(Component.TOP_ALIGNMENT);
         filterJButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent evt) {
@@ -106,15 +108,15 @@ public class MuonTraPanel extends javax.swing.JPanel {
         });
         filterJButton.setForeground(Color.WHITE);
         filterJButton.setBackground(new Color(28, 155, 26));
-        filterJButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        filterJButton.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
+        	layout.createParallelGroup(Alignment.TRAILING)
         		.addGroup(layout.createSequentialGroup()
         			.addContainerGap()
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(tablePanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         				.addGroup(layout.createSequentialGroup()
         					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
         						.addGroup(layout.createSequentialGroup()
@@ -129,7 +131,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
         						.addGroup(layout.createSequentialGroup()
         							.addComponent(SearchTImepanel, GroupLayout.PREFERRED_SIZE, 488, Short.MAX_VALUE)
         							.addGap(27)
-        							.addComponent(filterJButton, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
+        							.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)))
         					.addGap(21)
         					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
@@ -152,18 +154,18 @@ public class MuonTraPanel extends javax.swing.JPanel {
         								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))))
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
         						.addGroup(layout.createSequentialGroup()
-        							.addGap(18)
-        							.addComponent(filterJButton))
-        						.addGroup(layout.createSequentialGroup()
         							.addGap(9)
-        							.addComponent(SearchTImepanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-        					.addGap(8))
+        							.addComponent(SearchTImepanel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        							.addGap(8))
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(18)
+        							.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))))
         				.addGroup(layout.createSequentialGroup()
         					.addGap(47)
-        					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)))
-        			.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
-        			.addContainerGap())
+        					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)))
+        			.addGap(0)
+        			.addComponent(tablePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addGap(75))
         );
         
         timeJLabel = new JLabel("Thời gian mượn:");

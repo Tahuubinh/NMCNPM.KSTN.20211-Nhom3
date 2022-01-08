@@ -148,6 +148,8 @@ public class ThemPhongBanFrame extends javax.swing.JFrame {
     	lyDoJtf.setColumns(10);
     	
     	JButton okButton = new JButton("OK");
+    	okButton.setBorder(null);
+    	okButton.setSelected(true);
     	okButton.setForeground(Color.WHITE);
     	okButton.setFont(new Font("Tahoma", Font.BOLD, 16));
     	okButton.addActionListener(new ActionListener() {

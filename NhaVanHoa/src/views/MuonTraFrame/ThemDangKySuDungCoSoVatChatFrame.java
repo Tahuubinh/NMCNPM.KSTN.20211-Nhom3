@@ -41,6 +41,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
+import java.awt.Rectangle;
 
 /**
  *
@@ -164,6 +165,15 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
     	lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	
     	JButton okButton = new JButton("OK");
+    	okButton.setBorder(null);
+    	okButton.addMouseListener(new MouseAdapter() {
+    		@Override
+    		public void mouseClicked(MouseEvent e) {
+    			
+    		}
+    	});
+    	okButton.setSelected(true);
+    	okButton.setForeground(Color.WHITE);
     	okButton.setFont(new Font("Tahoma", Font.BOLD, 16));
     	okButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent evt) {
@@ -183,6 +193,8 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
     	coSoVatChatPanel.setBackground(new Color(255, 228, 228));
     	
     	addCoSovatChatButton = new JButton("");
+    	addCoSovatChatButton.setBackground(new Color(255, 228, 228));
+    	addCoSovatChatButton.setBorder(null);
     	addCoSovatChatButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent evt) {
     			addRowCoSoVatChatActionPerformed(evt);
@@ -198,14 +210,14 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
     		gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
     			.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
     				.addContainerGap()
-    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
-    					.addComponent(lienHeJlb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-    					.addComponent(idJlb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-    					.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-    					.addComponent(lblNewLabel_1_3, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-    					.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
-    						.addComponent(addCoSovatChatButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-    						.addComponent(tenDangKyJlb)))
+    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
+    					.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
+    						.addComponent(lienHeJlb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(idJlb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(lblNewLabel_1_3, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(tenDangKyJlb))
+    					.addComponent(addCoSovatChatButton, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
     				.addGap(13)
     				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
     					.addComponent(coSoVatChatPanel, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
@@ -260,18 +272,19 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
     				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
     					.addComponent(lblNewLabel_1_3, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
     					.addComponent(ngayTraJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-    				.addGap(22)
-    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
-    					.addComponent(coSoVatChatJlb)
-    					.addComponent(soLuongJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-    				.addPreferredGap(ComponentPlacement.RELATED)
     				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
     					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    						.addComponent(addCoSovatChatButton, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
-    						.addGap(19))
-    					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    						.addGap(22)
+    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
+    							.addComponent(coSoVatChatJlb)
+    							.addComponent(soLuongJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
+    						.addPreferredGap(ComponentPlacement.RELATED)
     						.addComponent(coSoVatChatPanel, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-    						.addContainerGap())))
+    						.addContainerGap())
+    					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    						.addPreferredGap(ComponentPlacement.RELATED)
+    						.addComponent(addCoSovatChatButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+    						.addGap(19))))
     	);
 
     	int columns = COLUMNS.length;

@@ -70,6 +70,7 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
         tablePanel = new javax.swing.JPanel();
         
         addNewBtn = new javax.swing.JButton();
+        addNewBtn.setDisabledIcon(new ImageIcon(CoSoVatChatPanel.class.getResource("/Icons/add.png")));
         addNewBtn.setBorder(null);
         addNewBtn.setIcon(new ImageIcon(CoSoVatChatPanel.class.getResource("/Icons/add.png")));
 
@@ -94,10 +95,10 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
         		.addGroup(layout.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(tablePanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+        				.addComponent(tablePanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 626, Short.MAX_VALUE)
         				.addGroup(layout.createSequentialGroup()
         					.addComponent(searchPanel, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED, 278, Short.MAX_VALUE)
         					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
@@ -114,7 +115,7 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
         					.addGap(23)))
         			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(tablePanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(56, Short.MAX_VALUE))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         
         searchJtf = new JTextField();

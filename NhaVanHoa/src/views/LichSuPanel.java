@@ -70,6 +70,8 @@ public class LichSuPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         
         JButton filterJButton = new JButton("Lọc");
+        filterJButton.setBorder(null);
+        filterJButton.setSelected(true);
         filterJButton.setAlignmentY(Component.TOP_ALIGNMENT);
         filterJButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent evt) {
@@ -78,7 +80,7 @@ public class LichSuPanel extends javax.swing.JPanel {
         });
         filterJButton.setForeground(Color.WHITE);
         filterJButton.setBackground(new Color(28, 155, 26));
-        filterJButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        filterJButton.setFont(new Font("Tahoma", Font.BOLD, 14));
         
         thoiGianJlb = new JLabel("Thời gian:");
         thoiGianJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -93,12 +95,12 @@ public class LichSuPanel extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(layout.createSequentialGroup()
+        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
         			.addContainerGap()
-        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-        				.addComponent(filterJButton, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(tablePanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+        				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
         					.addComponent(thoiGianJlb)
         					.addGap(36)
         					.addComponent(thoiGianJdc, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
@@ -116,9 +118,9 @@ public class LichSuPanel extends javax.swing.JPanel {
         						.addComponent(thoiGianJlb, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
         						.addComponent(statusJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         					.addGap(26)
-        					.addComponent(filterJButton))
+        					.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
         				.addComponent(thoiGianJdc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        			.addGap(18)
+        			.addGap(10)
         			.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
         			.addContainerGap())
         );

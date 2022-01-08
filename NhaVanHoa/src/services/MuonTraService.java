@@ -18,6 +18,7 @@ public class MuonTraService {
     
     /* 
      * Ham lay ra 1 nguoi muon trong database thong qua id
+     * id la cccd, tcc, hc
      * 
      */
     public MuonTraBean getMuonTra(String id) {
