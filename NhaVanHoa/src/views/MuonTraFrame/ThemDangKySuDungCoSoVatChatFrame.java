@@ -2,7 +2,7 @@ package views.MuonTraFrame;
 
 import Bean.MuonTraBean;
 import controllers.LoginController;
-import controllers.MuonTraManagerPanelController;
+import controllers.MuonTraPanelController;
 import controllersMuonTraController.AddNewController;
 
 import java.awt.event.WindowAdapter;
@@ -46,7 +46,7 @@ import com.toedter.calendar.JDateChooser;
  *
  * @author Hai
  */
-public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
+public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form AddNewPeopleJFrame
@@ -64,13 +64,13 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
     /**
      * @wbp.parser.constructor
      */
-    public ThemCoSoVatChatFrame(MuonTraManagerPanelController parentController, JFrame parentJFrame) {
+    public ThemDangKySuDungCoSoVatChatFrame(MuonTraPanelController parentController, JFrame parentJFrame) {
     	setBackground(new Color(255, 228, 228));
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
         initComponents();
-    	setIconImage(Toolkit.getDefaultToolkit().getImage(ThemCoSoVatChatFrame.class.getResource("/Icons/house.png")));
+    	setIconImage(Toolkit.getDefaultToolkit().getImage(ThemDangKySuDungCoSoVatChatFrame.class.getResource("/Icons/house.png")));
     	setTitle("Đăng ký sử dụng cơ sở vật chất");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
@@ -85,8 +85,8 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
         controller = new AddNewController();
     }
     
-    public ThemCoSoVatChatFrame(JFrame parentJFrame) {
-        this.parentController = new MuonTraManagerPanelController(){
+    public ThemDangKySuDungCoSoVatChatFrame(JFrame parentJFrame) {
+        this.parentController = new MuonTraPanelController(){
             @Override
             public void refreshData() {
                 // do nothing
@@ -103,7 +103,7 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
         this.parentFrame.setEnabled(false);
         this.muonTraBeann = new MuonTraBean();
         initComponents();
-        setTitle("Thêm mới nhân khẩu");
+        setTitle("Thêm mới đối tượng đăng ký sử dụng cơ sở vật chất");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         controller = new AddNewController();
         
@@ -164,6 +164,7 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
     	lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	
     	JButton okButton = new JButton("OK");
+    	okButton.setFont(new Font("Tahoma", Font.BOLD, 16));
     	okButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent evt) {
     			addThongTinDangKyCoSoVatChatActionPerformed(evt);
@@ -187,7 +188,7 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
     			addRowCoSoVatChatActionPerformed(evt);
     		}
     	});
-    	addCoSovatChatButton.setIcon(new ImageIcon(ThemCoSoVatChatFrame.class.getResource("/Icons/add.png")));
+    	addCoSovatChatButton.setIcon(new ImageIcon(ThemDangKySuDungCoSoVatChatFrame.class.getResource("/Icons/add.png")));
     	
     	ngayMuonJdc = new JDateChooser();
     	
@@ -272,7 +273,7 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
     						.addComponent(coSoVatChatPanel, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
     						.addContainerGap())))
     	);
-    	
+
     	int columns = COLUMNS.length;
     	model = new DefaultTableModel() {
     		@Override
@@ -381,7 +382,7 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
         }
         return true;
     }
-	private MuonTraManagerPanelController parentController;
+	private MuonTraPanelController parentController;
     private JFrame parentFrame;
     private MuonTraBean muonTraBeann;
     private AddNewController controller;

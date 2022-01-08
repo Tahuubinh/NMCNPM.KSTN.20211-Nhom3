@@ -2,6 +2,8 @@ package utility;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+
+import models.CoSoVatChatModel;
 import models.MuonTraModel;
 
 /**
@@ -11,6 +13,7 @@ import models.MuonTraModel;
  */
 public class ClassTableModel {
 
+	//table muon tra
     public DefaultTableModel setTableMuonTra(List<MuonTraModel> listItem, String[] listColumn) {
         final int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel()  {
@@ -40,7 +43,8 @@ public class ClassTableModel {
         return dtm;
     }
     
-    public DefaultTableModel setTableDangKySuDungCoSoVatChat(List<MuonTraModel> listItem, String[] listColumn) {
+    // table cho co so vat chat
+    public DefaultTableModel setTableCoSoVatChat(List<CoSoVatChatModel> listItem, String[] listColumn) {
         final int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel()  {
             @Override
@@ -49,19 +53,20 @@ public class ClassTableModel {
             }
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 1 ? Integer.class : String.class;
+                return columnIndex != 1 ? Integer.class : String.class;
             }
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
-        listItem.forEach((MuonTraModel item) -> {
-            obj[0] = item.getCoSoVatChat();
-            obj[1] = item.getSoLuong();
+        listItem.forEach((CoSoVatChatModel item) -> {
+            obj[0] = item.getId();
+            obj[1] = item.getTenCoSoVatChat();
+            obj[2] = item.getSoLuong();
+            obj[3] = item.getSoLuongMuon();
+            obj[4] = item.getSoLuongTrongKho();
             dtm.addRow(obj);
         });
         return dtm;
     }
-    // table cho tieusu
-    
 }

@@ -48,7 +48,7 @@ public class MainController {
                     view = new HomePagePanel();
                     break;
                 case "CoSoVatChat":
-                    view = new CoSoVatChatPanel();
+                    view = new CoSoVatChatPanel(this.jfrMain);
                     break;
                 case "PhongBan":
                 	view = new PhongBanPanel();
@@ -119,7 +119,7 @@ public class MainController {
                     view = new HomePagePanel();
                     break;
                 case "CoSoVatChat":
-                    view = new CoSoVatChatPanel();
+                    view = new CoSoVatChatPanel(this.jfrMain);
                     break;
                 case "PhongBan":
                 	view = new PhongBanPanel();

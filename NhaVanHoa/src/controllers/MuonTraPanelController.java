@@ -27,7 +27,7 @@ import utility.ClassTableModel;
  *
  * @author Hai
  */
-public class MuonTraManagerPanelController {
+public class MuonTraPanelController {
     
     private JPanel jpnView;
     private JTextField nguoiMuonJtfSearch;
@@ -40,7 +40,7 @@ public class MuonTraManagerPanelController {
     private final String[] COLUMNS = {"STT", "Tên người mượn", "CMND/TCC/HC", "Liên hệ", "Thời gian mượn", "Thời gian trả", "Cơ sở vậc chất", "Số lượng"};
     private JFrame parentJFrame;
 
-    public MuonTraManagerPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JTextField toJtfSearch, JTextField fromJtfSearch) {
+    public MuonTraPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JTextField toJtfSearch, JTextField fromJtfSearch) {
         this.jpnView = jpnView;
         this.nguoiMuonJtfSearch = nguoiMuonJtfSearch;
         this.lienheJtfSearch = lienheJtfSearch;
@@ -52,7 +52,7 @@ public class MuonTraManagerPanelController {
         initAction();
     }
 
-    public MuonTraManagerPanelController() {
+    public MuonTraPanelController() {
     }
     
     //khi nhap hoten vs lien he se tu dong tim, khong can an filter

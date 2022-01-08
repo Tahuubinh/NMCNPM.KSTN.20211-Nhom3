@@ -1,11 +1,11 @@
 package views;
 
-import controllers.MuonTraManagerPanelController;
+import controllers.MuonTraPanelController;
 import services.StringService;
 
 import javax.swing.JFrame;
 
-import views.MuonTraFrame.ThemCoSoVatChatFrame;
+import views.MuonTraFrame.ThemDangKySuDungCoSoVatChatFrame;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -33,13 +33,13 @@ public class MuonTraPanel extends javax.swing.JPanel {
     /**
      * Creates new form NhanKhauManagePanel
      */
-    private MuonTraManagerPanelController controller = null;
+    private MuonTraPanelController controller = null;
     private JFrame parentJFrame;
     
     public MuonTraPanel(JFrame parentFrame) {
         this.parentJFrame = parentFrame;
         initComponents();
-        controller = new MuonTraManagerPanelController(tablePanel, nguoiMuonJtfSearch, lienheJtfSearch, toJtfSearch, fromJtfSearch);
+        controller = new MuonTraPanelController(tablePanel, nguoiMuonJtfSearch, lienheJtfSearch, toJtfSearch, fromJtfSearch);
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -65,6 +65,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
         tablePanel = new javax.swing.JPanel();
         
         addNewBtn = new javax.swing.JButton();
+        addNewBtn.setBorder(null);
         addNewBtn.setIcon(new ImageIcon(MuonTraPanel.class.getResource("/Icons/add.png")));
         nguoiMuonJtfSearch = new javax.swing.JTextField();
 
@@ -113,49 +114,53 @@ public class MuonTraPanel extends javax.swing.JPanel {
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
         				.addGroup(layout.createSequentialGroup()
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
         						.addGroup(layout.createSequentialGroup()
         							.addGap(10)
-        							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(nguoiMuonJtfSearch, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
         							.addGap(26)
-        							.addComponent(nguoiMuonJtfSearch, GroupLayout.PREFERRED_SIZE, 128, GroupLayout.PREFERRED_SIZE)
-        							.addGap(47)
-        							.addComponent(lblNewLabel_1)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(lienheJtfSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(lienheJtfSearch, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
         						.addGroup(layout.createSequentialGroup()
-        							.addComponent(SearchTImepanel, GroupLayout.PREFERRED_SIZE, 369, GroupLayout.PREFERRED_SIZE)
+        							.addComponent(SearchTImepanel, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
         							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(filterJButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        					.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-        					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)))
+        							.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)))
+        					.addGap(21)
+        					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
         layout.setVerticalGroup(
         	layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(layout.createSequentialGroup()
-        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        				.addGroup(layout.createSequentialGroup()
-        					.addContainerGap()
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(lienheJtfSearch, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(2)
-        					.addGroup(layout.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(nguoiMuonJtfSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))))
-        			.addPreferredGap(ComponentPlacement.RELATED)
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addGroup(layout.createSequentialGroup()
-        					.addGap(9)
-        					.addComponent(SearchTImepanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createSequentialGroup()
-        					.addGap(18)
+        					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(9)
+        							.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        								.addComponent(lienheJtfSearch, GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+        								.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(2)
+        							.addGroup(layout.createParallelGroup(Alignment.BASELINE)
+        								.addComponent(nguoiMuonJtfSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))))
+        					.addPreferredGap(ComponentPlacement.RELATED)
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(filterJButton)
-        						.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
-        			.addGap(8)
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(SearchTImepanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(18)
+        							.addComponent(filterJButton)))
+        					.addGap(8))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(47)
+        					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED)))
         			.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
         			.addContainerGap())
         );
@@ -181,16 +186,16 @@ public class MuonTraPanel extends javax.swing.JPanel {
         	gl_SearchTImepanel.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_SearchTImepanel.createSequentialGroup()
         			.addGap(6)
-        			.addComponent(timeJLabel, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(timeJLabel, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
         			.addGap(18)
         			.addComponent(fromJLabel)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(fromJtfSearch, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(fromJtfSearch, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
         			.addGap(27)
         			.addComponent(toJLabel)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(toJtfSearch, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-        			.addContainerGap(30, Short.MAX_VALUE))
+        			.addComponent(toJtfSearch, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+        			.addGap(28))
         );
         gl_SearchTImepanel.setVerticalGroup(
         	gl_SearchTImepanel.createParallelGroup(Alignment.TRAILING)
@@ -204,9 +209,9 @@ public class MuonTraPanel extends javax.swing.JPanel {
         				.addGroup(gl_SearchTImepanel.createSequentialGroup()
         					.addGap(14)
         					.addGroup(gl_SearchTImepanel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(fromJtfSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(fromJtfSearch)
         						.addComponent(toJLabel)
-        						.addComponent(toJtfSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+        						.addComponent(toJtfSearch))))
         			.addContainerGap())
         );
         SearchTImepanel.setLayout(gl_SearchTImepanel);
@@ -214,10 +219,10 @@ public class MuonTraPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
-    	ThemCoSoVatChatFrame themCoSoVatChatFrame = new ThemCoSoVatChatFrame(this.controller, this.parentJFrame);
-    	themCoSoVatChatFrame.setLocationRelativeTo(null);
-    	themCoSoVatChatFrame.setResizable(false);
-    	themCoSoVatChatFrame.setVisible(true);
+    	ThemDangKySuDungCoSoVatChatFrame themDangKySuDungCoSoVatChatFrame = new ThemDangKySuDungCoSoVatChatFrame(this.controller, this.parentJFrame);
+    	themDangKySuDungCoSoVatChatFrame.setLocationRelativeTo(null);
+    	themDangKySuDungCoSoVatChatFrame.setResizable(false);
+    	themDangKySuDungCoSoVatChatFrame.setVisible(true);
     }//GEN-LAST:event_addNewBtnActionPerformed
 
     private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed

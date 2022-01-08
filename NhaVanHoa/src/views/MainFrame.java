@@ -21,6 +21,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  *
@@ -243,25 +244,37 @@ public class MainFrame extends javax.swing.JFrame {
             jpnBeanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+        
+        ghiChuJlb = new JLabel("Nhấn chuột phải vào hàng tương ứng để thêm tùy chọn");
+        ghiChuJlb.setForeground(new Color(50, 205, 50));
+        ghiChuJlb.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+        ghiChuJlb.setBackground(Color.WHITE);
 
         javax.swing.GroupLayout jpnContainerLayout = new javax.swing.GroupLayout(jpnContainer);
-        jpnContainer.setLayout(jpnContainerLayout);
         jpnContainerLayout.setHorizontalGroup(
-            jpnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnContainerLayout.createSequentialGroup()
-                .addComponent(jpnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpnBean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+        	jpnContainerLayout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(jpnContainerLayout.createSequentialGroup()
+        			.addComponent(jpnMenu, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addGroup(jpnContainerLayout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(jpnContainerLayout.createSequentialGroup()
+        					.addComponent(jpnBean, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        					.addContainerGap())
+        				.addGroup(Alignment.TRAILING, jpnContainerLayout.createSequentialGroup()
+        					.addComponent(ghiChuJlb, GroupLayout.PREFERRED_SIZE, 459, GroupLayout.PREFERRED_SIZE)
+        					.addGap(172))))
         );
         jpnContainerLayout.setVerticalGroup(
-            jpnContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpnMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jpnContainerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpnBean, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+        	jpnContainerLayout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(jpnMenu, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        		.addGroup(jpnContainerLayout.createSequentialGroup()
+        			.addGap(10)
+        			.addComponent(jpnBean, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(ghiChuJlb, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+        			.addGap(18))
         );
+        jpnContainer.setLayout(jpnContainerLayout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -289,4 +302,5 @@ public class MainFrame extends javax.swing.JFrame {
     private JPanel PhongBan;
     private JLabel jblLichSu;
     private JPanel LichSu;
+    private JLabel ghiChuJlb;
 }
