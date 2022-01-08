@@ -156,15 +156,32 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
     	lyDoJtf.setColumns(10);
     	
     	JButton okButton = new JButton("OK");
+    	okButton.addMouseListener(new MouseAdapter() {
+    		
+    		@Override
+        	public void mouseEntered(MouseEvent e) {
+                okButton.setBackground(new Color(195, 66, 2));
+        	}
+    		@Override
+        	public void mousePressed(MouseEvent e) {
+            	okButton.setBackground(new Color(212, 84, 21));
+        	}
+    		@Override
+        	public void mouseReleased(MouseEvent e) {
+                okButton.setBackground(new Color(195, 66, 2));
+        	}
+    		@Override
+        	public void mouseExited(MouseEvent e) {
+            	okButton.setBackground(new Color(212, 84, 21));
+        	}
+    	});
     	okButton.setBorder(null);
-    	okButton.setSelected(true);
     	okButton.setForeground(Color.WHITE);
     	okButton.setFont(new Font("Tahoma", Font.BOLD, 16));
     	okButton.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent evt) {
     			addThongTinDangKyCoSoVatChatActionPerformed(evt);
     		}
-    		
     	});
     	okButton.setBackground(new Color(212, 84, 21));
     	

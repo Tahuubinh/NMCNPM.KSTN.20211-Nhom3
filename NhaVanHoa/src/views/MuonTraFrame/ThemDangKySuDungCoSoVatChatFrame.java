@@ -168,11 +168,22 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
     	okButton.setBorder(null);
     	okButton.addMouseListener(new MouseAdapter() {
     		@Override
-    		public void mouseClicked(MouseEvent e) {
-    			
-    		}
+        	public void mouseEntered(MouseEvent e) {
+                okButton.setBackground(new Color(195, 66, 2));
+        	}
+    		@Override
+        	public void mousePressed(MouseEvent e) {
+            	okButton.setBackground(new Color(212, 84, 21));
+        	}
+    		@Override
+        	public void mouseReleased(MouseEvent e) {
+                okButton.setBackground(new Color(195, 66, 2));
+        	}
+    		@Override
+        	public void mouseExited(MouseEvent e) {
+            	okButton.setBackground(new Color(212, 84, 21));
+        	}
     	});
-    	okButton.setSelected(true);
     	okButton.setForeground(Color.WHITE);
     	okButton.setFont(new Font("Tahoma", Font.BOLD, 16));
     	okButton.addActionListener(new ActionListener() {

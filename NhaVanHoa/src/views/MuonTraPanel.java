@@ -25,6 +25,8 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -98,8 +100,26 @@ public class MuonTraPanel extends javax.swing.JPanel {
         SearchTImepanel.setBackground(Color.WHITE);
         
         JButton filterJButton = new JButton("Lọc");
+        filterJButton.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+                filterJButton.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+                filterJButton.setBackground(new Color(28, 155, 26));
+        	}
+        	
+        	@Override
+        	public void mouseReleased(MouseEvent e) {
+                filterJButton.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+                filterJButton.setBackground(new Color(28, 155, 26));
+        	}
+        });
         filterJButton.setBorder(null);
-        filterJButton.setSelected(true);
         filterJButton.setAlignmentY(Component.TOP_ALIGNMENT);
         filterJButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent evt) {

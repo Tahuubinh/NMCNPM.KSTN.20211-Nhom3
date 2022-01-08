@@ -26,6 +26,8 @@ import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -70,6 +72,25 @@ public class LichSuPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         
         JButton filterJButton = new JButton("Lọc");
+        filterJButton.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+                filterJButton.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+                filterJButton.setBackground(new Color(28, 155, 26));
+        	}
+        	
+        	@Override
+        	public void mouseReleased(MouseEvent e) {
+                filterJButton.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+                filterJButton.setBackground(new Color(28, 155, 26));
+        	}
+        });
         filterJButton.setBorder(null);
         filterJButton.setSelected(true);
         filterJButton.setAlignmentY(Component.TOP_ALIGNMENT);
@@ -94,18 +115,22 @@ public class LichSuPanel extends javax.swing.JPanel {
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
-        	layout.createParallelGroup(Alignment.LEADING)
-        		.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
-        			.addContainerGap()
-        			.addGroup(layout.createParallelGroup(Alignment.TRAILING)
-        				.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-        				.addComponent(tablePanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
-        				.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        					.addComponent(thoiGianJlb)
-        					.addGap(36)
-        					.addComponent(thoiGianJdc, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
-        					.addGap(101)
-        					.addComponent(statusJcb, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)))
+        	layout.createParallelGroup(Alignment.TRAILING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addContainerGap()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        						.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+        						.addGroup(layout.createSequentialGroup()
+        							.addComponent(thoiGianJlb)
+        							.addGap(36)
+        							.addComponent(thoiGianJdc, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
+        							.addGap(101)
+        							.addComponent(statusJcb, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE))))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGap(662)
+        					.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
         layout.setVerticalGroup(
@@ -117,11 +142,11 @@ public class LichSuPanel extends javax.swing.JPanel {
         					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
         						.addComponent(thoiGianJlb, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
         						.addComponent(statusJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        					.addGap(26)
-        					.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+        					.addGap(22)
+        					.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE))
         				.addComponent(thoiGianJdc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addGap(10)
-        			.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+        			.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         			.addContainerGap())
         );
         this.setLayout(layout);
