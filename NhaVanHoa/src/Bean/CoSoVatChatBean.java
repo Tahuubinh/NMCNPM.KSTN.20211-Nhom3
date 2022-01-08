@@ -4,7 +4,6 @@ import models.CoSoVatChatModel;
 
 public class CoSoVatChatBean {
 	private CoSoVatChatModel coSoVatChatModel;
-	
     public CoSoVatChatBean(CoSoVatChatModel coSoVatChatModel) {
     	this.setCoSoVatChatModel(coSoVatChatModel);
     }
@@ -17,6 +16,7 @@ public class CoSoVatChatBean {
 	public void setCoSoVatChatModel(CoSoVatChatModel coSoVatChatModel) {
 		this.coSoVatChatModel = coSoVatChatModel;
 	}
+
 	@Override
     public String toString() {
         String res ="";  

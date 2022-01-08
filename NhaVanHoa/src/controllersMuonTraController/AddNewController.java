@@ -2,13 +2,15 @@ package controllersMuonTraController;
 
 import Bean.CoSoVatChatBean;
 import Bean.MuonTraBean;
+import Bean.PhongBanBean;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import models.CoSoHaTangModel;
+import models.PhongBanModel;
 import models.CoSoVatChatModel;
 import models.NguoiMuonModel;
 import models.ThoiGianModel;
@@ -26,7 +28,7 @@ public class AddNewController {
     public boolean addNewNguoiMuon(MuonTraBean muonTraBean) throws SQLException, ClassNotFoundException{
         NguoiMuonModel nguoiMuonModel = muonTraBean.getNguoiMuonModel();
         CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
-        CoSoHaTangModel coSoHaTangModel = muonTraBean.getCoSoHaTangModel();
+        PhongBanModel coSoHaTangModel = muonTraBean.getCoSoHaTangModel();
         ThoiGianModel thoiGianModel = muonTraBean.getThoiGianModel();
         Connection connection = MysqlConnection.getMysqlConnection();
         connection.close();
@@ -35,6 +37,13 @@ public class AddNewController {
     
     public boolean addNewCoSoVatChat(CoSoVatChatBean coSoVatChatBean) throws SQLException, ClassNotFoundException{
         CoSoVatChatModel coSoVatChatModel = coSoVatChatBean.getCoSoVatChatModel();
+        Connection connection = MysqlConnection.getMysqlConnection();
+        connection.close();
+        return true;
+    }
+    
+    public boolean addNewPhongBan(PhongBanBean phongBanBean) throws SQLException, ClassNotFoundException{
+        PhongBanModel phongBanModel = phongBanBean.getPhongBanModel();
         Connection connection = MysqlConnection.getMysqlConnection();
         connection.close();
         return true;

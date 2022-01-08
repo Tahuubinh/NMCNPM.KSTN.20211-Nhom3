@@ -10,12 +10,14 @@ import java.util.EventObject;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import Bean.CoSoVatChatBean;
@@ -95,6 +97,8 @@ public class CoSoVatChatPanelController {
 	        
 	        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
 	        table.getTableHeader().setPreferredSize(new Dimension(100, 50));
+	        ((DefaultTableCellRenderer)table.getTableHeader().getDefaultRenderer())
+	        .setHorizontalAlignment(JLabel.CENTER);
 	        table.setRowHeight(50);
 	        table.validate();
 	        table.repaint();
@@ -102,6 +106,9 @@ public class CoSoVatChatPanelController {
 	        table.getColumnModel().getColumn(0).setMaxWidth(80);
 	        table.getColumnModel().getColumn(0).setMinWidth(80);
 	        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+	        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+	        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+	        table.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
 	        table.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,6 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import models.MuonTraModel;
 import services.MuonTraService;
@@ -37,7 +39,7 @@ public class MuonTraPanelController {
     private MuonTraService muonTraService;
     private List<MuonTraBean> listMuonTraBeans;
     private ClassTableModel classTableModel = null;
-    private final String[] COLUMNS = {"STT", "Tên người mượn", "CMND/TCC/HC", "Liên hệ", "Thời gian mượn", "Thời gian trả", "Cơ sở vậc chất", "Số lượng"};
+    private final String[] COLUMNS = {"STT", "Tên người mượn", "CMND/TCC/HC", "Liên hệ", "Thời gian mượn", "Thời gian trả", "Cơ sở vật chất", "Số lượng"};
     private JFrame parentJFrame;
 
     public MuonTraPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JTextField toJtfSearch, JTextField fromJtfSearch) {
@@ -125,9 +127,12 @@ public class MuonTraPanelController {
         };
         
         // thiet ke bang
+
         
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));
+        ((DefaultTableCellRenderer)table.getTableHeader().getDefaultRenderer())
+        .setHorizontalAlignment(JLabel.CENTER);
         table.setRowHeight(50);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.validate();
@@ -136,6 +141,9 @@ public class MuonTraPanelController {
         table.getColumnModel().getColumn(0).setMaxWidth(80);
         table.getColumnModel().getColumn(0).setMinWidth(80);
         table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        table.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
         table.getColumnModel().getColumn(1).setMaxWidth(150);
         table.getColumnModel().getColumn(1).setMinWidth(150);
         table.getColumnModel().getColumn(1).setPreferredWidth(150);

@@ -51,7 +51,7 @@ public class MainController {
                     view = new CoSoVatChatPanel(this.jfrMain);
                     break;
                 case "PhongBan":
-                	view = new PhongBanPanel();
+                	view = new PhongBanPanel(this.jfrMain);
                 	break;
                 case "MuonTra":
                     view = new MuonTraPanel(this.jfrMain);
@@ -122,7 +122,7 @@ public class MainController {
                     view = new CoSoVatChatPanel(this.jfrMain);
                     break;
                 case "PhongBan":
-                	view = new PhongBanPanel();
+                	view = new PhongBanPanel(this.jfrMain);
                 	break;
                 case "MuonTra":
                     view = new MuonTraPanel(this.jfrMain);

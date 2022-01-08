@@ -5,6 +5,7 @@ import javax.swing.table.DefaultTableModel;
 
 import models.CoSoVatChatModel;
 import models.MuonTraModel;
+import models.PhongBanModel;
 
 /**
  *
@@ -65,6 +66,31 @@ public class ClassTableModel {
             obj[2] = item.getSoLuong();
             obj[3] = item.getSoLuongMuon();
             obj[4] = item.getSoLuongTrongKho();
+            dtm.addRow(obj);
+        });
+        return dtm;
+    }
+    
+    // table cho co so phong ban
+    public DefaultTableModel setTablePhongBan(List<PhongBanModel> listItem, String[] listColumn) {
+        final int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel()  {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnIndex == 1 ? Integer.class : String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        obj = new Object[columns];
+        listItem.forEach((PhongBanModel item) -> {
+            obj[0] = item.getId();
+            obj[1] = item.getTenPhongBan();
+            obj[2] = item.getThoiGianSuDung();
             dtm.addRow(obj);
         });
         return dtm;

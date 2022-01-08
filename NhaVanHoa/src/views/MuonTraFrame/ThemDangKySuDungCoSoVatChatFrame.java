@@ -12,7 +12,7 @@ import java.util.EventObject;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import models.CoSoHaTangModel;
+import models.PhongBanModel;
 import models.CoSoVatChatModel;
 import models.NguoiMuonModel;
 import models.ThoiGianModel;
@@ -336,7 +336,7 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
     	if(validateValueInForm()) {
     		NguoiMuonModel nguoiMuonModel = this.muonTraBeann.getNguoiMuonModel();
     		CoSoVatChatModel coSoVatChatModel = this.muonTraBeann.getCoSoVatChatModel();
-    		CoSoHaTangModel coSoHaTangModel = this.muonTraBeann.getCoSoHaTangModel();
+    		PhongBanModel coSoHaTangModel = this.muonTraBeann.getCoSoHaTangModel();
     		ThoiGianModel thoiGianModel = this.muonTraBeann.getThoiGianModel();
     		nguoiMuonModel.setTenNguoiMuon(tenNguoiMuonJtf.getText());
     		nguoiMuonModel.setCccd(idJtf.getText());

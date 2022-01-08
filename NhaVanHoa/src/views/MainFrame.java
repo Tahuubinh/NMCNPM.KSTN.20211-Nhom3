@@ -41,9 +41,6 @@ public class MainFrame extends javax.swing.JFrame {
         listDanhMuc.add(new DanhMucBean("PhongBan", PhongBan, jblPhongBan));
         listDanhMuc.add(new DanhMucBean("MuonTra", MuonTra, jblMuontra));
         listDanhMuc.add(new DanhMucBean("LichSu", LichSu, jblLichSu));
-        listDanhMuc.forEach((item) -> {
-        	System.out.println(item.getJlb().getText());
-        });
         MainController controller = new MainController(jpnBean, this);
         controller.setView(Home, jblTrangChu, "TrangChu");
         controller.setEvent(listDanhMuc);

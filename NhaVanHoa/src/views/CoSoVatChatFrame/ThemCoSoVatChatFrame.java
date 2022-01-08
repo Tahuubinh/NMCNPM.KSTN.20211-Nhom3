@@ -14,7 +14,7 @@ import java.util.EventObject;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import models.CoSoHaTangModel;
+import models.PhongBanModel;
 import models.CoSoVatChatModel;
 import models.NguoiMuonModel;
 import models.ThoiGianModel;
