@@ -1,9 +1,11 @@
 package utility;
 
+import java.util.Date;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 import models.CoSoVatChatModel;
+import models.LichSuModel;
 import models.MuonTraModel;
 import models.PhongBanModel;
 
@@ -71,7 +73,7 @@ public class ClassTableModel {
         return dtm;
     }
     
-    // table cho co so phong ban
+    // table cho  Phong Ban
     public DefaultTableModel setTablePhongBan(List<PhongBanModel> listItem, String[] listColumn) {
         final int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel()  {
@@ -91,6 +93,35 @@ public class ClassTableModel {
             obj[0] = item.getId();
             obj[1] = item.getTenPhongBan();
             obj[2] = item.getThoiGianSuDung();
+            dtm.addRow(obj);
+        });
+        return dtm;
+    }
+    
+    // table cho Lich Su
+    public DefaultTableModel setTableLichSu(List<LichSuModel> listItem, String[] listColumn) {
+        final int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel()  {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+            	if(columnIndex == 1 || columnIndex == 3) return Integer.class;
+            	else if (columnIndex == 4) return Date.class;
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        obj = new Object[columns];
+        listItem.forEach((LichSuModel item) -> {
+            obj[0] = item.getStt();
+            obj[1] = item.getLyDo();
+            obj[2] = item.getDungCu();
+            obj[3] = item.getSoLuong();
+            obj[4] = item.getThoiGian();
             dtm.addRow(obj);
         });
         return dtm;

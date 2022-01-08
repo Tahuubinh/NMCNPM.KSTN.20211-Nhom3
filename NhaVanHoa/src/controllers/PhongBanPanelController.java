@@ -74,7 +74,7 @@ public class PhongBanPanelController {
 	    }
 	    //Khi an Filter, bien listMuonTraBeans se call muonTraService de thonn ke thon tin vua nhap
 	    //Chu y cac thong tin null
-	    public void initAction(String tenPhongBan){
+	    public void setData(String tenPhongBan){
 	      this.listPhongBanBeans = this.PhongBanService.statisticPhongBan(tenPhongBan);
 	      setDataTable();
 	    }

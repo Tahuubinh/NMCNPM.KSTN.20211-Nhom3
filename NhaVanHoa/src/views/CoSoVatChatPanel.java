@@ -158,7 +158,7 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
 
     private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed
     	String tenCoSoVatChat = StringService.covertToString(searchJtf.getText());
-    	controller.initAction(tenCoSoVatChat);
+    	controller.setData(tenCoSoVatChat);
     }//GEN-LAST:event_jtfSearchActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

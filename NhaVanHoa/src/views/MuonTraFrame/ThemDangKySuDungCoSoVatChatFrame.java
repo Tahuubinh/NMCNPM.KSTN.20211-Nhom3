@@ -343,7 +343,7 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
     		nguoiMuonModel.setLienHe(lienHeJtf.getText());
     		coSoVatChatModel.setTenCoSoVatChat("");
     		coSoVatChatModel.setSoLuong(0);
-    		coSoHaTangModel.setTenCoSoHaTang("");
+    		coSoHaTangModel.setTenPhongBan("");
     		thoiGianModel.setThoiGianMuon(ngayMuonJdc.getDate());
     		thoiGianModel.setThoiGianTra(ngayTraJdc.getDate());
             try {

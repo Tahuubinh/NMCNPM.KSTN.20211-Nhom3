@@ -18,11 +18,13 @@ import javax.swing.JPanel;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.border.LineBorder;
+import com.toedter.calendar.JDateChooser;
 
 /**
  *
@@ -39,7 +41,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
     public MuonTraPanel(JFrame parentFrame) {
         this.parentJFrame = parentFrame;
         initComponents();
-        controller = new MuonTraPanelController(tablePanel, nguoiMuonJtfSearch, lienheJtfSearch, toJtfSearch, fromJtfSearch);
+      controller = new MuonTraPanelController(tablePanel, nguoiMuonJtfSearch, lienheJtfSearch, tuNgayJdc, denNgayJdc);
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -112,22 +114,22 @@ public class MuonTraPanel extends javax.swing.JPanel {
         		.addGroup(layout.createSequentialGroup()
         			.addContainerGap()
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 672, Short.MAX_VALUE)
         				.addGroup(layout.createSequentialGroup()
-        					.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        					.addGroup(layout.createParallelGroup(Alignment.TRAILING)
         						.addGroup(layout.createSequentialGroup()
         							.addGap(10)
-        							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+        							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(nguoiMuonJtfSearch, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+        							.addComponent(nguoiMuonJtfSearch, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
         							.addGap(26)
-        							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 53, Short.MAX_VALUE)
+        							.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
         							.addPreferredGap(ComponentPlacement.RELATED)
-        							.addComponent(lienheJtfSearch, GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+        							.addComponent(lienheJtfSearch, GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE))
         						.addGroup(layout.createSequentialGroup()
-        							.addComponent(SearchTImepanel, GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-        							.addPreferredGap(ComponentPlacement.UNRELATED)
-        							.addComponent(filterJButton, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)))
+        							.addComponent(SearchTImepanel, GroupLayout.PREFERRED_SIZE, 488, Short.MAX_VALUE)
+        							.addGap(27)
+        							.addComponent(filterJButton, GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)))
         					.addGap(21)
         					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
@@ -148,70 +150,63 @@ public class MuonTraPanel extends javax.swing.JPanel {
         							.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         								.addComponent(nguoiMuonJtfSearch, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         								.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))))
-        					.addPreferredGap(ComponentPlacement.RELATED)
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
         						.addGroup(layout.createSequentialGroup()
-        							.addGap(9)
-        							.addComponent(SearchTImepanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        						.addGroup(layout.createSequentialGroup()
         							.addGap(18)
-        							.addComponent(filterJButton)))
+        							.addComponent(filterJButton))
+        						.addGroup(layout.createSequentialGroup()
+        							.addGap(9)
+        							.addComponent(SearchTImepanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
         					.addGap(8))
         				.addGroup(layout.createSequentialGroup()
         					.addGap(47)
         					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
         					.addPreferredGap(ComponentPlacement.RELATED)))
-        			.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+        			.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
         			.addContainerGap())
         );
         
         timeJLabel = new JLabel("Thời gian mượn:");
         timeJLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         
-        fromJLabel = new JLabel("Từ");
-        fromJLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        tuNgayJlb = new JLabel("Từ:");
+        tuNgayJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
         
-        fromJtfSearch = new JTextField();
-        fromJtfSearch.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        fromJtfSearch.setColumns(10);
+        denNgayJlb = new JLabel("Đến:");
+        denNgayJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
         
-        toJLabel = new JLabel("Đến");
-        toJLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        tuNgayJdc = new JDateChooser();
+        tuNgayJdc.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
         
-        toJtfSearch = new JTextField();
-        toJtfSearch.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        toJtfSearch.setColumns(10);
+        denNgayJdc = new JDateChooser();
+        denNgayJdc.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
         GroupLayout gl_SearchTImepanel = new GroupLayout(SearchTImepanel);
         gl_SearchTImepanel.setHorizontalGroup(
         	gl_SearchTImepanel.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_SearchTImepanel.createSequentialGroup()
         			.addGap(6)
-        			.addComponent(timeJLabel, GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+        			.addComponent(timeJLabel, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
         			.addGap(18)
-        			.addComponent(fromJLabel)
-        			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(fromJtfSearch, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-        			.addGap(27)
-        			.addComponent(toJLabel)
+        			.addComponent(tuNgayJlb)
         			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(toJtfSearch, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
-        			.addGap(28))
+        			.addComponent(tuNgayJdc, GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE)
+        			.addGap(35)
+        			.addComponent(denNgayJlb)
+        			.addPreferredGap(ComponentPlacement.UNRELATED)
+        			.addComponent(denNgayJdc, GroupLayout.PREFERRED_SIZE, 124, Short.MAX_VALUE)
+        			.addGap(9))
         );
         gl_SearchTImepanel.setVerticalGroup(
         	gl_SearchTImepanel.createParallelGroup(Alignment.TRAILING)
         		.addGroup(gl_SearchTImepanel.createSequentialGroup()
-        			.addGroup(gl_SearchTImepanel.createParallelGroup(Alignment.LEADING)
-        				.addGroup(gl_SearchTImepanel.createSequentialGroup()
-        					.addContainerGap()
-        					.addGroup(gl_SearchTImepanel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(fromJLabel)
-        						.addComponent(timeJLabel, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)))
-        				.addGroup(gl_SearchTImepanel.createSequentialGroup()
-        					.addGap(14)
-        					.addGroup(gl_SearchTImepanel.createParallelGroup(Alignment.BASELINE)
-        						.addComponent(fromJtfSearch)
-        						.addComponent(toJLabel)
-        						.addComponent(toJtfSearch))))
+        			.addContainerGap()
+        			.addGroup(gl_SearchTImepanel.createParallelGroup(Alignment.TRAILING)
+        				.addComponent(denNgayJdc, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(tuNgayJdc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(gl_SearchTImepanel.createParallelGroup(Alignment.BASELINE)
+        					.addComponent(timeJLabel, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+        					.addComponent(tuNgayJlb, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(denNgayJlb, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         			.addContainerGap())
         );
         SearchTImepanel.setLayout(gl_SearchTImepanel);
@@ -228,9 +223,9 @@ public class MuonTraPanel extends javax.swing.JPanel {
     private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed
     	String tenNguoiMuon = StringService.covertToString(nguoiMuonJtfSearch.getText());
     	String lienHe = StringService.covertToString(lienheJtfSearch.getText());
-    	String tuNgay = StringService.covertToString(toJtfSearch.getText());
-    	String denNgay = StringService.covertToString(fromJtfSearch.getText());
-    	controller.initAction(tenNguoiMuon, lienHe, tuNgay, denNgay);
+    	Date tuNgay = tuNgayJdc.getDate();
+    	Date denNgay = denNgayJdc.getDate();
+    	controller.setData(tenNguoiMuon, lienHe, tuNgay, denNgay);
     }//GEN-LAST:event_jtfSearchActionPerformed
 
 
@@ -240,8 +235,8 @@ public class MuonTraPanel extends javax.swing.JPanel {
     private javax.swing.JPanel tablePanel;
     private JTextField lienheJtfSearch;
     private JLabel timeJLabel;
-    private JLabel fromJLabel;
-    private JTextField fromJtfSearch;
-    private JLabel toJLabel;
-    private JTextField toJtfSearch;
+    private JLabel tuNgayJlb;
+    private JLabel denNgayJlb;
+    private JDateChooser tuNgayJdc;
+    private JDateChooser denNgayJdc;
 }

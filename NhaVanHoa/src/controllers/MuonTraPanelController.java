@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.EventObject;
 import java.util.List;
 import javax.swing.JFrame;
@@ -20,6 +21,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+
+import com.toedter.calendar.JDateChooser;
+
 import models.MuonTraModel;
 import services.MuonTraService;
 import services.StringService;
@@ -34,20 +38,20 @@ public class MuonTraPanelController {
     private JPanel jpnView;
     private JTextField nguoiMuonJtfSearch;
     private JTextField lienheJtfSearch;
-    private JTextField toJtfSearch;
-    private JTextField fromJtfSearch;
+    private JDateChooser tuNgayJdc;
+    private JDateChooser denNgayJdc;
     private MuonTraService muonTraService;
     private List<MuonTraBean> listMuonTraBeans;
     private ClassTableModel classTableModel = null;
     private final String[] COLUMNS = {"STT", "Tên người mượn", "CMND/TCC/HC", "Liên hệ", "Thời gian mượn", "Thời gian trả", "Cơ sở vật chất", "Số lượng"};
     private JFrame parentJFrame;
 
-    public MuonTraPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JTextField toJtfSearch, JTextField fromJtfSearch) {
+    public MuonTraPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JDateChooser tuNgayJdc, JDateChooser denNgayJdc) {
         this.jpnView = jpnView;
         this.nguoiMuonJtfSearch = nguoiMuonJtfSearch;
         this.lienheJtfSearch = lienheJtfSearch;
-        this.toJtfSearch = toJtfSearch;
-        this.fromJtfSearch = fromJtfSearch;
+        this.tuNgayJdc = tuNgayJdc;
+        this.denNgayJdc = denNgayJdc;
         classTableModel = new ClassTableModel();
         this.muonTraService = new MuonTraService();
         this.listMuonTraBeans = this.muonTraService.getListMuonTra();
@@ -63,21 +67,21 @@ public class MuonTraPanelController {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 String key = nguoiMuonJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), toJtfSearch.getText(), fromJtfSearch.getText());
+                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), tuNgayJdc.getDate(), denNgayJdc.getDate());
                 setDataTable();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String key = nguoiMuonJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), toJtfSearch.getText(), fromJtfSearch.getText());
+                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), tuNgayJdc.getDate(), denNgayJdc.getDate());
                 setDataTable();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 String key = nguoiMuonJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), toJtfSearch.getText(), fromJtfSearch.getText());
+                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), tuNgayJdc.getDate(), denNgayJdc.getDate());
                 setDataTable();
             }
         });
@@ -86,28 +90,28 @@ public class MuonTraPanelController {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 String key = lienheJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), toJtfSearch.getText(), fromJtfSearch.getText());
+                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), tuNgayJdc.getDate(), denNgayJdc.getDate());
                 setDataTable();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String key = lienheJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), toJtfSearch.getText(), fromJtfSearch.getText());
+                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), tuNgayJdc.getDate(), denNgayJdc.getDate());
                 setDataTable();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 String key = lienheJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), toJtfSearch.getText(), fromJtfSearch.getText());
+                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), tuNgayJdc.getDate(), denNgayJdc.getDate());
                 setDataTable();
             }
         });
     }
     //Khi an Filter, bien listMuonTraBeans se call muonTraService de thonn ke thon tin vua nhap
     //Chu y cac thong tin null
-    public void initAction(String tenNguoiMuon, String lienHe, String tuNgay, String denNgay){
+    public void setData(String tenNguoiMuon, String lienHe, Date tuNgay, Date denNgay){
       this.listMuonTraBeans = this.muonTraService.statisticMuonTra(tenNguoiMuon, lienHe, tuNgay, denNgay);
       setDataTable();
     }
@@ -218,20 +222,20 @@ public class MuonTraPanelController {
 		this.lienheJtfSearch = lienheJtfSearch;
 	}
 
-	public JTextField getToJtfSearch() {
-		return toJtfSearch;
+	public JDateChooser gettuNgayJdc() {
+		return tuNgayJdc;
 	}
 
-	public void setToJtfSearch(JTextField toJtfSearch) {
-		this.toJtfSearch = toJtfSearch;
+	public void settuNgayJdc(JDateChooser tuNgayJdc) {
+		this.tuNgayJdc = tuNgayJdc;
 	}
 
-	public JTextField getFromJtfSearch() {
-		return fromJtfSearch;
+	public JDateChooser getdenNgayJdc() {
+		return denNgayJdc;
 	}
 
-	public void setFromJtfSearch(JTextField fromJtfSearch) {
-		this.fromJtfSearch = fromJtfSearch;
+	public void setdenNgayJdc(JDateChooser denNgayJdc) {
+		this.denNgayJdc = denNgayJdc;
 	}
     
     

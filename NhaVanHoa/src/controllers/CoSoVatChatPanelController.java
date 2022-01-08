@@ -74,7 +74,7 @@ public class CoSoVatChatPanelController {
 	    }
 	    //Khi an Filter, bien listMuonTraBeans se call muonTraService de thonn ke thon tin vua nhap
 	    //Chu y cac thong tin null
-	    public void initAction(String tenCoSoVatChat){
+	    public void setData(String tenCoSoVatChat){
 	      this.listCoSoVatChatBeans = this.coSoVatChatService.statisticCoSoVatChat(tenCoSoVatChat);
 	      setDataTable();
 	    }

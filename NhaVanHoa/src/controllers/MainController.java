@@ -57,7 +57,7 @@ public class MainController {
                     view = new MuonTraPanel(this.jfrMain);
                     break;
                 case "LichSu":
-                    view = new LichSuPanel();
+                    view = new LichSuPanel(this.jfrMain);
                     break;
                 //any more
                 default:
@@ -128,7 +128,7 @@ public class MainController {
                     view = new MuonTraPanel(this.jfrMain);
                     break;
                 case "LichSu":
-                    view = new LichSuPanel();
+                    view = new LichSuPanel(this.jfrMain);
                     break;
                 default:
                     break;

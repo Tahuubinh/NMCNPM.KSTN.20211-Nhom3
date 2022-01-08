@@ -96,8 +96,8 @@ public class PhongBanPanel extends javax.swing.JPanel {
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addComponent(tablePanel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
         				.addGroup(layout.createSequentialGroup()
-        					.addComponent(searchPanel, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
-        					.addGap(82)
+        					.addComponent(searchPanel, GroupLayout.PREFERRED_SIZE, 312, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
         					.addComponent(addNewBtn, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
@@ -158,7 +158,7 @@ public class PhongBanPanel extends javax.swing.JPanel {
 
     private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed
     	String tenPhongBan = StringService.covertToString(searchJtf.getText());
-    	controller.initAction(tenPhongBan);
+    	controller.setData(tenPhongBan);
     }//GEN-LAST:event_jtfSearchActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

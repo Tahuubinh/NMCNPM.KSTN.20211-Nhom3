@@ -1,16 +1,60 @@
 package views;
 
-import controllers.HomeCotroller;
+import controllers.LichSuPanelController;
+import controllers.MuonTraPanelController;
+import services.StringService;
+
+import javax.swing.JFrame;
+
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import java.awt.Rectangle;
+import javax.swing.JPanel;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.awt.event.ActionEvent;
+import java.awt.Component;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.border.LineBorder;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JComboBox;
 
 /**
  *
- * @author Ai làm thì điền tên vào
+ * @author Hai
  */
 public class LichSuPanel extends javax.swing.JPanel {
 
-    public LichSuPanel() {
+    /**
+     * Creates new form NhanKhauManagePanel
+     */
+    private LichSuPanelController controller = null;
+    private JFrame parentJFrame;
+    
+    public LichSuPanel(JFrame parentFrame) {
+        this.parentJFrame = parentFrame;
         initComponents();
-
+        this.controller = new LichSuPanelController(tablePanel, thoiGianJdc, statusJcb);
+        GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
+        gl_tablePanel.setHorizontalGroup(
+        	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
+        		.addGap(0, 566, Short.MAX_VALUE)
+        );
+        gl_tablePanel.setVerticalGroup(
+        	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
+        		.addGap(0, 211, Short.MAX_VALUE)
+        );
+        tablePanel.setLayout(gl_tablePanel);
+        controller.setParentJFrame(parentJFrame);
+        controller.setDataTable();
     }
 
     /**
@@ -21,12 +65,73 @@ public class LichSuPanel extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        tablePanel = new javax.swing.JPanel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         
+        JButton filterJButton = new JButton("Lọc");
+        filterJButton.setAlignmentY(Component.TOP_ALIGNMENT);
+        filterJButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent evt) {
+        		jtfSearchActionPerformed(evt);
+        	}
+        });
+        filterJButton.setForeground(Color.WHITE);
+        filterJButton.setBackground(new Color(28, 155, 26));
+        filterJButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        
+        thoiGianJlb = new JLabel("Thời gian:");
+        thoiGianJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        
+        thoiGianJdc = new JDateChooser();
+        thoiGianJdc.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
+        
+        statusJcb = new JComboBox();
+        statusJcb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        statusJcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toàn bộ", "Đóng góp", "Loại bỏ"}));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        layout.setHorizontalGroup(
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addContainerGap()
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 754, Short.MAX_VALUE)
+        				.addComponent(filterJButton, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
+        				.addGroup(layout.createSequentialGroup()
+        					.addComponent(thoiGianJlb)
+        					.addGap(36)
+        					.addComponent(thoiGianJdc, GroupLayout.PREFERRED_SIZE, 307, GroupLayout.PREFERRED_SIZE)
+        					.addGap(101)
+        					.addComponent(statusJcb, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)))
+        			.addContainerGap())
+        );
+        layout.setVerticalGroup(
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addGroup(layout.createSequentialGroup()
+        			.addGap(16)
+        			.addGroup(layout.createParallelGroup(Alignment.LEADING)
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        						.addComponent(thoiGianJlb, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+        						.addComponent(statusJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        					.addGap(26)
+        					.addComponent(filterJButton))
+        				.addComponent(thoiGianJdc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        			.addGap(18)
+        			.addComponent(tablePanel, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+        			.addContainerGap())
+        );
+        this.setLayout(layout);
     }// </editor-fold>//GEN-END:initComponents
 
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    
-    // End of variables declaration//GEN-END:variables
+    private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed
+    	Date thoiGian = thoiGianJdc.getDate();
+    	String status = (String) statusJcb.getSelectedItem();
+    	this.controller.setData(thoiGian, status);
+    }//GEN-LAST:event_jtfSearchActionPerformed
+    private javax.swing.JPanel tablePanel;
+    private JLabel thoiGianJlb;
+    private JDateChooser thoiGianJdc;
+    private JComboBox statusJcb;
 }
