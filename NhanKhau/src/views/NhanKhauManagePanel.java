@@ -23,10 +23,13 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import javax.swing.JFrame;
@@ -152,6 +155,7 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
         hotenNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         
         locButton = new JButton("Lọc");
+        locButton.setBorderPainted(false);
         locButton.setFont(new Font("Tahoma", Font.BOLD, 14));
         locButton.setBackground(new java.awt.Color(0, 160, 50));
         locButton.addActionListener(new ActionListener() {
@@ -274,7 +278,14 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_khaiTuBtnActionPerformed
     
     private void xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_khaiTuBtnActionPerformed
-    	XoaNhanKhau xoaNhanKhau = new XoaNhanKhau(this.parentJFrame);
+    	JTable tempJTable = controller.getNhankhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	XoaNhanKhau xoaNhanKhau = new XoaNhanKhau(this.controller, this.parentJFrame, tempJTable, row);
     	xoaNhanKhau.setLocationRelativeTo(null);
     	xoaNhanKhau.setResizable(false);
     	xoaNhanKhau.setVisible(true);

@@ -335,7 +335,7 @@ public class NhanKhauService {
                         + "%'"
 						;
             }
-            System.err.println(query);
+            //System.err.println(query);
             
                     
         } catch (Exception e) {
