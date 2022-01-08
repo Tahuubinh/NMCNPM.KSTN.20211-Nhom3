@@ -20,8 +20,11 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import Bean.NhanKhauBean;
+import controllers.LoginController;
 import controllers.NhanKhauManagerPanelController;
 import controllers.NhanKhauManagerController.AddNewController;
+import models.ChungMinhThuModel;
+import models.NhanKhauModel;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -44,6 +47,8 @@ public class ThemMoiNhanKhau extends JFrame {
 	private JTextField ngaysinhtextField;
 	private JTextField tongiaotextField;
 	private JTextField textField;
+	JRadioButton namRadioButton;
+	JRadioButton nuRadioButton;
 	private NhanKhauManagerPanelController parentController;
     private JFrame parentFrame;
     private NhanKhauBean nhanKhauBean;
@@ -197,8 +202,8 @@ public class ThemMoiNhanKhau extends JFrame {
 		);
 		panel_1.setLayout(null);
 		
-		JRadioButton namRadioButton = new JRadioButton("Nam");
-		JRadioButton nuRadioButton = new JRadioButton("Nữ");
+		namRadioButton = new JRadioButton("Nam");
+		nuRadioButton = new JRadioButton("Nữ");
 		namRadioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (namRadioButton.isSelected()) {
@@ -226,9 +231,61 @@ public class ThemMoiNhanKhau extends JFrame {
 		hoanthanhButton.setForeground(new Color(255,255,255));
 		hoanthanhButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CreateBtnActionPerformed(e);
 			}
 		});
 		hoanthanhButton.setBounds(467, 26, 114, 50);
 		contentPane.add(hoanthanhButton);
 	}
+    private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
+            // tao moi 1 doi tuong nhan khau
+            NhanKhauModel temp = this.nhanKhauBean.getNhanKhauModel();
+            temp.setHoTen(this.hotenField.getText());
+            if (this.namRadioButton.isSelected()) {
+            	temp.setGioiTinh("nam");
+            }
+            else if (this.nuRadioButton.isSelected()) {
+            	temp.setGioiTinh("nữ");
+            } else {
+            	temp.setGioiTinh("");
+            }
+            try {
+                if (this.controller.addNewPeople(this.nhanKhauBean)) {
+                    JOptionPane.showMessageDialog(null, "Thêm thành công!!");
+                    close();
+                    parentController.refreshData();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+    }//GEN-LAST:event_CreateBtnActionPerformed
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -62,6 +62,14 @@ public class NhanKhauManagerPanelController {
         classTableModel = new ClassTableModel();
         this.nhanKhauService = new NhanKhauService();
         this.listNhanKhauBeans = this.nhanKhauService.getListNhanKhau();
+        locButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	String key = jtfSearch.getText();
+            	String keyDiachiString = diachiSearchtextField.getText();
+                listNhanKhauBeans = nhanKhauService.search(key.trim(), keyDiachiString.trim());
+                setDataTable();
+            }
+        });
         initAction();
     }
     
@@ -93,6 +101,10 @@ public class NhanKhauManagerPanelController {
 //                setDataTable();
 //            }
 //        });
+    	String key = jtfSearch.getText();
+    	String keyDiachiString = diachiSearchtextField.getText();
+        listNhanKhauBeans = nhanKhauService.search(key.trim(), keyDiachiString.trim());
+        setDataTable();
     }
     
     public void setDataTable() {
@@ -168,7 +180,9 @@ public class NhanKhauManagerPanelController {
     }
     
     public void refreshData() {
-        this.listNhanKhauBeans = this.nhanKhauService.getListNhanKhau();
+    	String key = jtfSearch.getText();
+    	String keyDiachiString = diachiSearchtextField.getText();
+        listNhanKhauBeans = nhanKhauService.search(key.trim(), keyDiachiString.trim());
         setDataTable();
     }
     public JPanel getJpnView() {
