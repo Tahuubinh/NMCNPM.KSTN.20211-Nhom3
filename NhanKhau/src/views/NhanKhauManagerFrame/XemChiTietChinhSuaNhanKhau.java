@@ -22,6 +22,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import Bean.NhanKhauBean;
 import controllers.NhanKhauManagerPanelController;
 import controllers.NhanKhauManagerController.AddNewController;
+import models.NhanKhauModel;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -41,13 +42,15 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 	private JPanel contentPane;
 	private JTextField hotenField;
 	private JTextField tcctextField;
-	private JTextField ngaysinhtextField;
+	//private JTextField ngaysinhtextField;
 	private JTextField tongiaotextField;
 	private JTextField textField;
 	private NhanKhauManagerPanelController parentController;
     private JFrame parentFrame;
     private NhanKhauBean nhanKhauBean;
     private AddNewController controller;
+    private NhanKhauModel nhanKhauModel;
+    private com.toedter.calendar.JDateChooser ngaysinhtextField;
 	/**
 	 * Launch the application.
 	 */
@@ -63,11 +66,12 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 //			}
 //		});
 //	}
-    public XemChiTietChinhSuaNhanKhau(NhanKhauManagerPanelController parentController, JFrame parentJFrame) {
+    public XemChiTietChinhSuaNhanKhau(NhanKhauManagerPanelController parentController, JFrame parentJFrame, NhanKhauModel nhanKhauModel) {
         this.parentController = parentController;
         this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
         this.nhanKhauBean = new NhanKhauBean();
+        this.nhanKhauModel = nhanKhauModel;
         initComponents();
         setTitle("Chỉnh sửa thông tin nhân khẩu");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -115,12 +119,17 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 		
 		hotenField = new JTextField();
 		hotenField.setColumns(10);
+		hotenField.setText(nhanKhauModel.getHoTen());
 		
 		tcctextField = new JTextField();
 		tcctextField.setColumns(10);
+		tcctextField.setText("");
 		
-		ngaysinhtextField = new JTextField();
-		ngaysinhtextField.setColumns(10);
+		ngaysinhtextField = new com.toedter.calendar.JDateChooser();
+		if (nhanKhauModel.getNamSinh() != null) {
+			ngaysinhtextField.setDate(nhanKhauModel.getNamSinh());
+		}
+		//ngaysinhtextField.setColumns(10);
 		
 		JLabel gioitinhLabel = new JLabel("Giới tính:");
 		
@@ -199,6 +208,11 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 		
 		JRadioButton namRadioButton = new JRadioButton("Nam");
 		JRadioButton nuRadioButton = new JRadioButton("Nữ");
+		if (nhanKhauModel.getGioiTinh().equals("Nam")) {
+			namRadioButton.setSelected(true);
+		} else if (nhanKhauModel.getGioiTinh().equals("Nữ")) {
+			nuRadioButton.setSelected(true);
+		}
 		namRadioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (namRadioButton.isSelected()) {
@@ -221,6 +235,7 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 		panel.setLayout(gl_panel);
 		
 		JButton hoanthanhButton = new JButton("Hoàn thành");
+		hoanthanhButton.setBorderPainted(false);
 		hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		hoanthanhButton.setBackground(new Color(212,84,21));
 		hoanthanhButton.setForeground(new Color(255,255,255));

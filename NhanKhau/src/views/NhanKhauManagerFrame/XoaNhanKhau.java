@@ -18,11 +18,17 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
+
+import controllers.NhanKhauManagerPanelController;
+import controllers.NhanKhauManagerController.XoaNhanKhauController;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -38,10 +44,15 @@ public class XoaNhanKhau extends JFrame {
 	private JPanel contentPane;
 	private JTextField ngaytextField;
     private JFrame parentJFrame = null;
+    private JTable table;
+    private NhanKhauManagerPanelController parentController;
+    private int row;
     
-    public XoaNhanKhau(JFrame parentJFrame) {
+    public XoaNhanKhau(NhanKhauManagerPanelController parentController, JFrame parentJFrame, JTable table, int row) {
         initComponents();
+        this.parentController = parentController;
         this.parentJFrame = parentJFrame;
+        this.table = table;
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         parentJFrame.setEnabled(false);
         
@@ -54,11 +65,9 @@ public class XoaNhanKhau extends JFrame {
         });
     }
     
-    private void close() {
-        if (JOptionPane.showConfirmDialog(this, "Are you sure to close??", "Confirm", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
-            this.parentJFrame.setEnabled(true);
-            dispose();
-        }
+    void close() {
+        this.parentJFrame.setEnabled(true);
+        dispose();
     }
 
 	/**
@@ -128,6 +137,22 @@ public class XoaNhanKhau extends JFrame {
 		hoanthanhButton.setForeground(new Color(255,255,255));
 		hoanthanhButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int confirm = JOptionPane.showConfirmDialog(null, "Đã chắc chắn?");
+				if (confirm == JOptionPane.YES_OPTION) {
+					XoaNhanKhauController controller = new XoaNhanKhauController();
+					try {
+						int id;
+						//System.err.println(table.getModel().getValueAt(table.getSelectedRow(),0));
+						id = (int) table.getModel().getValueAt(table.getSelectedRow(),0);
+		                if (controller.XoaNhanKhau(id)) {
+		                	close();
+		                    parentController.refreshData();
+		                }
+		            } catch (Exception err) {
+		                System.out.println(err.getMessage());
+		                JOptionPane.showMessageDialog(null, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+		            }
+				}
 			}
 		});
 		hoanthanhButton.setBounds(467, 26, 114, 50);

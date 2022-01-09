@@ -22,6 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+
 import models.NhanKhauModel;
 import services.NhanKhauService;
 import utility.ClassTableModel;
@@ -43,6 +46,7 @@ public class NhanKhauManagerPanelController {
     private ClassTableModel classTableModel = null;
     private final String[] COLUMNS = {"ID", "Họ tên", "Ngày sinh", "Giới tính", "Địa chỉ hiện nay"};
     private JFrame parentJFrame;
+    private JTable table;
 
     public NhanKhauManagerPanelController(JPanel jpnView, JTextField jtfSearch) {
         this.jpnView = jpnView;
@@ -70,14 +74,30 @@ public class NhanKhauManagerPanelController {
                 setDataTable();
             }
         });
-        initAction();
+        refreshData();
     }
     
     public NhanKhauManagerPanelController() {
     }
     
     
-    //
+    public JTable getNhankhauTable() {
+		return table;
+	}
+
+	public void setNhankhauTable(JTable nhankhauTable) {
+		this.table = nhankhauTable;
+	}
+
+	public List<NhanKhauBean> getListNhanKhauBeans() {
+		return listNhanKhauBeans;
+	}
+
+	public void setListNhanKhauBeans(List<NhanKhauBean> listNhanKhauBeans) {
+		this.listNhanKhauBeans = listNhanKhauBeans;
+	}
+
+	//
     public void initAction(){
 //        this.jtfSearch.getDocument().addDocumentListener(new DocumentListener() {
 //            @Override
@@ -112,14 +132,16 @@ public class NhanKhauManagerPanelController {
         this.listNhanKhauBeans.forEach(nhankhau -> {
             listItem.add(nhankhau.getNhanKhauModel());
         });
+        //System.err.println(listItem);
         DefaultTableModel model = classTableModel.setTableNhanKhau(listItem, COLUMNS);
-        JTable table = new JTable(model) {
+        table = new JTable(model) {
             @Override
             public boolean editCellAt(int row, int column, EventObject e) {
                 return false;
             }
             
         };
+        table.removeColumn(table.getColumnModel().getColumn(0));
 
 //        JPopupMenu tablepopupMenu;
 //        JMenuItem vangMenuItem;
@@ -147,20 +169,20 @@ public class NhanKhauManagerPanelController {
         table.validate();
         table.repaint();
         table.setFont(new Font("Arial", Font.PLAIN, 14));
-        table.getColumnModel().getColumn(0).setMaxWidth(80);
-        table.getColumnModel().getColumn(0).setMinWidth(80);
-        table.getColumnModel().getColumn(0).setPreferredWidth(80);
+//        table.getColumnModel().getColumn(0).setMaxWidth(80);
+//        table.getColumnModel().getColumn(0).setMinWidth(80);
+//        table.getColumnModel().getColumn(0).setPreferredWidth(80);
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
 //                JOptionPane.showConfirmDialog(null, table.getSelectedRow());
-                if (e.getClickCount() > 1) {
-                    NhanKhauBean temp = listNhanKhauBeans.get(table.getSelectedRow());
-                    NhanKhauBean info = nhanKhauService.getNhanKhau(temp.getChungMinhThuModel().getSoCMT());
-                    InfoJframe infoJframe = new InfoJframe(info.toString(), parentJFrame);
-                    infoJframe.setLocationRelativeTo(null);
-                    infoJframe.setVisible(true);
-                }
+//                if (e.getClickCount() > 1) {
+//                    NhanKhauBean temp = listNhanKhauBeans.get(table.getSelectedRow());
+//                    NhanKhauBean info = nhanKhauService.getNhanKhau(temp.getChungMinhThuModel().getSoCMT());
+//                    InfoJframe infoJframe = new InfoJframe(info.toString(), parentJFrame);
+//                    infoJframe.setLocationRelativeTo(null);
+//                    infoJframe.setVisible(true);
+//                }
             }
             
         });
