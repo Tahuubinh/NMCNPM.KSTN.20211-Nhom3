@@ -44,7 +44,7 @@ public class ThemMoiNhanKhau extends JFrame {
 	private JPanel contentPane;
 	private JTextField hotenField;
 	private JTextField tcctextField;
-	private JTextField ngaysinhtextField;
+	//private JTextField ngaysinhtextField;
 	private JTextField tongiaotextField;
 	private JTextField textField;
 	JRadioButton namRadioButton;
@@ -53,6 +53,7 @@ public class ThemMoiNhanKhau extends JFrame {
     private JFrame parentFrame;
     private NhanKhauBean nhanKhauBean;
     private AddNewController controller;
+    private com.toedter.calendar.JDateChooser ngaysinhtextField;
 	/**
 	 * Launch the application.
 	 */
@@ -124,8 +125,8 @@ public class ThemMoiNhanKhau extends JFrame {
 		tcctextField = new JTextField();
 		tcctextField.setColumns(10);
 		
-		ngaysinhtextField = new JTextField();
-		ngaysinhtextField.setColumns(10);
+		ngaysinhtextField = new com.toedter.calendar.JDateChooser();
+		//ngaysinhtextField.setColumns(10);
 		
 		JLabel gioitinhLabel = new JLabel("Giới tính:");
 		
@@ -226,6 +227,7 @@ public class ThemMoiNhanKhau extends JFrame {
 		panel.setLayout(gl_panel);
 		
 		JButton hoanthanhButton = new JButton("Hoàn thành");
+		hoanthanhButton.setBorderPainted(false);
 		hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		hoanthanhButton.setBackground(new Color(212,84,21));
 		hoanthanhButton.setForeground(new Color(255,255,255));
@@ -242,13 +244,16 @@ public class ThemMoiNhanKhau extends JFrame {
             NhanKhauModel temp = this.nhanKhauBean.getNhanKhauModel();
             temp.setHoTen(this.hotenField.getText());
             if (this.namRadioButton.isSelected()) {
-            	temp.setGioiTinh("nam");
+            	temp.setGioiTinh("Nam");
             }
             else if (this.nuRadioButton.isSelected()) {
-            	temp.setGioiTinh("nữ");
+            	temp.setGioiTinh("Nữ");
             } else {
             	temp.setGioiTinh("");
             }
+            temp.setNamSinh(ngaysinhtextField.getDate());
+            //System.err.println(temp.getNamSinh());
+            System.out.println();
             try {
                 if (this.controller.addNewPeople(this.nhanKhauBean)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công!!");

@@ -89,6 +89,14 @@ public class NhanKhauManagerPanelController {
 		this.table = nhankhauTable;
 	}
 
+	public List<NhanKhauBean> getListNhanKhauBeans() {
+		return listNhanKhauBeans;
+	}
+
+	public void setListNhanKhauBeans(List<NhanKhauBean> listNhanKhauBeans) {
+		this.listNhanKhauBeans = listNhanKhauBeans;
+	}
+
 	//
     public void initAction(){
 //        this.jtfSearch.getDocument().addDocumentListener(new DocumentListener() {

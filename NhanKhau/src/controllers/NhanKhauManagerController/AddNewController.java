@@ -104,11 +104,13 @@ public class AddNewController {
         NhanKhauModel nhanKhau = nhanKhauBean.getNhanKhauModel();
         Connection connection = MysqlConnection.getMysqlConnection();
         // 1 - 19
-        String query = "INSERT INTO nhan_khau (hoTen, gioiTinh)" 
-                        + " values (?, ?)";
+        String query = "INSERT INTO nhan_khau (hoTen, gioiTinh, namSinh)" 
+                        + " values (?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, nhanKhau.getHoTen());
         preparedStatement.setString(2, nhanKhau.getGioiTinh());
+        java.sql.Date namSinh = new java.sql.Date(nhanKhau.getNamSinh().getTime());
+        preparedStatement.setDate(3, namSinh);
         preparedStatement.executeUpdate();
         
         
