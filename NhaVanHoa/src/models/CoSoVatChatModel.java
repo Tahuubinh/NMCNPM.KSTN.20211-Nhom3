@@ -4,7 +4,7 @@ public class CoSoVatChatModel {
 	private int id;
 	private String tenCoSoVatChat;
 	private int soLuong;
-	private int donVi;
+	private String donVi;
 	private int soLuongMuon;
 	private int soLuongTrongKho;
 	private String lyDo;
@@ -26,10 +26,10 @@ public class CoSoVatChatModel {
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
-	public int getDonVi() {
+	public String getDonVi() {
 		return donVi;
 	}
-	public void setDonVi(int donVi) {
+	public void setDonVi(String donVi) {
 		this.donVi = donVi;
 	}
 	public int getSoLuongMuon() {

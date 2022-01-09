@@ -13,7 +13,7 @@ public class MysqlConnection {
         String hostName = "localhost";
         String dbName = "quan_ly_nhan_khau";
         String userName = "postgres";
-        String password = "passwd";
+        String password = "123123";
         return getMysqlConnection(hostName, dbName, userName, password);
     }
     

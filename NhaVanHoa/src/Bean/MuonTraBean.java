@@ -1,7 +1,6 @@
 package Bean;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import models.PhongBanModel;
 import models.CoSoVatChatModel;
 import models.MuonTraModel;
@@ -16,14 +15,14 @@ public class MuonTraBean {
     private MuonTraModel muonTraModel;
     private NguoiMuonModel nguoiMuonModel;
     private CoSoVatChatModel coSoVatChatModel;
-    private PhongBanModel coSoHaTangModel;
+    private PhongBanModel phongBanModel;
     private ThoiGianModel thoiGianModel;
     
-    public MuonTraBean(MuonTraModel muonTraModel, NguoiMuonModel nguoiMuonModel, CoSoVatChatModel coSoVatChatModel, PhongBanModel coSoHaTangModel, ThoiGianModel thoiGianModel) {
+    public MuonTraBean(MuonTraModel muonTraModel, NguoiMuonModel nguoiMuonModel, CoSoVatChatModel coSoVatChatModel, PhongBanModel phongBanModel, ThoiGianModel thoiGianModel) {
         this.muonTraModel = muonTraModel;
         this.nguoiMuonModel = nguoiMuonModel;
         this.coSoVatChatModel = coSoVatChatModel;
-        this.coSoHaTangModel = coSoHaTangModel;
+        this.phongBanModel = phongBanModel;
         this.thoiGianModel = thoiGianModel;
     }
 
@@ -57,12 +56,12 @@ public class MuonTraBean {
 		this.coSoVatChatModel = coSoVatChatModel;
 	}
 
-	public PhongBanModel getCoSoHaTangModel() {
-		return coSoHaTangModel;
+	public PhongBanModel getPhongBanModel() {
+		return phongBanModel;
 	}
 
-	public void setCoSoHaTangModel(PhongBanModel coSoHaTangModel) {
-		this.coSoHaTangModel = coSoHaTangModel;
+	public void setPhongBanModel(PhongBanModel phongBanModel) {
+		this.phongBanModel = phongBanModel;
 	}
 
 	public ThoiGianModel getThoiGianModel() {
