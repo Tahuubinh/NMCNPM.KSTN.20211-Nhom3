@@ -31,6 +31,7 @@ public class ChangeListPeopleController {
     private JButton addBtn;
     private JButton removeBtn;
     private JTextField searchJtf;
+    private JTextField diachiSearchtextField;
     private JPanel peopleJpn;
     private JPanel memJpn;
     private List<MemOfFamily> listMember;
@@ -53,12 +54,13 @@ public class ChangeListPeopleController {
      * @param peopleJpn
      * @param memJpn
      */
-    public ChangeListPeopleController(List<MemOfFamily> listMember, JButton addBtn, JButton removeBtn, JTextField searchJtf, JPanel peopleJpn, JPanel memJpn) {
+    public ChangeListPeopleController(List<MemOfFamily> listMember, JButton addBtn, JButton removeBtn, JTextField searchJtf, JTextField diachiSearchtextField, JPanel peopleJpn, JPanel memJpn) {
         this.listMember = listMember;
         this.listPeople = nhanKhauService.getListNhanKhau();
         this.addBtn = addBtn;
         this.removeBtn = removeBtn;
         this.searchJtf = searchJtf;
+        this.diachiSearchtextField = diachiSearchtextField;
         this.peopleJpn = peopleJpn;
         this.memJpn = memJpn;
         setData();
@@ -70,21 +72,43 @@ public class ChangeListPeopleController {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 String key = searchJtf.getText();
-                listPeople = nhanKhauService.search(key.trim());
+                listPeople = nhanKhauService.search(key.trim(), diachiSearchtextField.getText());
                 setData();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String key = searchJtf.getText();
-                listPeople = nhanKhauService.search(key.trim());
+                listPeople = nhanKhauService.search(key.trim(), diachiSearchtextField.getText());
                 setData();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 String key = searchJtf.getText();
-                listPeople = nhanKhauService.search(key.trim());
+                listPeople = nhanKhauService.search(key.trim(), diachiSearchtextField.getText());
+                setData();
+            }
+        });
+        this.diachiSearchtextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String key = searchJtf.getText();
+                listPeople = nhanKhauService.search(searchJtf.getText(), key.trim());
+                setData();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String key = searchJtf.getText();
+                listPeople = nhanKhauService.search(searchJtf.getText(), key.trim());
+                setData();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                String key = searchJtf.getText();
+                listPeople = nhanKhauService.search(searchJtf.getText(), key.trim());
                 setData();
             }
         });

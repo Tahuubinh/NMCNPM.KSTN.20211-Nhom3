@@ -22,6 +22,7 @@ public class LichSuService {
      */
     public LichSuBean getLichSu(String id) {
         LichSuBean LichSuBean = new LichSuBean();  
+        String query1 = "SELECT m.money_id, concat('Ông/Bà', r.user_name, 'tặng nhà văn hoá') as reason FROM money m JOIN registers r ON m.user_id = r.user_id";
         return LichSuBean;
     }
     

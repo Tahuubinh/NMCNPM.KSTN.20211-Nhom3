@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import models.PhongBanModel;
 import models.CoSoVatChatModel;
 import models.NguoiMuonModel;
+import models.NhaTaiTroModel;
 import models.ThoiGianModel;
 
 import javax.swing.JPanel;
@@ -244,9 +245,10 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
     private void addThongTinDangKyCoSoVatChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
     	if(validateValueInForm()) {
     		CoSoVatChatModel coSoVatChatModel = this.coSoVatChatBean.getCoSoVatChatModel();
+    		NhaTaiTroModel nhaTaiTroModel = this.coSoVatChatBean.getNhaTaiTroModel();
     		coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatJtf.getText());
     		coSoVatChatModel.setSoLuong(Integer.parseInt(soLuongJtf.getText()));
-    		coSoVatChatModel.setLyDo(lyDoJtf.getText());
+    		nhaTaiTroModel.setLyDo(lyDoJtf.getText());
             try {
             	if(this.controller.addNewCoSoVatChat(coSoVatChatBean)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công!!");

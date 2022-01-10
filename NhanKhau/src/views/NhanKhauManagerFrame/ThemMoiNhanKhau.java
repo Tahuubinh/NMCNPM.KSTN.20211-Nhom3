@@ -20,8 +20,11 @@ import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
 import Bean.NhanKhauBean;
+import controllers.LoginController;
 import controllers.NhanKhauManagerPanelController;
 import controllers.NhanKhauManagerController.AddNewController;
+import models.ChungMinhThuModel;
+import models.NhanKhauModel;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -35,19 +38,23 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
+import javax.swing.JTextArea;
 
 public class ThemMoiNhanKhau extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField hotenField;
 	private JTextField tcctextField;
-	private JTextField ngaysinhtextField;
+	//private JTextField ngaysinhtextField;
 	private JTextField tongiaotextField;
 	private JTextField textField;
+	JRadioButton namRadioButton;
+	JRadioButton nuRadioButton;
 	private NhanKhauManagerPanelController parentController;
     private JFrame parentFrame;
     private NhanKhauBean nhanKhauBean;
     private AddNewController controller;
+    private com.toedter.calendar.JDateChooser ngaysinhtextField;
 	/**
 	 * Launch the application.
 	 */
@@ -95,14 +102,14 @@ public class ThemMoiNhanKhau extends JFrame {
     private void initComponents() {
 		setForeground(Color.ORANGE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 617, 272);
+		setBounds(100, 100, 617, 325);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 428, 189);
+		panel.setBounds(10, 11, 428, 275);
 		contentPane.add(panel);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
@@ -119,8 +126,8 @@ public class ThemMoiNhanKhau extends JFrame {
 		tcctextField = new JTextField();
 		tcctextField.setColumns(10);
 		
-		ngaysinhtextField = new JTextField();
-		ngaysinhtextField.setColumns(10);
+		ngaysinhtextField = new com.toedter.calendar.JDateChooser();
+		//ngaysinhtextField.setColumns(10);
 		
 		JLabel gioitinhLabel = new JLabel("Giới tính:");
 		
@@ -131,10 +138,15 @@ public class ThemMoiNhanKhau extends JFrame {
 		tongiaotextField = new JTextField();
 		tongiaotextField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Liên hệ");
+		JLabel lblNewLabel = new JLabel("Liên hệ:");
 		
 		textField = new JTextField();
 		textField.setColumns(10);
+		
+		JLabel ghi_chuLabel = new JLabel("Ghi chú:");
+		
+		JTextArea ghi_chutextArea = new JTextArea();
+		ghi_chutextArea.setLineWrap(true);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -145,17 +157,18 @@ public class ThemMoiNhanKhau extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED, 428, Short.MAX_VALUE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(tongiaoLabel))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(tccLabel)
 								.addComponent(ngaysinhNewLabel)
 								.addComponent(hotenLabel)
 								.addComponent(gioitinhLabel)
-								.addComponent(lblNewLabel))
+								.addComponent(lblNewLabel)
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(ghi_chuLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(tongiaoLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 							.addGap(95)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(ghi_chutextArea, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(tongiaotextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(hotenField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
@@ -193,12 +206,19 @@ public class ThemMoiNhanKhau extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(24, Short.MAX_VALUE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(14)
+							.addComponent(ghi_chuLabel))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(ghi_chutextArea, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		panel_1.setLayout(null);
 		
-		JRadioButton namRadioButton = new JRadioButton("Nam");
-		JRadioButton nuRadioButton = new JRadioButton("Nữ");
+		namRadioButton = new JRadioButton("Nam");
+		nuRadioButton = new JRadioButton("Nữ");
 		namRadioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (namRadioButton.isSelected()) {
@@ -221,14 +241,70 @@ public class ThemMoiNhanKhau extends JFrame {
 		panel.setLayout(gl_panel);
 		
 		JButton hoanthanhButton = new JButton("Hoàn thành");
+		hoanthanhButton.setBorderPainted(false);
 		hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		hoanthanhButton.setBackground(new Color(212,84,21));
 		hoanthanhButton.setForeground(new Color(255,255,255));
 		hoanthanhButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CreateBtnActionPerformed(e);
 			}
 		});
 		hoanthanhButton.setBounds(467, 26, 114, 50);
 		contentPane.add(hoanthanhButton);
 	}
+    private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
+            // tao moi 1 doi tuong nhan khau
+            NhanKhauModel temp = this.nhanKhauBean.getNhanKhauModel();
+            temp.setHoTen(this.hotenField.getText());
+            if (this.namRadioButton.isSelected()) {
+            	temp.setGioiTinh("Nam");
+            }
+            else if (this.nuRadioButton.isSelected()) {
+            	temp.setGioiTinh("Nữ");
+            } else {
+            	temp.setGioiTinh("");
+            }
+            temp.setNamSinh(ngaysinhtextField.getDate());
+            //System.err.println(temp.getNamSinh());
+            System.out.println();
+            try {
+                if (this.controller.addNewPeople(this.nhanKhauBean)) {
+                    JOptionPane.showMessageDialog(null, "Thêm thành công!!");
+                    close();
+                    parentController.refreshData();
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+    }//GEN-LAST:event_CreateBtnActionPerformed
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

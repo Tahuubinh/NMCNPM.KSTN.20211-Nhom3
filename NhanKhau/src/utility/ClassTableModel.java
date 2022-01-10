@@ -35,6 +35,11 @@ public class ClassTableModel {
             obj[2] = item.getNamSinh();
             obj[3] = item.getGioiTinh();
             obj[4] = item.getDiaChiHienNay();
+            
+//            obj[0] = item.getHoTen();
+//            obj[1] = item.getNamSinh();
+//            obj[2] = item.getGioiTinh();
+//            obj[3] = item.getDiaChiHienNay();
             dtm.addRow(obj);
         });
         return dtm;
