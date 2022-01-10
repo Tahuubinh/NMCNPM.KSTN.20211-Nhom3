@@ -1,7 +1,6 @@
 package views;
 
 import controllers.NhanKhauManagerPanelController;
-import models.NhanKhauModel;
 import views.NhanKhauManagerFrame.AddNewPeopleJFrame;
 import views.NhanKhauManagerFrame.ThemMoiNhanKhau;
 import views.NhanKhauManagerFrame.XemChiTietChinhSuaNhanKhau;
@@ -13,8 +12,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
 
 import org.jcp.xml.dsig.internal.MacOutputStream;
-
-import Bean.NhanKhauBean;
 
 import java.awt.Color;
 import javax.swing.GroupLayout.Alignment;
@@ -31,8 +28,6 @@ import javax.swing.JTable;
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.List;
-
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -250,20 +245,11 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
 //      addNewPeopleJFrame.setLocationRelativeTo(null);
 //      addNewPeopleJFrame.setResizable(false);
 //      addNewPeopleJFrame.setVisible(true);
-  	    
-    	JTable tempJTable = controller.getNhankhauTable();
-    	int row = tempJTable.getSelectedRow();
-    	if (row == -1) {
-    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
-    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
-    		return;
-    	}
-    	List<NhanKhauBean> list = controller.getListNhanKhauBeans();
-    	NhanKhauModel nhanKhauModel = list.get(row).getNhanKhauModel();
-        XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame, nhanKhauModel);
-        addNewPeopleJFrame.setLocationRelativeTo(null);
-        addNewPeopleJFrame.setResizable(false);
-        addNewPeopleJFrame.setVisible(true);
+  	
+      XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame);
+      addNewPeopleJFrame.setLocationRelativeTo(null);
+      addNewPeopleJFrame.setResizable(false);
+      addNewPeopleJFrame.setVisible(true);
   	
       
     }
