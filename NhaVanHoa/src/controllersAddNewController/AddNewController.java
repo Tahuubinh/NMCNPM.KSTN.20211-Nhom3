@@ -1,4 +1,4 @@
-package controllersMuonTraController;
+package controllersAddNewController;
 
 import Bean.CoSoVatChatBean;
 import Bean.MuonTraBean;
@@ -28,7 +28,7 @@ public class AddNewController {
     public boolean addNewNguoiMuon(MuonTraBean muonTraBean) throws SQLException, ClassNotFoundException{
         NguoiMuonModel nguoiMuonModel = muonTraBean.getNguoiMuonModel();
         CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
-        PhongBanModel coSoHaTangModel = muonTraBean.getCoSoHaTangModel();
+        PhongBanModel phongBanModel = muonTraBean.getPhongBanModel();
         ThoiGianModel thoiGianModel = muonTraBean.getThoiGianModel();
         Connection connection = MysqlConnection.getMysqlConnection();
         connection.close();
@@ -38,6 +38,13 @@ public class AddNewController {
     public boolean addNewCoSoVatChat(CoSoVatChatBean coSoVatChatBean) throws SQLException, ClassNotFoundException{
         CoSoVatChatModel coSoVatChatModel = coSoVatChatBean.getCoSoVatChatModel();
         Connection connection = MysqlConnection.getMysqlConnection();
+        
+        String query = "INSERT INTO nhan_khau (hoTen, gioiTinh)" 
+                        + " values (?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setString(1, nhanKhau.getHoTen());
+        preparedStatement.setString(2, nhanKhau.getGioiTinh());
+        preparedStatement.executeUpdate();
         connection.close();
         return true;
     }

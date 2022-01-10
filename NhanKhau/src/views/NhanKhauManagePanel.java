@@ -11,7 +11,6 @@ import views.NhanKhauManagerFrame.KhaiTuJFrame;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
 
-import org.jcp.xml.dsig.internal.MacOutputStream;
 
 import java.awt.Color;
 import javax.swing.GroupLayout.Alignment;

@@ -6,6 +6,13 @@ public class NhaTaiTroModel {
 	private int idItem;
 	private int soLuong;
 	private String ngayTaiTro;
+	private String lyDo;
+	public String getLyDo() {
+		return lyDo;
+	}
+	public void setLyDo(String lyDo) {
+		this.lyDo = lyDo;
+	}
 	public int getId() {
 		return id;
 	}

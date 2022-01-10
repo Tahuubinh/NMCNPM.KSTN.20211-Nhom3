@@ -3,9 +3,9 @@ package views.PhongBanFrame;
 import Bean.PhongBanBean;
 import Bean.MuonTraBean;
 import controllers.PhongBanPanelController;
+import controllersAddNewController.AddNewController;
 import controllers.LoginController;
 import controllers.MuonTraPanelController;
-import controllersMuonTraController.AddNewController;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
