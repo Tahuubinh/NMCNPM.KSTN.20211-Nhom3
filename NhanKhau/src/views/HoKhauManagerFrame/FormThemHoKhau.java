@@ -70,6 +70,7 @@ public class FormThemHoKhau extends JFrame {
 		setTitle("Thêm hộ khẩu");
         initComponents();
         this.parentJFrame = parentJFrame;
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         parentJFrame.setEnabled(false);
         this.addWindowListener(new WindowAdapter() {
             @Override

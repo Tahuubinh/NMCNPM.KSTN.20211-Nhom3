@@ -1,6 +1,10 @@
 package views;
 
 import controllers.ThongKePanelController;
+
+import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JFrame;
 
 /**
@@ -100,8 +104,11 @@ public class ThongKePanel extends javax.swing.JPanel {
 
         denNamJtf.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        jButton1.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14)); // NOI18N
         jButton1.setText("Show");
+        jButton1.setBorderPainted(false);
+        jButton1.setForeground(Color.WHITE);
+        jButton1.setBackground(new Color(0, 160, 50));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);

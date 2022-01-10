@@ -272,6 +272,13 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
 
     private void tamVangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tamVangBtnActionPerformed
         // hien jframe dang ky tam vang
+    	JTable tempJTable = controller.getNhankhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
     	System.out.println("Hello");
         DangKyTamVang dangKyTamVangJFrame = new DangKyTamVang(this.controller, this.parentJFrame);
         dangKyTamVangJFrame.setLocationRelativeTo(null);
