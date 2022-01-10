@@ -8,9 +8,14 @@ package views;
 import controllers.HoKhauPanelController;
 import javax.swing.JFrame;
 import views.HoKhauManagerFrame.ChuyenDiNoiKhac;
+import views.HoKhauManagerFrame.FormDoiChuHo;
+import views.HoKhauManagerFrame.FormThemHoKhau;
 import views.HoKhauManagerFrame.TachHoKhau;
 import views.HoKhauManagerFrame.ThemMoiHoKhau;
 import javax.swing.border.LineBorder;
+
+import Bean.NhanKhauBean;
+
 import java.awt.Color;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
@@ -105,6 +110,11 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         
         JMenuItem doichuhoMenuItem = new JMenuItem("Đổi chủ hộ");
         popupMenu.add(doichuhoMenuItem);
+        doichuhoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	doiChuBtnActionPerformed(evt);
+            }
+        });
         
         themnhankhauMenuItem = new JMenuItem("Thêm nhân khẩu");
         popupMenu.add(themnhankhauMenuItem);
@@ -139,6 +149,7 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         diachitextField.setFont(new Font("Arial", Font.PLAIN, 14));
         
         locButton = new JButton("Lọc");
+        locButton.setBorderPainted(false);
         locButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         	}
@@ -223,7 +234,14 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_chuyenDiBtnActionPerformed
 
     private void themMoiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themMoiBtnActionPerformed
-        ThemMoiHoKhau themMoiHoKhau = new ThemMoiHoKhau(this.parentFrame);
+    	FormThemHoKhau themMoiHoKhau = new FormThemHoKhau(this.parentFrame);
+        themMoiHoKhau.setLocationRelativeTo(null);
+        themMoiHoKhau.setResizable(false);
+        themMoiHoKhau.setVisible(true);
+    }//GEN-LAST:event_themMoiBtnActionPerformed
+    
+    private void doiChuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themMoiBtnActionPerformed
+    	FormDoiChuHo themMoiHoKhau = new FormDoiChuHo(new NhanKhauBean(), this.parentFrame);
         themMoiHoKhau.setLocationRelativeTo(null);
         themMoiHoKhau.setResizable(false);
         themMoiHoKhau.setVisible(true);
