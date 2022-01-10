@@ -3,7 +3,7 @@ package views.MuonTraFrame;
 import Bean.MuonTraBean;
 import controllers.LoginController;
 import controllers.MuonTraPanelController;
-import controllersMuonTraController.AddNewController;
+import controllersAddNewController.AddNewController;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;

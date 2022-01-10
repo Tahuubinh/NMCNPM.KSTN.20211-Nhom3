@@ -1,4 +1,4 @@
-package controllersMuonTraController;
+package controllersAddNewController;
 
 import Bean.CoSoVatChatBean;
 import Bean.MuonTraBean;
@@ -25,6 +25,7 @@ import services.MysqlConnection;
 
 public class AddNewController {
    
+	//add thong tin nguoi muon vao database, neu add that bai tra ve false
     public boolean addNewNguoiMuon(MuonTraBean muonTraBean) throws SQLException, ClassNotFoundException{
         NguoiMuonModel nguoiMuonModel = muonTraBean.getNguoiMuonModel();
         CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
@@ -35,6 +36,7 @@ public class AddNewController {
         return true;
     }
     
+    //add thong tin co so vat chat vao database, neu add that bai tra ve false
     public boolean addNewCoSoVatChat(CoSoVatChatBean coSoVatChatBean) throws SQLException, ClassNotFoundException{
         CoSoVatChatModel coSoVatChatModel = coSoVatChatBean.getCoSoVatChatModel();
         Connection connection = MysqlConnection.getMysqlConnection();
@@ -42,6 +44,7 @@ public class AddNewController {
         return true;
     }
     
+    //add thong tinphong ban vao database, neu add that bai tra ve false
     public boolean addNewPhongBan(PhongBanBean phongBanBean) throws SQLException, ClassNotFoundException{
         PhongBanModel phongBanModel = phongBanBean.getPhongBanModel();
         Connection connection = MysqlConnection.getMysqlConnection();
