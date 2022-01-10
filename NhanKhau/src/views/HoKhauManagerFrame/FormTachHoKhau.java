@@ -19,6 +19,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import Bean.NhanKhauBean;
 import controllers.NhanKhauManagerPanelController;
 import controllers.NhanKhauManagerController.XoaNhanKhauController;
 
@@ -190,11 +191,21 @@ public class FormTachHoKhau extends JFrame {
 		panel_1.add(panel_2_1);
 		
 		JButton select_chu_hoBtn = new JButton();
+		select_chu_hoBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectChuHoBtnActionPerformed(e);
+			}
+		});
 		select_chu_hoBtn.setText("Chọn...");
 		select_chu_hoBtn.setBounds(58, 21, 69, 20);
 		panel_1.add(select_chu_hoBtn);
 		
 		JButton select_thanh_vienBtn = new JButton();
+		select_thanh_vienBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selectThanhVienBtnActionPerformed(e);
+			}
+		});
 		select_thanh_vienBtn.setText("Chọn...");
 		select_thanh_vienBtn.setBounds(77, 45, 69, 20);
 		panel_1.add(select_thanh_vienBtn);
@@ -209,5 +220,18 @@ public class FormTachHoKhau extends JFrame {
 		lblHKhuMi.setBounds(10, 203, 103, 25);
 		contentPane.add(lblHKhuMi);
 	}
+    
+    private void selectChuHoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBtnActionPerformed
+    	FormChonChuHoMoi choosePeople = new FormChonChuHoMoi(new NhanKhauBean(), this);
+        choosePeople.setLocationRelativeTo(null);
+        choosePeople.setResizable(false);
+        choosePeople.setVisible(true);
+    }//GEN-LAST:event_selectBtnActionPerformed
+    private void selectThanhVienBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBtnActionPerformed
+    	FormChonThanhVienMoi choosePeople = new FormChonThanhVienMoi(new NhanKhauBean(), this);
+        choosePeople.setLocationRelativeTo(null);
+        choosePeople.setResizable(false);
+        choosePeople.setVisible(true);
+    }//GEN-LAST:event_selectBtnActionPerformed
 }
 

@@ -132,6 +132,7 @@ public class XoaNhanKhau extends JFrame {
 		panel.setLayout(gl_panel);
 		
 		JButton hoanthanhButton = new JButton("Hoàn thành");
+		hoanthanhButton.setBorderPainted(false);
 		hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		hoanthanhButton.setBackground(new Color(212,84,21));
 		hoanthanhButton.setForeground(new Color(255,255,255));
