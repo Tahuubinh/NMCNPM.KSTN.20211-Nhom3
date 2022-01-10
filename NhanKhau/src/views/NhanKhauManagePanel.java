@@ -248,10 +248,6 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_addNewBtnActionPerformed
     
     private void ChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
-//      AddNewPeopleJFrame addNewPeopleJFrame = new AddNewPeopleJFrame(this.controller, this.parentJFrame);
-//      addNewPeopleJFrame.setLocationRelativeTo(null);
-//      addNewPeopleJFrame.setResizable(false);
-//      addNewPeopleJFrame.setVisible(true);
   	    
     	JTable tempJTable = controller.getNhankhauTable();
     	int row = tempJTable.getSelectedRow();
@@ -262,7 +258,7 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     	}
     	List<NhanKhauBean> list = controller.getListNhanKhauBeans();
     	NhanKhauModel nhanKhauModel = list.get(row).getNhanKhauModel();
-        XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame, nhanKhauModel);
+        XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame, nhanKhauModel, tempJTable, row);
         addNewPeopleJFrame.setLocationRelativeTo(null);
         addNewPeopleJFrame.setResizable(false);
         addNewPeopleJFrame.setVisible(true);

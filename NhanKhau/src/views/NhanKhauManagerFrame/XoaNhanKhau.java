@@ -138,7 +138,7 @@ public class XoaNhanKhau extends JFrame {
 		hoanthanhButton.setForeground(new Color(255,255,255));
 		hoanthanhButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int confirm = JOptionPane.showConfirmDialog(null, "Đã chắc chắn?");
+				int confirm = JOptionPane.showConfirmDialog(null, "Đã chắc chắn?", "Xóa", JOptionPane.YES_NO_OPTION);
 				if (confirm == JOptionPane.YES_OPTION) {
 					XoaNhanKhauController controller = new XoaNhanKhauController();
 					try {
