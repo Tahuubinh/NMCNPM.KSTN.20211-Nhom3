@@ -39,7 +39,7 @@ public class ClassTableModel {
             obj[2] = item.getid();
             obj[3] = item.getLienHe();
             obj[4] = item.getThoiGianMuon();
-            obj[5] = item.getThoiGIanTra();
+            obj[5] = item.getThoiGianTra();
             obj[6] = item.getCoSoVatChat();
             obj[7] = item.getSoLuong();
             dtm.addRow(obj);

@@ -39,6 +39,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 public class ThemMoiNhanKhau extends JFrame {
 
@@ -146,6 +147,7 @@ public class ThemMoiNhanKhau extends JFrame {
 		JLabel ghi_chuLabel = new JLabel("Ghi chú:");
 		
 		JTextArea ghi_chutextArea = new JTextArea();
+		ghi_chutextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		ghi_chutextArea.setLineWrap(true);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(

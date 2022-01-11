@@ -1,5 +1,6 @@
 package models;
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 /**
  *
@@ -10,10 +11,10 @@ public class MuonTraModel {
     private String tenNguoiMuon;
     private String id;
     private String lienHe;
-	private String thoiGianMuon;
-    private String thoiGIanTra;
+	private Timestamp thoiGianMuon;
+    private Timestamp thoiGianTra;
     private String coSoVatChat;
-    private String soLuong;
+    private int soLuong;
     
     
     public int getStt() {
@@ -40,17 +41,17 @@ public class MuonTraModel {
 	public void setLienHe(String lienHe) {
 		this.lienHe = lienHe;
 	}
-	public String getThoiGianMuon() {
+	public Timestamp getThoiGianMuon() {
 		return thoiGianMuon;
 	}
-	public void setThoiGianMuon(String thoiGianMuon) {
+	public void setThoiGianMuon(Timestamp thoiGianMuon) {
 		this.thoiGianMuon = thoiGianMuon;
 	}
-	public String getThoiGIanTra() {
-		return thoiGIanTra;
+	public Timestamp getThoiGianTra() {
+		return thoiGianTra;
 	}
-	public void setThoiGIanTra(String thoiGIanTra) {
-		this.thoiGIanTra = thoiGIanTra;
+	public void setThoiGianTra(Timestamp thoiGianTra) {
+		this.thoiGianTra = thoiGianTra;
 	}
 	public String getCoSoVatChat() {
 		return coSoVatChat;
@@ -58,10 +59,10 @@ public class MuonTraModel {
 	public void setCoSoVatChat(String coSoVatChat) {
 		this.coSoVatChat = coSoVatChat;
 	}
-	public String getSoLuong() {
+	public int getSoLuong() {
 		return soLuong;
 	}
-	public void setSoLuong(String soLuong) {
+	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
 }

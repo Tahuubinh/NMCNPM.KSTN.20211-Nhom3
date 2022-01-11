@@ -9,9 +9,13 @@ import controllers.HoKhauPanelController;
 import javax.swing.JFrame;
 import views.HoKhauManagerFrame.ChuyenDiNoiKhac;
 import views.HoKhauManagerFrame.FormDoiChuHo;
+import views.HoKhauManagerFrame.FormTachHoKhau;
 import views.HoKhauManagerFrame.FormThemHoKhau;
+import views.HoKhauManagerFrame.FormThemThanhVien;
 import views.HoKhauManagerFrame.TachHoKhau;
 import views.HoKhauManagerFrame.ThemMoiHoKhau;
+import views.HoKhauManagerFrame.XoaHoKhau;
+
 import javax.swing.border.LineBorder;
 
 import Bean.NhanKhauBean;
@@ -25,10 +29,14 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+
 import java.awt.Component;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -89,7 +97,7 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         tachHoKhauBtn.setText("Tách HK");
         tachHoKhauBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tachHoKhauBtnActionPerformed(evt);
+            	tachHoKhauBtnActionPerformed(evt);
             }
         });
 
@@ -107,6 +115,11 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         
         tachMenuItem = new JMenuItem("Tách hộ khẩu");
         popupMenu.add(tachMenuItem);
+        tachMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	tachHoKhauBtnActionPerformed(evt);
+            }
+        });
         
         JMenuItem doichuhoMenuItem = new JMenuItem("Đổi chủ hộ");
         popupMenu.add(doichuhoMenuItem);
@@ -118,9 +131,19 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         
         themnhankhauMenuItem = new JMenuItem("Thêm nhân khẩu");
         popupMenu.add(themnhankhauMenuItem);
+        themnhankhauMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	themThanhVienBtnActionPerformed(evt);
+            }
+        });
         
         JMenuItem xoa_ho_khauMenuItem = new JMenuItem("Xóa hộ khẩu");
         popupMenu.add(xoa_ho_khauMenuItem);
+        xoa_ho_khauMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	chuyenDiBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout tableJpnLayout = new javax.swing.GroupLayout(tableJpn);
         tableJpn.setLayout(tableJpnLayout);
@@ -134,13 +157,13 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         );
         
         maJLabel = new JLabel("Mã hộ khẩu");
-        maJLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        maJLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         
         chuhoJLabel = new JLabel("Tên chủ hộ");
-        chuhoJLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        chuhoJLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         
         diachiJLabel = new JLabel("Địa chỉ");
-        diachiJLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        diachiJLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         
         chuhotextField = new JTextField();
         chuhotextField.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -184,8 +207,8 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         				.addGroup(layout.createSequentialGroup()
         					.addGap(18)
         					.addGroup(layout.createParallelGroup(Alignment.LEADING)
-        						.addComponent(tachHoKhauBtn, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-        						.addComponent(chuyenDiBtn, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+        						//.addComponent(tachHoKhauBtn, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+        						//.addComponent(chuyenDiBtn, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
         						.addComponent(themMoiBtn, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE))
         					.addContainerGap())
         				.addGroup(Alignment.TRAILING, layout.createSequentialGroup()
@@ -213,9 +236,9 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         				.addGroup(layout.createSequentialGroup()
         					.addComponent(themMoiBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
         					.addGap(18)
-        					.addComponent(tachHoKhauBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					//.addComponent(tachHoKhauBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
         					.addGap(18)
-        					.addComponent(chuyenDiBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+        					//.addComponent(chuyenDiBtn, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
         					.addContainerGap(85, Short.MAX_VALUE))
         				.addComponent(tableJpn, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)))
         );
@@ -227,7 +250,14 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfSearchActionPerformed
 
     private void chuyenDiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chuyenDiBtnActionPerformed
-        ChuyenDiNoiKhac chuyenDiNoiKhac = new ChuyenDiNoiKhac(this.parentFrame);
+    	JTable tempJTable = controller.getHoKhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+        XoaHoKhau chuyenDiNoiKhac = new XoaHoKhau(this.parentFrame, new JTable(), 0);
         chuyenDiNoiKhac.setLocationRelativeTo(null);
         chuyenDiNoiKhac.setResizable(false);
         chuyenDiNoiKhac.setVisible(true);
@@ -241,14 +271,42 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
     }//GEN-LAST:event_themMoiBtnActionPerformed
     
     private void doiChuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themMoiBtnActionPerformed
+    	JTable tempJTable = controller.getHoKhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
     	FormDoiChuHo themMoiHoKhau = new FormDoiChuHo(new NhanKhauBean(), this.parentFrame);
+        themMoiHoKhau.setLocationRelativeTo(null);
+        themMoiHoKhau.setResizable(false);
+        themMoiHoKhau.setVisible(true);
+    }//GEN-LAST:event_themMoiBtnActionPerformed
+    
+    private void themThanhVienBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themMoiBtnActionPerformed
+    	JTable tempJTable = controller.getHoKhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	FormThemThanhVien themMoiHoKhau = new FormThemThanhVien(new NhanKhauBean(), this.parentFrame);
         themMoiHoKhau.setLocationRelativeTo(null);
         themMoiHoKhau.setResizable(false);
         themMoiHoKhau.setVisible(true);
     }//GEN-LAST:event_themMoiBtnActionPerformed
 
     private void tachHoKhauBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tachHoKhauBtnActionPerformed
-        TachHoKhau tachHoKhau = new TachHoKhau(this.parentFrame);
+    	JTable tempJTable = controller.getHoKhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+        FormTachHoKhau tachHoKhau = new FormTachHoKhau(this.parentFrame, new JTable(), 0);
         tachHoKhau.setLocationRelativeTo(null);
         tachHoKhau.setResizable(false);
         tachHoKhau.setVisible(true);

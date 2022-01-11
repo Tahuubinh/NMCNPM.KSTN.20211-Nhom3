@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
+
+import javax.sql.rowset.JoinRowSet;
 import javax.swing.BoxLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
@@ -22,6 +24,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import Bean.NhanKhauBean;
 import controllers.NhanKhauManagerPanelController;
 import controllers.NhanKhauManagerController.AddNewController;
+import controllers.NhanKhauManagerController.ChinhSuaController;
 import models.NhanKhauModel;
 
 import javax.swing.GroupLayout;
@@ -29,6 +32,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -37,6 +42,7 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 public class XemChiTietChinhSuaNhanKhau extends JFrame {
 
@@ -49,9 +55,13 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 	private NhanKhauManagerPanelController parentController;
     private JFrame parentFrame;
     private NhanKhauBean nhanKhauBean;
-    private AddNewController controller;
+    private ChinhSuaController controller;
     private NhanKhauModel nhanKhauModel;
     private com.toedter.calendar.JDateChooser ngaysinhtextField;
+    private JRadioButton namRadioButton;
+    private JRadioButton nuRadioButton;
+	private JTable table;
+	private int row;
 	/**
 	 * Launch the application.
 	 */
@@ -67,16 +77,18 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 //			}
 //		});
 //	}
-    public XemChiTietChinhSuaNhanKhau(NhanKhauManagerPanelController parentController, JFrame parentJFrame, NhanKhauModel nhanKhauModel) {
+    public XemChiTietChinhSuaNhanKhau(NhanKhauManagerPanelController parentController, JFrame parentJFrame, NhanKhauModel nhanKhauModel, JTable table, int row) {
         this.parentController = parentController;
         this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
         this.nhanKhauBean = new NhanKhauBean();
         this.nhanKhauModel = nhanKhauModel;
+        this.table = table;
+        this.row = row;
         initComponents();
         setTitle("Chỉnh sửa thông tin nhân khẩu");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        controller = new AddNewController();
+        controller = new ChinhSuaController();
         
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -149,6 +161,7 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 		JLabel ghi_chuLabel = new JLabel("Ghi chú:");
 		
 		JTextArea ghi_chutextArea = new JTextArea();
+		ghi_chutextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		ghi_chutextArea.setLineWrap(true);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -218,8 +231,8 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 		);
 		panel_1.setLayout(null);
 		
-		JRadioButton namRadioButton = new JRadioButton("Nam");
-		JRadioButton nuRadioButton = new JRadioButton("Nữ");
+		namRadioButton = new JRadioButton("Nam");
+		nuRadioButton = new JRadioButton("Nữ");
 		if (nhanKhauModel.getGioiTinh().equals("Nam")) {
 			namRadioButton.setSelected(true);
 		} else if (nhanKhauModel.getGioiTinh().equals("Nữ")) {
@@ -253,9 +266,62 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 		hoanthanhButton.setForeground(new Color(255,255,255));
 		hoanthanhButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				UpdateBtnActionPerformed(e);
 			}
 		});
 		hoanthanhButton.setBounds(467, 26, 114, 50);
 		contentPane.add(hoanthanhButton);
 	}
+    private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
+        // tao moi 1 doi tuong nhan khau
+    	int confirm = JOptionPane.showConfirmDialog(null, "Đã chắc chắn?", "Chỉnh sửa", JOptionPane.YES_NO_OPTION);
+		if (confirm == JOptionPane.YES_OPTION) {
+	        NhanKhauModel temp = this.nhanKhauBean.getNhanKhauModel();
+	        temp.setHoTen(this.hotenField.getText());
+	        if (this.namRadioButton.isSelected()) {
+	        	temp.setGioiTinh("Nam");
+	        }
+	        else if (this.nuRadioButton.isSelected()) {
+	        	temp.setGioiTinh("Nữ");
+	        } else {
+	        	temp.setGioiTinh("");
+	        }
+	        temp.setNamSinh(ngaysinhtextField.getDate());
+	        //System.err.println(temp.getNamSinh());
+	        try {
+	        	int id = (int) table.getModel().getValueAt(table.getSelectedRow(),0);
+	            if (this.controller.UpdatePeople(this.nhanKhauBean, id)) {
+	                JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!!");
+	                close();
+	                parentController.refreshData();
+	            }
+	        } catch (Exception e) {
+	            System.out.println(e.getMessage());
+	            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+	        }
+		}
+    }//GEN-LAST:event_CreateBtnActionPerformed
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
