@@ -169,16 +169,6 @@ public class MuonTraPanelController {
         table.getColumnModel().getColumn(7).setMaxWidth(80);
         table.getColumnModel().getColumn(7).setMinWidth(80);
         table.getColumnModel().getColumn(7).setPreferredWidth(80);
-        table.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-//                JOptionPane.showConfirmDialog(null, table.getSelectedRow());
-                if (e.getClickCount() > 1) {
-
-                }
-            }
-            
-        });
         
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(table);

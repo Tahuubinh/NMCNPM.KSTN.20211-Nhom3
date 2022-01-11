@@ -8,6 +8,7 @@ import models.CoSoVatChatModel;
 import models.LichSuModel;
 import models.MuonTraModel;
 import models.PhongBanModel;
+import models.muonTra.AddMuonTraModel;
 
 /**
  *
@@ -122,6 +123,35 @@ public class ClassTableModel {
             obj[2] = item.getDungCu();
             obj[3] = item.getSoLuong();
             obj[4] = item.getThoiGian();
+            dtm.addRow(obj);
+        });
+        return dtm;
+    }
+    
+    public DefaultTableModel setTableAddMuonTra(List<CoSoVatChatModel> listItemCoSoVatChat,List<PhongBanModel> listItemPhongBan, String[] listColumn) {
+        final int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel()  {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+            	if(columnIndex == 1) return Integer.class;
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        obj = new Object[columns];
+        listItemPhongBan.forEach((PhongBanModel item) -> {
+            obj[0] = item.getTenPhongBan();
+            obj[1] = 1;
+            dtm.addRow(obj);
+        });
+        listItemCoSoVatChat.forEach((CoSoVatChatModel item) -> {
+            obj[0] = item.getTenCoSoVatChat();
+            obj[1] = item.getSoLuongMuon();
             dtm.addRow(obj);
         });
         return dtm;

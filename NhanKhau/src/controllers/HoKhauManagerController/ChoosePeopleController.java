@@ -53,28 +53,28 @@ public class ChoosePeopleController {
     }
     
     public void initAction() {
-        this.searchJtf.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                String key = searchJtf.getText();
-                list = nhanKhauService.search(key.trim());
-                setData();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                String key = searchJtf.getText();
-                list = nhanKhauService.search(key.trim());
-                setData();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                String key = searchJtf.getText();
-                list = nhanKhauService.search(key.trim());
-                setData();
-            }
-        });
+//        this.searchJtf.getDocument().addDocumentListener(new DocumentListener() {
+//            @Override
+//            public void insertUpdate(DocumentEvent e) {
+//                String key = searchJtf.getText();
+//                list = nhanKhauService.search(key.trim());
+//                setData();
+//            }
+//
+//            @Override
+//            public void removeUpdate(DocumentEvent e) {
+//                String key = searchJtf.getText();
+//                list = nhanKhauService.search(key.trim());
+//                setData();
+//            }
+//
+//            @Override
+//            public void changedUpdate(DocumentEvent e) {
+//                String key = searchJtf.getText();
+//                list = nhanKhauService.search(key.trim());
+//                setData();
+//            }
+//        });
     }
     
     public void setData() {
