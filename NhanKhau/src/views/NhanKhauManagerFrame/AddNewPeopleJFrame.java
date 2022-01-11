@@ -33,6 +33,9 @@ public class AddNewPeopleJFrame extends javax.swing.JFrame {
 //        controller = new AddNewController();
 //    }
 
+    /**
+     * @wbp.parser.constructor
+     */
     public AddNewPeopleJFrame(NhanKhauManagerPanelController parentController, JFrame parentJFrame) {
         this.parentController = parentController;
         this.parentFrame = parentJFrame;

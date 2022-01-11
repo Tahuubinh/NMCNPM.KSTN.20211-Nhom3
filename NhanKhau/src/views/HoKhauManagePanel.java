@@ -172,6 +172,25 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         diachitextField.setFont(new Font("Arial", Font.PLAIN, 14));
         
         locButton = new JButton("Lọc");
+        locButton.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+                locButton.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+                locButton.setBackground(new Color(28, 155, 26));
+        	}
+        	
+        	@Override
+        	public void mouseReleased(MouseEvent e) {
+                locButton.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+                locButton.setBackground(new Color(28, 155, 26));
+        	}
+        });
         locButton.setBorderPainted(false);
         locButton.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {

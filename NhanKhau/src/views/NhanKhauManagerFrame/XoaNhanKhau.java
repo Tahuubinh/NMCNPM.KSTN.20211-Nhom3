@@ -14,10 +14,10 @@ import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import javax.swing.BoxLayout;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.FormSpecs;
+//import com.jgoodies.forms.layout.RowSpec;
 
 import controllers.NhanKhauManagerPanelController;
 import controllers.NhanKhauManagerController.XoaNhanKhauController;
@@ -38,6 +38,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class XoaNhanKhau extends JFrame {
 
@@ -132,6 +134,24 @@ public class XoaNhanKhau extends JFrame {
 		panel.setLayout(gl_panel);
 		
 		JButton hoanthanhButton = new JButton("Hoàn thành");
+		hoanthanhButton.addMouseListener(new MouseAdapter() {
+    		@Override
+        	public void mouseEntered(MouseEvent e) {
+                hoanthanhButton.setBackground(new Color(195, 66, 2));
+        	}
+    		@Override
+        	public void mousePressed(MouseEvent e) {
+            	hoanthanhButton.setBackground(new Color(212, 84, 21));
+        	}
+    		@Override
+        	public void mouseReleased(MouseEvent e) {
+                hoanthanhButton.setBackground(new Color(195, 66, 2));
+        	}
+    		@Override
+        	public void mouseExited(MouseEvent e) {
+            	hoanthanhButton.setBackground(new Color(212, 84, 21));
+        	}
+		});
 		hoanthanhButton.setBorderPainted(false);
 		hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		hoanthanhButton.setBackground(new Color(212,84,21));

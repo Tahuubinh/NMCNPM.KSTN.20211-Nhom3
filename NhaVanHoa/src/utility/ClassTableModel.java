@@ -18,6 +18,7 @@ import models.muonTra.AddMuonTraModel;
 public class ClassTableModel {
 
 	//table muon tra
+	private int i;
     public DefaultTableModel setTableMuonTra(List<MuonTraModel> listItem, String[] listColumn) {
         final int columns = listColumn.length;
         DefaultTableModel dtm = new DefaultTableModel()  {
@@ -33,8 +34,9 @@ public class ClassTableModel {
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
+        i = 0;
         listItem.forEach((MuonTraModel item) -> {
-            obj[0] = item.getStt();
+            obj[0] = i++;
             obj[1] = item.getTenNguoiMuon();
             obj[2] = item.getid();
             obj[3] = item.getLienHe();
@@ -63,8 +65,9 @@ public class ClassTableModel {
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
+        i = 0;
         listItem.forEach((CoSoVatChatModel item) -> {
-            obj[0] = item.getId();
+            obj[0] = i++;
             obj[1] = item.getTenCoSoVatChat();
             obj[2] = item.getSoLuong();
             obj[3] = item.getSoLuongMuon();
@@ -90,8 +93,9 @@ public class ClassTableModel {
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
+        i = 0;
         listItem.forEach((PhongBanModel item) -> {
-            obj[0] = item.getId();
+            obj[0] = i++;
             obj[1] = item.getTenPhongBan();
             obj[2] = item.getThoiGianSuDung();
             dtm.addRow(obj);
@@ -117,8 +121,9 @@ public class ClassTableModel {
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
+        i = 0;
         listItem.forEach((LichSuModel item) -> {
-            obj[0] = item.getStt();
+            obj[0] = i++;
             obj[1] = item.getLyDo();
             obj[2] = item.getDungCu();
             obj[3] = item.getSoLuong();
