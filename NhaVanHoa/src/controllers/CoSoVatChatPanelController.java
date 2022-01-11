@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -33,10 +34,12 @@ public class CoSoVatChatPanelController {
 	    private ClassTableModel classTableModel = null;
 	    private final String[] COLUMNS = {"STT", "Dụng cụ", "Tổng số", "Số lượng mượn", "Số lượng trong kho"};
 	    private JFrame parentJFrame;
+	    private JPopupMenu popupMenu;
 
-	    public CoSoVatChatPanelController(JPanel jpnView, JTextField searchJtf) {
+	    public CoSoVatChatPanelController(JPanel jpnView, JTextField searchJtf, JPopupMenu popup) {
 	        this.jpnView = jpnView;
 	        this.searchJtf  = searchJtf;
+	        this.popupMenu = popup;
 	        classTableModel = new ClassTableModel();
 	        this.coSoVatChatService = new CoSoVatChatService();
 	        this.listCoSoVatChatBeans = this.coSoVatChatService.getListCoSoVatChat();
@@ -92,7 +95,7 @@ public class CoSoVatChatPanelController {
 	            }
 	            
 	        };
-	        
+	        table.setComponentPopupMenu(popupMenu);
 	        // thiet ke bang
 	        
 	        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));

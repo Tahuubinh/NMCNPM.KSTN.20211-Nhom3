@@ -39,6 +39,7 @@ public class HoKhauPanelController {
     private final TableModelHoKhau tableModelHoKhau = new TableModelHoKhau();
     private final String COLUNMS[] = {"Mã hộ khẩu", "Họ tên chủ hộ", "Địa chỉ"}; 
     private JFrame parentJFrame;
+    private JTable table;
 
     public HoKhauPanelController(JTextField searchJtf, JPanel tableJpn) {
         this.searchJtf = searchJtf;
@@ -60,6 +61,10 @@ public class HoKhauPanelController {
         setData();
         initAction();
     }
+    
+    public JTable getHoKhauTable() {
+		return table;
+	}
     
     public void initAction() {
 //        this.searchJtf.getDocument().addDocumentListener(new DocumentListener() {
@@ -101,7 +106,7 @@ public class HoKhauPanelController {
     public void setData() {
         DefaultTableModel model = tableModelHoKhau.setTableHoKhau(list, COLUNMS);
         
-        JTable table = new JTable(model) {
+        table = new JTable(model) {
             @Override
             public boolean editCellAt(int row, int column, EventObject e) {
                 return false;

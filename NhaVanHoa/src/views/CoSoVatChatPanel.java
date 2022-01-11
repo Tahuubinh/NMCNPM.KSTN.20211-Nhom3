@@ -28,6 +28,10 @@ import java.awt.Insets;
 import javax.swing.border.CompoundBorder;
 import javax.swing.UIManager;
 import javax.swing.SwingConstants;
+import javax.swing.JPopupMenu;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -44,7 +48,8 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
     public CoSoVatChatPanel(JFrame parentFrame) {
         this.parentJFrame = parentFrame;
         initComponents();
-        controller = new CoSoVatChatPanelController(tablePanel, searchJtf);
+        controller = new CoSoVatChatPanelController(tablePanel, searchJtf, popupMenu);
+        
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -68,6 +73,15 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         tablePanel = new javax.swing.JPanel();
+
+        popupMenu = new JPopupMenu();
+        addPopup(tablePanel, popupMenu);
+        
+        themMenuItem = new JMenuItem("Thêm");
+        popupMenu.add(themMenuItem);
+        
+        botMenuItem = new JMenuItem("Bớt");
+        popupMenu.add(botMenuItem);
         
         addNewBtn = new javax.swing.JButton();
         addNewBtn.setDisabledIcon(new ImageIcon(CoSoVatChatPanel.class.getResource("/Icons/add.png")));
@@ -166,4 +180,24 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
     private javax.swing.JButton addNewBtn;
     private javax.swing.JPanel tablePanel;
     private JTextField searchJtf;
+    private JPopupMenu popupMenu;
+    private JMenuItem themMenuItem;
+    private JMenuItem botMenuItem;
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
 }

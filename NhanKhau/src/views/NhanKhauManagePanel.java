@@ -3,15 +3,18 @@ package views;
 import controllers.NhanKhauManagerPanelController;
 import models.NhanKhauModel;
 import views.NhanKhauManagerFrame.AddNewPeopleJFrame;
+import views.NhanKhauManagerFrame.DangKyTamTru;
 import views.NhanKhauManagerFrame.ThemMoiNhanKhau;
 import views.NhanKhauManagerFrame.XemChiTietChinhSuaNhanKhau;
 import views.NhanKhauManagerFrame.XoaNhanKhau;
 import views.NhanKhauManagerFrame.DangKyTamTruJFrame;
+import views.NhanKhauManagerFrame.DangKyTamVang;
 import views.NhanKhauManagerFrame.DangKyTamVangJFrame;
 import views.NhanKhauManagerFrame.KhaiTuJFrame;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
 
+import org.jcp.xml.dsig.internal.MacOutputStream;
 
 import Bean.NhanKhauBean;
 
@@ -238,17 +241,13 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     	
         ThemMoiNhanKhau addNewPeopleJFrame = new ThemMoiNhanKhau(this.controller, this.parentJFrame);
         addNewPeopleJFrame.setLocationRelativeTo(null);
-        addNewPeopleJFrame.setResizable(false);
+        addNewPeopleJFrame.setResizable(true);
         addNewPeopleJFrame.setVisible(true);
     	
         
     }//GEN-LAST:event_addNewBtnActionPerformed
     
     private void ChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
-//      AddNewPeopleJFrame addNewPeopleJFrame = new AddNewPeopleJFrame(this.controller, this.parentJFrame);
-//      addNewPeopleJFrame.setLocationRelativeTo(null);
-//      addNewPeopleJFrame.setResizable(false);
-//      addNewPeopleJFrame.setVisible(true);
   	    
     	JTable tempJTable = controller.getNhankhauTable();
     	int row = tempJTable.getSelectedRow();
@@ -259,7 +258,7 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     	}
     	List<NhanKhauBean> list = controller.getListNhanKhauBeans();
     	NhanKhauModel nhanKhauModel = list.get(row).getNhanKhauModel();
-        XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame, nhanKhauModel);
+        XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame, nhanKhauModel, tempJTable, row);
         addNewPeopleJFrame.setLocationRelativeTo(null);
         addNewPeopleJFrame.setResizable(false);
         addNewPeopleJFrame.setVisible(true);
@@ -269,15 +268,22 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
 
     private void tamVangBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tamVangBtnActionPerformed
         // hien jframe dang ky tam vang
+    	JTable tempJTable = controller.getNhankhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
     	System.out.println("Hello");
-        DangKyTamVangJFrame dangKyTamVangJFrame = new DangKyTamVangJFrame(this.parentJFrame);
+        DangKyTamVang dangKyTamVangJFrame = new DangKyTamVang(this.controller, this.parentJFrame);
         dangKyTamVangJFrame.setLocationRelativeTo(null);
         dangKyTamVangJFrame.setResizable(false);
         dangKyTamVangJFrame.setVisible(true);
     }//GEN-LAST:event_tamVangBtnActionPerformed
 
     private void tamTruBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tamTruBtnActionPerformed
-        DangKyTamTruJFrame dangKyTamTruJFrame = new DangKyTamTruJFrame(this.parentJFrame);
+        DangKyTamTru dangKyTamTruJFrame = new DangKyTamTru(this.controller, this.parentJFrame);
         dangKyTamTruJFrame.setLocationRelativeTo(null);
         dangKyTamTruJFrame.setResizable(false);
         dangKyTamTruJFrame.setVisible(true);

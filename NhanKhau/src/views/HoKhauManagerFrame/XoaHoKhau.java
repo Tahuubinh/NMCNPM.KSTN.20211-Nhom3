@@ -1,4 +1,4 @@
-package views.NhanKhauManagerFrame;
+package views.HoKhauManagerFrame;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -38,8 +38,10 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
-public class XoaNhanKhau extends JFrame {
+public class XoaHoKhau extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField ngaytextField;
@@ -48,9 +50,9 @@ public class XoaNhanKhau extends JFrame {
     private NhanKhauManagerPanelController parentController;
     private int row;
     
-    public XoaNhanKhau(NhanKhauManagerPanelController parentController, JFrame parentJFrame, JTable table, int row) {
+    public XoaHoKhau(JFrame parentJFrame, JTable table, int row) {
         initComponents();
-        this.parentController = parentController;
+        //this.parentController = parentController;
         this.parentJFrame = parentJFrame;
         this.table = table;
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -76,14 +78,14 @@ public class XoaNhanKhau extends JFrame {
     private void initComponents() {
 		setForeground(Color.ORANGE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 617, 138);
+		setBounds(100, 100, 617, 201);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 428, 72);
+		panel.setBounds(10, 11, 428, 140);
 		contentPane.add(panel);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
@@ -95,8 +97,9 @@ public class XoaNhanKhau extends JFrame {
 		ngaytextField = new JTextField();
 		ngaytextField.setColumns(10);
 		
-		JComboBox lydocomboBox = new JComboBox();
-		lydocomboBox.setModel(new DefaultComboBoxModel(new String[] {"Chuyển đi nơi khác", "Khai tử"}));
+		JTextArea ly_dotextArea = new JTextArea();
+		ly_dotextArea.setLineWrap(true);
+		ly_dotextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -104,30 +107,31 @@ public class XoaNhanKhau extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(ngayLabel)
-								.addComponent(lydoLabel)))
+							.addComponent(ngayLabel))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(lydoLabel))
 						.addComponent(lblNewLabel_3))
-					.addGap(95)
+					.addGap(73)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(ngaytextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-						.addComponent(lydocomboBox, GroupLayout.PREFERRED_SIZE, 139, GroupLayout.PREFERRED_SIZE))
+						.addComponent(ly_dotextArea, GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+						.addComponent(ngaytextField, GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblNewLabel_3)
-							.addComponent(lydoLabel))
-						.addComponent(lydocomboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGap(17)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_3)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lydoLabel)
+							.addComponent(ly_dotextArea, GroupLayout.PREFERRED_SIZE, 72, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(ngayLabel)
 						.addComponent(ngaytextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(126, Short.MAX_VALUE))
+					.addGap(28))
 		);
 		panel.setLayout(gl_panel);
 		
@@ -138,7 +142,7 @@ public class XoaNhanKhau extends JFrame {
 		hoanthanhButton.setForeground(new Color(255,255,255));
 		hoanthanhButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int confirm = JOptionPane.showConfirmDialog(null, "Đã chắc chắn?", "Xóa", JOptionPane.YES_NO_OPTION);
+				int confirm = JOptionPane.showConfirmDialog(null, "Đã chắc chắn?");
 				if (confirm == JOptionPane.YES_OPTION) {
 					XoaNhanKhauController controller = new XoaNhanKhauController();
 					try {

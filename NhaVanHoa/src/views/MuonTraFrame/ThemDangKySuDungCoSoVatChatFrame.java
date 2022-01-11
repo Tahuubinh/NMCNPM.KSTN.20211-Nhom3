@@ -72,7 +72,7 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
         this.parentFrame.setEnabled(false);
         initComponents();
     	setIconImage(Toolkit.getDefaultToolkit().getImage(ThemDangKySuDungCoSoVatChatFrame.class.getResource("/Icons/house.png")));
-    	setTitle("Đăng ký sử dụng cơ sở vật chất");
+    	setTitle("Đăng ký sử dụng ");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -360,14 +360,14 @@ public class ThemDangKySuDungCoSoVatChatFrame extends javax.swing.JFrame {
     	if(validateValueInForm()) {
     		NguoiMuonModel nguoiMuonModel = this.muonTraBeann.getNguoiMuonModel();
     		CoSoVatChatModel coSoVatChatModel = this.muonTraBeann.getCoSoVatChatModel();
-    		PhongBanModel coSoHaTangModel = this.muonTraBeann.getCoSoHaTangModel();
+    		PhongBanModel phongBanModel = this.muonTraBeann.getPhongBanModel();
     		ThoiGianModel thoiGianModel = this.muonTraBeann.getThoiGianModel();
     		nguoiMuonModel.setTenNguoiMuon(tenNguoiMuonJtf.getText());
     		nguoiMuonModel.setCccd(idJtf.getText());
     		nguoiMuonModel.setLienHe(lienHeJtf.getText());
     		coSoVatChatModel.setTenCoSoVatChat("");
     		coSoVatChatModel.setSoLuong(0);
-    		coSoHaTangModel.setTenPhongBan("");
+    		phongBanModel.setTenPhongBan("");
     		thoiGianModel.setThoiGianMuon(ngayMuonJdc.getDate());
     		thoiGianModel.setThoiGianTra(ngayTraJdc.getDate());
             try {

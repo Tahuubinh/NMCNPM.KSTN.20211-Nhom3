@@ -38,6 +38,8 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
+import javax.swing.JTextArea;
+import javax.swing.border.LineBorder;
 
 public class ThemMoiNhanKhau extends JFrame {
 
@@ -101,14 +103,14 @@ public class ThemMoiNhanKhau extends JFrame {
     private void initComponents() {
 		setForeground(Color.ORANGE);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 617, 272);
+		setBounds(100, 100, 617, 325);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 428, 189);
+		panel.setBounds(10, 11, 428, 275);
 		contentPane.add(panel);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
@@ -137,10 +139,16 @@ public class ThemMoiNhanKhau extends JFrame {
 		tongiaotextField = new JTextField();
 		tongiaotextField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Liên hệ");
+		JLabel lblNewLabel = new JLabel("Liên hệ:");
 		
 		textField = new JTextField();
 		textField.setColumns(10);
+		
+		JLabel ghi_chuLabel = new JLabel("Ghi chú:");
+		
+		JTextArea ghi_chutextArea = new JTextArea();
+		ghi_chutextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
+		ghi_chutextArea.setLineWrap(true);
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -151,17 +159,18 @@ public class ThemMoiNhanKhau extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED, 428, Short.MAX_VALUE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(tongiaoLabel))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addContainerGap()
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(tccLabel)
 								.addComponent(ngaysinhNewLabel)
 								.addComponent(hotenLabel)
 								.addComponent(gioitinhLabel)
-								.addComponent(lblNewLabel))
+								.addComponent(lblNewLabel)
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+									.addComponent(ghi_chuLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(tongiaoLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
 							.addGap(95)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(ghi_chutextArea, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(tongiaotextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(panel_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(hotenField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
@@ -199,7 +208,14 @@ public class ThemMoiNhanKhau extends JFrame {
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel)
 						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(24, Short.MAX_VALUE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(14)
+							.addComponent(ghi_chuLabel))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(ghi_chutextArea, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)))
+					.addContainerGap())
 		);
 		panel_1.setLayout(null);
 		
