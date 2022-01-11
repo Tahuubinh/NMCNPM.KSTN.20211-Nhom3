@@ -19,9 +19,12 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import com.jgoodies.forms.layout.RowSpec;
 
+import Bean.HoKhauBean;
 import Bean.NhanKhauBean;
+import controllers.HoKhauPanelController;
 import controllers.LoginController;
 import controllers.NhanKhauManagerPanelController;
+import controllers.HoKhauManagerController.ThemMoiController;
 import controllers.NhanKhauManagerController.AddNewController;
 import models.ChungMinhThuModel;
 import models.NhanKhauModel;
@@ -34,6 +37,7 @@ import javax.swing.JRadioButtonMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -46,11 +50,12 @@ public class FormThemHoKhau extends JFrame {
 	private JTextField hotenField;
 	private NhanKhauBean chuHo = new NhanKhauBean();
 	private JTextField maHKtextField;
-	private NhanKhauManagerPanelController parentController;
+	private HoKhauPanelController parentController;
     private JFrame parentJFrame;
     private NhanKhauBean nhanKhauBean;
-    private AddNewController controller;
+    private ThemMoiController controller;
     private JTextField dia_chitextField;
+    private JTextField id_chuho;
 	/**
 	 * Launch the application.
 	 */
@@ -66,10 +71,12 @@ public class FormThemHoKhau extends JFrame {
 //			}
 //		});
 //	}
-    public FormThemHoKhau(JFrame parentJFrame) {
+    public FormThemHoKhau(HoKhauPanelController parentController, JFrame parentJFrame) {
 		setTitle("Thêm hộ khẩu");
         initComponents();
         this.parentJFrame = parentJFrame;
+        this.parentController = parentController;
+        this.controller = new ThemMoiController();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         parentJFrame.setEnabled(false);
         this.addWindowListener(new WindowAdapter() {
@@ -129,6 +136,7 @@ public class FormThemHoKhau extends JFrame {
 		maHKtextField = new JTextField();
 		maHKtextField.setColumns(10);
 		
+		id_chuho = new JTextField();
 		dia_chitextField = new JTextField();
 		dia_chitextField.setColumns(10);
 		
@@ -199,15 +207,46 @@ public class FormThemHoKhau extends JFrame {
 		hoanthanhButton.setBounds(467, 26, 114, 50);
 		contentPane.add(hoanthanhButton);
 	}
+    
     private void selectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBtnActionPerformed
-    	FormChonChuHo choosePeople = new FormChonChuHo(this.chuHo, this);
+    	FormChonChuHo choosePeople = new FormChonChuHo(this.chuHo, this, this.hotenField, this.id_chuho);
         choosePeople.setLocationRelativeTo(null);
         choosePeople.setResizable(false);
         choosePeople.setVisible(true);
     }//GEN-LAST:event_selectBtnActionPerformed
     private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
-            // tao moi 1 doi tuong nhan khau
-            
+    	if (this.id_chuho.getText().equals("")) {
+    		JOptionPane.showMessageDialog(null, "Hãy chọn một người làm chủ hộ trước",
+  			      "Lỗi thiếu thông tin!", JOptionPane.ERROR_MESSAGE);;
+    		return;
+    	}
+    	if (this.maHKtextField.getText().equals("")) {
+    		JOptionPane.showMessageDialog(null, "Hãy nhập mã hộ khẩu trước",
+  			      "Lỗi thiếu thông tin!", JOptionPane.ERROR_MESSAGE);;
+    		return;
+    	}
+    	if (this.dia_chitextField.getText().equals("")) {
+    		JOptionPane.showMessageDialog(null, "Hãy nhập địa chỉ trước",
+  			      "Lỗi thiếu thông tin!", JOptionPane.ERROR_MESSAGE);;
+    		return;
+    	}
+    	int tempid = Integer.parseInt(this.id_chuho.getText());
+    	String maHKString = this.maHKtextField.getText();
+    	String dia_chiString = this.dia_chitextField.getText();
+    	HoKhauBean hoKhauBean = new HoKhauBean();
+    	hoKhauBean.getChuHo().setID(tempid);
+    	hoKhauBean.getHoKhauModel().setMaHoKhau(maHKString);
+    	hoKhauBean.getHoKhauModel().setDiaChi(dia_chiString);
+    	try {
+            this.controller.addNew(hoKhauBean);
+            JOptionPane.showMessageDialog(null, "Thêm thành công!!");
+            dispose();
+            parentController.refreshData();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+    	
     }//GEN-LAST:event_CreateBtnActionPerformed
 }
 

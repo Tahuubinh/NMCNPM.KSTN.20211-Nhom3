@@ -193,6 +193,10 @@ CREATE TABLE  nhan_khau  (
    ghiChu  varchar(100)    NULL
 )  ;
 
+ALTER TABLE nhan_khau ADD COLUMN tcc varchar(30);
+ALTER TABLE nhan_khau ADD COLUMN lienhe varchar(30);
+ALTER TABLE nhan_khau 
+ALTER COLUMN lienhe TYPE varchar(100);
 --
 -- Đang đổ dữ liệu cho bảng  nhan_khau 
 --

@@ -38,6 +38,8 @@ public class NhanKhauModel {
     private int idNguoiXoa;
     private String lyDoXoa;
     private String ghiChu;
+    private String tccString;
+    private String lienheString;
 
     public int getID() {
         return ID;
@@ -294,4 +296,21 @@ public class NhanKhauModel {
     public void setGhiChu(String ghiChu) {
         this.ghiChu = ghiChu;
     }
+
+	public String getTccString() {
+		return tccString;
+	}
+
+	public void setTccString(String tccString) {
+		this.tccString = tccString;
+	}
+
+	public String getLienheString() {
+		return lienheString;
+	}
+
+	public void setLienheString(String lienheString) {
+		this.lienheString = lienheString;
+	}
+    
 }

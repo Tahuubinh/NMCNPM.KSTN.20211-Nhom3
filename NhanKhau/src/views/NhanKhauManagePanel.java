@@ -275,10 +275,11 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     	}
     	List<NhanKhauBean> list = controller.getListNhanKhauBeans();
     	NhanKhauModel nhanKhauModel = list.get(row).getNhanKhauModel();
-        XemChiTietChinhSuaNhanKhau addNewPeopleJFrame = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame, nhanKhauModel, tempJTable, row);
-        addNewPeopleJFrame.setLocationRelativeTo(null);
-        addNewPeopleJFrame.setResizable(false);
-        addNewPeopleJFrame.setVisible(true);
+    	//System.err.println(nhanKhauModel.getTccString());
+        XemChiTietChinhSuaNhanKhau xemChiTietChinhSuaNhanKhau = new XemChiTietChinhSuaNhanKhau(this.controller, this.parentJFrame, nhanKhauModel, tempJTable, row);
+        xemChiTietChinhSuaNhanKhau.setLocationRelativeTo(null);
+        xemChiTietChinhSuaNhanKhau.setResizable(false);
+        xemChiTietChinhSuaNhanKhau.setVisible(true);
   	
       
     }

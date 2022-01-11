@@ -19,18 +19,19 @@ public class TableModelHoKhau {
             }
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 5 ? Boolean.class : String.class;
+                return columnIndex == 4 ? Boolean.class : String.class;
             }
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
         listItem.forEach((NhanKhauBean item) -> {  
-            obj[0] = item.getNhanKhauModel().getHoTen();
-            obj[1] = item.getNhanKhauModel().getGioiTinh();
+            obj[0] = item.getNhanKhauModel().getID();
+            obj[1] = item.getNhanKhauModel().getHoTen();
             obj[2] = item.getNhanKhauModel().getNamSinh();
-            obj[3] = item.getNhanKhauModel().getDiaChiHienNay();
-            obj[4] = item.getChungMinhThuModel().getSoCMT();
+            obj[3] = item.getNhanKhauModel().getGioiTinh();
+//            obj[3] = item.getNhanKhauModel().getDiaChiHienNay();
+//            obj[4] = item.getChungMinhThuModel().getSoCMT();
             dtm.addRow(obj);
         });
         return dtm;

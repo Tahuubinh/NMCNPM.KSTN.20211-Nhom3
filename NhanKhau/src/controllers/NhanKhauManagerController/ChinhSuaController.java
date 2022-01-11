@@ -25,15 +25,19 @@ public class ChinhSuaController {
         Connection connection = MysqlConnection.getMysqlConnection();
         // 1 - 19
         String query = "UPDATE nhan_khau " 
-                        + " SET hoTen = ?, gioiTinh = ?, namSinh = ? "
+                        + " SET hoTen = ?, gioiTinh = ?, namSinh = ?, tcc = ?, tongiao = ?, lienhe = ?, ghichu = ? "
                         + "WHERE id = ?";
-        System.err.println(query);
+        // System.err.println(query);
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, nhanKhau.getHoTen());
         preparedStatement.setString(2, nhanKhau.getGioiTinh());
         java.sql.Date namSinh = new java.sql.Date(nhanKhau.getNamSinh().getTime());
         preparedStatement.setDate(3, namSinh);
-        preparedStatement.setInt(4, id);
+        preparedStatement.setString(4, nhanKhau.getTccString());
+        preparedStatement.setString(5, nhanKhau.getTonGiao());
+        preparedStatement.setString(6, nhanKhau.getLienheString());
+        preparedStatement.setString(7, nhanKhau.getGhiChu());
+        preparedStatement.setInt(8, id);
         preparedStatement.executeUpdate();
         
         

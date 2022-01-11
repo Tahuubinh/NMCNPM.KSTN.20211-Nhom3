@@ -38,8 +38,8 @@ public class MainController {
     // set panel for root
     public void setView(JPanel jpnItem, JLabel jlbItem, String kind) {
         this.kindSelected = kind;
-        jpnItem.setBackground(new Color(0));
-        jlbItem.setBackground(new Color(0));
+        jpnItem.setBackground(new Color(28, 155, 26));
+        jlbItem.setBackground(new Color(28, 155, 26));
         JPanel view = new  JPanel();
         switch(kind) {
                 case "TrangChu":
@@ -79,8 +79,8 @@ public class MainController {
     public void setDefaultColor() {
         this.listDanhMuc.forEach((item) -> {
             if (item.getKind().equals("TrangChu")) {
-                item.getJlb().setBackground(new Color(0, 160, 50));
-                item.getJpn().setBackground(new Color(0, 160, 50));
+                item.getJlb().setBackground(Color.BLACK);
+                item.getJpn().setBackground(Color.BLACK);
             } else {
                 item.getJlb().setBackground(new Color(102,102,102));
                 item.getJpn().setBackground(new Color(102,102,102));
@@ -137,15 +137,15 @@ public class MainController {
             root.validate();
             root.repaint();
             setDefaultColor();
-            jlbItem.setBackground(new Color(0));
-            jpnItem.setBackground(new Color(0));
+            jlbItem.setBackground(new Color(28, 155, 26));
+            jpnItem.setBackground(new Color(28, 155, 26));
         }        
 
         @Override
         public void mousePressed(MouseEvent e) {
             kindSelected = kind;
-            jlbItem.setBackground(Color.BLACK);
-            jpnItem.setBackground(Color.BLACK);
+            jlbItem.setBackground(new Color(28, 155, 26));
+            jpnItem.setBackground(new Color(28, 155, 26));
         }
 
         @Override
@@ -154,16 +154,16 @@ public class MainController {
 
         @Override
         public void mouseEntered(MouseEvent e) {
-            jlbItem.setBackground(Color.BLACK);
-            jpnItem.setBackground(Color.BLACK);
+            jlbItem.setBackground(new Color(28, 155, 26));
+            jpnItem.setBackground(new Color(28, 155, 26));
         }
 
         @Override
         public void mouseExited(MouseEvent e) {
             if (!kind.equalsIgnoreCase(kindSelected)) {
                 if (kind.equals("TrangChu")) {
-                    jlbItem.setBackground(new Color(0, 160, 50));
-                    jpnItem.setBackground(new Color(0, 160, 50));
+                    jlbItem.setBackground(Color.BLACK);
+                    jpnItem.setBackground(Color.BLACK);
                 } else 
                 {
                     jlbItem.setBackground(new Color(102,102,102));
