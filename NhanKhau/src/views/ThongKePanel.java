@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JFrame;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -51,6 +53,25 @@ public class ThongKePanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         denNamJtf = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jButton1.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+                jButton1.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+                jButton1.setBackground(new Color(28, 155, 26));
+        	}
+        	
+        	@Override
+        	public void mouseReleased(MouseEvent e) {
+                jButton1.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+                jButton1.setBackground(new Color(28, 155, 26));
+        	}
+        });
         GenderJcb = new javax.swing.JComboBox<>();
         StatusJcb = new javax.swing.JComboBox<>();
 

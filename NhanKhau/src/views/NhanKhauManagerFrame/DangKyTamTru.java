@@ -39,6 +39,8 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class DangKyTamTru extends JFrame {
 
@@ -260,6 +262,24 @@ public class DangKyTamTru extends JFrame {
 		panel.setLayout(gl_panel);
 		
 		JButton hoanthanhButton = new JButton("Hoàn thành");
+		hoanthanhButton.addMouseListener(new MouseAdapter() {
+    		@Override
+        	public void mouseEntered(MouseEvent e) {
+                hoanthanhButton.setBackground(new Color(195, 66, 2));
+        	}
+    		@Override
+        	public void mousePressed(MouseEvent e) {
+            	hoanthanhButton.setBackground(new Color(212, 84, 21));
+        	}
+    		@Override
+        	public void mouseReleased(MouseEvent e) {
+                hoanthanhButton.setBackground(new Color(195, 66, 2));
+        	}
+    		@Override
+        	public void mouseExited(MouseEvent e) {
+            	hoanthanhButton.setBackground(new Color(212, 84, 21));
+        	}
+		});
 		hoanthanhButton.setBorderPainted(false);
 		hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		hoanthanhButton.setBackground(new Color(212,84,21));

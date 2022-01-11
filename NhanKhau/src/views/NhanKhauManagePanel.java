@@ -14,8 +14,6 @@ import views.NhanKhauManagerFrame.KhaiTuJFrame;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.ColorUIResource;
 
-import org.jcp.xml.dsig.internal.MacOutputStream;
-
 import Bean.NhanKhauBean;
 
 import java.awt.Color;
@@ -162,6 +160,25 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
         hotenNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
         
         locButton = new JButton("Lọc");
+        locButton.addMouseListener(new MouseAdapter() {
+        	@Override
+        	public void mouseEntered(MouseEvent e) {
+                locButton.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mousePressed(MouseEvent e) {
+                locButton.setBackground(new Color(28, 155, 26));
+        	}
+        	
+        	@Override
+        	public void mouseReleased(MouseEvent e) {
+                locButton.setBackground(new Color(12, 122, 10));
+        	}
+        	@Override
+        	public void mouseExited(MouseEvent e) {
+                locButton.setBackground(new Color(28, 155, 26));
+        	}
+        });
         locButton.setBorderPainted(false);
         locButton.setFont(new Font("Tahoma", Font.BOLD, 14));
         locButton.setBackground(new java.awt.Color(0, 160, 50));
