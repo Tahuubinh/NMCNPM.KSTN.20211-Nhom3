@@ -48,7 +48,7 @@ public class ThemMoiNhanKhau extends JFrame {
 	private JTextField tcctextField;
 	//private JTextField ngaysinhtextField;
 	private JTextField tongiaotextField;
-	private JTextField textField;
+	private JTextField lien_he_textField;
 	JRadioButton namRadioButton;
 	JRadioButton nuRadioButton;
 	private NhanKhauManagerPanelController parentController;
@@ -56,6 +56,7 @@ public class ThemMoiNhanKhau extends JFrame {
     private NhanKhauBean nhanKhauBean;
     private AddNewController controller;
     private com.toedter.calendar.JDateChooser ngaysinhtextField;
+    private JTextArea ghi_chutextArea;
 	/**
 	 * Launch the application.
 	 */
@@ -139,14 +140,14 @@ public class ThemMoiNhanKhau extends JFrame {
 		tongiaotextField = new JTextField();
 		tongiaotextField.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("Liên hệ:");
+		JLabel lienheLabel = new JLabel("Liên hệ:");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		lien_he_textField = new JTextField();
+		lien_he_textField.setColumns(10);
 		
 		JLabel ghi_chuLabel = new JLabel("Ghi chú:");
 		
-		JTextArea ghi_chutextArea = new JTextArea();
+		ghi_chutextArea = new JTextArea();
 		ghi_chutextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		ghi_chutextArea.setLineWrap(true);
 		GroupLayout gl_panel = new GroupLayout(panel);
@@ -164,7 +165,7 @@ public class ThemMoiNhanKhau extends JFrame {
 								.addComponent(ngaysinhNewLabel)
 								.addComponent(hotenLabel)
 								.addComponent(gioitinhLabel)
-								.addComponent(lblNewLabel)
+								.addComponent(lienheLabel)
 								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 									.addComponent(ghi_chuLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(tongiaoLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -176,7 +177,7 @@ public class ThemMoiNhanKhau extends JFrame {
 								.addComponent(hotenField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(ngaysinhtextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(tcctextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))))
+								.addComponent(lien_he_textField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -206,8 +207,8 @@ public class ThemMoiNhanKhau extends JFrame {
 						.addComponent(tongiaotextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lienheLabel)
+						.addComponent(lien_he_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(14)
@@ -258,7 +259,12 @@ public class ThemMoiNhanKhau extends JFrame {
     private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
             // tao moi 1 doi tuong nhan khau
             NhanKhauModel temp = this.nhanKhauBean.getNhanKhauModel();
+            if (this.hotenField.getText().trim().equals("")) {
+            	JOptionPane.showMessageDialog(null, "Cần nhập tên!");
+            	return;
+            }
             temp.setHoTen(this.hotenField.getText());
+            temp.setTccString(this.tcctextField.getText());
             if (this.namRadioButton.isSelected()) {
             	temp.setGioiTinh("Nam");
             }
@@ -268,8 +274,10 @@ public class ThemMoiNhanKhau extends JFrame {
             	temp.setGioiTinh("");
             }
             temp.setNamSinh(ngaysinhtextField.getDate());
-            //System.err.println(temp.getNamSinh());
-            System.out.println();
+            temp.setTonGiao(tongiaotextField.getText());
+            temp.setLienheString(lien_he_textField.getText());
+            temp.setGhiChu(ghi_chutextArea.getText());
+            
             try {
                 if (this.controller.addNewPeople(this.nhanKhauBean)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công!!");

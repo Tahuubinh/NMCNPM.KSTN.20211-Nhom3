@@ -51,7 +51,7 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 	private JTextField tcctextField;
 	//private JTextField ngaysinhtextField;
 	private JTextField tongiaotextField;
-	private JTextField textField;
+	private JTextField lien_hetextField;
 	private NhanKhauManagerPanelController parentController;
     private JFrame parentFrame;
     private NhanKhauBean nhanKhauBean;
@@ -62,6 +62,7 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
     private JRadioButton nuRadioButton;
 	private JTable table;
 	private int row;
+	private JTextArea ghi_chutextArea;
 	/**
 	 * Launch the application.
 	 */
@@ -136,7 +137,7 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 		
 		tcctextField = new JTextField();
 		tcctextField.setColumns(10);
-		tcctextField.setText("");
+		tcctextField.setText(nhanKhauModel.getTccString());
 		
 		ngaysinhtextField = new com.toedter.calendar.JDateChooser();
 		if (nhanKhauModel.getNamSinh() != null) {
@@ -152,17 +153,20 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 		
 		tongiaotextField = new JTextField();
 		tongiaotextField.setColumns(10);
+		tongiaotextField.setText(nhanKhauModel.getTonGiao());
 		
-		JLabel lblNewLabel = new JLabel("Liên hệ");
+		JLabel lien_heLabel = new JLabel("Liên hệ");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		lien_hetextField = new JTextField();
+		lien_hetextField.setColumns(10);
+		lien_hetextField.setText(nhanKhauModel.getLienheString());
 		
 		JLabel ghi_chuLabel = new JLabel("Ghi chú:");
 		
-		JTextArea ghi_chutextArea = new JTextArea();
+		ghi_chutextArea = new JTextArea();
 		ghi_chutextArea.setBorder(new LineBorder(new Color(0, 0, 0)));
 		ghi_chutextArea.setLineWrap(true);
+		ghi_chutextArea.setText(nhanKhauModel.getGhiChu());
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -181,7 +185,7 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 								.addComponent(ngaysinhNewLabel)
 								.addComponent(hotenLabel)
 								.addComponent(gioitinhLabel)
-								.addComponent(lblNewLabel)
+								.addComponent(lien_heLabel)
 								.addComponent(ghi_chuLabel, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE))
 							.addGap(95)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
@@ -191,7 +195,7 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 								.addComponent(hotenField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(ngaysinhtextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(tcctextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))))
+								.addComponent(lien_hetextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -221,8 +225,8 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 						.addComponent(tongiaotextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lien_heLabel)
+						.addComponent(lien_hetextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(ghi_chuLabel)
@@ -277,7 +281,12 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
     	int confirm = JOptionPane.showConfirmDialog(null, "Đã chắc chắn?", "Chỉnh sửa", JOptionPane.YES_NO_OPTION);
 		if (confirm == JOptionPane.YES_OPTION) {
 	        NhanKhauModel temp = this.nhanKhauBean.getNhanKhauModel();
+	        if (this.hotenField.getText().trim().equals("")) {
+            	JOptionPane.showMessageDialog(null, "Cần nhập tên!");
+            	return;
+            }
 	        temp.setHoTen(this.hotenField.getText());
+            temp.setTccString(this.tcctextField.getText());
 	        if (this.namRadioButton.isSelected()) {
 	        	temp.setGioiTinh("Nam");
 	        }
@@ -288,6 +297,9 @@ public class XemChiTietChinhSuaNhanKhau extends JFrame {
 	        }
 	        temp.setNamSinh(ngaysinhtextField.getDate());
 	        //System.err.println(temp.getNamSinh());
+	        temp.setTonGiao(tongiaotextField.getText());
+            temp.setLienheString(lien_hetextField.getText());
+            temp.setGhiChu(ghi_chutextArea.getText());
 	        try {
 	        	int id = (int) table.getModel().getValueAt(table.getSelectedRow(),0);
 	            if (this.controller.UpdatePeople(this.nhanKhauBean, id)) {
