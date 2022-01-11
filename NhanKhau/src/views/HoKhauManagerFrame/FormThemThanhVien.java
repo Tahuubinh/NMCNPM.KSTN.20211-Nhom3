@@ -1,9 +1,17 @@
 package views.HoKhauManagerFrame;
 
 import Bean.NhanKhauBean;
+import controllers.HoKhauManagerController.ChonChuHoMoiController;
+import controllers.HoKhauManagerController.ChonThanhVienController;
 import controllers.HoKhauManagerController.ChoosePeopleController;
+import models.NhanKhauModel;
+import services.HoKhauService;
+import views.NhanKhauManagerFrame.ThemMoiNhanKhau;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.GroupLayout.Alignment;
@@ -15,6 +23,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -25,6 +37,8 @@ public class FormThemThanhVien extends javax.swing.JFrame {
     private NhanKhauBean nhanKhauBean;
     private NhanKhauBean nhanKhauBeanTemp;
     private JFrame parentJFrame;
+    private ChonThanhVienController controller;
+    private JTable parenTable;
     //private final ChoosePeopleController controller;
     
     /**
@@ -32,14 +46,17 @@ public class FormThemThanhVien extends javax.swing.JFrame {
      * @param nhanKhauBean nhan khau duoc truyen vao tu frame cha
      * @param parentJframe frame cha de disable
      */
-    public FormThemThanhVien(NhanKhauBean nhanKhauBean, JFrame parentJframe) {
+    public FormThemThanhVien(NhanKhauBean nhanKhauBean, JFrame parentJframe, JTable parenTable) {
     	setTitle("Chọn đổi chủ hộ");
         initComponents();
         this.nhanKhauBean = nhanKhauBean;
         this.parentJFrame = parentJframe;
+        this.parenTable = parenTable;
         this.nhanKhauBeanTemp = new NhanKhauBean();
+//        this.hotenField = hotenField;
+//        this.id_chuho = id_chuho;
         parentJframe.setEnabled(false);
-        //controller = new ChoosePeopleController(this.nhanKhauBeanTemp, searchJtf, selectedJtf, tableJpn);
+        controller = new ChonThanhVienController(this.tableJpn, this.ho_tentextField, this.locButton);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -88,19 +105,13 @@ public class FormThemThanhVien extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout tableJpnLayout = new javax.swing.GroupLayout(tableJpn);
-        tableJpn.setLayout(tableJpnLayout);
-        tableJpnLayout.setHorizontalGroup(
-            tableJpnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        tableJpnLayout.setVerticalGroup(
-            tableJpnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 272, Short.MAX_VALUE)
-        );
         
         hoanthanhButton = new JButton("Hoàn thành");
+        hoanthanhButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		ThemThanhVienBtnActionPerformed(e);
+        	}
+        });
         hoanthanhButton.setForeground(Color.WHITE);
         hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
         hoanthanhButton.setBorderPainted(false);
@@ -121,7 +132,7 @@ public class FormThemThanhVien extends javax.swing.JFrame {
         JLabel ho_tenLable_1 = new JLabel("Thành viên trong hộ");
         ho_tenLable_1.setFont(new Font("Tahoma", Font.PLAIN, 12));
         
-        JPanel panel = new JPanel();
+        JPanel thang_vien_tablepanel = new JPanel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1Layout.setHorizontalGroup(
@@ -132,7 +143,7 @@ public class FormThemThanhVien extends javax.swing.JFrame {
         				.addComponent(ho_tenLable_1, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
         				.addGroup(Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
         					.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
-        						.addComponent(panel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+        						.addComponent(thang_vien_tablepanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
         						.addGroup(Alignment.LEADING, jPanel1Layout.createSequentialGroup()
         							.addComponent(ho_tenLable, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
         							.addPreferredGap(ComponentPlacement.RELATED)
@@ -163,9 +174,11 @@ public class FormThemThanhVien extends javax.swing.JFrame {
         			.addGap(27)
         			.addComponent(ho_tenLable_1, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
         			.addPreferredGap(ComponentPlacement.RELATED)
-        			.addComponent(panel, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
+        			.addComponent(thang_vien_tablepanel, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+        thang_vien_tablepanel.setLayout(null);
+        tableJpn.setLayout(null);
         jPanel1.setLayout(jPanel1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -187,4 +200,40 @@ public class FormThemThanhVien extends javax.swing.JFrame {
     private JLabel ho_tenLable;
     private JTextField ho_tentextField;
     private JButton locButton;
+    
+    private void ThemThanhVienBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
+    	JTable tempJTable = controller.getNhankhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	int id_nhan_khau = (int)tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),0);
+    	int id_ho_khau = (int)this.parenTable.getModel().getValueAt(tempJTable.getSelectedRow(),3);
+        try {
+			new HoKhauService().addThanhVien(id_nhan_khau, id_ho_khau);
+			JOptionPane.showMessageDialog(null, "Thêm thành công!!");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//        
+//        try {
+//            if (this.controller.addNewPeople(this.nhanKhauBean)) {
+//                JOptionPane.showMessageDialog(null, "Thêm thành công!!");
+//                close();
+//                parentController.refreshData();
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+//        }
+    }//GEN-LAST:event_CreateBtnActionPerformed
 }
+
+
+

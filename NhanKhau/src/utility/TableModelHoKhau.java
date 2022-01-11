@@ -70,7 +70,7 @@ public class TableModelHoKhau {
             }
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 3 ? Boolean.class : String.class;
+                return columnIndex == 4 ? Boolean.class : String.class;
             }
         };
         dtm.setColumnIdentifiers(listColumn);
@@ -80,6 +80,7 @@ public class TableModelHoKhau {
             obj[0] = item.getHoKhauModel().getMaHoKhau();
             obj[1] = item.getChuHo().getHoTen();
             obj[2] = item.getHoKhauModel().getDiaChi();
+            obj[3] = item.getHoKhauModel().getID();
             dtm.addRow(obj);
         });
         return dtm;

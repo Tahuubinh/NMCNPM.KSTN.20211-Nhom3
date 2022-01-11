@@ -37,7 +37,7 @@ public class HoKhauPanelController {
     private JPopupMenu tablepopupMenu;
     private final HoKhauService hoKhauService = new HoKhauService();
     private final TableModelHoKhau tableModelHoKhau = new TableModelHoKhau();
-    private final String COLUNMS[] = {"Mã hộ khẩu", "Họ tên chủ hộ", "Địa chỉ"}; 
+    private final String COLUNMS[] = {"Mã hộ khẩu", "Họ tên chủ hộ", "Địa chỉ", "ID"}; 
     private JFrame parentJFrame;
     private JTable table;
 
@@ -122,6 +122,7 @@ public class HoKhauPanelController {
             }
             
         };
+        table.removeColumn(table.getColumnModel().getColumn(3));
         table.setComponentPopupMenu(tablepopupMenu);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));

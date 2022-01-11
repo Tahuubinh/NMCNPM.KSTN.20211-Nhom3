@@ -313,7 +313,7 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
     			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
-    	FormThemThanhVien themMoiHoKhau = new FormThemThanhVien(new NhanKhauBean(), this.parentFrame);
+    	FormThemThanhVien themMoiHoKhau = new FormThemThanhVien(new NhanKhauBean(), this.parentFrame, tempJTable);
         themMoiHoKhau.setLocationRelativeTo(null);
         themMoiHoKhau.setResizable(false);
         themMoiHoKhau.setVisible(true);
