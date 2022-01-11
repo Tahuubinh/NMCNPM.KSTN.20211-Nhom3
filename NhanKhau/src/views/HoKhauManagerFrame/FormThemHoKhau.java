@@ -92,10 +92,9 @@ public class FormThemHoKhau extends JFrame {
     }
     
     private void close() {
-        if (JOptionPane.showConfirmDialog(this, "Are you sure to close??", "Confirm", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION) {
-            this.parentJFrame.setEnabled(true);
-            dispose();
-        }
+        this.parentJFrame.setEnabled(true);
+        dispose();
+        
     }
     
     public void setDataChuHo() {
@@ -240,8 +239,9 @@ public class FormThemHoKhau extends JFrame {
     	try {
             this.controller.addNew(hoKhauBean);
             JOptionPane.showMessageDialog(null, "Thêm thành công!!");
-            dispose();
             parentController.refreshData();
+            close();
+            //parentJFrame.setEnabled(true);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
