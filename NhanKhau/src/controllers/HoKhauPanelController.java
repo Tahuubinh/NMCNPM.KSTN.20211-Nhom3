@@ -58,6 +58,15 @@ public class HoKhauPanelController {
         this.locButton = locButton;
         this.tablepopupMenu = tablepopupMenu;
         this.list = hoKhauService.getListHoKhau();
+        locButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	String key = searchJtf.getText();
+            	String key_chu_hoString = chuhotextField.getText();
+            	String keyDiachiString = diachitextField.getText();
+                list = hoKhauService.search(key.trim(), key_chu_hoString.trim(), keyDiachiString.trim());
+                setData();
+            }
+        });
         setData();
         initAction();
     }
