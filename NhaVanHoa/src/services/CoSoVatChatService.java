@@ -20,7 +20,7 @@ public class CoSoVatChatService {
 		try {
 			connection = MysqlConnection.getMysqlConnection();
 			 
-	        String query = "SELECT i.item_id, i.item_name, i.item_quantity, i.item_unit, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
+	        String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
 	   			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE CAST(i.item_id AS string) = "
 	   			 		 + id
 	   			 		 + " GROUP BY i.item_id";
@@ -33,7 +33,6 @@ public class CoSoVatChatService {
                 coSoVatChat.setId(idCoSoVatChat);
                 coSoVatChat.setTenCoSoVatChat(rs.getString("item_name"));
                 coSoVatChat.setSoLuong(rs.getInt("item_quantity"));
-                coSoVatChat.setDonVi(rs.getString("item_unit"));
                 coSoVatChat.setSoLuongMuon(rs.getInt("lended"));
                 coSoVatChat.setSoLuongTrongKho(rs.getInt("remain"));
 	        }
@@ -53,18 +52,16 @@ public class CoSoVatChatService {
         
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
-            String query = "SELECT i.item_id, i.item_name, i.item_quantity, i.item_unit, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
+            String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
        			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id GROUP BY i.item_id";
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
-        	System.out.println(rs);
             while (rs.next()){
             	CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
                 CoSoVatChatModel coSoVatChat = coSoVatChatBean.getCoSoVatChatModel();
                 coSoVatChat.setId(rs.getInt("item_id"));
                 coSoVatChat.setTenCoSoVatChat(rs.getString("item_name"));
                 coSoVatChat.setSoLuong(rs.getInt("item_quantity"));
-                coSoVatChat.setDonVi(rs.getString("item_unit"));
                 coSoVatChat.setSoLuongMuon(rs.getInt("lended"));
                 coSoVatChat.setSoLuongTrongKho(rs.getInt("remain"));
                 list.add(coSoVatChatBean);
@@ -93,20 +90,18 @@ public class CoSoVatChatService {
         
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
-            String query = "SELECT i.item_id, i.item_name, i.item_quantity, i.item_unit, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
+            String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
 			 		 	 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE i.item_name LIKE '% "
 			 		 	 + tenCoSoVatChat
 			 		 	 + "%' GROUP BY i.item_id";
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
-        	System.out.println(rs);
             while (rs.next()){
             	CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
                 CoSoVatChatModel coSoVatChat = coSoVatChatBean.getCoSoVatChatModel();
                 coSoVatChat.setId(rs.getInt("item_id"));
                 coSoVatChat.setTenCoSoVatChat(rs.getString("item_name"));
                 coSoVatChat.setSoLuong(rs.getInt("item_quantity"));
-                coSoVatChat.setDonVi(rs.getString("item_unit"));
                 coSoVatChat.setSoLuongMuon(rs.getInt("lended"));
                 coSoVatChat.setSoLuongTrongKho(rs.getInt("remain"));
                 list.add(coSoVatChatBean);

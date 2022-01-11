@@ -2,7 +2,6 @@ package models;
 
 public class NhaTaiTroModel {
 	private int id;
-	private int idNhaTaiTro;
 	private int idItem;
 	private int soLuong;
 	private String ngayTaiTro;
@@ -18,12 +17,6 @@ public class NhaTaiTroModel {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getIdNhaTaiTro() {
-		return idNhaTaiTro;
-	}
-	public void setIdNhaTaiTro(int idNhaTaiTro) {
-		this.idNhaTaiTro = idNhaTaiTro;
 	}
 	public int getIdItem() {
 		return idItem;

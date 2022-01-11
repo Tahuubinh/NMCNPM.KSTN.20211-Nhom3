@@ -22,7 +22,44 @@ public class LichSuService {
      */
     public LichSuBean getLichSu(String id) {
         LichSuBean LichSuBean = new LichSuBean();  
-        String query1 = "SELECT m.money_id, concat('Ông/Bà', r.user_name, 'tặng nhà văn hoá') as reason FROM money m JOIN registers r ON m.user_id = r.user_id";
+        
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query1 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
+      			  + "FROM money m JOIN item i on m.item_id = i.item_id WHERE m.money_id ="
+      			  + id;
+            String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
+        			  + "FROM deleteditem d JOIN item i on d.item_id = i.item_id WHERE d.delete_id ="
+        			  + id;
+            PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
+            ResultSet rs1 = preparedStatement1.executeQuery();
+            PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
+            ResultSet rs2 = preparedStatement2.executeQuery();
+            while (rs1.next()){
+            	LichSuBean lichSuBean = new LichSuBean(); 
+                LichSuModel lichSu = lichSuBean.getLichSuModel();
+                lichSu.setStt(rs1.getInt("money_id"));
+                lichSu.setLyDo(rs1.getString("reason"));
+                lichSu.setDungCu(rs1.getString("item_name"));
+                lichSu.setSoLuong(rs1.getInt("item_number"));
+                lichSu.setThoiGian(rs1.getDate("date"));
+            }
+            while (rs2.next()){
+            	LichSuBean lichSuBean = new LichSuBean(); 
+                LichSuModel lichSu = lichSuBean.getLichSuModel();
+                lichSu.setStt(rs2.getInt("delete_id"));
+                lichSu.setLyDo(rs2.getString("reason"));
+                lichSu.setDungCu(rs2.getString("item_name"));
+                lichSu.setSoLuong(rs2.getInt("item_number"));
+                lichSu.setThoiGian(rs2.getDate("date"));
+            }
+            preparedStatement1.close();
+            preparedStatement2.close();
+            connection.close();
+        } catch (Exception e) {
+
+        	this.exceptionHandle(e.getMessage());
+        }
         return LichSuBean;
     }
     
@@ -30,6 +67,43 @@ public class LichSuService {
     public List<LichSuBean> getListLichSu() {
     	
         List<LichSuBean> list = new ArrayList<>();
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query1 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
+      			  + "FROM money m JOIN item i on m.item_id = i.item_id";
+            String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
+        			  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id";
+            PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
+            ResultSet rs1 = preparedStatement1.executeQuery();
+            PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
+            ResultSet rs2 = preparedStatement2.executeQuery();
+            while (rs1.next()){
+            	LichSuBean lichSuBean = new LichSuBean(); 
+                LichSuModel lichSu = lichSuBean.getLichSuModel();
+                lichSu.setStt(rs1.getInt("money_id"));
+                lichSu.setLyDo(rs1.getString("reason"));
+                lichSu.setDungCu(rs1.getString("item_name"));
+                lichSu.setSoLuong(rs1.getInt("item_number"));
+                lichSu.setThoiGian(rs1.getDate("date"));
+                list.add(lichSuBean);
+            }
+            while (rs2.next()){
+            	LichSuBean lichSuBean = new LichSuBean(); 
+                LichSuModel lichSu = lichSuBean.getLichSuModel();
+                lichSu.setStt(rs2.getInt("delete_id"));
+                lichSu.setLyDo(rs2.getString("reason"));
+                lichSu.setDungCu(rs2.getString("item_name"));
+                lichSu.setSoLuong(rs2.getInt("item_number"));
+                lichSu.setThoiGian(rs2.getDate("date"));
+                list.add(lichSuBean);
+            }
+            preparedStatement1.close();
+            preparedStatement2.close();
+            connection.close();
+        } catch (Exception e) {
+
+        	this.exceptionHandle(e.getMessage());
+        }
         return list;
     }
     
@@ -37,6 +111,7 @@ public class LichSuService {
     public List<LichSuBean> statisticLichSu(Date thoiGian, String status) {
         List<LichSuBean> list = new ArrayList<>();
         //viết truy vấn
+        
         return list;
     }
     
@@ -45,6 +120,45 @@ public class LichSuService {
      */
     public List<LichSuBean> search(Date thoiGian, String status) {
         List<LichSuBean> list = new  ArrayList<>();
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query1 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
+      			  + "FROM money m JOIN item i on m.item_id = i.item_id WHERE m.date = "
+      			  + thoiGian;
+            String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
+        			  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id WHERE d.date = "
+        			  + thoiGian;
+            PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
+            ResultSet rs1 = preparedStatement1.executeQuery();
+            PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
+            ResultSet rs2 = preparedStatement2.executeQuery();
+            while (rs1.next()){
+            	LichSuBean lichSuBean = new LichSuBean(); 
+                LichSuModel lichSu = lichSuBean.getLichSuModel();
+                lichSu.setStt(rs1.getInt("money_id"));
+                lichSu.setLyDo(rs1.getString("reason"));
+                lichSu.setDungCu(rs1.getString("item_name"));
+                lichSu.setSoLuong(rs1.getInt("item_number"));
+                lichSu.setThoiGian(rs1.getDate("date"));
+                if(status == "Toàn bộ" || status == "Đóng góp") list.add(lichSuBean);
+            }
+            while (rs2.next()){
+            	LichSuBean lichSuBean = new LichSuBean(); 
+                LichSuModel lichSu = lichSuBean.getLichSuModel();
+                lichSu.setStt(rs2.getInt("delete_id"));
+                lichSu.setLyDo(rs2.getString("reason"));
+                lichSu.setDungCu(rs2.getString("item_name"));
+                lichSu.setSoLuong(rs2.getInt("item_number"));
+                lichSu.setThoiGian(rs2.getDate("date"));
+                if(status == "Toàn bộ" || status == "Loại bỏ") list.add(lichSuBean);
+            }
+            preparedStatement1.close();
+            preparedStatement2.close();
+            connection.close();
+        } catch (Exception e) {
+
+        	this.exceptionHandle(e.getMessage());
+        }
         return list;
     }
     

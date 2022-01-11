@@ -8,9 +8,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import models.MuonTraModel;
 
-import models.CoSoVatChatModel;
-import models.PhongBanModel;
 
 /**
  *
@@ -43,22 +42,28 @@ public class MuonTraService {
 	        PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
 	        ResultSet rs1 = preparedStatement1.executeQuery();
 	        PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
-	        ResultSet rs2 = preparedStatement1.executeQuery();
+	        ResultSet rs2 = preparedStatement2.executeQuery();
 	        while(rs1.next()) {
-	        	CoSoVatChatModel coSoVatChat = muonTraBean.getCoSoVatChatModel();
-                coSoVatChat.setId(rs1.getInt("item_id"));
-                coSoVatChat.setTenCoSoVatChat(rs1.getString("item_name"));
-                coSoVatChat.setSoLuong(rs1.getInt("item_quantity"));
-                coSoVatChat.setDonVi(rs1.getString("item_unit"));
-                coSoVatChat.setSoLuongMuon(rs1.getInt("lended"));
-                coSoVatChat.setSoLuongTrongKho(rs1.getInt("remain"));
+	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
+	        	muonTra.setStt(rs1.getInt("event_no"));
+	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
+	        	muonTra.setid(rs1.getString("cccd"));
+	        	muonTra.setLienHe(rs1.getString("user_phone"));
+	        	muonTra.setThoiGianMuon(rs1.getTimestamp("time_start"));
+	        	muonTra.setThoiGianTra(rs1.getTimestamp("time_end"));
+	        	muonTra.setCoSoVatChat(rs1.getString("item_name"));
+	        	muonTra.setSoLuong(rs1.getInt("item_number"));
 	        }
 	        while(rs2.next()) {
-	        	PhongBanModel phongBan = muonTraBean.getPhongBanModel();
-                phongBan.setId(rs2.getInt("infra_id"));
-                phongBan.setTenPhongBan(rs2.getString("infra_name"));
-                phongBan.setThoiGianSuDung(rs2.getString("thoigian"));
-                phongBan.setLyDo(rs2.getString("reason"));
+	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
+	        	muonTra.setStt(rs1.getInt("event_no"));
+	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
+	        	muonTra.setid(rs1.getString("cccd"));
+	        	muonTra.setLienHe(rs1.getString("user_phone"));
+	        	muonTra.setThoiGianMuon(rs1.getTimestamp("time_start"));
+	        	muonTra.setThoiGianTra(rs1.getTimestamp("time_end"));
+	        	muonTra.setCoSoVatChat(rs1.getString("infra_name"));
+	        	muonTra.setSoLuong(1);
 	        }
 	        preparedStatement1.close();
 	        preparedStatement2.close();
@@ -86,25 +91,31 @@ public class MuonTraService {
 	        PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
 	        ResultSet rs1 = preparedStatement1.executeQuery();
 	        PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
-	        ResultSet rs2 = preparedStatement1.executeQuery();
+	        ResultSet rs2 = preparedStatement2.executeQuery();
 	        while(rs1.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
-	        	CoSoVatChatModel coSoVatChat = muonTraBean.getCoSoVatChatModel();
-                coSoVatChat.setId(rs1.getInt("item_id"));
-                coSoVatChat.setTenCoSoVatChat(rs1.getString("item_name"));
-                coSoVatChat.setSoLuong(rs1.getInt("item_quantity"));
-                coSoVatChat.setDonVi(rs1.getString("item_unit"));
-                coSoVatChat.setSoLuongMuon(rs1.getInt("lended"));
-                coSoVatChat.setSoLuongTrongKho(rs1.getInt("remain"));
+	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
+	        	muonTra.setStt(rs1.getInt("event_no"));
+	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
+	        	muonTra.setid(rs1.getString("cccd"));
+	        	muonTra.setLienHe(rs1.getString("user_phone"));
+	        	muonTra.setThoiGianMuon(rs1.getTimestamp("time_start"));
+	        	muonTra.setThoiGianTra(rs1.getTimestamp("time_end"));
+	        	muonTra.setCoSoVatChat(rs1.getString("item_name"));
+	        	muonTra.setSoLuong(rs1.getInt("item_number"));
                 list.add(muonTraBean);
 	        }
 	        while(rs2.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
-	        	PhongBanModel phongBan = muonTraBean.getPhongBanModel();
-                phongBan.setId(rs2.getInt("infra_id"));
-                phongBan.setTenPhongBan(rs2.getString("infra_name"));
-                phongBan.setThoiGianSuDung(rs2.getString("thoigian"));
-                phongBan.setLyDo(rs2.getString("reason"));
+	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
+	        	muonTra.setStt(rs1.getInt("event_no"));
+	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
+	        	muonTra.setid(rs1.getString("cccd"));
+	        	muonTra.setLienHe(rs1.getString("user_phone"));
+	        	muonTra.setThoiGianMuon(rs1.getTimestamp("time_start"));
+	        	muonTra.setThoiGianTra(rs1.getTimestamp("time_end"));
+	        	muonTra.setCoSoVatChat(rs1.getString("infra_name"));
+	        	muonTra.setSoLuong(1);
                 list.add(muonTraBean);
 	        }
 	        preparedStatement1.close();
@@ -158,25 +169,31 @@ public class MuonTraService {
 	        PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
 	        ResultSet rs1 = preparedStatement1.executeQuery();
 	        PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
-	        ResultSet rs2 = preparedStatement1.executeQuery();
+	        ResultSet rs2 = preparedStatement2.executeQuery();
 	        while(rs1.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
-	        	CoSoVatChatModel coSoVatChat = muonTraBean.getCoSoVatChatModel();
-                coSoVatChat.setId(rs1.getInt("item_id"));
-                coSoVatChat.setTenCoSoVatChat(rs1.getString("item_name"));
-                coSoVatChat.setSoLuong(rs1.getInt("item_quantity"));
-                coSoVatChat.setDonVi(rs1.getString("item_unit"));
-                coSoVatChat.setSoLuongMuon(rs1.getInt("lended"));
-                coSoVatChat.setSoLuongTrongKho(rs1.getInt("remain"));
+	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
+	        	muonTra.setStt(rs1.getInt("event_no"));
+	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
+	        	muonTra.setid(rs1.getString("cccd"));
+	        	muonTra.setLienHe(rs1.getString("user_phone"));
+	        	muonTra.setThoiGianMuon(rs1.getTimestamp("time_start"));
+	        	muonTra.setThoiGianTra(rs1.getTimestamp("time_end"));
+	        	muonTra.setCoSoVatChat(rs1.getString("item_name"));
+	        	muonTra.setSoLuong(rs1.getInt("item_number"));
                 list.add(muonTraBean);
 	        }
 	        while(rs2.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
-	        	PhongBanModel phongBan = muonTraBean.getPhongBanModel();
-                phongBan.setId(rs2.getInt("infra_id"));
-                phongBan.setTenPhongBan(rs2.getString("infra_name"));
-                phongBan.setThoiGianSuDung(rs2.getString("thoigian"));
-                phongBan.setLyDo(rs2.getString("reason"));
+	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
+	        	muonTra.setStt(rs1.getInt("event_no"));
+	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
+	        	muonTra.setid(rs1.getString("cccd"));
+	        	muonTra.setLienHe(rs1.getString("user_phone"));
+	        	muonTra.setThoiGianMuon(rs1.getTimestamp("time_start"));
+	        	muonTra.setThoiGianTra(rs1.getTimestamp("time_end"));
+	        	muonTra.setCoSoVatChat(rs1.getString("infra_name"));
+	        	muonTra.setSoLuong(1);
                 list.add(muonTraBean);
 	        }
 	        preparedStatement1.close();
