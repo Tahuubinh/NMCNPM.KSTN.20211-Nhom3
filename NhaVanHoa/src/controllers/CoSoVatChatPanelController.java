@@ -46,6 +46,7 @@ public class CoSoVatChatPanelController {
 	    public CoSoVatChatPanelController() {
 	    }
 	    
+	    
 	    //khi nhap hoten vs lien he se tu dong tim, khong can an filter
 	    public void initAction(){
 	        this.searchJtf.getDocument().addDocumentListener(new DocumentListener() {
@@ -75,7 +76,7 @@ public class CoSoVatChatPanelController {
 	    //Khi an Filter, bien listMuonTraBeans se call muonTraService de thonn ke thon tin vua nhap
 	    //Chu y cac thong tin null
 	    public void setData(String tenCoSoVatChat){
-	      this.listCoSoVatChatBeans = this.coSoVatChatService.statisticCoSoVatChat(tenCoSoVatChat);
+	      this.listCoSoVatChatBeans = this.coSoVatChatService.search(tenCoSoVatChat);
 	      setDataTable();
 	    }
 	    

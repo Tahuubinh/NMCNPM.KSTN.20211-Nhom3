@@ -5,7 +5,7 @@ import services.StringService;
 
 import javax.swing.JFrame;
 
-import views.MuonTraFrame.ThemDangKySuDungCoSoVatChatFrame;
+import views.MuonTraFrame.DangKySuDungFrame;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -236,7 +236,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addNewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
-    	ThemDangKySuDungCoSoVatChatFrame themDangKySuDungCoSoVatChatFrame = new ThemDangKySuDungCoSoVatChatFrame(this.controller, this.parentJFrame);
+    	DangKySuDungFrame themDangKySuDungCoSoVatChatFrame = new DangKySuDungFrame(this.controller, this.parentJFrame);
     	themDangKySuDungCoSoVatChatFrame.setLocationRelativeTo(null);
     	themDangKySuDungCoSoVatChatFrame.setResizable(false);
     	themDangKySuDungCoSoVatChatFrame.setVisible(true);

@@ -249,6 +249,8 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
     		coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatJtf.getText());
     		coSoVatChatModel.setSoLuong(Integer.parseInt(soLuongJtf.getText()));
     		nhaTaiTroModel.setLyDo(lyDoJtf.getText());
+    		coSoVatChatBean.setCoSoVatChatModel(coSoVatChatModel);
+    		coSoVatChatBean.setNhaTaiTroModel(nhaTaiTroModel);
             try {
             	if(this.controller.addNewCoSoVatChat(coSoVatChatBean)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công!!");

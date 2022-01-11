@@ -102,7 +102,7 @@ public class ThemPhongBanFrame extends javax.swing.JFrame {
         };
         this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
-        this.PhongBanBean = new PhongBanBean();
+        this.phongBanBean = new PhongBanBean();
         initComponents();
         setTitle("Thêm mới cơ sở vật chất");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -223,11 +223,12 @@ public class ThemPhongBanFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void addThongTinDangKyPhongBanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
     	if(validateValueInForm()) {
-    		PhongBanModel PhongBanModel = this.PhongBanBean.getPhongBanModel();
-    		PhongBanModel.setTenPhongBan(tenPhongBanJtf.getText());
-    		PhongBanModel.setLyDo(lyDoJtf.getText());
+    		PhongBanModel phongBanModel = this.phongBanBean.getPhongBanModel();
+    		phongBanModel.setTenPhongBan(tenPhongBanJtf.getText());
+    		phongBanModel.setLyDo(lyDoJtf.getText());
+    		this.phongBanBean.setPhongBanModel(phongBanModel);
             try {
-            	if(this.controller.addNewPhongBan(PhongBanBean)) {
+            	if(this.controller.addNewPhongBan(phongBanBean)) {
                     JOptionPane.showMessageDialog(null, "Thêm thành công!!");
                     close();
                     parentController.refreshData();
@@ -250,7 +251,7 @@ public class ThemPhongBanFrame extends javax.swing.JFrame {
     }
 	private PhongBanPanelController parentController;
     private JFrame parentFrame;
-    private PhongBanBean PhongBanBean;
+    private PhongBanBean phongBanBean;
     private AddNewController controller;
     private JPanel DangKyPhongBanPanel;
     private JTextField lyDoJtf;

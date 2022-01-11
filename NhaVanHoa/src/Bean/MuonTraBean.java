@@ -2,6 +2,9 @@ package Bean;
 
 
 import models.PhongBanModel;
+
+import java.util.List;
+
 import models.CoSoVatChatModel;
 import models.MuonTraModel;
 import models.NguoiMuonModel;
@@ -17,7 +20,8 @@ public class MuonTraBean {
     private CoSoVatChatModel coSoVatChatModel;
     private PhongBanModel phongBanModel;
     private ThoiGianModel thoiGianModel;
-    
+    private List<CoSoVatChatModel> listCoSoVatChatModels;
+    private List<PhongBanModel> listPhongBanModels;
     public MuonTraBean(MuonTraModel muonTraModel, NguoiMuonModel nguoiMuonModel, CoSoVatChatModel coSoVatChatModel, PhongBanModel phongBanModel, ThoiGianModel thoiGianModel) {
         this.muonTraModel = muonTraModel;
         this.nguoiMuonModel = nguoiMuonModel;
@@ -70,6 +74,22 @@ public class MuonTraBean {
 
 	public void setThoiGianModel(ThoiGianModel thoiGianModel) {
 		this.thoiGianModel = thoiGianModel;
+	}
+
+	public List<CoSoVatChatModel> getListCoSoVatChatModels() {
+		return listCoSoVatChatModels;
+	}
+
+	public void setListCoSoVatChatModels(List<CoSoVatChatModel> listCoSoVatChatModels) {
+		this.listCoSoVatChatModels = listCoSoVatChatModels;
+	}
+
+	public List<PhongBanModel> getListPhongBanModels() {
+		return listPhongBanModels;
+	}
+
+	public void setListPhongBanModels(List<PhongBanModel> listPhongBanModels) {
+		this.listPhongBanModels = listPhongBanModels;
 	}
 
 	@Override

@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
+
 import models.PhongBanModel;
 import models.CoSoVatChatModel;
 import models.NguoiMuonModel;
@@ -28,9 +30,10 @@ public class AddNewController {
 	//add thong tin nguoi muon vao database, neu add that bai tra ve false
     public boolean addNewNguoiMuon(MuonTraBean muonTraBean) throws SQLException, ClassNotFoundException{
         NguoiMuonModel nguoiMuonModel = muonTraBean.getNguoiMuonModel();
-        CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
-        PhongBanModel phongBanModel = muonTraBean.getPhongBanModel();
         ThoiGianModel thoiGianModel = muonTraBean.getThoiGianModel();
+        List<CoSoVatChatModel> listCoSoVatChatModels = muonTraBean.getListCoSoVatChatModels();
+        List<PhongBanModel> listPhongBanModels = muonTraBean.getListPhongBanModels();
+        
         Connection connection = MysqlConnection.getMysqlConnection();
         connection.close();
         return true;
@@ -40,14 +43,7 @@ public class AddNewController {
     public boolean addNewCoSoVatChat(CoSoVatChatBean coSoVatChatBean) throws SQLException, ClassNotFoundException{
         CoSoVatChatModel coSoVatChatModel = coSoVatChatBean.getCoSoVatChatModel();
         Connection connection = MysqlConnection.getMysqlConnection();
-        
-        String query = "INSERT INTO nhan_khau (hoTen, gioiTinh)" 
-                        + " values (?, ?)";
-        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement.setString(1, nhanKhau.getHoTen());
-        preparedStatement.setString(2, nhanKhau.getGioiTinh());
-        preparedStatement.executeUpdate();
-        connection.close();
+
         return true;
     }
     

@@ -78,12 +78,12 @@ public class CoSoVatChatService {
         return list;
     }
     
-    //danh sach co so vat chat phuc vu viec thong ke
-    public List<CoSoVatChatBean> statisticCoSoVatChat(String tenCoSoVatChat) {
-        List<CoSoVatChatBean> list = new ArrayList<>();
+    //lay so luong co so vat chat con lai theo ten
+    public int getSoLuongConLai(String tenCoSoVatChat) {
+    	int soLuong = 0;
         //viết truy vấn
         
-        return list;
+        return soLuong;
     }
     
     //danh sach co so vat chat phuc vu viec search
