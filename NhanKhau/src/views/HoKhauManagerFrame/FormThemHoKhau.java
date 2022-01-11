@@ -200,7 +200,7 @@ public class FormThemHoKhau extends JFrame {
 		contentPane.add(hoanthanhButton);
 	}
     private void selectBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectBtnActionPerformed
-    	FormChonChuHo choosePeople = new FormChonChuHo(this.chuHo, this);
+    	FormChonChuHo choosePeople = new FormChonChuHo(this.chuHo, this, this.hotenField);
         choosePeople.setLocationRelativeTo(null);
         choosePeople.setResizable(false);
         choosePeople.setVisible(true);

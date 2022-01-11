@@ -173,6 +173,46 @@ public class NhanKhauService {
         return list;
     }
     
+    public List<NhanKhauBean> getListKhongPhaiChuHo() {
+        List<NhanKhauBean> list = new ArrayList<>();
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query = "select * from nhan_khau\r\n"
+            		+ "where id not in (\r\n"
+            		+ "	select idchuho from ho_khau\r\n"
+            		+ "	union\r\n"
+            		+ "	select idnhankhau from thanh_vien_cua_ho\r\n"
+            		+ ")";
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+        	System.out.println(rs);
+            while (rs.next()){
+                NhanKhauBean nhanKhauBean = new NhanKhauBean();
+                NhanKhauModel nhanKhau = nhanKhauBean.getNhanKhauModel();
+                nhanKhau.setID(rs.getInt("ID"));
+                nhanKhau.setHoTen(rs.getString("hoTen"));
+                nhanKhau.setGioiTinh(rs.getString("gioiTinh"));
+                nhanKhau.setNamSinh(rs.getDate("namSinh"));
+                nhanKhau.setDiaChiHienNay(rs.getString("diachi"));
+                nhanKhau.setTccString(rs.getString("tcc"));
+//                System.err.println("sfsdf   " + rs.getString("hoTen"));
+//                System.err.println(rs.getString("tcc"));
+                ChungMinhThuModel chungMinhThuModel = nhanKhauBean.getChungMinhThuModel();
+                chungMinhThuModel.setIdNhanKhau(rs.getInt("idNhanKhau"));
+                chungMinhThuModel.setSoCMT(rs.getString("soCMT"));
+                chungMinhThuModel.setNgayCap(rs.getDate("ngayCap"));
+                chungMinhThuModel.setNoiCap(rs.getString("noiCap"));
+                list.add(nhanKhauBean);
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+    
     public List<NhanKhauBean> statisticNhanKhau(int TuTuoi, int denTuoi, String gender, String Status, int tuNam, int denNam) {
         List<NhanKhauBean> list = new ArrayList<>();
         
@@ -400,6 +440,87 @@ public class NhanKhauService {
                 nhanKhau.setGioiTinh(rs.getString("gioiTinh"));
                 nhanKhau.setNamSinh(rs.getDate("namSinh"));
                 nhanKhau.setDiaChiHienNay(rs.getString("diaChiHienNay"));
+                nhanKhau.setTccString(rs.getString("tcc"));
+                nhanKhau.setLienheString(rs.getString("lienhe"));
+                nhanKhau.setTonGiao(rs.getString("tongiao"));
+                nhanKhau.setGhiChu(rs.getString("ghichu"));
+//                ChungMinhThuModel chungMinhThuModel = temp.getChungMinhThuModel();
+//                chungMinhThuModel.setIdNhanKhau(rs.getInt("idNhanKhau"));
+//                chungMinhThuModel.setSoCMT(rs.getString("soCMT"));
+//                chungMinhThuModel.setNgayCap(rs.getDate("ngayCap"));
+//                chungMinhThuModel.setNoiCap(rs.getString("noiCap"));
+                list.add(temp);
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception mysqlException) {
+            this.exceptionHandle(mysqlException.getMessage());
+        }
+        return list;
+    }
+    
+    public List<NhanKhauBean> searchKhongPhaiChuHo(String keyword, String diachi) {
+        List<NhanKhauBean> list = new  ArrayList<>();
+        String query;
+        
+        // truy cap db
+        // create query
+        try {
+            //long a = Long.parseLong(keyword);
+        	Boolean hasAndBoolean = false;
+            query = "select * from nhan_khau\r\n"
+            		+ "where id not in (\r\n"
+            		+ "	select idchuho from ho_khau\r\n"
+            		+ "	union\r\n"
+            		+ "	select idnhankhau from thanh_vien_cua_ho\r\n"
+            		+ ")";
+            if (!keyword.isEmpty() || !diachi.isEmpty()) {
+            	query += " AND ";
+            }
+            if (!keyword.isEmpty()) {
+            	hasAndBoolean = true;
+            	query += "hoten LIKE '%"
+                        + keyword
+                        + "%'"
+    						;
+            }
+            if (!diachi.isEmpty()) {
+            	if (hasAndBoolean == true) {
+            		query += " AND ";
+            	}
+            	hasAndBoolean = true;
+            	query += "diachihiennay LIKE '%"
+                        + diachi
+                        + "%' "
+						;
+            }
+            query += " ORDER BY id";
+            //System.err.println(query);
+            
+                    
+        } catch (Exception e) {
+            query = "SELECT * "
+                    + "FROM nhan_khau "
+                    + "INNER JOIN chung_minh_thu "
+                    + "ON nhan_khau.ID = chung_minh_thu.idNhanKhau "
+                    + "WHERE MATCH(hoTen, bietDanh) AGAINST ('"
+                    + keyword
+                    + "' IN NATURAL LANGUAGE MODE);";
+        }
+        
+        // execute query
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                NhanKhauBean temp = new NhanKhauBean();
+                NhanKhauModel nhanKhau = temp.getNhanKhauModel();
+                nhanKhau.setID(rs.getInt("ID"));
+                nhanKhau.setHoTen(rs.getString("hoTen"));
+                nhanKhau.setGioiTinh(rs.getString("gioiTinh"));
+                nhanKhau.setNamSinh(rs.getDate("namSinh"));
+                //nhanKhau.setDiaChiHienNay(rs.getString("diaChiHienNay"));
                 nhanKhau.setTccString(rs.getString("tcc"));
                 nhanKhau.setLienheString(rs.getString("lienhe"));
                 nhanKhau.setTonGiao(rs.getString("tongiao"));

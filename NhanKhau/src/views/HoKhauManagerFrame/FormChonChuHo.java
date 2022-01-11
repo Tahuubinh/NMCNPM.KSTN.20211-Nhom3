@@ -1,11 +1,15 @@
 package views.HoKhauManagerFrame;
 
 import Bean.NhanKhauBean;
+import controllers.HoKhauManagerController.ChonChuHoMoiController;
 import controllers.HoKhauManagerController.ChoosePeopleController;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.Closeable;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -14,6 +18,8 @@ import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -24,6 +30,8 @@ public class FormChonChuHo extends javax.swing.JFrame {
     private NhanKhauBean nhanKhauBean;
     private NhanKhauBean nhanKhauBeanTemp;
     private JFrame parentJFrame;
+    private ChonChuHoMoiController controller;
+    private JTextField hotenField;
     //private final ChoosePeopleController controller;
     
     /**
@@ -31,14 +39,15 @@ public class FormChonChuHo extends javax.swing.JFrame {
      * @param nhanKhauBean nhan khau duoc truyen vao tu frame cha
      * @param parentJframe frame cha de disable
      */
-    public FormChonChuHo(NhanKhauBean nhanKhauBean, JFrame parentJframe) {
+    public FormChonChuHo(NhanKhauBean nhanKhauBean, JFrame parentJframe, JTextField hotenField) {
     	setTitle("Chọn chủ hộ");
         initComponents();
         this.nhanKhauBean = nhanKhauBean;
         this.parentJFrame = parentJframe;
         this.nhanKhauBeanTemp = new NhanKhauBean();
+        this.hotenField = hotenField;
         parentJframe.setEnabled(false);
-        //controller = new ChoosePeopleController(this.nhanKhauBeanTemp, searchJtf, selectedJtf, tableJpn);
+        controller = new ChonChuHoMoiController(this.tableJpn, this.ho_tentextField, this.locButton);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -56,6 +65,11 @@ public class FormChonChuHo extends javax.swing.JFrame {
         }
     }
 
+    void close() {
+        this.parentJFrame.setEnabled(true);
+        dispose();
+    }
+    
     public NhanKhauBean getNhanKhauBean() {
         return nhanKhauBean;
     }
@@ -83,11 +97,6 @@ public class FormChonChuHo extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         tableJpn = new javax.swing.JPanel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-
         javax.swing.GroupLayout tableJpnLayout = new javax.swing.GroupLayout(tableJpn);
         tableJpn.setLayout(tableJpnLayout);
         tableJpnLayout.setHorizontalGroup(
@@ -98,8 +107,16 @@ public class FormChonChuHo extends javax.swing.JFrame {
             tableJpnLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 272, Short.MAX_VALUE)
         );
-        
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         hoanthanhButton = new JButton("Hoàn thành");
+        hoanthanhButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		hoanThanh(e);
+        	}
+        });
         hoanthanhButton.setForeground(Color.WHITE);
         hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
         hoanthanhButton.setBorderPainted(false);
@@ -112,6 +129,10 @@ public class FormChonChuHo extends javax.swing.JFrame {
         ho_tentextField.setFont(new Font("Arial", Font.PLAIN, 14));
         
         locButton = new JButton("Lọc");
+        locButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
         locButton.setForeground(Color.WHITE);
         locButton.setFont(new Font("Tahoma", Font.BOLD, 14));
         locButton.setBorderPainted(false);
@@ -152,6 +173,7 @@ public class FormChonChuHo extends javax.swing.JFrame {
         				.addComponent(tableJpn, GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE))
         			.addContainerGap())
         );
+        tableJpn.setLayout(null);
         jPanel1.setLayout(jPanel1Layout);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -174,4 +196,28 @@ public class FormChonChuHo extends javax.swing.JFrame {
     private JTextField ho_tentextField;
     private JButton locButton;
     // End of variables declaration//GEN-END:variables
+    private void hoanThanh(java.awt.event.ActionEvent evt) {
+    	JTable tempJTable = controller.getNhankhauTable();
+		int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	String ho_ten = (String) tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),1);
+    	this.hotenField.setText(ho_ten);
+    	close();
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
