@@ -32,6 +32,7 @@ public class FormChonChuHo extends javax.swing.JFrame {
     private JFrame parentJFrame;
     private ChonChuHoMoiController controller;
     private JTextField hotenField;
+    private JTextField id_chuho;
     //private final ChoosePeopleController controller;
     
     /**
@@ -39,13 +40,14 @@ public class FormChonChuHo extends javax.swing.JFrame {
      * @param nhanKhauBean nhan khau duoc truyen vao tu frame cha
      * @param parentJframe frame cha de disable
      */
-    public FormChonChuHo(NhanKhauBean nhanKhauBean, JFrame parentJframe, JTextField hotenField) {
+    public FormChonChuHo(NhanKhauBean nhanKhauBean, JFrame parentJframe, JTextField hotenField, JTextField id_chuho) {
     	setTitle("Chọn chủ hộ");
         initComponents();
         this.nhanKhauBean = nhanKhauBean;
         this.parentJFrame = parentJframe;
         this.nhanKhauBeanTemp = new NhanKhauBean();
         this.hotenField = hotenField;
+        this.id_chuho = id_chuho;
         parentJframe.setEnabled(false);
         controller = new ChonChuHoMoiController(this.tableJpn, this.ho_tentextField, this.locButton);
         this.addWindowListener(new WindowAdapter() {
@@ -204,6 +206,10 @@ public class FormChonChuHo extends javax.swing.JFrame {
     			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
+    	int temp_id = (int)tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),0);
+    	this.id_chuho.setText(String.valueOf(temp_id));
+//    	System.err.println((int) tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),0));
+//    	System.err.println(this.id_chuho.intValue());
     	String ho_ten = (String) tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),1);
     	this.hotenField.setText(ho_ten);
     	close();

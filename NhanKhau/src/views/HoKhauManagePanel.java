@@ -265,7 +265,7 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
 
     private void themMoiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themMoiBtnActionPerformed
     	//ThemMoiHoKhau themMoiHoKhau = new ThemMoiHoKhau(this.parentFrame);
-    	FormThemHoKhau themMoiHoKhau = new FormThemHoKhau(this.parentFrame);
+    	FormThemHoKhau themMoiHoKhau = new FormThemHoKhau(this.controller, this.parentFrame);
         themMoiHoKhau.setLocationRelativeTo(null);
         themMoiHoKhau.setResizable(false);
         themMoiHoKhau.setVisible(true);

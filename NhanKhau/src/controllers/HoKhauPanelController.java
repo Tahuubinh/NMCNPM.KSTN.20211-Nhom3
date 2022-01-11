@@ -150,6 +150,14 @@ public class HoKhauPanelController {
         tableJpn.validate();
         tableJpn.repaint();
     }
+    
+    public void refreshData() {
+    	String key = searchJtf.getText();
+    	String key_chu_hoString = chuhotextField.getText();
+    	String keyDiachiString = diachitextField.getText();
+        list = hoKhauService.search(key.trim(), key_chu_hoString.trim(), keyDiachiString.trim());
+        setData();
+    }
 
     public void setParentJFrame(JFrame parentJFrame) {
         this.parentJFrame = parentJFrame;
