@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -33,10 +34,12 @@ public class PhongBanPanelController {
 	    private ClassTableModel classTableModel = null;
 	    private final String[] COLUMNS = {"STT", "Tên phòng ban", "Lịch sử dụng tiếp theo"};
 	    private JFrame parentJFrame;
-
-	    public PhongBanPanelController(JPanel jpnView, JTextField searchJtf) {
+	    private JTable table;
+	    private JPopupMenu popupMenu;
+	    public PhongBanPanelController(JPanel jpnView, JTextField searchJtf, JPopupMenu popupMenu) {
 	        this.jpnView = jpnView;
 	        this.searchJtf  = searchJtf;
+	        this.popupMenu = popupMenu;
 	        classTableModel = new ClassTableModel();
 	        this.PhongBanService = new PhongBanService();
 	        this.listPhongBanBeans = this.PhongBanService.getListPhongBan();
@@ -75,7 +78,7 @@ public class PhongBanPanelController {
 	    //Khi an Filter, bien listMuonTraBeans se call muonTraService de thonn ke thon tin vua nhap
 	    //Chu y cac thong tin null
 	    public void setData(String tenPhongBan){
-	      this.listPhongBanBeans = this.PhongBanService.statisticPhongBan(tenPhongBan);
+	      this.listPhongBanBeans = this.PhongBanService.search(tenPhongBan);
 	      setDataTable();
 	    }
 	    
@@ -85,14 +88,14 @@ public class PhongBanPanelController {
 	            listItem.add(PhongBan.getPhongBanModel());
 	        });
 	        DefaultTableModel model = classTableModel.setTablePhongBan(listItem, COLUMNS);
-	        JTable table = new JTable(model) {
+	        table = new JTable(model) {
 	            @Override
 	            public boolean editCellAt(int row, int column, EventObject e) {
 	                return false;
 	            }
 	            
 	        };
-	        
+	        table.setComponentPopupMenu(popupMenu);
 	        // thiet ke bang
 	        
 	        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
@@ -157,7 +160,13 @@ public class PhongBanPanelController {
 			this.searchJtf = searchJtf;
 		}
 
+		public JTable getTable() {
+			return table;
+		}
 
-
+		public void setTable(JTable table) {
+			this.table = table;
+		}
+		
 
 }

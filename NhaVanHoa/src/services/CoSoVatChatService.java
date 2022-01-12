@@ -176,7 +176,6 @@ public class CoSoVatChatService {
 
         	this.exceptionHandle(e.getMessage());
         }
-        System.out.println(list.size());
         return list;
     }
     

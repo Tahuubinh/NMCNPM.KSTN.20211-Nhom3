@@ -2,16 +2,23 @@ package views;
 
 import controllers.PhongBanPanelController;
 import controllers.MuonTraPanelController;
+import services.CoSoVatChatService;
+import services.PhongBanService;
 import services.StringService;
 
 import javax.swing.JFrame;
 
+import views.CoSoVatChatFrame.XoaCoSoVatChatFrame;
+import views.PhongBanFrame.DoiTenPhongBanFrame;
 import views.PhongBanFrame.ThemPhongBanFrame;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Rectangle;
@@ -28,6 +35,11 @@ import java.awt.Insets;
 import javax.swing.border.CompoundBorder;
 import javax.swing.UIManager;
 import javax.swing.SwingConstants;
+import javax.swing.JPopupMenu;
+import javax.swing.JRootPane;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  *
@@ -44,7 +56,9 @@ public class PhongBanPanel extends javax.swing.JPanel {
     public PhongBanPanel(JFrame parentFrame) {
         this.parentJFrame = parentFrame;
         initComponents();
-        controller = new PhongBanPanelController(tablePanel, searchJtf);
+        controller = new PhongBanPanelController(tablePanel, searchJtf, popupMenu);
+        
+
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -69,6 +83,31 @@ public class PhongBanPanel extends javax.swing.JPanel {
     private void initComponents() {
         tablePanel = new javax.swing.JPanel();
         
+        popupMenu = new JPopupMenu();
+        addPopup(tablePanel, popupMenu);
+        
+        huyPhongBan = new JMenuItem("Hủy phòng ban");
+        popupMenu.add(huyPhongBan);
+        huyPhongBan.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				huyPhongBanActionPerformed(evt);
+			}
+		});
+        
+        doiTenPhongBan = new JMenuItem("Đổi tên phòng ban");
+        popupMenu.add(doiTenPhongBan);
+        doiTenPhongBan.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				doiTenPhongBanActionPerformed(evt);
+			}
+
+		});
         addNewBtn = new javax.swing.JButton();
         addNewBtn.setBorder(null);
         addNewBtn.setIcon(new ImageIcon(PhongBanPanel.class.getResource("/Icons/add.png")));
@@ -161,8 +200,69 @@ public class PhongBanPanel extends javax.swing.JPanel {
     	controller.setData(tenPhongBan);
     }//GEN-LAST:event_jtfSearchActionPerformed
 
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+	
+	private void huyPhongBanActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+  		return;
+		}
+		String tenPhongBan = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+        if (JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn hủy phòng " + tenPhongBan + " ??", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
+        	 try {
+             	PhongBanService phongBanService = new PhongBanService();
+             	phongBanService.huyPhongBan(tenPhongBan);
+                     JOptionPane.showMessageDialog(null, "Hủy thành công!!");
+                controller.refreshData();
+           
+             } catch (Exception e) {
+                 System.out.println(e.getMessage());
+                 JOptionPane.showMessageDialog(null, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+             }
+        }
+	}
+	
+	private void doiTenPhongBanActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+  		return;
+		}
+		String tenPhongBan = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		DoiTenPhongBanFrame doiTenPhongBanFrame = new DoiTenPhongBanFrame(this.controller, this.parentJFrame, tenPhongBan);
+		doiTenPhongBanFrame.setLocationRelativeTo(null);
+		doiTenPhongBanFrame.setResizable(false);
+		doiTenPhongBanFrame.setVisible(true);
+	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewBtn;
     private javax.swing.JPanel tablePanel;
     private JTextField searchJtf;
+    private JPopupMenu popupMenu;
+    private JMenuItem huyPhongBan;
+    private JMenuItem doiTenPhongBan;
+
 }
