@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.toedter.calendar.JDateChooser;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -44,7 +47,7 @@ import java.awt.event.MouseEvent;
 public class XoaNhanKhau extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField ngaytextField;
+	private com.toedter.calendar.JDateChooser ngaytextField;
     private JFrame parentJFrame = null;
     private JTable table;
     private NhanKhauManagerPanelController parentController;
@@ -94,8 +97,7 @@ public class XoaNhanKhau extends JFrame {
 		
 		JLabel ngayLabel = new JLabel("Ngày:");
 		
-		ngaytextField = new JTextField();
-		ngaytextField.setColumns(10);
+		ngaytextField = new JDateChooser();
 		
 		JComboBox lydocomboBox = new JComboBox();
 		lydocomboBox.setModel(new DefaultComboBoxModel(new String[] {"Chuyển đi nơi khác", "Khai tử"}));
