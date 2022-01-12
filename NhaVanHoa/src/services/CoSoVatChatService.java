@@ -25,9 +25,9 @@ public class CoSoVatChatService {
 			connection = MysqlConnection.getMysqlConnection();
 			 
 	        String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(coalesce((ir.item_number),0)) AS lended, (i.item_quantity-COALESCE(sum(ir.item_number), 0)) AS remain "
-	   			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE i.item_name = "
+	   			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE i.item_name = '"
 	   			 		 + tenCoSoVatChat
-	   			 		 + " GROUP BY i.item_id";
+	   			 		 + "' GROUP BY i.item_id";
 	        PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
 	        ResultSet rs = preparedStatement.executeQuery();
 	        while(rs.next()) {
@@ -42,8 +42,8 @@ public class CoSoVatChatService {
 	        
 	        query = "SELECT ir.item_number, r.user_name, s.time_start, s.time_end FROM itemregistered ir "
 	        	  + "LEFT JOIN registers r ON ir.user_id = r.user_id LEFT JOIN item i ON ir.item_id = i.item_id "
-	        	  + "LEFT JOIN schedule s ON ir.event_no = s.event_no WHERE item_name = "
-	        	  + tenCoSoVatChat;
+	        	  + "LEFT JOIN schedule s ON ir.event_no = s.event_no WHERE item_name = '"
+	        	  + tenCoSoVatChat +"'";
 	        preparedStatement = (PreparedStatement)connection.prepareStatement(query);
 	        rs = preparedStatement.executeQuery();
 	        
@@ -107,8 +107,10 @@ public class CoSoVatChatService {
         
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
-            String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(coalesce((ir.item_number),0)) AS lended, (i.item_quantity-COALESCE(sum(ir.item_number), 0)) AS remain "
-       			 		 + "FROM item i LEFT JOIN itemregistered ir ON i.item_id=ir.item_id GROUP BY i.item_id, i.item_name, i.item_quantity";
+            String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(coalesce((ir.item_number),0)) AS lended, "
+            			 + "(i.item_quantity-COALESCE(sum(ir.item_number), 0)) AS remain "
+       			 		 + "FROM item i LEFT JOIN itemregistered ir ON i.item_id=ir.item_id "
+       			 		 + "GROUP BY i.item_id, i.item_name, i.item_quantity";
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -136,8 +138,9 @@ public class CoSoVatChatService {
         
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
-            String query = "SELECT (i.item_quantity-sum(coalesce((ir.item_number),0))) as remain FROM item i LEFT JOIN itemregistered ir on i.item_id=ir.item_id "
-       			 		 + "WHERE i.item_name = " + tenCoSoVatChat + " GROUP BY ir.item_id, i.item_name, i.item_quantity";
+            String query = "SELECT (i.item_quantity-sum(coalesce((ir.item_number),0))) as remain "
+            			 + "FROM item i LEFT JOIN itemregistered ir on i.item_id=ir.item_id "
+       			 		 + "WHERE i.item_name = '" + tenCoSoVatChat + "' GROUP BY ir.item_id, i.item_name, i.item_quantity";
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             soLuong = rs.getInt("remain");
@@ -203,7 +206,7 @@ public class CoSoVatChatService {
     	try {
             Connection connection = MysqlConnection.getMysqlConnection();
             String query = "UPDATE item SET item_quantity = item_quantity + "
-            			 + soLuongXoa + "WHERE item_name = "+ tenCoSoVatChat; 
+            			 + soLuongXoa + "WHERE item_name = '"+ tenCoSoVatChat + "'"; 
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             preparedStatement.executeQuery();
             preparedStatement.close();
@@ -220,7 +223,7 @@ public class CoSoVatChatService {
     	try {
             Connection connection = MysqlConnection.getMysqlConnection();
             String query = "UPDATE item SET item_quantity = item_quantity - "
-            			 + soLuongXoa + "WHERE item_name = "+ tenCoSoVatChat; 
+            			 + soLuongXoa + "WHERE item_name = '" + tenCoSoVatChat + "'"; 
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             preparedStatement.executeQuery();
             preparedStatement.close();

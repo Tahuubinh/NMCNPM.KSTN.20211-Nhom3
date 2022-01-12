@@ -32,13 +32,13 @@ public class MuonTraService {
 			String query1 = "SELECT s.event_no, r.user_name, r.cccd, r.user_phone, s.time_start, s.time_end, i.item_name, ir.item_number "
       			  + "FROM registers r JOIN itemregistered ir ON r.user_id = ir.user_id "
       			  + "JOIN schedule s ON ir.event_no = s.event_no JOIN item i ON i.item_id = ir.item_id "
-      			  + "WHERE CAST(r.cccd AS string) = "
-      			  + id;
+      			  + "WHERE CAST(r.cccd AS character) = '"
+      			  + id + "'";
 			String query2 = "SELECT s.event_no, r.user_name, r.cccd, r.user_phone, s.time_start, s.time_end, i.infra_name "
 			  		  + "FROM registers r JOIN infraregistered ir ON r.user_id = ir.user_id "
 			  		  + "JOIN schedule s ON ir.event_no = s.event_no JOIN infrastructure i ON i.infra_id = ir.infra_id "
-			  		  + "WHERE CAST(r.cccd AS string) = "
-			  		  + id;
+			  		  + "WHERE CAST(r.cccd AS character) = '"
+			  		  + id + "'";
 	        PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
 	        ResultSet rs1 = preparedStatement1.executeQuery();
 	        PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);

@@ -38,8 +38,8 @@ public class AddNewController {
         List<PhongBanModel> listPhongBanModels = muonTraBean.getListPhongBanModels();
         int idNguoiMuon=-1;
         Connection connection = MysqlConnection.getMysqlConnection();
-        String query1 = "SELECT user_id FROM registers WHERE user_name = " + nguoiMuonModel.getTenNguoiMuon() 
-        			 + " AND cccd = " + nguoiMuonModel.getCccd();
+        String query1 = "SELECT user_id FROM registers WHERE user_name = '" + nguoiMuonModel.getTenNguoiMuon() 
+        			 + "' AND cccd = '" + nguoiMuonModel.getCccd() + "'";
         PreparedStatement st1 = connection.prepareStatement(query1);
         ResultSet rs1 = st1.executeQuery();
         while(rs1.next()) {
@@ -47,7 +47,7 @@ public class AddNewController {
         }
         if(idNguoiMuon < 0) return false;
         
-        String query2 = "INSERT INTO schedule (time_start, time_end, real_time_end) values (?, ?, ?)";
+        String query2 = "INSERT INTO schedule (time_start, time_end, real_time_end) values ('?', '?', ?)";
         PreparedStatement st2 = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
     	st2.setTimestamp(1, (Timestamp) thoiGianModel.getThoiGianMuon());
     	st2.setTimestamp(2, (Timestamp) thoiGianModel.getThoiGianTra());
@@ -57,9 +57,9 @@ public class AddNewController {
         listCoSoVatChatModels.forEach(coSoVatChat ->{
         	int soLuongMuon = coSoVatChat.getSoLuongMuon();
         	String query3 = "INSERT INTO itemregistered (item_id, user_id, event_no, item_number) values "
-        				  + "((SELECT item_id FROM item WHERE item_name = "
+        				  + "((SELECT item_id FROM item WHERE item_name = '"
         				  + coSoVatChat.getTenCoSoVatChat()
-        				  + ", ?, ?, ?)";
+        				  + "', ?, ?, ?)";
         	try {
 				PreparedStatement st3 = connection.prepareStatement(query3);
 				st3.setInt(2, rs1.getInt(1));
@@ -73,9 +73,9 @@ public class AddNewController {
         });
         listPhongBanModels.forEach(phongBan ->{
         	String query3 = "INSERT INTO itemregistered (infra_id, user_id, event_no) values "
-        				  + "((SELECT item_id FROM item WHERE item_name = "
+        				  + "((SELECT item_id FROM item WHERE item_name = '"
         				  + phongBan.getTenPhongBan()
-        				  + ", ?, ?)";
+        				  + "', ?, ?)";
         	try {
 				PreparedStatement st3 = connection.prepareStatement(query3);
 				st3.setInt(2, rs1.getInt(1));
@@ -106,8 +106,8 @@ public class AddNewController {
         if (idCoSoVatChat > 0) {
         	String query1 = "UPDATE item SET item_quantity = item_quantity + " 
         				  + coSoVatChatModel.getSoLuong()
-        				  + " WHERE item_name = "
-        				  + coSoVatChatModel.getTenCoSoVatChat();
+        				  + " WHERE item_name = '"
+        				  + coSoVatChatModel.getTenCoSoVatChat() + "'";
         	PreparedStatement preparedStatement1 = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
         	preparedStatement1.execute();
         	preparedStatement1.close();
@@ -122,9 +122,9 @@ public class AddNewController {
         	preparedStatement1.close();
         }
         String query2 = "INSERT INTO money (item_id, item_number, date, reason) "
-        			  + "values ((SELECT item_id FROM item WHERE item_name = "
+        			  + "values ((SELECT item_id FROM item WHERE item_name = '"
         			  + coSoVatChatModel.getTenCoSoVatChat()
-        			  + "), ?, CURRENT_DATE, ?)";
+        			  + "'), ?, CURRENT_DATE, ?)";
         PreparedStatement preparedStatement2 = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
         preparedStatement2.setInt(2, coSoVatChatModel.getSoLuong());
         preparedStatement2.setString(4, coSoVatChatModel.getLyDo());
@@ -139,7 +139,7 @@ public class AddNewController {
         PhongBanModel phongBanModel = phongBanBean.getPhongBanModel();       
         Connection connection = MysqlConnection.getMysqlConnection();
         String query = "INSERT INTO infrastructure (infra_name, reason) "
-				  	 + "values (?, ?)";
+				  	 + "values ('?', ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, phongBanModel.getTenPhongBan());
         preparedStatement.setString(2, phongBanModel.getLyDo());
