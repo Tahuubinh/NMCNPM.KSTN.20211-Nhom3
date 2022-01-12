@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 
 import views.CoSoVatChatFrame.ThemCoSoVatChatFrame;
 import views.CoSoVatChatFrame.XemChiTietCoSoVatChatFrame;
+import views.CoSoVatChatFrame.XoaCoSoVatChatFrame;
 
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
@@ -90,6 +91,17 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
 			}
 		});
         
+        xoaCoSoVatChat = new JMenuItem("Xóa cơ sở vật chất");
+        popupMenu.add(xoaCoSoVatChat);
+        xoaCoSoVatChat.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				xoaCoSoVatChatActionPerformed(evt);
+			}
+
+		});
         addNewBtn = new javax.swing.JButton();
         addNewBtn.setDisabledIcon(new ImageIcon(CoSoVatChatPanel.class.getResource("/Icons/add.png")));
         addNewBtn.setBorder(null);
@@ -212,20 +224,38 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
   		return;
 		}
 		
-		String tenCoSoVatChatDetail = (String) xemChiTietTable.getModel().getValueAt(row, 1);
-		String tongSoLuong = (String) xemChiTietTable.getModel().getValueAt(row, 2);
-		String soLuongMuon = (String) xemChiTietTable.getModel().getValueAt(row, 3);
-		String soLuongTrongKho = (String) xemChiTietTable.getModel().getValueAt(row, 4);
+		String tenCoSoVatChatDetail = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		String tongSoLuong = xemChiTietTable.getModel().getValueAt(row, 2).toString();
+		String soLuongMuon = xemChiTietTable.getModel().getValueAt(row, 3).toString();
+		String soLuongTrongKho = xemChiTietTable.getModel().getValueAt(row, 4).toString();
 		XemChiTietCoSoVatChatFrame xemChiTietCoSoVatChatFrame = new XemChiTietCoSoVatChatFrame(this.controller, this.parentJFrame, tenCoSoVatChatDetail, tongSoLuong, soLuongMuon, soLuongTrongKho);
         xemChiTietCoSoVatChatFrame.setLocationRelativeTo(null);
         xemChiTietCoSoVatChatFrame.setResizable(false);
         xemChiTietCoSoVatChatFrame.setVisible(true);
+	}
+	
+	private void xoaCoSoVatChatActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+  		return;
+		}
+		String tenCoSoVatChatDetail = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		String tongSoLuong = xemChiTietTable.getModel().getValueAt(row, 2).toString();
+		String soLuongMuon = xemChiTietTable.getModel().getValueAt(row, 3).toString();
+		String soLuongTrongKho = xemChiTietTable.getModel().getValueAt(row, 4).toString();
+		XoaCoSoVatChatFrame xoaCoSoVatChatFrame = new XoaCoSoVatChatFrame(this.controller, this.parentJFrame, tenCoSoVatChatDetail, tongSoLuong, soLuongMuon, soLuongTrongKho);
+		xoaCoSoVatChatFrame.setLocationRelativeTo(null);
+		xoaCoSoVatChatFrame.setResizable(false);
+		xoaCoSoVatChatFrame.setVisible(true);
 	}
     private javax.swing.JButton addNewBtn;
     private javax.swing.JPanel tablePanel;
     private JTextField searchJtf;
     private JPopupMenu popupMenu;
     private JMenuItem xemChiTietCoSoVatChat;
-    private JMenuItem chinhSuaCoSoVatChat;
     private JMenuItem xoaCoSoVatChat;
 }

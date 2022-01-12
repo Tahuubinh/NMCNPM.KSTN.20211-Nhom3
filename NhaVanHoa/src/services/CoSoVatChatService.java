@@ -10,9 +10,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import Bean.CoSoVatChatBean;
 import models.CoSoVatChatModel;
-import models.NguoiMuonModel;
-import models.NhaTaiTroModel;
-import models.ThoiGianModel;
+import models.ListNguoiMuonCoSoVatChatDetailModel;
+
 
 
 public class CoSoVatChatService {
@@ -21,8 +20,7 @@ public class CoSoVatChatService {
 	public CoSoVatChatBean getCoSoVatChatDetail(String tenCoSoVatChat) {
 		Connection connection;
 		CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
-		List<NguoiMuonModel> listNguoiMuon = coSoVatChatBean.getListNguoiMuonModels();
-		List<ThoiGianModel> listThoiGian = coSoVatChatBean.getListThoiGianModels();
+		List<ListNguoiMuonCoSoVatChatDetailModel> list = coSoVatChatBean.getListNguoiMuonCoSoVatChatDetailModels();
 		try {
 			connection = MysqlConnection.getMysqlConnection();
 			 
@@ -42,33 +40,20 @@ public class CoSoVatChatService {
 	        }
 	        preparedStatement.close();
 	        
-	        query = "SELECT ir.event_no, r.user_id, r.user_name, r.user_address, r.user_phone, r.fee_register, r.cccd FROM itemregistered ir "
-	        	  + "LEFT JOIN registers r ON ir.user_id = r.user_id LEFT JOIN item i ON ir.item_id = i.item_id WHERE item_name = "
+	        query = "SELECT ir.item_number, r.user_name, s.time_start, s.time_end FROM itemregistered ir "
+	        	  + "LEFT JOIN registers r ON ir.user_id = r.user_id LEFT JOIN item i ON ir.item_id = i.item_id "
+	        	  + "LEFT JOIN schedule s ON ir.event_no = s.event_no WHERE item_name = "
 	        	  + tenCoSoVatChat;
 	        preparedStatement = (PreparedStatement)connection.prepareStatement(query);
 	        rs = preparedStatement.executeQuery();
 	        
 	        while(rs.next()) {
 	        	
-	        	NguoiMuonModel nguoiMuon = new NguoiMuonModel();
-	        	nguoiMuon.setId(rs.getString("user_id"));
-	        	nguoiMuon.setTenNguoiMuon(rs.getString("user_name"));
-	        	nguoiMuon.setDiaChi(rs.getString("user_address"));
-	        	nguoiMuon.setLienHe(rs.getString("user_phone"));
-	        	nguoiMuon.setPhiDangKi(rs.getInt("fee_register"));
-	        	nguoiMuon.setCccd(rs.getString("cccd"));
-	        	listNguoiMuon.add(nguoiMuon);
-	        	int event_no = rs.getInt("event_no");
-	        	ThoiGianModel thoiGian = new ThoiGianModel();	        	
-	        	String query1 = "SELECT * FROM schedule WHERE event_no = " + event_no;
-	        	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
-	        	ResultSet rs1 = st1.executeQuery();
-	        	thoiGian.setId(event_no);
-	        	thoiGian.setThoiGianMuon(rs1.getTimestamp("time_start"));
-	        	thoiGian.setThoiGianTra(rs1.getTimestamp("time_end"));
-	        	thoiGian.setThoiGianTraThucTe(null);
-	        	listThoiGian.add(thoiGian);
-	        	st1.close();
+	        	ListNguoiMuonCoSoVatChatDetailModel detail = new ListNguoiMuonCoSoVatChatDetailModel();
+	        	detail.setSoLuongMuon(rs.getInt("item_number"));
+	        	detail.setTenNguoiMuon(rs.getString("user_name"));
+	        	detail.setThoiGianMuon(rs.getString("time_start"));
+	        	detail.setThoiGianTra(rs.getString("time_end"));
 	        }
 	        preparedStatement.close();
 	        
@@ -81,6 +66,8 @@ public class CoSoVatChatService {
 	public CoSoVatChatBean getCoSoVatChat(String tenCoSoVatChat) {
 		Connection connection;
 		CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
+		List<ListNguoiMuonCoSoVatChatDetailModel> listNguoiMuonCoSoVatChatDetailModels = new ArrayList<>();
+		coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(listNguoiMuonCoSoVatChatDetailModels);
 //		try {
 //			connection = MysqlConnection.getMysqlConnection();
 //			 
@@ -205,6 +192,23 @@ public class CoSoVatChatService {
 
          	this.exceptionHandle(e.getMessage());
          }
+    }
+    
+    // xoa ten ten va so luong
+    // tu dong add thoi gian xoa
+    public void xoaCoSoVatChat(String tenCoSoVatChat, int soLuongXoa) {
+    	try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query = "UPDATE item SET item_quantity = item_quantity - "
+            			 + soLuongXoa + "WHERE item_name = "+ tenCoSoVatChat; 
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            preparedStatement.executeQuery();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e) {
+
+        	this.exceptionHandle(e.getMessage());
+        }
     }
     
     /*

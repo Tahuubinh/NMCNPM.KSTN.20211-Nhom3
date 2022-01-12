@@ -25,6 +25,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
+import java.awt.Color;
 
 public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
     private XemChiTietCoSoVatChatCotroller controller;
@@ -35,9 +36,6 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
      * Creates new form ChuyenDiNoiKhac
      */
     public XemChiTietCoSoVatChatFrame(CoSoVatChatPanelController parentController, JFrame parentJFrame, String tenCoSoVatChatDetail, String tongSoLuong, String soLuongMuon, String soLuongTrongKho) {
-        this.coSoVatChatService = new CoSoVatChatService();
-        coSoVatChatBean = this.coSoVatChatService.getCoSoVatChat(tenCoSoVatChatDetail);
-        coSoVatChatModel = coSoVatChatBean.getCoSoVatChatModel();
         this.parentController = parentController;
         this.parentJFrame = parentJFrame;
         this.parentJFrame.setEnabled(false);
@@ -47,7 +45,7 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
     	this.soLuongMuonDetail.setText(soLuongMuon);
     	this.soLuongTrongKhoDetail.setText(soLuongTrongKho);
         pack();
-        controller = new XemChiTietCoSoVatChatCotroller(parentJFrame, this.parentJFrame);
+        controller = new XemChiTietCoSoVatChatCotroller(this.tablePanel, this.tenCoSoVatChatDetail);
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -60,7 +58,7 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
         tablePanel.setLayout(gl_tablePanel);
         controller.setDataTable();
     	setIconImage(Toolkit.getDefaultToolkit().getImage(DangKySuDungFrame.class.getResource("/Icons/house.png")));
-    	setTitle("Đăng ký sử dụng cơ sở vật chất / phòng ban");
+    	setTitle("Xem chi tiết cơ sở vật chất");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -94,7 +92,7 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        xemChiTietPanel.setBackground(new java.awt.Color(255, 255, 255));
+        xemChiTietPanel.setBackground(new Color(255, 228, 228));
         
         JLabel tenCoSoVatChatJlb = new JLabel("Tên cơ sở vật chất:");
         tenCoSoVatChatJlb.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -120,10 +118,10 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
         soLuongTrongKhoDetail = new JLabel("null");
         soLuongTrongKhoDetail.setFont(new Font("Tahoma", Font.PLAIN, 16));
         
-        JLabel lblNhTiTr = new JLabel("Nhà tài trợ:");
+        JLabel lblNhTiTr = new JLabel("");
         lblNhTiTr.setFont(new Font("Tahoma", Font.PLAIN, 16));
         
-        nhaTaiTroDetail = new JLabel("null");
+        nhaTaiTroDetail = new JLabel("");
         nhaTaiTroDetail.setFont(new Font("Tahoma", Font.PLAIN, 16));
         
         JLabel bangDanhSachNguoiMuonJlb = new JLabel("Bảng danh sách người mượn");

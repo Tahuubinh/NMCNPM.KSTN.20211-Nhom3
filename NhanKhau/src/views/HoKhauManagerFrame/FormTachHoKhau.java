@@ -19,6 +19,7 @@ import javax.swing.BoxLayout;
 //import com.jgoodies.forms.layout.FormSpecs;
 //import com.jgoodies.forms.layout.RowSpec;
 
+import Bean.HoKhauBean;
 import Bean.NhanKhauBean;
 import controllers.HoKhauPanelController;
 import controllers.NhanKhauManagerPanelController;
@@ -216,13 +217,31 @@ public class FormTachHoKhau extends JFrame {
     			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
+    	if (this.maHK_textField.getText().equals("")) {
+    		JOptionPane.showMessageDialog(null, "Hãy nhập mã hộ khẩu trước",
+  			      "Lỗi thiếu thông tin!", JOptionPane.ERROR_MESSAGE);;
+    		return;
+    	}
+    	if (this.dia_chi_textField.getText().equals("")) {
+    		JOptionPane.showMessageDialog(null, "Hãy nhập địa chỉ trước",
+  			      "Lỗi thiếu thông tin!", JOptionPane.ERROR_MESSAGE);;
+    		return;
+    	}
     	int id_nhan_khau = (int)tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),0);
     	id_ho_khau = (int)this.parenTable.getModel().getValueAt(parenTable.getSelectedRow(),3);
+    	String maHKString = this.maHK_textField.getText();
+    	String dia_chiString = this.dia_chi_textField.getText();
+    	HoKhauBean hoKhauBean = new HoKhauBean();
+    	hoKhauBean.getChuHo().setID(id_nhan_khau);
+    	hoKhauBean.getHoKhauModel().setMaHoKhau(maHKString);
+    	hoKhauBean.getHoKhauModel().setDiaChi(dia_chiString);
         try {
 			new HoKhauService().subThanhVien(id_nhan_khau, id_ho_khau);
-			JOptionPane.showMessageDialog(null, "Bớt thành công!!");
+			new HoKhauService().addNew(hoKhauBean);
+			JOptionPane.showMessageDialog(null, "Tách hộ khẩu thành công!!");
 	        parentController.refreshData();
 	        quan_lycontroller.refreshData();
+	        close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -125,7 +125,10 @@ CREATE TABLE  ho_khau  (
    lyDoChuyen  text    NULL,
    nguoiThucHien  int   NULL
 )  ;
-
+SELECT MAX(id)+1 FROM ho_khau
+CREATE SEQUENCE ho_khau_id_seq MINVALUE 100
+ALTER TABLE ho_khau ALTER id SET DEFAULT nextval('ho_khau_id_seq')
+ALTER SEQUENCE ho_khau_id_seq OWNED BY ho_khau.id
 --
 -- Đang đổ dữ liệu cho bảng  ho_khau 
 --
@@ -200,6 +203,10 @@ ALTER COLUMN lienhe TYPE varchar(100);
 --
 -- Đang đổ dữ liệu cho bảng  nhan_khau 
 --
+SELECT MAX(id)+1 FROM nhan_khau
+CREATE SEQUENCE nhan_khau_id_seq MINVALUE 100
+ALTER TABLE nhan_khau ALTER id SET DEFAULT nextval('nhan_khau_id_seq')
+ALTER SEQUENCE nhan_khau_id_seq OWNED BY nhan_khau.id
 
 INSERT INTO  nhan_khau  ( ID ,  maNhanKhau ,  hoTen ,  bietDanh ,  namSinh ,  gioiTinh ,  noiSinh ,  nguyenQuan ,  danToc ,  tonGiao ,  quocTich ,  soHoChieu ,  noiThuongTru ,  diaChiHienNay ,  trinhDoHocVan ,  TrinhDoChuyenMon ,  bietTiengDanToc ,  trinhDoNgoaiNgu ,  ngheNghiep ,  noiLamViec ,  tienAn ,  ngayChuyenDen ,  lyDoChuyenDen ,  ngayChuyenDi ,  lyDoChuyenDi ,  diaChiMoi ,  ngayTao ,  idNguoiTao ,  ngayXoa ,  idNguoiXoa ,  lyDoXoa ,  ghiChu ) VALUES
 (26, NULL, 'Trinh Văn An', '', '1990-12-07', 'Nam', NULL, 'Hà Nội', 'Kinh', 'Không', 'Việt Nam', '', 'Số 1 Tạ Quang Bưu, Hai Bà Trưng, Hà Nội', 'Số 1 Tạ Quang Bưu, Hai Bà Trưng, Hà Nội', '12/12 chính quy', 'Thạc sĩ', 'Không', 'Anh trình đọ B', 'Giáo Viên', 'Trường THCS Chu Văn An', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-08', 1, NULL, NULL, NULL, NULL),
