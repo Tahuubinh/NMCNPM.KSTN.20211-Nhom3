@@ -22,6 +22,8 @@ import utility.ClassTableModel;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -46,6 +48,7 @@ import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
 
 import java.awt.Rectangle;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -211,9 +214,40 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     	});
     	muonButton.setIcon(null);
     	
+    	DefaultComboBoxModel gioComboBoxModel = new DefaultComboBoxModel();
+		for(int i = 0; i < 24; ++i) {
+			if(i<10) gioComboBoxModel.addElement("0"+i);
+			else gioComboBoxModel.addElement(i);
+		}
+
+    	DefaultComboBoxModel phutComboBoxModel = new DefaultComboBoxModel();
+		for(int i = 0; i < 60; ++i) {
+			if(i<10) phutComboBoxModel.addElement("0"+i);
+			else phutComboBoxModel.addElement(i);
+		}
     	ngayMuonJdc = new JDateChooser();
     	
     	ngayTraJdc = new JDateChooser();
+    	
+    	gioMuonJcb = new JComboBox(gioComboBoxModel);
+    	
+    	phutMuonJcb = new JComboBox(phutComboBoxModel);
+    	
+    	gioTraJcb = new JComboBox(gioComboBoxModel);
+    	
+    	phutTraJcb = new JComboBox(phutComboBoxModel);
+    	
+    	gioMuonJlb = new JLabel("giờ");
+    	gioMuonJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	
+    	phutMuonJlb = new JLabel("phút");
+    	phutMuonJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	
+    	gioTraJlb = new JLabel("giờ");
+    	gioTraJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	
+    	phutTraJlb = new JLabel("phút");
+    	phutTraJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	GroupLayout gl_DangKyCoSoVatChatPanel = new GroupLayout(DangKyCoSoVatChatPanel);
     	gl_DangKyCoSoVatChatPanel.setHorizontalGroup(
     		gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
@@ -238,11 +272,29 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     								.addComponent(tenNguoiMuonJtf)
     								.addGap(18)))
     						.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+    					.addComponent(tablePanel, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
     					.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING, false)
-    						.addComponent(ngayMuonJdc, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-    						.addComponent(lienHeJtf, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
-    					.addComponent(ngayTraJdc, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
-    					.addComponent(tablePanel, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE))
+    						.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    							.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING, false)
+    								.addComponent(ngayTraJdc, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    								.addComponent(ngayMuonJdc, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+    							.addGap(18)
+    							.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING, false)
+    								.addComponent(gioTraJcb, Alignment.TRAILING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    								.addComponent(gioMuonJcb, Alignment.TRAILING, 0, 38, Short.MAX_VALUE))
+    							.addGap(6)
+    							.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
+    								.addComponent(gioMuonJlb, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+    								.addComponent(gioTraJlb, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+    							.addPreferredGap(ComponentPlacement.RELATED)
+    							.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING, false)
+    								.addComponent(phutTraJcb, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    								.addComponent(phutMuonJcb, 0, 39, Short.MAX_VALUE))
+    							.addPreferredGap(ComponentPlacement.UNRELATED)
+    							.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING, false)
+    								.addComponent(phutMuonJlb, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    								.addComponent(phutTraJlb, GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)))
+    						.addComponent(lienHeJtf, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)))
     				.addContainerGap(17, Short.MAX_VALUE))
     	);
     	gl_DangKyCoSoVatChatPanel.setVerticalGroup(
@@ -266,7 +318,13 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     								.addGap(47)
     								.addComponent(lienHeJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
     								.addGap(10)
-    								.addComponent(ngayMuonJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))))
+    								.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
+    									.addComponent(ngayMuonJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+    									.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
+    										.addComponent(gioMuonJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    										.addComponent(gioMuonJlb)
+    										.addComponent(phutMuonJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    										.addComponent(phutMuonJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))))))
     					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
     						.addGap(31)
     						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
@@ -274,9 +332,14 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     							.addComponent(idJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))))
     				.addPreferredGap(ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
     				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
+    					.addComponent(gioTraJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
     					.addComponent(lblNewLabel_1_3, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-    					.addComponent(ngayTraJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-    				.addGap(11)
+    					.addComponent(ngayTraJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+    					.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
+    						.addComponent(phutTraJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(gioTraJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(phutTraJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)))
+    				.addPreferredGap(ComponentPlacement.RELATED)
     				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
     					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
     						.addComponent(muonButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
@@ -363,4 +426,12 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     private JDateChooser ngayTraJdc;
     private ClassTableModel classTableModel = null;
     private JPanel tablePanel;
+    private JComboBox phutMuonJcb;
+    private JComboBox gioTraJcb;
+    private JComboBox phutTraJcb;
+    private JComboBox gioMuonJcb;
+    private JLabel gioMuonJlb;
+    private JLabel phutMuonJlb;
+    private JLabel gioTraJlb;
+    private JLabel phutTraJlb;
 }

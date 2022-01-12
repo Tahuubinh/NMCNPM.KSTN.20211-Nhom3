@@ -121,4 +121,63 @@ public class AddNewController {
         connection.close();
         return true;
     }
+	
+	public void addTamTru(int id, Date bat_dau, Date ket_thuc) throws SQLException, ClassNotFoundException{
+		Connection connection = MysqlConnection.getMysqlConnection();
+        // 1 - 19
+        String query = "INSERT INTO tam_tru (idnhankhau, tungay, denngay)" 
+                        + " values (?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setInt(1, id);
+        preparedStatement.setDate(2, bat_dau);
+        preparedStatement.setDate(3, ket_thuc);
+        
+        
+        
+        preparedStatement.executeUpdate();
+        connection.close();
+	}
+	
+	public void addTamVang(int id, Date bat_dau, Date ket_thuc) throws SQLException, ClassNotFoundException{
+		Connection connection = MysqlConnection.getMysqlConnection();
+        // 1 - 19
+        String query = "INSERT INTO tam_vang (idnhankhau, tungay, denngay)" 
+                        + " values (?, ?, ?)";
+        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setInt(1, id);
+        preparedStatement.setDate(2, bat_dau);
+        preparedStatement.setDate(3, ket_thuc);
+        
+        
+        
+        preparedStatement.executeUpdate();
+        connection.close();
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

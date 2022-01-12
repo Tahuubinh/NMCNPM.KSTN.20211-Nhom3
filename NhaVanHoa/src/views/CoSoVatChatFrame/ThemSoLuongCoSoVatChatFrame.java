@@ -40,7 +40,7 @@ import javax.swing.JTextField;
 import java.awt.Dimension;
 import java.awt.ComponentOrientation;
 
-public class XoaCoSoVatChatFrame extends javax.swing.JFrame {
+public class ThemSoLuongCoSoVatChatFrame extends javax.swing.JFrame {
 	 /**
      * Creates new form AddNewPeopleJFrame
      */
@@ -57,7 +57,7 @@ public class XoaCoSoVatChatFrame extends javax.swing.JFrame {
     /**
      * @wbp.parser.constructor
      */
-    public XoaCoSoVatChatFrame(CoSoVatChatPanelController parentController, JFrame parentJFrame, String tenCoSoVatChatDetail, String tongSoLuong, String soLuongMuon, String soLuongTrongKho) {
+    public ThemSoLuongCoSoVatChatFrame(CoSoVatChatPanelController parentController, JFrame parentJFrame, String tenCoSoVatChatDetail, String tongSoLuong, String soLuongMuon, String soLuongTrongKho) {
     	setBackground(new Color(255, 228, 228));
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
@@ -82,7 +82,7 @@ public class XoaCoSoVatChatFrame extends javax.swing.JFrame {
         controller = new AddNewController();
     }
     
-    public XoaCoSoVatChatFrame(JFrame parentJFrame) {
+    public ThemSoLuongCoSoVatChatFrame(JFrame parentJFrame) {
         this.parentController = new CoSoVatChatPanelController(){
             @Override
             public void refreshData() {
@@ -187,7 +187,7 @@ public class XoaCoSoVatChatFrame extends javax.swing.JFrame {
     	soLuongTrongKhoDetail = new JLabel("null");
     	soLuongTrongKhoDetail.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	
-    	JLabel soLuongXoaJlb = new JLabel("Số lượng xóa:");
+    	JLabel soLuongXoaJlb = new JLabel("Số lượng thêm:");
     	soLuongXoaJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	
     	soLuongXoaJtf = new JTextField();
@@ -270,7 +270,7 @@ public class XoaCoSoVatChatFrame extends javax.swing.JFrame {
             try {
             	CoSoVatChatService coSoVatChatService = new CoSoVatChatService();
             	coSoVatChatService.xoaCoSoVatChat(tenCoSoVatChatDetail.getText(),  Integer.parseInt(soLuongXoaJtf.getText()));
-                    JOptionPane.showMessageDialog(null, "Xóa thành công!!");
+                    JOptionPane.showMessageDialog(null, "Thêm thành công!!");
                     close();
                     parentController.refreshData();
               

@@ -239,6 +239,9 @@ CREATE TABLE  tam_tru  (
    lyDo  text   NOT NULL
 )  ;
 
+ALTER TABLE tam_tru ALTER COLUMN lyDo DROP NOT NULL;
+
+
 -- --------------------------------------------------------
 
 --
@@ -447,13 +450,21 @@ ALTER TABLE  nhan_khau
 --
 ALTER TABLE  tam_tru 
   ADD CONSTRAINT  tam_tru_ibfk_1  FOREIGN KEY ( idNhanKhau ) REFERENCES  nhan_khau  ( ID );
+ALTER TABLE tam_tru
+   DROP CONSTRAINT tam_tru_ibfk_1
+ , ADD  CONSTRAINT tam_tru_ibfk_1
+   FOREIGN KEY ( idNhanKhau ) REFERENCES  nhan_khau  ( ID ) ON DELETE CASCADE;
 
 --
 -- Các ràng buộc cho bảng  tam_vang 
 --
 ALTER TABLE  tam_vang 
   ADD CONSTRAINT  tam_vang_ibfk_1  FOREIGN KEY ( idNhanKhau ) REFERENCES  nhan_khau  ( ID );
-
+  
+ALTER TABLE tam_vang
+   DROP CONSTRAINT tam_vang_ibfk_1
+ , ADD  CONSTRAINT tam_vang_ibfk_1
+   FOREIGN KEY ( idNhanKhau ) REFERENCES  nhan_khau  ( ID ) ON DELETE CASCADE;
 --
 -- Các ràng buộc cho bảng  thanh_vien_cua_ho 
 --

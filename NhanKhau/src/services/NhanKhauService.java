@@ -465,7 +465,7 @@ public class NhanKhauService {
             }
             query = query1 + " UNION " + query2 + " UNION " + query3;
             query += " ORDER BY id";
-            System.err.println(query);
+            //System.err.println(query);
             
                     
         } catch (Exception e) {

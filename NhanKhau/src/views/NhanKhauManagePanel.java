@@ -294,6 +294,8 @@ public class NhanKhauManagePanel extends javax.swing.JPanel {
     		return;
     	}
     	System.out.println("Hello");
+    	
+    	//DangKyTamVangJFrame dangKyTamVangJFrame = new DangKyTamVangJFrame(this.parentJFrame);
         DangKyTamVang dangKyTamVangJFrame = new DangKyTamVang(this.controller, this.parentJFrame);
         dangKyTamVangJFrame.setLocationRelativeTo(null);
         dangKyTamVangJFrame.setResizable(false);
