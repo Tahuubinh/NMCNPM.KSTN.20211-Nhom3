@@ -54,6 +54,7 @@ public class CoSoVatChatService {
 	        	detail.setTenNguoiMuon(rs.getString("user_name"));
 	        	detail.setThoiGianMuon(rs.getString("time_start"));
 	        	detail.setThoiGianTra(rs.getString("time_end"));
+	        	list.add(detail);
 	        }
 	        preparedStatement.close();
 	        
@@ -63,6 +64,7 @@ public class CoSoVatChatService {
         }
 		return coSoVatChatBean;
 	}
+	
 	public CoSoVatChatBean getCoSoVatChat(String tenCoSoVatChat) {
 		Connection connection;
 		CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
@@ -197,8 +199,20 @@ public class CoSoVatChatService {
     // them so luong cua ten csvc tuong ung
     // tu dong add thoi gian xoa
     public void themSoLuongCoSoVatChat(String tenCoSoVatChat, int soLuongXoa) {
+    	try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query = "UPDATE item SET item_quantity = item_quantity + "
+            			 + soLuongXoa + "WHERE item_name = "+ tenCoSoVatChat; 
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            preparedStatement.executeQuery();
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e) {
 
-   }
+        	this.exceptionHandle(e.getMessage());
+        }
+    	
+    }
     // xoa ten ten va so luong
     // tu dong add thoi gian xoa
     public void xoaCoSoVatChat(String tenCoSoVatChat, int soLuongXoa) {
@@ -209,6 +223,10 @@ public class CoSoVatChatService {
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             preparedStatement.executeQuery();
             preparedStatement.close();
+            query = "DELETE FROM item WHERE item_quantity = 0";
+            PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
+            st.executeQuery();
+            st.close();
             connection.close();
         } catch (Exception e) {
 
