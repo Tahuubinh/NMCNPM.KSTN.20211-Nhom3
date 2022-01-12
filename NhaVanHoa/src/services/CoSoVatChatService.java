@@ -152,6 +152,12 @@ public class CoSoVatChatService {
          }
     }
     
+    // xoa ten ten va so luong
+    // tu dong add thoi gian xoa
+    public void xoaCoSoVatChat(String tenCoSoVatChat, int soLuongXoa) {
+
+   }
+    
     /*
      * Ham sử lý ngoại lệ : thông báo ra lỗi nhận được
      */

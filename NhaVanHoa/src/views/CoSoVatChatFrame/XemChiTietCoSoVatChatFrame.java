@@ -25,6 +25,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 
 import javax.swing.JPanel;
+import java.awt.Color;
 
 public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
     private XemChiTietCoSoVatChatCotroller controller;
@@ -57,7 +58,7 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
         tablePanel.setLayout(gl_tablePanel);
         controller.setDataTable();
     	setIconImage(Toolkit.getDefaultToolkit().getImage(DangKySuDungFrame.class.getResource("/Icons/house.png")));
-    	setTitle("Đăng ký sử dụng cơ sở vật chất / phòng ban");
+    	setTitle("Xem chi tiết cơ sở vật chất");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -91,7 +92,7 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
-        xemChiTietPanel.setBackground(new java.awt.Color(255, 255, 255));
+        xemChiTietPanel.setBackground(new Color(255, 228, 228));
         
         JLabel tenCoSoVatChatJlb = new JLabel("Tên cơ sở vật chất:");
         tenCoSoVatChatJlb.setFont(new Font("Tahoma", Font.PLAIN, 16));
