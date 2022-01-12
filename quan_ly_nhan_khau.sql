@@ -239,6 +239,8 @@ CREATE TABLE  tam_tru  (
    lyDo  text   NOT NULL
 )  ;
 
+ALTER TABLE tam_tru ALTER COLUMN lyDo DROP NOT NULL;
+
 -- --------------------------------------------------------
 
 --

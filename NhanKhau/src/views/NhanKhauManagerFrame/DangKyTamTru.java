@@ -31,6 +31,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -49,7 +51,7 @@ public class DangKyTamTru extends JFrame {
 	private JTextField tcctextField;
 	//private JTextField ngaysinhtextField;
 	private JTextField tongiaotextField;
-	private JTextField textField;
+	private JTextField lien_he_textField;
 	JRadioButton namRadioButton;
 	JRadioButton nuRadioButton;
 	private NhanKhauManagerPanelController parentController;
@@ -57,7 +59,9 @@ public class DangKyTamTru extends JFrame {
     private NhanKhauBean nhanKhauBean;
     private AddNewController controller;
     private com.toedter.calendar.JDateChooser ngaysinhtextField;
-    private JTextField textField_1;
+    private com.toedter.calendar.JDateChooser bat_dautextField = new JDateChooser();	
+    private com.toedter.calendar.JDateChooser ket_thuctextField = new JDateChooser();
+    private JTextField dia_chi_tam_vang_textField;
 	/**
 	 * Launch the application.
 	 */
@@ -143,8 +147,8 @@ public class DangKyTamTru extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Liên hệ");
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		lien_he_textField = new JTextField();
+		lien_he_textField.setColumns(10);
 		
 		JLabel dia_chiLabel = new JLabel("Địa chỉ tạm vắng:");
 		
@@ -152,12 +156,12 @@ public class DangKyTamTru extends JFrame {
 		
 		JLabel ket_thucLabel = new JLabel("Ngày kết thúc:");
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		dia_chi_tam_vang_textField = new JTextField();
+		dia_chi_tam_vang_textField.setColumns(10);
 		
-		JDateChooser bat_dautextField = new JDateChooser();
+		bat_dautextField = new JDateChooser();
 		
-		JDateChooser bat_dautextField_1 = new JDateChooser();
+		ket_thuctextField = new JDateChooser();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -179,7 +183,8 @@ public class DangKyTamTru extends JFrame {
 								.addComponent(lblNewLabel)
 								.addComponent(bat_dauLabel, GroupLayout.PREFERRED_SIZE, 69, GroupLayout.PREFERRED_SIZE)
 								.addComponent(ket_thucLabel, GroupLayout.PREFERRED_SIZE, 71, GroupLayout.PREFERRED_SIZE)
-								.addComponent(dia_chiLabel, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+								//.addComponent(dia_chiLabel, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
+								)
 							.addGap(72)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addComponent(tongiaotextField, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
@@ -187,10 +192,10 @@ public class DangKyTamTru extends JFrame {
 								.addComponent(hotenField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(ngaysinhtextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(tcctextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-								.addComponent(textField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-								.addComponent(textField_1, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+								.addComponent(lien_he_textField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+								//.addComponent(dia_chi_tam_vang_textField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
 								.addComponent(bat_dautextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
-								.addComponent(bat_dautextField_1, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))))
+								.addComponent(ket_thuctextField, GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE))))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
@@ -221,11 +226,12 @@ public class DangKyTamTru extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lien_he_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(dia_chiLabel)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						//.addComponent(dia_chiLabel)
+						//.addComponent(dia_chi_tam_vang_textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(bat_dauLabel)
@@ -233,7 +239,7 @@ public class DangKyTamTru extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(ket_thucLabel)
-						.addComponent(bat_dautextField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(ket_thuctextField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(64, Short.MAX_VALUE))
 		);
 		panel_1.setLayout(null);
@@ -293,7 +299,39 @@ public class DangKyTamTru extends JFrame {
 		contentPane.add(hoanthanhButton);
 	}
     private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
-            // tao moi 1 doi tuong nhan khau
+    	NhanKhauModel temp = this.nhanKhauBean.getNhanKhauModel();
+        if (this.hotenField.getText().trim().equals("")) {
+        	JOptionPane.showMessageDialog(null, "Cần nhập tên!");
+        	return;
+        }
+        temp.setHoTen(this.hotenField.getText());
+        temp.setTccString(this.tcctextField.getText());
+        if (this.namRadioButton.isSelected()) {
+        	temp.setGioiTinh("Nam");
+        }
+        else if (this.nuRadioButton.isSelected()) {
+        	temp.setGioiTinh("Nữ");
+        } else {
+        	temp.setGioiTinh("");
+        }
+        temp.setNamSinh(ngaysinhtextField.getDate());
+        temp.setTonGiao(tongiaotextField.getText());
+        temp.setLienheString(lien_he_textField.getText());
+        //temp.setGhiChu(ghi_chutextArea.getText());
+        
+        try {
+            if (this.controller.addNewPeople(this.nhanKhauBean)) {
+                JOptionPane.showMessageDialog(null, "Thêm thành công!!");
+                close();
+                parentController.refreshData();
+                JTable tempJTable = parentController.getNhankhauTable();
+                int id = (int) tempJTable.getModel().getValueAt(tempJTable.getRowCount() - 1,0);
+                this.controller.addTamTru(id, new java.sql.Date(bat_dautextField.getDate().getTime()), new java.sql.Date(ket_thuctextField.getDate().getTime()));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
             
     }//GEN-LAST:event_CreateBtnActionPerformed
 }

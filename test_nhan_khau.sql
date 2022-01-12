@@ -24,3 +24,10 @@ AND n.id NOT IN (
 ) 
 AND n.hoten LIKE '%add%'
 ORDER BY id;
+
+select * from tam_tru
+delete from tam_tru
+where idnhankhau = 81
+select * from nhan_khau
+insert into tam_tru (idnhankhau, tungay, denngay)
+values (81, NOW(), NOW())
