@@ -78,6 +78,23 @@ public class QuanLyThanhVienController {
         refreshData();
     }
     
+    public QuanLyThanhVienController(JPanel jpnView, int id_ho_khau) {
+        this.jpnView = jpnView;
+        classTableModel = new TableModelHoKhau();
+        this.nhanKhauService = new NhanKhauService();
+        this.id_ho_khau = id_ho_khau;
+        this.listNhanKhauBeans = this.nhanKhauService.searchThanhVienCuaHo(this.id_ho_khau);
+//        locButton.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//            	String key = jtfSearch.getText();
+//            	//String keyDiachiString = diachiSearchtextField.getText();
+//                listNhanKhauBeans = nhanKhauService.searchThanhVienCuaHo(key.trim(), "");
+//                setDataTable();
+//            }
+//        });
+        refreshData();
+    }
+    
     public QuanLyThanhVienController() {
     }
     
