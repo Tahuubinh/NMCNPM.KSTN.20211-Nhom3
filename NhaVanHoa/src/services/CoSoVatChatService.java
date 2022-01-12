@@ -54,13 +54,16 @@ public class CoSoVatChatService {
 	        	detail.setTenNguoiMuon(rs.getString("user_name"));
 	        	detail.setThoiGianMuon(rs.getString("time_start"));
 	        	detail.setThoiGianTra(rs.getString("time_end"));
+	        	list.add(detail);
 	        }
+	        coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(list);
 	        preparedStatement.close();
 	        
 	        connection.close();
 		} catch (Exception e) {
             this.exceptionHandle(e.getMessage());
         }
+		System.out.print(list.size());
 		return coSoVatChatBean;
 	}
 	public CoSoVatChatBean getCoSoVatChat(String tenCoSoVatChat) {
