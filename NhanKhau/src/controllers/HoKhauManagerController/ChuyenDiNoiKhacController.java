@@ -29,7 +29,7 @@ public class ChuyenDiNoiKhacController {
     private JPanel tableJpn;
     private List<HoKhauBean> list;
     private final TableModelHoKhau tableModelHoKhau = new TableModelHoKhau();
-    private final String COLUNMS[] = {"Mã hộ khẩu", "Họ tên chủ hộ", "Địa chỉ"}; 
+    private final String COLUNMS[] = {"Mã hộ khẩu", "Họ tên chủ hộ", "Địa chỉ", "ID"}; 
     private JTextField maHoKhauJtf;
     private JTextField tenChuHoJtf;
     private JTextField maKhuVucJtf;

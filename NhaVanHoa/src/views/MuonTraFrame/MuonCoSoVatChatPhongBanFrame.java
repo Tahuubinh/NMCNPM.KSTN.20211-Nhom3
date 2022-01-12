@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EventObject;
@@ -376,7 +377,18 @@ public class MuonCoSoVatChatPhongBanFrame extends javax.swing.JFrame {
 	            return false;
 			}
 	    	if(checkCoSoVatChat) {
-	    		int soLuong = coSoVatChatService.getSoLuongConLai((String) tenCoSoVatChatPhongBanJcb.getSelectedItem());
+	    		int soLuong=0;
+				try {
+					soLuong = coSoVatChatService.getSoLuongConLai((String) tenCoSoVatChatPhongBanJcb.getSelectedItem());
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra", "Warning", JOptionPane.WARNING_MESSAGE);
+		            return false;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra", "Warning", JOptionPane.WARNING_MESSAGE);
+		            return false;
+				}
 	            JOptionPane.showMessageDialog(rootPane, "Số lượng " + tenCoSoVatChatPhongBanJcb.getSelectedItem() + "còn lại tối đa là: " + soLuong, "Warning", JOptionPane.WARNING_MESSAGE);
 	            soLuongJtf.setText(Integer.toString(soLuong));
 	            return false;
