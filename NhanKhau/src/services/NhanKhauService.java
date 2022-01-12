@@ -217,12 +217,12 @@ public class NhanKhauService {
         List<NhanKhauBean> list = new ArrayList<>();
         
         String query = "SELECT * FROM nhan_khau "
-                    + " INNER JOIN chung_minh_thu ON nhan_khau.ID = chung_minh_thu.idNhanKhau"
-                    + " LEFT JOIN tam_tru ON nhan_khau.ID = tam_tru.idNhanKhau "
-                    + " LEFT JOIN tam_vang ON nhan_khau.ID = tam_vang.idNhanKhau "
+                    + "\n"
+                    + " LEFT JOIN tam_tru ON nhan_khau.ID = tam_tru.idNhanKhau \n"
+                    + " LEFT JOIN tam_vang ON nhan_khau.ID = tam_vang.idNhanKhau\n "
                     + " WHERE DATE_PART('year', AGE(CURRENT_DATE, namSinh))  >= "
                     + TuTuoi
-                    + " AND DATE_PART('year', AGE(CURRENT_DATE, namSinh))  <= "
+                    + " \nAND DATE_PART('year', AGE(CURRENT_DATE, namSinh))  <= "
                     + denTuoi;
         if (!gender.equalsIgnoreCase("Toan Bo")) {
             query += " AND nhan_khau.gioiTinh = '" + gender + "'";
@@ -246,7 +246,8 @@ public class NhanKhauService {
                     + denNam
                     + ")";
         }
-        query += " ORDER BY ngayTao DESC";
+        query += " ORDER BY ngayTao ASC";
+        System.out.println(query);
          try {
             Connection connection = MysqlConnection.getMysqlConnection();
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
@@ -270,10 +271,10 @@ public class NhanKhauService {
                 nhanKhau.setNoiThuongTru(rs.getString("noiThuongTru"));
                 nhanKhau.setDiaChiHienNay(rs.getString("diaChiHienNay"));
                 // con nhieu nua
-                chungMinhThuModel.setIdNhanKhau(rs.getInt("idNhanKhau"));
-                chungMinhThuModel.setSoCMT(rs.getString("soCMT"));
-                chungMinhThuModel.setNgayCap(rs.getDate("ngayCap"));
-                chungMinhThuModel.setNoiCap(rs.getString("noiCap"));
+//                chungMinhThuModel.setIdNhanKhau(rs.getInt("idNhanKhau"));
+//                chungMinhThuModel.setSoCMT(rs.getString("soCMT"));
+//                chungMinhThuModel.setNgayCap(rs.getDate("ngayCap"));
+//                chungMinhThuModel.setNoiCap(rs.getString("noiCap"));
                 
                 if (idNhanKhau > 0) {
                     String sql = "SELECT * FROM tieu_su WHERE idNhanKhau = " + idNhanKhau;
