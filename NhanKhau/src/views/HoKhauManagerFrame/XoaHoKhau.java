@@ -19,8 +19,10 @@ import javax.swing.BoxLayout;
 //import com.jgoodies.forms.layout.FormSpecs;
 //import com.jgoodies.forms.layout.RowSpec;
 
+import controllers.HoKhauPanelController;
 import controllers.NhanKhauManagerPanelController;
 import controllers.NhanKhauManagerController.XoaNhanKhauController;
+import services.HoKhauService;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -47,12 +49,13 @@ public class XoaHoKhau extends JFrame {
 	private JTextField ngaytextField;
     private JFrame parentJFrame = null;
     private JTable table;
-    private NhanKhauManagerPanelController parentController;
+    private HoKhauPanelController parentController;
     private int row;
     
-    public XoaHoKhau(JFrame parentJFrame, JTable table, int row) {
+    public XoaHoKhau(HoKhauPanelController parentCTL, JFrame parentJFrame, JTable table) {
         initComponents();
         //this.parentController = parentController;
+        this.parentController = parentCTL;
         this.parentJFrame = parentJFrame;
         this.table = table;
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -142,14 +145,16 @@ public class XoaHoKhau extends JFrame {
 		hoanthanhButton.setForeground(new Color(255,255,255));
 		hoanthanhButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int confirm = JOptionPane.showConfirmDialog(null, "Đã chắc chắn?");
+				int confirm = JOptionPane.showConfirmDialog(null,"Chắn chắn xóa hộ khẩu này?", "Xóa hộ khẩu",
+			               JOptionPane.YES_NO_OPTION,
+			               JOptionPane.QUESTION_MESSAGE);
 				if (confirm == JOptionPane.YES_OPTION) {
-					XoaNhanKhauController controller = new XoaNhanKhauController();
+					HoKhauService controller = new HoKhauService();
 					try {
 						int id;
 						//System.err.println(table.getModel().getValueAt(table.getSelectedRow(),0));
-						id = (int) table.getModel().getValueAt(table.getSelectedRow(),0);
-		                if (controller.XoaNhanKhau(id)) {
+						id = (int) table.getModel().getValueAt(table.getSelectedRow(),3);
+		                if (controller.xoaHoKhau(id)) {
 		                	close();
 		                    parentController.refreshData();
 		                }

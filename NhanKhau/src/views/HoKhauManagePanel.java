@@ -129,7 +129,7 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
             }
         });
         
-        themnhankhauMenuItem = new JMenuItem("Thêm nhân khẩu");
+        themnhankhauMenuItem = new JMenuItem("Chỉnh sửa thành viên");
         popupMenu.add(themnhankhauMenuItem);
         themnhankhauMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -276,8 +276,8 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
     			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
-    	ChuyenDiNoiKhac chuyenDiNoiKhac = new ChuyenDiNoiKhac(this.parentFrame);
-        //XoaHoKhau chuyenDiNoiKhac = new XoaHoKhau(this.parentFrame, new JTable(), 0);
+    	//ChuyenDiNoiKhac chuyenDiNoiKhac = new ChuyenDiNoiKhac(this.parentFrame);
+        XoaHoKhau chuyenDiNoiKhac = new XoaHoKhau(this.controller, this.parentFrame, tempJTable);
         chuyenDiNoiKhac.setLocationRelativeTo(null);
         chuyenDiNoiKhac.setResizable(false);
         chuyenDiNoiKhac.setVisible(true);
