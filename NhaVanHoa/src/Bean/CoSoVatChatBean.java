@@ -1,5 +1,7 @@
 package Bean;
 
+import java.util.List;
+
 import models.CoSoVatChatModel;
 import models.ItemDaXoaModel;
 import models.NguoiMuonModel;
@@ -10,8 +12,8 @@ public class CoSoVatChatBean {
 	private CoSoVatChatModel coSoVatChatModel;
 	private NhaTaiTroModel nhaTaiTroModel;
 	private ItemDaXoaModel itemDaXoaModel;
-	private NguoiMuonModel nguoiMuonModel;
-	private ThoiGianModel thoiGianModel;
+	private List<NguoiMuonModel> listNguoiMuonModels;
+	private List<ThoiGianModel> listThoiGianModels;
     public CoSoVatChatBean(CoSoVatChatModel coSoVatChatModel) {
     	this.setCoSoVatChatModel(coSoVatChatModel);
     }
@@ -38,17 +40,18 @@ public class CoSoVatChatBean {
 		this.itemDaXoaModel = itemDaXoaModel;
 	}
 	
-	public NguoiMuonModel getNguoiMuonModel() {
-		return nguoiMuonModel;
+
+	public List<NguoiMuonModel> getListNguoiMuonModels() {
+		return listNguoiMuonModels;
 	}
-	public void setNguoiMuonModel(NguoiMuonModel nguoiMuonModel) {
-		this.nguoiMuonModel = nguoiMuonModel;
+	public void setListNguoiMuonModels(List<NguoiMuonModel> listNguoiMuonModels) {
+		this.listNguoiMuonModels = listNguoiMuonModels;
 	}
-	public ThoiGianModel getThoiGianModel() {
-		return thoiGianModel;
+	public List<ThoiGianModel> getListThoiGianModels() {
+		return listThoiGianModels;
 	}
-	public void setThoiGianModel(ThoiGianModel thoiGianModel) {
-		this.thoiGianModel = thoiGianModel;
+	public void setListThoiGianModels(List<ThoiGianModel> listThoiGianModels) {
+		this.listThoiGianModels = listThoiGianModels;
 	}
 	@Override
     public String toString() {
