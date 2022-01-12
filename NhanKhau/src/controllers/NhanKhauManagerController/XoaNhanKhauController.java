@@ -29,6 +29,22 @@ public class XoaNhanKhauController {
         return true;
     }
     
+    public boolean XoaTamTru(int id) {
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query = "DELETE FROM tam_tru WHERE id = (?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (Exception e) {
+            System.err.println(e);
+            return false;
+        }
+        return true;
+    }
+    
     public boolean addNew(KhaiTuModel khaiTuModel) {
         try {
             Connection connection = MysqlConnection.getMysqlConnection();

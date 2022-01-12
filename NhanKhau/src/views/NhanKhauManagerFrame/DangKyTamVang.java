@@ -31,6 +31,8 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JRadioButton;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JTable;
+
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -51,6 +53,7 @@ public class DangKyTamVang extends JFrame {
     private NhanKhauBean nhanKhauBean;
     private AddNewController controller;
     private com.toedter.calendar.JDateChooser ket_thuctextField;
+    private com.toedter.calendar.JDateChooser bat_dautextField;
 	/**
 	 * Launch the application.
 	 */
@@ -121,7 +124,7 @@ public class DangKyTamVang extends JFrame {
 		
 		ket_thuctextField = new com.toedter.calendar.JDateChooser();
 		
-		JDateChooser bat_dautextField = new JDateChooser();
+		bat_dautextField = new JDateChooser();
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -199,7 +202,17 @@ public class DangKyTamVang extends JFrame {
 		contentPane.add(hoanthanhButton);
 	}
     private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
-            
+        try {
+        	JTable tempJTable = parentController.getNhankhauTable();
+            int id = (int) tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),0);
+            this.controller.addTamVang(id, new java.sql.Date(bat_dautextField.getDate().getTime()), new java.sql.Date(ket_thuctextField.getDate().getTime()));
+            JOptionPane.showMessageDialog(null, "Thêm thành công!!");
+            close();
+            parentController.refreshData();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_CreateBtnActionPerformed
 }
 
