@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import Bean.CoSoVatChatBean;
 import models.CoSoVatChatModel;
+import models.ListNguoiMuonCoSoVatChatDetailModel;
 
 
 public class CoSoVatChatService {
@@ -23,6 +24,8 @@ public class CoSoVatChatService {
 	public CoSoVatChatBean getCoSoVatChat(String tenCoSoVatChat) {
 		Connection connection;
 		CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
+		List<ListNguoiMuonCoSoVatChatDetailModel> listNguoiMuonCoSoVatChatDetailModels = new ArrayList<>();
+		coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(listNguoiMuonCoSoVatChatDetailModels);
 //		try {
 //			connection = MysqlConnection.getMysqlConnection();
 //			 

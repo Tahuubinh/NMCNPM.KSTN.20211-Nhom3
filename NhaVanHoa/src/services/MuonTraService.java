@@ -109,13 +109,13 @@ public class MuonTraService {
 	        while(rs1.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
 	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
-	        	muonTra.setStt(rs2.getInt("event_no"));
-	        	muonTra.setTenNguoiMuon(rs2.getString("user_name"));
-	        	muonTra.setid(rs2.getString("cccd"));
-	        	muonTra.setLienHe(rs2.getString("user_phone"));
-	        	muonTra.setThoiGianMuon(rs2.getTimestamp("time_start"));
-	        	muonTra.setThoiGianTra(rs2.getTimestamp("time_end"));
-	        	muonTra.setCoSoVatChat(rs2.getString("infra_name"));
+	        	muonTra.setStt(rs1.getInt("event_no"));
+	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
+	        	muonTra.setid(rs1.getString("cccd"));
+	        	muonTra.setLienHe(rs1.getString("user_phone"));
+	        	muonTra.setThoiGianMuon(rs1.getTimestamp("time_start"));
+	        	muonTra.setThoiGianTra(rs1.getTimestamp("time_end"));
+	        	muonTra.setCoSoVatChat(rs1.getString("infra_name"));
 	        	muonTra.setSoLuong(1);
                 list.add(muonTraBean);
 	        }

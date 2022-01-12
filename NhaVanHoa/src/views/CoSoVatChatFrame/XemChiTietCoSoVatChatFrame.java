@@ -35,9 +35,6 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
      * Creates new form ChuyenDiNoiKhac
      */
     public XemChiTietCoSoVatChatFrame(CoSoVatChatPanelController parentController, JFrame parentJFrame, String tenCoSoVatChatDetail, String tongSoLuong, String soLuongMuon, String soLuongTrongKho) {
-        this.coSoVatChatService = new CoSoVatChatService();
-        coSoVatChatBean = this.coSoVatChatService.getCoSoVatChat(tenCoSoVatChatDetail);
-        coSoVatChatModel = coSoVatChatBean.getCoSoVatChatModel();
         this.parentController = parentController;
         this.parentJFrame = parentJFrame;
         this.parentJFrame.setEnabled(false);
@@ -47,7 +44,7 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
     	this.soLuongMuonDetail.setText(soLuongMuon);
     	this.soLuongTrongKhoDetail.setText(soLuongTrongKho);
         pack();
-        controller = new XemChiTietCoSoVatChatCotroller(parentJFrame, this.parentJFrame);
+        controller = new XemChiTietCoSoVatChatCotroller(this.tablePanel, this.tenCoSoVatChatDetail);
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -120,10 +117,10 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
         soLuongTrongKhoDetail = new JLabel("null");
         soLuongTrongKhoDetail.setFont(new Font("Tahoma", Font.PLAIN, 16));
         
-        JLabel lblNhTiTr = new JLabel("Nhà tài trợ:");
+        JLabel lblNhTiTr = new JLabel("");
         lblNhTiTr.setFont(new Font("Tahoma", Font.PLAIN, 16));
         
-        nhaTaiTroDetail = new JLabel("null");
+        nhaTaiTroDetail = new JLabel("");
         nhaTaiTroDetail.setFont(new Font("Tahoma", Font.PLAIN, 16));
         
         JLabel bangDanhSachNguoiMuonJlb = new JLabel("Bảng danh sách người mượn");

@@ -6,8 +6,11 @@ import javax.swing.table.DefaultTableModel;
 
 import models.CoSoVatChatModel;
 import models.LichSuModel;
+import models.ListNguoiMuonCoSoVatChatDetailModel;
 import models.MuonTraModel;
+import models.NguoiMuonModel;
 import models.PhongBanModel;
+import models.ThoiGianModel;
 import models.muonTra.AddMuonTraModel;
 
 /**
@@ -158,6 +161,34 @@ public class ClassTableModel {
         listItemCoSoVatChat.forEach((CoSoVatChatModel item) -> {
             obj[0] = item.getTenCoSoVatChat();
             obj[1] = item.getSoLuongMuon();
+            dtm.addRow(obj);
+        });
+        return dtm;
+    }
+    
+    public DefaultTableModel setTableCoSoVatChatDetail(List<ListNguoiMuonCoSoVatChatDetailModel> listNguoiMuonCoSoVatChatDetailModels, String[] listColumn) {
+        final int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel()  {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+            	if(columnIndex == 0 || columnIndex == 2) return Integer.class;
+                return String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        obj = new Object[columns];
+        i = 1;
+        listNguoiMuonCoSoVatChatDetailModels.forEach(nguoiMuon -> {
+        	obj[0] = i++;
+        	obj[1] = nguoiMuon.getTenNguoiMuon();
+        	obj[2] = nguoiMuon.getSoLuongMuon();
+        	obj[3] = nguoiMuon.getThoiGianMuon();
+        	obj[4] = nguoiMuon.getThoiGianTra();
             dtm.addRow(obj);
         });
         return dtm;

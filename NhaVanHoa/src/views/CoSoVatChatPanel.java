@@ -212,10 +212,10 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
   		return;
 		}
 		
-		String tenCoSoVatChatDetail = (String) xemChiTietTable.getModel().getValueAt(row, 1);
-		String tongSoLuong = (String) xemChiTietTable.getModel().getValueAt(row, 2);
-		String soLuongMuon = (String) xemChiTietTable.getModel().getValueAt(row, 3);
-		String soLuongTrongKho = (String) xemChiTietTable.getModel().getValueAt(row, 4);
+		String tenCoSoVatChatDetail = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		String tongSoLuong = xemChiTietTable.getModel().getValueAt(row, 2).toString();
+		String soLuongMuon = xemChiTietTable.getModel().getValueAt(row, 3).toString();
+		String soLuongTrongKho = xemChiTietTable.getModel().getValueAt(row, 4).toString();
 		XemChiTietCoSoVatChatFrame xemChiTietCoSoVatChatFrame = new XemChiTietCoSoVatChatFrame(this.controller, this.parentJFrame, tenCoSoVatChatDetail, tongSoLuong, soLuongMuon, soLuongTrongKho);
         xemChiTietCoSoVatChatFrame.setLocationRelativeTo(null);
         xemChiTietCoSoVatChatFrame.setResizable(false);
