@@ -247,6 +247,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
     	String lienHe = StringService.covertToString(lienheJtfSearch.getText());
     	Date tuNgay = tuNgayJdc.getDate();
     	Date denNgay = denNgayJdc.getDate();
+    	System.out.println(tuNgay);
     	controller.setData(tenNguoiMuon, lienHe, tuNgay, denNgay);
     }//GEN-LAST:event_jtfSearchActionPerformed
 

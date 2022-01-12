@@ -59,7 +59,6 @@ public class CoSoVatChatPanelController {
 	                String key = searchJtf.getText();
 	                listCoSoVatChatBeans = coSoVatChatService.search(key.trim());
 	                setDataTable();
-	                System.out.print("aaa");
 	            }
 
 	            @Override
@@ -74,7 +73,7 @@ public class CoSoVatChatPanelController {
 	                String key = searchJtf.getText();
 	                listCoSoVatChatBeans = coSoVatChatService.search(key.trim());
 	                setDataTable();
-	                System.out.print("aaa");
+
 	            }
 	        });
 	        
@@ -90,7 +89,6 @@ public class CoSoVatChatPanelController {
 	        List<CoSoVatChatModel> listItem = new ArrayList<>();
 	        this.listCoSoVatChatBeans.forEach(coSoVatChat -> {
 	            listItem.add(coSoVatChat.getCoSoVatChatModel());
-	            System.out.print(coSoVatChat.getCoSoVatChatModel().getTenCoSoVatChat());
 	        });
 	        DefaultTableModel model = classTableModel.setTableCoSoVatChat(listItem, COLUMNS);
 	        table = new JTable(model) {

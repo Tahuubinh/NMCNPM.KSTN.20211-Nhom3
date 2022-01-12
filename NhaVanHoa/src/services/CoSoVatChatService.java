@@ -56,12 +56,14 @@ public class CoSoVatChatService {
 	        	detail.setThoiGianTra(rs.getString("time_end"));
 	        	list.add(detail);
 	        }
+	        coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(list);
 	        preparedStatement.close();
 	        
 	        connection.close();
 		} catch (Exception e) {
             this.exceptionHandle(e.getMessage());
         }
+		System.out.print(list.size());
 		return coSoVatChatBean;
 	}
 	
@@ -178,7 +180,6 @@ public class CoSoVatChatService {
 
         	this.exceptionHandle(e.getMessage());
         }
-        System.out.println(list.size());
         return list;
     }
     

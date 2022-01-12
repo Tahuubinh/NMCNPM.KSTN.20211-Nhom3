@@ -119,6 +119,17 @@ public class PhongBanService {
         return list;
     }
     
+    public bool huyPhongBan(String tenPhongBan) {
+        List<PhongBanBean> list = new ArrayList<>();
+        //viết truy vấn
+        return true;
+    }
+    
+    public List<PhongBanBean> doiTenPhongBan(String tenPhongBan) {
+        List<PhongBanBean> list = new ArrayList<>();
+        //viết truy vấn
+        return list;
+    }
     /*
      * Ham sử lý ngoại lệ : thông báo ra lỗi nhận được
      */

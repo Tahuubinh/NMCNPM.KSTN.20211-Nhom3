@@ -111,6 +111,7 @@ public class ThongKePanelController {
         table.getColumnModel().getColumn(0).setMaxWidth(80);
         table.getColumnModel().getColumn(0).setMinWidth(80);
         table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.removeColumn(table.getColumnModel().getColumn(0));
         
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(table);

@@ -112,7 +112,7 @@ public class MuonTraPanelController {
     //Khi an Filter, bien listMuonTraBeans se call muonTraService de thonn ke thon tin vua nhap
     //Chu y cac thong tin null
     public void setData(String tenNguoiMuon, String lienHe, Date tuNgay, Date denNgay){
-      this.listMuonTraBeans = this.muonTraService.statisticMuonTra(tenNguoiMuon, lienHe, tuNgay, denNgay);
+      this.listMuonTraBeans = this.muonTraService.search(tenNguoiMuon, lienHe, tuNgay, denNgay);
       setDataTable();
     }
     
