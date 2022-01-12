@@ -2,10 +2,10 @@ package views;
 
 import controllers.MuonTraPanelController;
 import services.StringService;
+import views.MuonTraFrame.DangKySuDungFrame;
 
 import javax.swing.JFrame;
 
-import views.MuonTraFrame.DangKySuDungFrame;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;

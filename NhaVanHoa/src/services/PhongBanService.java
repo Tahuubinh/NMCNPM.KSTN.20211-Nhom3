@@ -20,9 +20,9 @@ public class PhongBanService {
         try {
 			connection = MysqlConnection.getMysqlConnection();
 			 
-			String query = "SELECT DISTINCT(i.infra_id), s.time_start, i.infra_name, concat_ws(' - ', s.time_start, s.time_end) AS thoigian, i.reason "
-       			 + "FROM infrastructure i JOIN infraregistered ir ON i.infra_id = ir.infra_id "
-       			 + "JOIN schedule s on ir.event_no = s.event_no WHERE s.time_start > CURRENT_TIMESTAMP AND CAST(infra_id AS string) = "
+			String query = "SELECT DISTINCT(i.infra_id), s.time_start, i.infra_name, concat_ws(' - ', coalesce(cast(s.time_start as character ),''), coalesce(cast(s.time_end as character ),'')) AS thoigian, i.reason "
+       			 + "FROM infrastructure i LEFT JOIN infraregistered ir ON i.infra_id = ir.infra_id "
+       			 + "LEFT JOIN schedule s on ir.event_no = s.event_no WHERE (s.time_start > CURRENT_TIMESTAMP or s.time_start is null) AND CAST(infra_id AS string) = "
        			 + id
        			 + " ORDER BY s.time_start";
 	        PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
@@ -52,9 +52,9 @@ public class PhongBanService {
         try {
 			connection = MysqlConnection.getMysqlConnection();
 			 
-			String query = "SELECT DISTINCT(i.infra_id), s.time_start, i.infra_name, concat_ws(' - ', s.time_start, s.time_end) "
-  			 		 + "FROM infrastructure i JOIN infraregistered ir ON i.infra_id = ir.infra_id "
-  			 		 + "JOIN schedule s on ir.event_no = s.event_no WHERE s.time_start > CURRENT_TIMESTAMP "
+			String query = "SELECT DISTINCT(i.infra_id), s.time_start, i.infra_name, concat_ws(' - ', coalesce(cast(s.time_start as character ),''), coalesce(cast(s.time_end as character ),'')) as thoigian, i.reason "
+  			 		 + "FROM infrastructure i LEFT JOIN infraregistered ir ON i.infra_id = ir.infra_id "
+  			 		 + "LEFT JOIN schedule s on ir.event_no = s.event_no WHERE (s.time_start > CURRENT_TIMESTAMP or s.time_start is null) "
   			 		 + "ORDER BY s.time_start";
 	        PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
 	        ResultSet rs = preparedStatement.executeQuery();
@@ -93,9 +93,9 @@ public class PhongBanService {
         try {
 			connection = MysqlConnection.getMysqlConnection();
 			 
-			String query = "SELECT DISTINCT(i.infra_id), s.time_start, i.infra_name, concat_ws(' - ', s.time_start, s.time_end) "
-		   			 + "FROM infrastructure i JOIN infraregistered ir ON i.infra_id = ir.infra_id "
-		   			 + "JOIN schedule s on ir.event_no = s.event_no WHERE s.time_start > CURRENT_TIMESTAMP AND infra_name LIKE '%"
+			String query = "SELECT DISTINCT(i.infra_id), s.time_start, i.infra_name, concat_ws(' - ', coalesce(cast(s.time_start as character ),''), coalesce(cast(s.time_end as character ),'')) as thoigian, i.reason "
+		   			 + "FROM infrastructure i LEFT JOIN infraregistered ir ON i.infra_id = ir.infra_id "
+		   			 + "LEFT JOIN schedule s on ir.event_no = s.event_no WHERE (s.time_start > CURRENT_TIMESTAMP or s.time_start is null) AND infra_name LIKE '%"
 		   			 + tenPhongBan
 		   			 + "%' ORDER BY s.time_start";
 	        PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);

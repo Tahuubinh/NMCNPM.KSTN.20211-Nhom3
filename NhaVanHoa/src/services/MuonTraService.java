@@ -108,13 +108,13 @@ public class MuonTraService {
 	        while(rs2.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
 	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
-	        	muonTra.setStt(rs1.getInt("event_no"));
-	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
-	        	muonTra.setid(rs1.getString("cccd"));
-	        	muonTra.setLienHe(rs1.getString("user_phone"));
-	        	muonTra.setThoiGianMuon(rs1.getTimestamp("time_start"));
-	        	muonTra.setThoiGianTra(rs1.getTimestamp("time_end"));
-	        	muonTra.setCoSoVatChat(rs1.getString("infra_name"));
+	        	muonTra.setStt(rs2.getInt("event_no"));
+	        	muonTra.setTenNguoiMuon(rs2.getString("user_name"));
+	        	muonTra.setid(rs2.getString("cccd"));
+	        	muonTra.setLienHe(rs2.getString("user_phone"));
+	        	muonTra.setThoiGianMuon(rs2.getTimestamp("time_start"));
+	        	muonTra.setThoiGianTra(rs2.getTimestamp("time_end"));
+	        	muonTra.setCoSoVatChat(rs2.getString("infra_name"));
 	        	muonTra.setSoLuong(1);
                 list.add(muonTraBean);
 	        }
@@ -149,18 +149,18 @@ public class MuonTraService {
 			    	  + "JOIN schedule s ON ir.event_no = s.event_no JOIN item i ON i.item_id = ir.item_id "
 			    	  + "WHERE r.user_name LIKE '%"
 			    	  + tenNguoiMuon
-			    	  + "%' AND CAST(r.user_phone as string) = "
+			    	  + "%' AND CAST(r.user_phone as character) = "
 			    	  + lienHe
 			    	  + " AND CAST(s.time_start as date) BETWEEN "
 			    	  + tuNgay
 			    	  + " AND "
 			    	  + denNgay;
-      String query2 = "SELECT s.event_no, r.user_name, r.cccd, r.user_phone, s.time_start, s.time_end, i.infra_name "
+			String query2 = "SELECT s.event_no, r.user_name, r.cccd, r.user_phone, s.time_start, s.time_end, i.infra_name "
 		  		  	  + "FROM registers r JOIN infraregistered ir ON r.user_id = ir.user_id "
 		  		  	  + "JOIN schedule s ON ir.event_no = s.event_no JOIN infrastructure i ON i.infra_id = ir.infra_id "
 		  		  	  + "WHERE r.user_name LIKE '%"
 			    	  + tenNguoiMuon
-			    	  + "%' AND CAST(r.user_phone as string) = "
+			    	  + "%' AND CAST(r.user_phone as character) = "
 			    	  + lienHe
 			    	  + " AND CAST(s.time_start as date) BETWEEN "
 			    	  + tuNgay

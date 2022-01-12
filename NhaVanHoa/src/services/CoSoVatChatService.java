@@ -3,6 +3,7 @@ package services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +21,10 @@ public class CoSoVatChatService {
 		try {
 			connection = MysqlConnection.getMysqlConnection();
 			 
-	        String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
-	   			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE CAST(i.item_id AS string) = "
+	        String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(coalesce((ir.item_number),0)) AS lended, (i.item_quantity-COALESCE(sum(ir.item_number), 0)) AS remain "
+	   			 		 + "FROM item i  LEFT JOIN itemregistered ir ON i.item_id=ir.item_id WHERE CAST(i.item_id AS string) = "
 	   			 		 + id
-	   			 		 + " GROUP BY i.item_id";
+	   			 		 + " GROUP BY i.item_id, i.item_name, i.item_quantity";
 	        PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
 	        ResultSet rs = preparedStatement.executeQuery();
 	        int idCoSoVatChat = -1;
@@ -52,8 +53,8 @@ public class CoSoVatChatService {
         
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
-            String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
-       			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id GROUP BY i.item_id";
+            String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(coalesce((ir.item_number),0)) AS lended, (i.item_quantity-COALESCE(sum(ir.item_number), 0)) AS remain "
+       			 		 + "FROM item i LEFT JOIN itemregistered ir ON i.item_id=ir.item_id GROUP BY i.item_id, i.item_name, i.item_quantity";
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -76,9 +77,22 @@ public class CoSoVatChatService {
     }
     
     //lay so luong co so vat chat con lai theo ten
-    public int getSoLuongConLai(String tenCoSoVatChat) {
+    public int getSoLuongConLai(String tenCoSoVatChat) throws ClassNotFoundException, SQLException {
     	int soLuong = 0;
-        //viết truy vấn
+        
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query = "SELECT (i.item_quantity-sum(coalesce((ir.item_number),0))) as remain FROM item i LEFT JOIN itemregistered ir on i.item_id=ir.item_id "
+       			 		 + "WHERE i.item_name = " + tenCoSoVatChat + " GROUP BY ir.item_id, i.item_name, i.item_quantity";
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            soLuong = rs.getInt("remain");
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e) {
+
+        	this.exceptionHandle(e.getMessage());
+        }
         
         return soLuong;
     }
@@ -90,10 +104,10 @@ public class CoSoVatChatService {
         
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
-            String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
-			 		 	 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE i.item_name LIKE '% "
+            String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(coalesce((ir.item_number),0)) AS lended, (i.item_quantity-COALESCE(sum(ir.item_number), 0)) AS remain "
+			 		 	 + "FROM item i LEFT JOIN itemregistered ir ON i.item_id=ir.item_id WHERE i.item_name LIKE '%"
 			 		 	 + tenCoSoVatChat
-			 		 	 + "%' GROUP BY i.item_id";
+			 		 	 + "%' GROUP BY i.item_id, i.item_name, i.item_quantity"; 
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -112,7 +126,22 @@ public class CoSoVatChatService {
 
         	this.exceptionHandle(e.getMessage());
         }
+        System.out.println(list.size());
         return list;
+    }
+    
+    public void xoaCoSoVatChat(int id) {
+    	 try {
+             Connection connection = MysqlConnection.getMysqlConnection();
+             String query = "DELETE FROM item WHERE item_id = "+ id; 
+             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+             preparedStatement.executeQuery();
+             preparedStatement.close();
+             connection.close();
+         } catch (Exception e) {
+
+         	this.exceptionHandle(e.getMessage());
+         }
     }
     
     /*
