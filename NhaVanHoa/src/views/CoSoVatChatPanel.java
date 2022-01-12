@@ -7,6 +7,7 @@ import services.StringService;
 import javax.swing.JFrame;
 
 import views.CoSoVatChatFrame.ThemCoSoVatChatFrame;
+import views.CoSoVatChatFrame.ThemSoLuongCoSoVatChatFrame;
 import views.CoSoVatChatFrame.XemChiTietCoSoVatChatFrame;
 import views.CoSoVatChatFrame.XoaCoSoVatChatFrame;
 
@@ -91,6 +92,18 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
 			}
 		});
         
+        themSoLuong = new JMenuItem("Thêm số lượng");
+        popupMenu.add(themSoLuong);
+        themSoLuong.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				themSoLuongActionPerformed(evt);
+			}
+
+
+		});
         xoaCoSoVatChat = new JMenuItem("Xóa cơ sở vật chất");
         popupMenu.add(xoaCoSoVatChat);
         xoaCoSoVatChat.addActionListener(new ActionListener() {
@@ -234,6 +247,26 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
         xemChiTietCoSoVatChatFrame.setVisible(true);
 	}
 	
+	private void themSoLuongActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+  		return;
+		}
+		String tenCoSoVatChatDetail = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		String tongSoLuong = xemChiTietTable.getModel().getValueAt(row, 2).toString();
+		String soLuongMuon = xemChiTietTable.getModel().getValueAt(row, 3).toString();
+		String soLuongTrongKho = xemChiTietTable.getModel().getValueAt(row, 4).toString();
+		ThemSoLuongCoSoVatChatFrame themSoLuongCoSoVatChatFrame = new ThemSoLuongCoSoVatChatFrame(this.controller, this.parentJFrame, tenCoSoVatChatDetail, tongSoLuong, soLuongMuon, soLuongTrongKho);
+		themSoLuongCoSoVatChatFrame.setLocationRelativeTo(null);
+		themSoLuongCoSoVatChatFrame.setResizable(false);
+		themSoLuongCoSoVatChatFrame.setVisible(true);
+	}
+	
 	private void xoaCoSoVatChatActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
 		JTable xemChiTietTable = this.controller.getTable();
@@ -257,5 +290,6 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
     private JTextField searchJtf;
     private JPopupMenu popupMenu;
     private JMenuItem xemChiTietCoSoVatChat;
+    private JMenuItem themSoLuong;
     private JMenuItem xoaCoSoVatChat;
 }

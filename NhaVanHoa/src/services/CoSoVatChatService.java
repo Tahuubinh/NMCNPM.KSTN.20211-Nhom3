@@ -152,6 +152,11 @@ public class CoSoVatChatService {
          }
     }
     
+    // them so luong cua ten csvc tuong ung
+    // tu dong add thoi gian xoa
+    public void themSoLuongCoSoVatChat(String tenCoSoVatChat, int soLuongXoa) {
+
+   }
     // xoa ten ten va so luong
     // tu dong add thoi gian xoa
     public void xoaCoSoVatChat(String tenCoSoVatChat, int soLuongXoa) {
