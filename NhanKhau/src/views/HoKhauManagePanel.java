@@ -327,8 +327,8 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
     			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
-    	TachHoKhau tachHoKhau = new TachHoKhau(this.parentFrame);
-        //FormTachHoKhau tachHoKhau = new FormTachHoKhau(this.parentFrame, new JTable(), 0);
+    	//TachHoKhau tachHoKhau = new TachHoKhau(this.parentFrame);
+        FormTachHoKhau tachHoKhau = new FormTachHoKhau(this.controller, this.parentFrame, tempJTable);
         tachHoKhau.setLocationRelativeTo(null);
         tachHoKhau.setResizable(false);
         tachHoKhau.setVisible(true);
