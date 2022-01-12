@@ -385,36 +385,87 @@ public class NhanKhauService {
     public List<NhanKhauBean> search(String keyword, String diachi) {
         List<NhanKhauBean> list = new  ArrayList<>();
         String query;
+        String query1, query2, query3;
         
         // truy cap db
         // create query
         try {
             //long a = Long.parseLong(keyword);
         	Boolean hasAndBoolean = false;
-            query = "SELECT * "
-                    + "FROM nhan_khau";
-            if (!keyword.isEmpty() || !diachi.isEmpty()) {
-            	query += " WHERE ";
-            }
+        	query1 = "SELECT n.*, h.diachi FROM nhan_khau n, ho_khau h \r\n"
+        			+ "WHERE n.id = idchuho";
+        	query2 = "SELECT n.*, h.diachi FROM nhan_khau n, ho_khau h, thanh_vien_cua_ho tv\r\n"
+        			+ "WHERE n.id = tv.idnhankhau \r\n"
+        			+ "AND h.id = idhokhau";
+        	query3 = "SELECT n.*, h.diachi FROM nhan_khau n FULL JOIN ho_khau h\r\n"
+        			+ "ON n.id = h.idchuho FULL JOIN thanh_vien_cua_ho tv \r\n"
+        			+ "ON n.id = tv.idnhankhau\r\n"
+        			+ "WHERE n.id NOT IN (\r\n"
+        			+ "	SELECT idchuho FROM ho_khau\r\n"
+        			+ ") \r\n"
+        			+ "AND n.id NOT IN (\r\n"
+        			+ "	SELECT idnhankhau FROM thanh_vien_cua_ho\r\n"
+        			+ ") ";
+//            query = "SELECT n.*, h.diachi FROM nhan_khau n, ho_khau h \r\n"
+//            		+ "WHERE n.id = idchuho\r\n"
+//            		+ "UNION\r\n"
+//            		+ "SELECT n.*, h.diachi FROM nhan_khau n, ho_khau h, thanh_vien_cua_ho tv\r\n"
+//            		+ "WHERE n.id = tv.idnhankhau \r\n"
+//            		+ "AND h.id = idhokhau\r\n"
+//            		+ "UNION\r\n"
+//            		+ "SELECT n.*, h.diachi FROM nhan_khau n FULL JOIN ho_khau h\r\n"
+//            		+ "ON n.id = h.idchuho FULL JOIN thanh_vien_cua_ho tv \r\n"
+//            		+ "ON n.id = tv.idnhankhau\r\n"
+//            		+ "WHERE n.id NOT IN (\r\n"
+//            		+ "	SELECT idchuho FROM ho_khau\r\n"
+//            		+ ") \r\n"
+//            		+ "AND n.id NOT IN (\r\n"
+//            		+ "	SELECT idnhankhau FROM thanh_vien_cua_ho\r\n"
+//            		+ ")";
+            hasAndBoolean = true;
             if (!keyword.isEmpty()) {
+            	if (hasAndBoolean == true) {
+            		query1 += " AND ";
+            		query2 += " AND ";
+            		query3 += " AND ";
+            	}
             	hasAndBoolean = true;
-            	query += "hoten LIKE '%"
+            	query1 += "hoten LIKE '%"
+                        + keyword
+                        + "%'"
+    						;
+            	query2 += "hoten LIKE '%"
+                        + keyword
+                        + "%'"
+    						;
+            	query3 += "hoten LIKE '%"
                         + keyword
                         + "%'"
     						;
             }
             if (!diachi.isEmpty()) {
             	if (hasAndBoolean == true) {
-            		query += " AND ";
+            		query1 += " AND ";
+            		query2 += " AND ";
+            		query3 += " AND ";
             	}
             	hasAndBoolean = true;
-            	query += "diachihiennay LIKE '%"
+            	query1 += "diachi LIKE '%"
+                        + diachi
+                        + "%' "
+						;
+            	query2 += "diachi LIKE '%"
+                        + diachi
+                        + "%' "
+						;
+            	query3 += "diachi LIKE '%"
                         + diachi
                         + "%' "
 						;
             }
+            query = query1 + " UNION " + query2 + " UNION " + query3;
             query += " ORDER BY id";
-            //System.err.println(query);
+            System.err.println(query);
             
                     
         } catch (Exception e) {
@@ -439,7 +490,7 @@ public class NhanKhauService {
                 nhanKhau.setHoTen(rs.getString("hoTen"));
                 nhanKhau.setGioiTinh(rs.getString("gioiTinh"));
                 nhanKhau.setNamSinh(rs.getDate("namSinh"));
-                nhanKhau.setDiaChiHienNay(rs.getString("diaChiHienNay"));
+                nhanKhau.setDiaChiHienNay(rs.getString("diachi"));
                 nhanKhau.setTccString(rs.getString("tcc"));
                 nhanKhau.setLienheString(rs.getString("lienhe"));
                 nhanKhau.setTonGiao(rs.getString("tongiao"));
