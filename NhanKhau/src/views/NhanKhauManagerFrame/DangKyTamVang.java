@@ -204,8 +204,10 @@ public class DangKyTamVang extends JFrame {
     private void CreateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
         try {
         	JTable tempJTable = parentController.getNhankhauTable();
+        	String dia_chi_tam_denString = dia_chiField.getText();
             int id = (int) tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),0);
-            this.controller.addTamVang(id, new java.sql.Date(bat_dautextField.getDate().getTime()), new java.sql.Date(ket_thuctextField.getDate().getTime()));
+            this.controller.addTamVang(id, new java.sql.Date(bat_dautextField.getDate().getTime()), 
+            		new java.sql.Date(ket_thuctextField.getDate().getTime()), dia_chi_tam_denString);
             JOptionPane.showMessageDialog(null, "Thêm thành công!!");
             close();
             parentController.refreshData();

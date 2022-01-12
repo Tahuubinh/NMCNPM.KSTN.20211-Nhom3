@@ -138,15 +138,16 @@ public class AddNewController {
         connection.close();
 	}
 	
-	public void addTamVang(int id, Date bat_dau, Date ket_thuc) throws SQLException, ClassNotFoundException{
+	public void addTamVang(int id, Date bat_dau, Date ket_thuc, String dia_chi_tam_denString) throws SQLException, ClassNotFoundException{
 		Connection connection = MysqlConnection.getMysqlConnection();
         // 1 - 19
-        String query = "INSERT INTO tam_vang (idnhankhau, tungay, denngay)" 
-                        + " values (?, ?, ?)";
+        String query = "INSERT INTO tam_vang (idnhankhau, tungay, denngay, noitamtru)" 
+                        + " values (?, ?, ?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setInt(1, id);
         preparedStatement.setDate(2, bat_dau);
         preparedStatement.setDate(3, ket_thuc);
+        preparedStatement.setString(4, dia_chi_tam_denString);
         
         
         
