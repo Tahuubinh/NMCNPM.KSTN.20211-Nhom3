@@ -1,9 +1,9 @@
 package views.PhongBanFrame;
 
 import Bean.PhongBanBean;
+import ControllersAddNewController.AddNewController;
 import Bean.MuonTraBean;
 import controllers.PhongBanPanelController;
-import controllersAddNewController.AddNewController;
 import controllers.LoginController;
 import controllers.MuonTraPanelController;
 

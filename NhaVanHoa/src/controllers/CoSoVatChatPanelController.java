@@ -35,7 +35,8 @@ public class CoSoVatChatPanelController {
 	    private final String[] COLUMNS = {"STT", "Dụng cụ", "Tổng số", "Số lượng mượn", "Số lượng trong kho"};
 	    private JFrame parentJFrame;
 	    private JPopupMenu popupMenu;
-
+	    private JTable table;
+	    
 	    public CoSoVatChatPanelController(JPanel jpnView, JTextField searchJtf, JPopupMenu popup) {
 	        this.jpnView = jpnView;
 	        this.searchJtf  = searchJtf;
@@ -89,7 +90,7 @@ public class CoSoVatChatPanelController {
 	            listItem.add(coSoVatChat.getCoSoVatChatModel());
 	        });
 	        DefaultTableModel model = classTableModel.setTableCoSoVatChat(listItem, COLUMNS);
-	        JTable table = new JTable(model) {
+	        table = new JTable(model) {
 	            @Override
 	            public boolean editCellAt(int row, int column, EventObject e) {
 	                return false;
@@ -156,6 +157,14 @@ public class CoSoVatChatPanelController {
 
 		public void setSearchJtf(JTextField searchJtf) {
 			this.searchJtf = searchJtf;
+		}
+
+		public JTable getTable() {
+			return table;
+		}
+
+		public void setTable(JTable table) {
+			this.table = table;
 		}
 
 

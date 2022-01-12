@@ -90,8 +90,7 @@ public class MuonTraService {
 			  		  	  + "JOIN schedule s ON ir.event_no = s.event_no JOIN infrastructure i ON i.infra_id = ir.infra_id ";
 	        PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
 	        ResultSet rs1 = preparedStatement1.executeQuery();
-	        PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
-	        ResultSet rs2 = preparedStatement2.executeQuery();
+
 	        while(rs1.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
 	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
@@ -105,7 +104,9 @@ public class MuonTraService {
 	        	muonTra.setSoLuong(rs1.getInt("item_number"));
                 list.add(muonTraBean);
 	        }
-	        while(rs2.next()) {
+	        preparedStatement1 = (PreparedStatement)connection.prepareStatement(query2);
+	        rs1 = preparedStatement1.executeQuery();
+	        while(rs1.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
 	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
 	        	muonTra.setStt(rs1.getInt("event_no"));
@@ -119,7 +120,6 @@ public class MuonTraService {
                 list.add(muonTraBean);
 	        }
 	        preparedStatement1.close();
-	        preparedStatement2.close();
 	        connection.close();
 		} catch (Exception e) {
             this.exceptionHandle(e.getMessage());

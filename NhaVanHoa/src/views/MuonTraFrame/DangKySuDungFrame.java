@@ -1,10 +1,10 @@
 package views.MuonTraFrame;
 
 import Bean.MuonTraBean;
+import ControllersAddNewController.AddCoSoVatChatPhongBanController;
+import ControllersAddNewController.AddNewController;
 import controllers.LoginController;
 import controllers.MuonTraPanelController;
-import controllersAddNewController.AddCoSoVatChatPhongBanController;
-import controllersAddNewController.AddNewController;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -44,6 +44,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
+
 import java.awt.Rectangle;
 
 /**

@@ -18,12 +18,12 @@ public class QuanLyNhaVanHoa {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
         }
-//        MainFrame mainFrame = new MainFrame();
-//        mainFrame.setLocationRelativeTo(null);
-//        mainFrame.setResizable(false);
-//        mainFrame.setVisible(true);
-        LoginUI loginUI = new LoginUI();
-        loginUI.setVisible(true); 
+        MainFrame mainFrame = new MainFrame();
+        mainFrame.setLocationRelativeTo(null);
+        mainFrame.setResizable(false);
+        mainFrame.setVisible(true);
+//        LoginUI loginUI = new LoginUI();
+//        loginUI.setVisible(true); 
     }
     
 }

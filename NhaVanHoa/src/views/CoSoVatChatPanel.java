@@ -7,6 +7,8 @@ import services.StringService;
 import javax.swing.JFrame;
 
 import views.CoSoVatChatFrame.ThemCoSoVatChatFrame;
+import views.CoSoVatChatFrame.XemChiTietCoSoVatChatFrame;
+
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -32,6 +34,7 @@ import javax.swing.JPopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,11 +52,10 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
         this.parentJFrame = parentFrame;
         initComponents();
         controller = new CoSoVatChatPanelController(tablePanel, searchJtf, popupMenu);
-        
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
-        		.addGap(0, 566, Short.MAX_VALUE)
+        		.addGap(0, 626, Short.MAX_VALUE)
         );
         gl_tablePanel.setVerticalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -73,15 +75,20 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         tablePanel = new javax.swing.JPanel();
-
+        
         popupMenu = new JPopupMenu();
         addPopup(tablePanel, popupMenu);
         
-        themMenuItem = new JMenuItem("Thêm");
-        popupMenu.add(themMenuItem);
-        
-        botMenuItem = new JMenuItem("Bớt");
-        popupMenu.add(botMenuItem);
+        xemChiTietCoSoVatChat = new JMenuItem("Xem chi tiết");
+        popupMenu.add(xemChiTietCoSoVatChat);
+        xemChiTietCoSoVatChat.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				xemChiTietCoSoVatChatActionPerformed(evt);
+			}
+		});
         
         addNewBtn = new javax.swing.JButton();
         addNewBtn.setDisabledIcon(new ImageIcon(CoSoVatChatPanel.class.getResource("/Icons/add.png")));
@@ -177,12 +184,7 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jtfSearchActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addNewBtn;
-    private javax.swing.JPanel tablePanel;
-    private JTextField searchJtf;
-    private JPopupMenu popupMenu;
-    private JMenuItem themMenuItem;
-    private JMenuItem botMenuItem;
+
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
@@ -200,4 +202,30 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
 			}
 		});
 	}
+	
+	private void xemChiTietCoSoVatChatActionPerformed(ActionEvent evt) {
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+  		return;
+		}
+		
+		String tenCoSoVatChatDetail = (String) xemChiTietTable.getModel().getValueAt(row, 1);
+		String tongSoLuong = (String) xemChiTietTable.getModel().getValueAt(row, 2);
+		String soLuongMuon = (String) xemChiTietTable.getModel().getValueAt(row, 3);
+		String soLuongTrongKho = (String) xemChiTietTable.getModel().getValueAt(row, 4);
+		XemChiTietCoSoVatChatFrame xemChiTietCoSoVatChatFrame = new XemChiTietCoSoVatChatFrame(this.controller, this.parentJFrame, tenCoSoVatChatDetail, tongSoLuong, soLuongMuon, soLuongTrongKho);
+        xemChiTietCoSoVatChatFrame.setLocationRelativeTo(null);
+        xemChiTietCoSoVatChatFrame.setResizable(false);
+        xemChiTietCoSoVatChatFrame.setVisible(true);
+	}
+    private javax.swing.JButton addNewBtn;
+    private javax.swing.JPanel tablePanel;
+    private JTextField searchJtf;
+    private JPopupMenu popupMenu;
+    private JMenuItem xemChiTietCoSoVatChat;
+    private JMenuItem chinhSuaCoSoVatChat;
+    private JMenuItem xoaCoSoVatChat;
 }

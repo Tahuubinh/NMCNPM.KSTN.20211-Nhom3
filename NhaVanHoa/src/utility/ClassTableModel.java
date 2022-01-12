@@ -28,13 +28,14 @@ public class ClassTableModel {
             }
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return columnIndex == 0 ? Integer.class : String.class;
+            	if(columnIndex == 0 || columnIndex == 7) return Integer.class;
+                return String.class;
             }
         };
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
-        i = 0;
+        i = 1;
         listItem.forEach((MuonTraModel item) -> {
             obj[0] = i++;
             obj[1] = item.getTenNguoiMuon();
@@ -65,7 +66,7 @@ public class ClassTableModel {
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
-        i = 0;
+        i = 1;
         listItem.forEach((CoSoVatChatModel item) -> {
             obj[0] = i++;
             obj[1] = item.getTenCoSoVatChat();
@@ -93,7 +94,7 @@ public class ClassTableModel {
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
-        i = 0;
+        i = 1;
         listItem.forEach((PhongBanModel item) -> {
             obj[0] = i++;
             obj[1] = item.getTenPhongBan();
@@ -121,7 +122,7 @@ public class ClassTableModel {
         dtm.setColumnIdentifiers(listColumn);
         Object[] obj;
         obj = new Object[columns];
-        i = 0;
+        i = 1;
         listItem.forEach((LichSuModel item) -> {
             obj[0] = i++;
             obj[1] = item.getLyDo();

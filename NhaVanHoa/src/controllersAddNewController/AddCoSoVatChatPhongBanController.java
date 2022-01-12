@@ -1,4 +1,4 @@
-package controllersAddNewController;
+package ControllersAddNewController;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
