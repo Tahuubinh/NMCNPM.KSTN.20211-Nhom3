@@ -540,6 +540,67 @@ public class NhanKhauService {
         return list;
     }
     
+    public List<NhanKhauBean> searchThanhVienCuaHo(int idchuho) {
+        List<NhanKhauBean> list = new  ArrayList<>();
+        String query;
+        
+        // truy cap db
+        // create query
+        try {
+            //long a = Long.parseLong(keyword);
+        	Boolean hasAndBoolean = false;
+        	query = "select * from nhan_khau\r\n"
+            		+ "where id in (\r\n"
+            		+ "	select idnhankhau from thanh_vien_cua_ho\r\n"
+            		+ "	where idhokhau = " + idchuho + "  and "
+            		+ " (quanhevoichuho is null or quanhevoichuho != 'Chủ hộ')\r\n"
+            		+ ")";
+            query += " ORDER BY id";
+            //System.err.println(query);
+            
+                    
+        } catch (Exception e) {
+            query = "SELECT * "
+                    + "FROM nhan_khau "
+                    + "INNER JOIN chung_minh_thu "
+                    + "ON nhan_khau.ID = chung_minh_thu.idNhanKhau "
+                    + "WHERE MATCH(hoTen, bietDanh) AGAINST ('"
+//                    + keyword
+                    + "' IN NATURAL LANGUAGE MODE);";
+        }
+        
+        // execute query
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                NhanKhauBean temp = new NhanKhauBean();
+                NhanKhauModel nhanKhau = temp.getNhanKhauModel();
+                nhanKhau.setID(rs.getInt("ID"));
+                nhanKhau.setHoTen(rs.getString("hoTen"));
+                nhanKhau.setGioiTinh(rs.getString("gioiTinh"));
+                nhanKhau.setNamSinh(rs.getDate("namSinh"));
+                //nhanKhau.setDiaChiHienNay(rs.getString("diaChiHienNay"));
+                nhanKhau.setTccString(rs.getString("tcc"));
+                nhanKhau.setLienheString(rs.getString("lienhe"));
+                nhanKhau.setTonGiao(rs.getString("tongiao"));
+                nhanKhau.setGhiChu(rs.getString("ghichu"));
+//                ChungMinhThuModel chungMinhThuModel = temp.getChungMinhThuModel();
+//                chungMinhThuModel.setIdNhanKhau(rs.getInt("idNhanKhau"));
+//                chungMinhThuModel.setSoCMT(rs.getString("soCMT"));
+//                chungMinhThuModel.setNgayCap(rs.getDate("ngayCap"));
+//                chungMinhThuModel.setNoiCap(rs.getString("noiCap"));
+                list.add(temp);
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception mysqlException) {
+            this.exceptionHandle(mysqlException.getMessage());
+        }
+        return list;
+    }
+    
     /*
      * Ham sử lý ngoại lệ : thông báo ra lỗi nhận được
      */

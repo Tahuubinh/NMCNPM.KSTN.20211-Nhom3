@@ -88,6 +88,22 @@ public class HoKhauService {
         connection.close();
         return true;
     }
+    
+    public boolean subThanhVien(int id_nhan_khau, int id_ho_khau) throws ClassNotFoundException, SQLException{
+        Connection connection = MysqlConnection.getMysqlConnection();
+        String query = "DELETE FROM thanh_vien_cua_ho " 
+                    + " WHERE idnhankhau = ? and idhokhau = ?";
+//        System.err.println(query);
+        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setInt(1, id_nhan_khau);
+        preparedStatement.setInt(2, id_ho_khau);
+//        System.err.println(id_nhan_khau);
+//        System.err.println(id_ho_khau);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        connection.close();
+        return true;
+    }
      
     // lay ra 10 ho khau
     public List<HoKhauBean> getListHoKhau() {

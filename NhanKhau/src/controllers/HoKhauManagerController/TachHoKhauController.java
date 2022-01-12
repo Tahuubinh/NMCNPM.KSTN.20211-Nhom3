@@ -54,7 +54,7 @@ public class TachHoKhauController {
     private List<MemOfFamily> listThanhVien;
     private final TableModelHoKhau tableModelHoKhau = new TableModelHoKhau();
     private final String[] COLUMNS_NK = {"Họ tên", "Ngày sinh", "Quan hệ với chủ hộ"};
-    private final String[] COLUNMS = {"Mã hộ khẩu", "Họ tên chủ hộ", "Địa chỉ"}; 
+    private final String[] COLUNMS = {"Mã hộ khẩu", "Họ tên chủ hộ", "Địa chỉ", "ID"}; 
     private HoKhauBean hoKhauSelected;
     private MemOfFamily thanhVienSeclected;
     private MemOfFamily thanhVienHoMoiSeclected;
