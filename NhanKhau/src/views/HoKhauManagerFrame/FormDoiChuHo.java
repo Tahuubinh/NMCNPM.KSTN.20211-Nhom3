@@ -1,11 +1,20 @@
 package views.HoKhauManagerFrame;
 
+import Bean.HoKhauBean;
 import Bean.NhanKhauBean;
+import controllers.HoKhauPanelController;
+import controllers.HoKhauManagerController.ChonThanhVienController;
 import controllers.HoKhauManagerController.ChoosePeopleController;
+import controllers.HoKhauManagerController.QuanLyThanhVienController;
+import services.HoKhauService;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
@@ -14,6 +23,8 @@ import java.awt.Font;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 /**
  *
@@ -22,8 +33,11 @@ import javax.swing.JTextField;
 public class FormDoiChuHo extends javax.swing.JFrame {
 
     private NhanKhauBean nhanKhauBean;
-    private NhanKhauBean nhanKhauBeanTemp;
     private JFrame parentJFrame;
+    private QuanLyThanhVienController quan_lycontroller;
+    private JTable parenTable;
+    private int id_ho_khau;
+    private HoKhauPanelController parent_controller;
     //private final ChoosePeopleController controller;
     
     /**
@@ -31,14 +45,18 @@ public class FormDoiChuHo extends javax.swing.JFrame {
      * @param nhanKhauBean nhan khau duoc truyen vao tu frame cha
      * @param parentJframe frame cha de disable
      */
-    public FormDoiChuHo(NhanKhauBean nhanKhauBean, JFrame parentJframe) {
-    	setTitle("Chọn đổi chủ hộ");
-        initComponents();
+    public FormDoiChuHo(NhanKhauBean nhanKhauBean, JFrame parentJframe, JTable parenTable, HoKhauPanelController parent_controller) {
+    	setTitle("Đổi chủ hộ");
         this.nhanKhauBean = nhanKhauBean;
         this.parentJFrame = parentJframe;
-        this.nhanKhauBeanTemp = new NhanKhauBean();
+        this.parenTable = parenTable;
+        this.parent_controller = parent_controller;
+        initComponents();
+        this.id_ho_khau = (int)this.parenTable.getModel().getValueAt(parenTable.getSelectedRow(),3);
+//        this.hotenField = hotenField;
+//        this.id_chuho = id_chuho;
         parentJframe.setEnabled(false);
-        //controller = new ChoosePeopleController(this.nhanKhauBeanTemp, searchJtf, selectedJtf, tableJpn);
+        quan_lycontroller = new QuanLyThanhVienController(this.tableJpn, this.ho_tentextField, this.locButton, this.id_ho_khau);
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -100,16 +118,23 @@ public class FormDoiChuHo extends javax.swing.JFrame {
         );
         
         hoanthanhButton = new JButton("Hoàn thành");
+        hoanthanhButton.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+    			ChangeActionPerformed(e);
+        	}
+        });
         hoanthanhButton.setForeground(Color.WHITE);
         hoanthanhButton.setFont(new Font("Tahoma", Font.BOLD, 11));
         hoanthanhButton.setBorderPainted(false);
         hoanthanhButton.setBackground(new Color(212, 84, 21));
         
-        ho_tenLable = new JLabel("Họ tên:");
+        ho_tenLable = new JLabel("Họ tên chủ hộ cũ:");
         ho_tenLable.setFont(new Font("Tahoma", Font.PLAIN, 12));
         
         ho_tentextField = new JTextField();
+        ho_tentextField.setEditable(false);
         ho_tentextField.setFont(new Font("Arial", Font.PLAIN, 14));
+        ho_tentextField.setText((String)this.parenTable.getModel().getValueAt(parenTable.getSelectedRow(),1));
         
         locButton = new JButton("Lọc");
         locButton.setForeground(Color.WHITE);
@@ -122,19 +147,14 @@ public class FormDoiChuHo extends javax.swing.JFrame {
         	jPanel1Layout.createParallelGroup(Alignment.LEADING)
         		.addGroup(jPanel1Layout.createSequentialGroup()
         			.addContainerGap()
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING, false)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addComponent(ho_tenLable, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(ho_tentextField))
+        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING, false)
+        				.addGroup(Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+        					.addComponent(ho_tenLable, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+        					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        					.addComponent(ho_tentextField, GroupLayout.PREFERRED_SIZE, 401, GroupLayout.PREFERRED_SIZE))
         				.addComponent(tableJpn, GroupLayout.PREFERRED_SIZE, 532, GroupLayout.PREFERRED_SIZE))
-        			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addPreferredGap(ComponentPlacement.RELATED)
-        					.addComponent(hoanthanhButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(jPanel1Layout.createSequentialGroup()
-        					.addGap(30)
-        					.addComponent(locButton, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(hoanthanhButton, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)
         			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -143,9 +163,7 @@ public class FormDoiChuHo extends javax.swing.JFrame {
         			.addGap(12)
         			.addGroup(jPanel1Layout.createParallelGroup(Alignment.TRAILING)
         				.addComponent(ho_tenLable, GroupLayout.PREFERRED_SIZE, 15, GroupLayout.PREFERRED_SIZE)
-        				.addGroup(jPanel1Layout.createParallelGroup(Alignment.BASELINE)
-        					.addComponent(ho_tentextField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-        					.addComponent(locButton, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
+        				.addComponent(ho_tentextField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
         			.addGap(31)
         			.addGroup(jPanel1Layout.createParallelGroup(Alignment.LEADING)
         				.addComponent(hoanthanhButton, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
@@ -167,6 +185,31 @@ public class FormDoiChuHo extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void ChangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CreateBtnActionPerformed
+    	JTable tempJTable = quan_lycontroller.getNhankhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	int id_nhan_khau = (int)tempJTable.getModel().getValueAt(tempJTable.getSelectedRow(),0);
+    	id_ho_khau = (int)this.parenTable.getModel().getValueAt(parenTable.getSelectedRow(),3);
+        try {
+			new HoKhauService().doiChuHo(id_nhan_khau, id_ho_khau);
+			JOptionPane.showMessageDialog(null, "Đổi thành công!!");
+	        quan_lycontroller.refreshData();
+	        parent_controller.refreshData();
+			ho_tentextField.setText((String)this.parenTable.getModel().getValueAt(parenTable.getSelectedRow(),1));
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }//GEN-LAST:event_CreateBtnActionPerformed
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel tableJpn;
     private JButton hoanthanhButton;

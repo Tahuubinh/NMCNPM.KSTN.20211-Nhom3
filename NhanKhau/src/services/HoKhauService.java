@@ -104,6 +104,39 @@ public class HoKhauService {
         connection.close();
         return true;
     }
+    
+    public boolean doiChuHo(int id_nhan_khau, int id_ho_khau) throws ClassNotFoundException, SQLException{
+    	try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query = "SELECT * FROM ho_khau WHERE id = " + id_ho_khau;
+            int id_chu_ho = 0;
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+            	id_chu_ho = rs.getInt("idChuHo");
+            }
+            addThanhVien(id_chu_ho, id_ho_khau);
+            subThanhVien(id_nhan_khau, id_ho_khau);
+            preparedStatement.close();
+            
+            query = "UPDATE ho_khau "
+            		+ "SET idchuho = ?"
+            		+ "WHERE id = ?";
+	//        System.err.println(query);
+	        preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+	        preparedStatement.setInt(1, id_nhan_khau);
+	        preparedStatement.setInt(2, id_ho_khau);
+	//        System.err.println(id_nhan_khau);
+	//        System.err.println(id_ho_khau);
+	        preparedStatement.executeUpdate();
+	        preparedStatement.close();
+	        connection.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
+    
     public boolean xoaHoKhau(int id_ho_khau) throws ClassNotFoundException, SQLException{
         Connection connection = MysqlConnection.getMysqlConnection();
         String query = "DELETE FROM thanh_vien_cua_ho " 
@@ -137,7 +170,7 @@ public class HoKhauService {
         
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
-            String query = "SELECT * FROM ho_khau INNER JOIN nhan_khau ON ho_khau.idChuHo = nhan_khau.ID ORDER BY ngayTao DESC";
+            String query = "SELECT * FROM ho_khau INNER JOIN nhan_khau ON ho_khau.idChuHo = nhan_khau.ID";
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()){
@@ -308,7 +341,7 @@ public class HoKhauService {
             	hasAndBoolean = true;
             	query += "diachi LIKE '%"
                         + dia_chi
-                        + "%'"
+                        + "%' "
 						;
             }
             //System.err.println(query);

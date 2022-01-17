@@ -50,7 +50,7 @@ public class FormThemThanhVien extends javax.swing.JFrame {
      * @param parentJframe frame cha de disable
      */
     public FormThemThanhVien(NhanKhauBean nhanKhauBean, JFrame parentJframe, JTable parenTable) {
-    	setTitle("Chọn đổi chủ hộ");
+    	setTitle("Điều chỉnh thành viên trong hộ");
         initComponents();
         this.nhanKhauBean = nhanKhauBean;
         this.parentJFrame = parentJframe;

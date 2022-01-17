@@ -299,10 +299,10 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
     			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
-    	FormDoiChuHo themMoiHoKhau = new FormDoiChuHo(new NhanKhauBean(), this.parentFrame);
-        themMoiHoKhau.setLocationRelativeTo(null);
-        themMoiHoKhau.setResizable(false);
-        themMoiHoKhau.setVisible(true);
+    	FormDoiChuHo doi_chu_ho = new FormDoiChuHo(new NhanKhauBean(), this.parentFrame, tempJTable, controller);
+    	doi_chu_ho.setLocationRelativeTo(null);
+    	doi_chu_ho.setResizable(false);
+    	doi_chu_ho.setVisible(true);
     }//GEN-LAST:event_themMoiBtnActionPerformed
     
     private void themThanhVienBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themMoiBtnActionPerformed

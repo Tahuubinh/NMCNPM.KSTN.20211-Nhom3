@@ -33,3 +33,14 @@ insert into tam_tru (idnhankhau, tungay, denngay)
 values (81, NOW(), NOW())
 
 select * from tam_vang
+select * from nhan_khau
+where id in (
+	select idnhankhau from tam_tru
+)
+
+SELECT * FROM nhan_khau
+ LEFT JOIN tam_tru ON nhan_khau.ID = tam_tru.idNhanKhau 
+ LEFT JOIN tam_vang ON nhan_khau.ID = tam_vang.idNhanKhau
+  WHERE DATE_PART('year', AGE(CURRENT_DATE, namSinh))  >= -1 
+AND DATE_PART('year', AGE(CURRENT_DATE, namSinh))  <= 200 AND (DATE_PART('year', tam_tru.tuNgay) BETWEEN 0 AND 2100) 
+ORDER BY ngayTao DESC
