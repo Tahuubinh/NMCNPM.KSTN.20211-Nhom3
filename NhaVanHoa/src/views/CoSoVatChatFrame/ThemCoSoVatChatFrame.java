@@ -72,6 +72,7 @@ public class ThemCoSoVatChatFrame extends javax.swing.JFrame {
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
+        this.coSoVatChatBean = new CoSoVatChatBean();
         initComponents();
     	setIconImage(Toolkit.getDefaultToolkit().getImage(ThemCoSoVatChatFrame.class.getResource("/Icons/house.png")));
     	setTitle("Thêm cơ sở vật chất");

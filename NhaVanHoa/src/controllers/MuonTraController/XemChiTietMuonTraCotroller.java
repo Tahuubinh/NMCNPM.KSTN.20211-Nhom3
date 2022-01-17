@@ -39,16 +39,17 @@ public class XemChiTietMuonTraCotroller {
 	    private ClassTableModel classTableModel = null;
 	    private final String[] COLUMNS = {"STT", "Tên", "Số lượng", "Đã trả", "Ngày trả"};
 	    private JFrame parentJFrame;
-	    private JLabel tenNguoiDangKySuDungDetail;
+	    private JLabel idDetail;
+	    private JLabel thoiGianMuonDetail;
 	    private JTable table;
 	    private JPopupMenu popupMenu;
 	    private List<PhongBanModel> listPhongBan;
 	    private List<CoSoVatChatModel> listCoSoVatChat;
-	    public XemChiTietMuonTraCotroller(JPanel jpnView, JLabel tenNguoiDangKySuDungDetail, JPopupMenu popupMenu) {
+	    public XemChiTietMuonTraCotroller(JPanel jpnView, JLabel idDetail, JLabel thoiGianMuonDetail, JPopupMenu popupMenu) {
 	        this.jpnView = jpnView;
 	        classTableModel = new ClassTableModel();
 	        this.muonTraService = new MuonTraService();
-	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(tenNguoiDangKySuDungDetail.getText());
+	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(idDetail.getText(), thoiGianMuonDetail.getText());
 	        this.popupMenu = popupMenu;
 	        initAction();
 	    }
@@ -123,7 +124,7 @@ public class XemChiTietMuonTraCotroller {
 	    }
 	    
 	    public void refreshData() {
-	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(this.tenNguoiDangKySuDungDetail.getText());
+	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(this.idDetail.getText(), thoiGianMuonDetail.getText());
 	        setDataTable();
 	    }
 	    public JPanel getJpnView() {

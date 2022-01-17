@@ -17,11 +17,11 @@ import models.ThoiGianModel;
  * @author Hai
  */
 public class MuonTraBean {
-    private MuonTraModel muonTraModel;
-    private NguoiMuonModel nguoiMuonModel;
-    private CoSoVatChatModel coSoVatChatModel;
-    private PhongBanModel phongBanModel;
-    private ThoiGianModel thoiGianModel;
+    private MuonTraModel muonTraModel = new MuonTraModel();
+    private NguoiMuonModel nguoiMuonModel = new NguoiMuonModel();
+    private CoSoVatChatModel coSoVatChatModel = new CoSoVatChatModel();
+    private PhongBanModel phongBanModel = new PhongBanModel();
+    private ThoiGianModel thoiGianModel = new ThoiGianModel();
     private List<CoSoVatChatModel> listCoSoVatChatModels = new ArrayList<>();
     private List<PhongBanModel> listPhongBanModels = new ArrayList<>();
     public MuonTraBean(MuonTraModel muonTraModel, NguoiMuonModel nguoiMuonModel, CoSoVatChatModel coSoVatChatModel, PhongBanModel phongBanModel, ThoiGianModel thoiGianModel) {

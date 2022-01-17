@@ -19,6 +19,7 @@ import models.CoSoVatChatModel;
 import models.NguoiMuonModel;
 import models.NhaTaiTroModel;
 import models.ThoiGianModel;
+import services.MuonTraService;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -67,14 +68,19 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     /**
      * @wbp.parser.constructor
      */
-    public ChinhSuaMuonTraFrame(CoSoVatChatPanelController parentController, JFrame parentJFrame) {
+    public ChinhSuaMuonTraFrame(CoSoVatChatPanelController parentController, JFrame parentJFrame, String cccdNguoiMuon, String thoiGianMuon, JLabel tenCoSoVatChatPhongBanDetailJlb, int soLuongMuon, int isCoSoVatChat) {
     	setBackground(new Color(255, 228, 228));
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
+        this.muonTraBean = new MuonTraBean();
         initComponents();
+        this.tenCoSoVatChatPhongBanDetailJlb.setText(tenCoSoVatChatPhongBanDetailJlb.getText());
+        this.soLuongMuonJtf.setText(soLuongMuon+"");
+        this.cccdNguoiMuon = cccdNguoiMuon;
+        this.thoiGianMuon = thoiGianMuon;
     	setIconImage(Toolkit.getDefaultToolkit().getImage(ChinhSuaMuonTraFrame.class.getResource("/Icons/house.png")));
-    	setTitle("Thêm cơ sở vật chất");
+    	setTitle("Chỉnh sửa cơ sở vật chất / phòng ban đã mượn");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -104,7 +110,7 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
         };
         this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
-        this.coSoVatChatBean = new CoSoVatChatBean();
+        this.muonTraBean = new MuonTraBean();
         initComponents();
         setTitle("Thêm mới cơ sở vật chất");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -139,22 +145,15 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     	DangKyCoSoVatChatPanel.setBackground(new Color(255, 228, 228));
     	getContentPane().add(DangKyCoSoVatChatPanel, BorderLayout.CENTER);
     	
-    	JLabel tenCoSoVatChatJlb = new JLabel("Tên cơ sở vật chất:");
-    	tenCoSoVatChatJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	JLabel tenCoSoVatChatPhongBanJlb = new JLabel("Tên cơ sở vật chất / phòng ban:");
+    	tenCoSoVatChatPhongBanJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	
-    	JLabel soLuongJlb = new JLabel("Số lượng:");
-    	soLuongJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	JLabel soLuongMuonJlb = new JLabel("Số lượng mượn:");
+    	soLuongMuonJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	
-    	soLuongJtf = new JTextField();
-    	soLuongJtf.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    	soLuongJtf.setColumns(10);
-    	
-    	JLabel lyDoJlb = new JLabel("Lý do:");
-    	lyDoJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    	
-    	lyDoJtf = new JTextField();
-    	lyDoJtf.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    	lyDoJtf.setColumns(10);
+    	soLuongMuonJtf = new JTextField();
+    	soLuongMuonJtf.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	soLuongMuonJtf.setColumns(10);
     	
     	JButton okButton = new JButton("OK");
     	okButton.addMouseListener(new MouseAdapter() {
@@ -186,57 +185,40 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     	});
     	okButton.setBackground(new Color(212, 84, 21));
     	
-    	tenCoSoVatChatJtf = new JTextField();
-    	tenCoSoVatChatJtf.setFont(new Font("Tahoma", Font.PLAIN, 14));
-    	tenCoSoVatChatJtf.setColumns(10);
+    	tenCoSoVatChatPhongBanDetailJlb = new JLabel("null");
+    	tenCoSoVatChatPhongBanDetailJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	GroupLayout gl_DangKyCoSoVatChatPanel = new GroupLayout(DangKyCoSoVatChatPanel);
     	gl_DangKyCoSoVatChatPanel.setHorizontalGroup(
     		gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
     			.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
     				.addContainerGap()
     				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
-    					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    						.addComponent(lyDoJlb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-    						.addPreferredGap(ComponentPlacement.UNRELATED)
-    						.addComponent(lyDoJtf, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE)
-    						.addContainerGap())
-    					.addGroup(Alignment.TRAILING, gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
-    							.addComponent(soLuongJlb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-    							.addComponent(tenCoSoVatChatJlb))
-    						.addPreferredGap(ComponentPlacement.UNRELATED)
-    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
-    							.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    								.addComponent(soLuongJtf, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE)
-    								.addGap(18)
-    								.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-    							.addComponent(tenCoSoVatChatJtf, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE))
-    						.addContainerGap())))
+    					.addComponent(soLuongMuonJlb, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+    					.addComponent(tenCoSoVatChatPhongBanJlb))
+    				.addPreferredGap(ComponentPlacement.UNRELATED)
+    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
+    					.addComponent(tenCoSoVatChatPhongBanDetailJlb)
+    					.addComponent(soLuongMuonJtf, GroupLayout.PREFERRED_SIZE, 207, GroupLayout.PREFERRED_SIZE))
+    				.addPreferredGap(ComponentPlacement.RELATED)
+    				.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+    				.addContainerGap())
     	);
     	gl_DangKyCoSoVatChatPanel.setVerticalGroup(
     		gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
     			.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
-    					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    						.addGap(52)
-    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
-    							.addComponent(tenCoSoVatChatJlb)
-    							.addComponent(tenCoSoVatChatJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-    						.addGap(18)
-    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
-    							.addComponent(soLuongJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-    							.addComponent(soLuongJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
-    							.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    								.addGap(21)
-    								.addComponent(lyDoJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-    							.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    								.addGap(18)
-    								.addComponent(lyDoJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))))
-    					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    						.addGap(73)
-    						.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)))
-    				.addContainerGap(84, Short.MAX_VALUE))
+    				.addGap(84)
+    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
+    					.addComponent(tenCoSoVatChatPhongBanJlb)
+    					.addComponent(tenCoSoVatChatPhongBanDetailJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
+    				.addGap(18)
+    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
+    					.addComponent(soLuongMuonJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+    					.addComponent(soLuongMuonJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
+    				.addContainerGap(90, Short.MAX_VALUE))
+    			.addGroup(Alignment.TRAILING, gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    				.addContainerGap(94, Short.MAX_VALUE)
+    				.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
+    				.addGap(91))
     	);
     	
     	DangKyCoSoVatChatPanel.setLayout(gl_DangKyCoSoVatChatPanel);
@@ -244,37 +226,56 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private void addThongTinDangKyCoSoVatChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
     	if(validateValueInForm()) {
-    		CoSoVatChatModel coSoVatChatModel = this.coSoVatChatBean.getCoSoVatChatModel();
-    		NhaTaiTroModel nhaTaiTroModel = this.coSoVatChatBean.getNhaTaiTroModel();
-    		coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatJtf.getText());
-    		coSoVatChatModel.setSoLuong(Integer.parseInt(soLuongJtf.getText()));
-    		nhaTaiTroModel.setLyDo(lyDoJtf.getText());
-    		coSoVatChatBean.setCoSoVatChatModel(coSoVatChatModel);
-    		coSoVatChatBean.setNhaTaiTroModel(nhaTaiTroModel);
-            try {
-            	if(this.controller.addNewCoSoVatChat(coSoVatChatBean)) {
-                    JOptionPane.showMessageDialog(null, "Thêm thành công!!");
-                    close();
-                    parentController.refreshData();
+    		MuonTraService muonTraService = new MuonTraService();
+    		if(isCoSoVatChat > 0) {
+    			CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
+    			coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatPhongBanDetailJlb.getText());
+    			coSoVatChatModel.setSoLuong(Integer.parseInt(soLuongMuonJtf.getText()));
+    			try {
+    				if(coSoVatChatModel.getSoLuong() == 0) {
+    					if(JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn không mượn bất cứ cái "+ coSoVatChatModel.getTenCoSoVatChat() +" ?", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
+                    		if(muonTraService.huyMuonCoSoVatChat(this.cccdNguoiMuon, coSoVatChatModel.getTenCoSoVatChat(), this.thoiGianMuon))
+                                JOptionPane.showMessageDialog(null, "Xóa thành công!!");
+                    	}
+    					return;
+    				}
+                	if(muonTraService.chinhSuaCoSoVatChatMuon(cccdNguoiMuon, coSoVatChatModel, thoiGianMuon)) {
+                        JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!!");
+                        close();
+                        parentController.refreshData();
+                    }
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
                 }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
-            }
+    		} else {
+    			String tenPhongBan = tenCoSoVatChatPhongBanDetailJlb.getText();
+    			try {
+    					if(JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn không mượn  "+ tenPhongBan +" ?", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
+                    		if(muonTraService.huyMuonPhongBan(this.cccdNguoiMuon, tenPhongBan, this.thoiGianMuon))
+                                JOptionPane.showMessageDialog(null, "Xóa thành công!!");
+                    	}
+    					return;
+        
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                    JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+    		}
+            
     	}
     }
     // check cac gia tri duoc nhap vao form
     private boolean validateValueInForm() {
         // check null
-    	if(tenCoSoVatChatJtf.getText().trim().isEmpty() 
-    			|| soLuongJtf.getText().trim().isEmpty()
+    	if(soLuongMuonJtf.getText().trim().isEmpty()
     			) {
             JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập hết các trường bắt buộc", "Warning", JOptionPane.WARNING_MESSAGE);
             return false;
     	}
     	try {
-    		int soLuong = Integer.parseInt(soLuongJtf.getText());
-    		if(soLuong <= 0) {
+    		int soLuong = Integer.parseInt(soLuongMuonJtf.getText());
+    		if(soLuong < 0) {
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đúng định dạng số lượng", "Warning", JOptionPane.WARNING_MESSAGE);
                 return false;
     		}
@@ -287,10 +288,12 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     }
 	private CoSoVatChatPanelController parentController;
     private JFrame parentFrame;
-    private CoSoVatChatBean coSoVatChatBean;
+    private MuonTraBean muonTraBean;
     private AddNewController controller;
     private JPanel DangKyCoSoVatChatPanel;
-    private JTextField soLuongJtf;
-    private JTextField lyDoJtf;
-    private JTextField tenCoSoVatChatJtf;
+    private JTextField soLuongMuonJtf;
+    private JLabel tenCoSoVatChatPhongBanDetailJlb;
+    private String cccdNguoiMuon;
+    private String thoiGianMuon;
+    private int isCoSoVatChat;
 }

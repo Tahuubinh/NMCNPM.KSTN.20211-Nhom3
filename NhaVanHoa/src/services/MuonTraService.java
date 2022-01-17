@@ -221,28 +221,33 @@ public class MuonTraService {
     /*
      * Ham sử lý ngoại lệ : thông báo ra lỗi nhận được
      */
-    public boolean huyLichMuon(String cccdNguoiMuo) {
+    public boolean huyLichMuon(String cccdNguoiMuon, String thoiGianMuon) {
 		// TODO Auto-generated method stub
 		
 		return true;
 	}
     
-    public boolean chinhSuaCoSoVatChatMuon(String cccdNguoiMuo, CoSoVatChatModel coSoVatChatModel) {
+    public boolean chinhSuaCoSoVatChatMuon(String cccdNguoiMuon, CoSoVatChatModel coSoVatChatModel, String thoiGianMuon) {
     	
 		return true;	
     }
     
-    public boolean hoanTraCoSoVatChatMuon(String cccdNguoiMuo, CoSoVatChatModel coSoVatChatModel) {
+    public boolean huyMuonCoSoVatChat(String cccdNguoiMuon, String tenCoSoVatChat, String thoiGianMuon) {
     	
 		return true;	
     }
     
-    public boolean huyphongBanMuon(String cccdNguoiMuo, PhongBanModel coSoVatChatModel) {
+    public boolean hoanTraCoSoVatChatMuon(String cccdNguoiMuon, CoSoVatChatModel coSoVatChatModel, String thoiGianMuon) {
     	
 		return true;	
     }
     
-    public boolean hoanTraPhongBanMuon(String cccdNguoiMuo, PhongBanModel coSoVatChatModel) {
+    public boolean huyMuonPhongBan(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon) {
+    	
+		return true;	
+    }
+    
+    public boolean hoanTraPhongBanMuon(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon) {
     	
 		return true;	
     }

@@ -10,9 +10,9 @@ import models.NhaTaiTroModel;
 import models.ThoiGianModel;
 
 public class CoSoVatChatBean {
-	private CoSoVatChatModel coSoVatChatModel;
-	private NhaTaiTroModel nhaTaiTroModel;
-	private ItemDaXoaModel itemDaXoaModel;
+	private CoSoVatChatModel coSoVatChatModel = new CoSoVatChatModel();
+	private NhaTaiTroModel nhaTaiTroModel = new NhaTaiTroModel();
+	private ItemDaXoaModel itemDaXoaModel = new ItemDaXoaModel();
 	private List<ListNguoiMuonCoSoVatChatDetailModel> listNguoiMuonCoSoVatChatDetailModels;
     public CoSoVatChatBean(CoSoVatChatModel coSoVatChatModel) {
     	this.setCoSoVatChatModel(coSoVatChatModel);

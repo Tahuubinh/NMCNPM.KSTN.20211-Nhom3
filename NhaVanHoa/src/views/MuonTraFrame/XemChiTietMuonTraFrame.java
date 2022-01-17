@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.EventObject;
 import java.util.List;
@@ -72,8 +73,8 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
     public XemChiTietMuonTraFrame(MuonTraPanelController parentController, JFrame parentJFrame, String tenNguoiDangKySuDungDetail, String idDetail, String lienHeDetail, String thoiGianDetail, String thoiGianTraDetail) {
     	setBackground(new Color(255, 228, 228));
     	this.parentController = parentController;
-    	this.parentFrame = parentJFrame;
-        this.parentFrame.setEnabled(true);
+    	this.parentJFrame = parentJFrame;
+        this.parentJFrame.setEnabled(true);
         initComponents();
         this.tenNguoiDangKyDetail.setText(tenNguoiDangKySuDungDetail);
         this.idDetail.setText(idDetail);
@@ -97,7 +98,7 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 		});
         
     	pack();
-        controller = new XemChiTietMuonTraCotroller(tablePanel, this.tenNguoiDangKyDetail, this.popupMenu);
+        controller = new XemChiTietMuonTraCotroller(tablePanel, this.idDetail, this.thoiGianMuonDetail, this.popupMenu);
        
         listCoSoVatChat = controller.getListCoSoVatChat();
         listPhongBan = controller.getListPhongBan();
@@ -115,6 +116,7 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
         controller.setDataTable();
     	setIconImage(Toolkit.getDefaultToolkit().getImage(XemChiTietMuonTraFrame.class.getResource("/Icons/house.png")));
     	setTitle("Xem chi tiết mượn trả");
+        childController = new AddNewController();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter() {
             @Override
@@ -141,9 +143,8 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
             
             
         };
-        this.parentFrame = parentJFrame;
-        this.parentFrame.setEnabled(false);
-        this.muonTraBeann = new MuonTraBean();
+        this.parentJFrame = parentJFrame;
+        this.parentJFrame.setEnabled(false);
         initComponents();
         setTitle("Xem chi tiết mượn trả");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -158,24 +159,10 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
             }
             
         });
-        popupMenu = new JPopupMenu();
-        addPopup(tablePanel, popupMenu);
-        
-        chinhSua = new JMenuItem("Chỉnh sửa");
-        popupMenu.add(chinhSua);
-        chinhSua.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				// TODO Auto-generated method stub
-				chinhSuaActionPerformed(evt);
-			}
-
-		});
     }
     
     void close() {
-        this.parentFrame.setEnabled(true);
+        this.parentJFrame.setEnabled(true);
         dispose();
     }
 
@@ -320,7 +307,18 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 			System.out.print("Can't convert to timestamp");
 			e.printStackTrace();
 		}
-		
+		int isCoSoVatChat = 1;
+		String tenCoSoVatChatPhongBan = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		int soLuongMuon =Integer.parseInt(xemChiTietTable.getModel().getValueAt(row, 2).toString());
+		for(int i = 0; i < this.listPhongBan.size(); ++i) {
+			if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
+				isCoSoVatChat = 0;
+				return;
+			}
+		}
+		ChinhSuaMuonTraFrame chinhSuaMuonTraFrame = new ChinhSuaMuonTraFrame(this.controller, parentJFrame, idDetail, thoiGianMuonDetail, tenCoSoVatChatPhongBan, soLuongMuon, isCoSoVatChat);
+		xemChiTietMuonTraFrame.setResizable(false);
+		xemChiTietMuonTraFrame.setVisible(true);
 	}
 	
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -343,11 +341,11 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
     // check cac gia tri duoc nhap vao form
     private XemChiTietMuonTraCotroller controller;
 	private MuonTraPanelController parentController;
-    private JFrame parentFrame;
+    private JFrame parentJFrame;
     private MuonTraBean muonTraBeann;
     private AddNewController childController;
-    private List<PhongBanModel> listPhongBan;
-    private List<CoSoVatChatModel> listCoSoVatChat;
+    private List<PhongBanModel> listPhongBan = new ArrayList<>();
+    private List<CoSoVatChatModel> listCoSoVatChat = new ArrayList<>();
     private JPanel DangKyCoSoVatChatPanel;
     private JLabel thoiGianMuonJlb;
     private JLabel thoiGianTraJlb;
@@ -361,6 +359,5 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
     private JPopupMenu popupMenu;
     private JMenuItem chinhSua;
     private JMenuItem hoanTra;
-
 	
 }

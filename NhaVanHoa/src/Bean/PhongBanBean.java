@@ -3,7 +3,7 @@ package Bean;
 import models.PhongBanModel;
 
 public class PhongBanBean {
-	private PhongBanModel PhongBanModel;
+	private PhongBanModel PhongBanModel = new PhongBanModel();
 	
     public PhongBanBean(PhongBanModel PhongBanModel) {
     	this.setPhongBanModel(PhongBanModel);

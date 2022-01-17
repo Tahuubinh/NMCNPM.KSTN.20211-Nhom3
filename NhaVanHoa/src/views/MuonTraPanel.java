@@ -336,10 +336,12 @@ public class MuonTraPanel extends javax.swing.JPanel {
   		return;
 		}
 		String tenNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		String cccdNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 2).toString();
+		String thoiGianMuon = xemChiTietTable.getModel().getValueAt(row, 4).toString();
         if (JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn hủy lịch mượn của " + tenNguoiMuon + " ??", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
         	 try {
              	MuonTraService muonTraService = new MuonTraService();
-             	if(muonTraService.huyLichMuon(tenNguoiMuon))
+             	if(muonTraService.huyLichMuon(cccdNguoiMuon, thoiGianMuon))
                      JOptionPane.showMessageDialog(null, "Hủy thành công!!");
                 else {
                     JOptionPane.showMessageDialog(null, "Đã quá lịch mượn, không thể hủy", "Warning", JOptionPane.WARNING_MESSAGE);
