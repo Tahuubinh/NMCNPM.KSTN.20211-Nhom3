@@ -3,6 +3,7 @@ package Bean;
 
 import models.PhongBanModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.CoSoVatChatModel;
@@ -21,8 +22,8 @@ public class MuonTraBean {
     private CoSoVatChatModel coSoVatChatModel;
     private PhongBanModel phongBanModel;
     private ThoiGianModel thoiGianModel;
-    private List<CoSoVatChatModel> listCoSoVatChatModels;
-    private List<PhongBanModel> listPhongBanModels;
+    private List<CoSoVatChatModel> listCoSoVatChatModels = new ArrayList<>();
+    private List<PhongBanModel> listPhongBanModels = new ArrayList<>();
     public MuonTraBean(MuonTraModel muonTraModel, NguoiMuonModel nguoiMuonModel, CoSoVatChatModel coSoVatChatModel, PhongBanModel phongBanModel, ThoiGianModel thoiGianModel) {
         this.muonTraModel = muonTraModel;
         this.nguoiMuonModel = nguoiMuonModel;

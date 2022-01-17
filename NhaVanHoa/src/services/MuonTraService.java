@@ -4,6 +4,7 @@ import Bean.MuonTraBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -130,12 +131,6 @@ public class MuonTraService {
         return list;
     }
     
-    //danh sach nguoi muon, phuc vu cho viec search
-    public List<MuonTraBean> statisticMuonTra(String tenNguoiMuon, String lienHe, Date tuNgay, Date denNgay) {
-        List<MuonTraBean> list = new ArrayList<>();
-        //viết truy vấn
-        return list;
-    }
     
     /*
      * ham tim kiem nhan khau theo ten, lien he, tu ngay, den ngay
@@ -214,8 +209,9 @@ public class MuonTraService {
     }
     
     // add cac gia tri nhan ve vao ListMuonTraDetail
-    public MuonTraBean getChiTietMuonTra(String tenNguoiMuon) {
+    public MuonTraBean getChiTietMuonTra(String cccdNguoiMuon, String thoiGianMuon) {
         MuonTraBean muonTraBean = new MuonTraBean();
+        Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
         List<CoSoVatChatModel> listCoSoVatChatModels = muonTraBean.getListCoSoVatChatModels();
         List<PhongBanModel> listPhongBanModels = muonTraBean.getListPhongBanModels();
 
@@ -225,31 +221,32 @@ public class MuonTraService {
     /*
      * Ham sử lý ngoại lệ : thông báo ra lỗi nhận được
      */
-    public boolean huyLichMuon(String tenNguoiMuon) {
+    public boolean huyLichMuon(String cccdNguoiMuo) {
 		// TODO Auto-generated method stub
 		
 		return true;
 	}
     
-    public boolean chinhSuaCoSoVatChat(String tenNguoiMuon, CoSoVatChatModel coSoVatChatModel) {
+    public boolean chinhSuaCoSoVatChatMuon(String cccdNguoiMuo, CoSoVatChatModel coSoVatChatModel) {
     	
 		return true;	
     }
     
-    public boolean hoanTraCoSoVatChat(String tenNguoiMuon, CoSoVatChatModel coSoVatChatModel) {
+    public boolean hoanTraCoSoVatChatMuon(String cccdNguoiMuo, CoSoVatChatModel coSoVatChatModel) {
     	
 		return true;	
     }
     
-    public boolean chinhSuaPhongBan(String tenNguoiMuon, PhongBanModel coSoVatChatModel) {
+    public boolean huyphongBanMuon(String cccdNguoiMuo, PhongBanModel coSoVatChatModel) {
     	
 		return true;	
     }
     
-    public boolean hoanTraPhongBan(String tenNguoiMuon, PhongBanModel coSoVatChatModel) {
+    public boolean hoanTraPhongBanMuon(String cccdNguoiMuo, PhongBanModel coSoVatChatModel) {
     	
 		return true;	
     }
+    
     private void exceptionHandle(String message) {
         JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.ERROR_MESSAGE);
     }

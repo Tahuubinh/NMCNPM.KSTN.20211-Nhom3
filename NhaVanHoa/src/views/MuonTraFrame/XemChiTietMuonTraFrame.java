@@ -80,6 +80,22 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
         this.lienHeDetail.setText(lienHeDetail);
         this.thoiGianMuonDetail.setText(thoiGianDetail);
         this.thoiGianTraDetail.setText(thoiGianDetail);
+        
+        popupMenu = new JPopupMenu();
+        addPopup(tablePanel, popupMenu);
+        
+        chinhSua = new JMenuItem("Chỉnh sửa");
+        popupMenu.add(chinhSua);
+        chinhSua.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				chinhSuaActionPerformed(evt);
+			}
+
+		});
+        
     	pack();
         controller = new XemChiTietMuonTraCotroller(tablePanel, this.tenNguoiDangKyDetail, this.popupMenu);
        
@@ -142,6 +158,20 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
             }
             
         });
+        popupMenu = new JPopupMenu();
+        addPopup(tablePanel, popupMenu);
+        
+        chinhSua = new JMenuItem("Chỉnh sửa");
+        popupMenu.add(chinhSua);
+        chinhSua.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				chinhSuaActionPerformed(evt);
+			}
+
+		});
     }
     
     void close() {
@@ -162,20 +192,7 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
     	DangKyCoSoVatChatPanel.setBackground(new Color(255, 228, 228));
     	getContentPane().add(DangKyCoSoVatChatPanel, BorderLayout.CENTER);
     	
-        popupMenu = new JPopupMenu();
-        addPopup(tablePanel, popupMenu);
-        
-        chinhSua = new JMenuItem("Chỉnh sửa");
-        popupMenu.add(chinhSua);
-        chinhSua.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				// TODO Auto-generated method stub
-				chinhSuaActionPerformed(evt);
-			}
-
-		});
+     
 
     	JLabel tenDangKyJlb = new JLabel("Tên người đăng ký:");
     	tenDangKyJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));

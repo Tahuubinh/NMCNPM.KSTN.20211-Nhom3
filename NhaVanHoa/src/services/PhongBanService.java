@@ -121,7 +121,6 @@ public class PhongBanService {
     }
     
     public boolean huyPhongBan(String tenPhongBan) {
-<<<<<<< HEAD
         List<PhongBanBean> list = new ArrayList<>();
         //viết truy vấn
         return true;
@@ -129,8 +128,6 @@ public class PhongBanService {
     
     public boolean huyPhongBanBatBuoc(String tenPhongBan) {
         List<PhongBanBean> list = new ArrayList<>();
-=======
->>>>>>> 74acf052588fa17e4f55c789d268ad5899c14136
         //viết truy vấn
     	String query = "DELETE FROM infrastructure WHERE infra_name = '" + tenPhongBan + "'";
     	Connection connection;

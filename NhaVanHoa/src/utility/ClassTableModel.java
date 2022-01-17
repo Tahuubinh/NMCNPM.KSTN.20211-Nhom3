@@ -40,7 +40,7 @@ public class ClassTableModel {
         Object[] obj;
         obj = new Object[columns];
         i = 1;
-        listItem.forEach((MuonTraModel item) -> {
+        listItem.forEach(item -> {
             obj[0] = i++;
             obj[1] = item.getTenNguoiMuon();
             obj[2] = item.getid();
