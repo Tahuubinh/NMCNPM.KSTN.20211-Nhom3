@@ -157,11 +157,12 @@ public class NhanKhauService {
                 nhanKhau.setTccString(rs.getString("tcc"));
 //                System.err.println("sfsdf   " + rs.getString("hoTen"));
 //                System.err.println(rs.getString("tcc"));
-                ChungMinhThuModel chungMinhThuModel = nhanKhauBean.getChungMinhThuModel();
-                chungMinhThuModel.setIdNhanKhau(rs.getInt("idNhanKhau"));
-                chungMinhThuModel.setSoCMT(rs.getString("soCMT"));
-                chungMinhThuModel.setNgayCap(rs.getDate("ngayCap"));
-                chungMinhThuModel.setNoiCap(rs.getString("noiCap"));
+                
+//                ChungMinhThuModel chungMinhThuModel = nhanKhauBean.getChungMinhThuModel();
+//                chungMinhThuModel.setIdNhanKhau(rs.getInt("idNhanKhau"));
+//                chungMinhThuModel.setSoCMT(rs.getString("soCMT"));
+//                chungMinhThuModel.setNgayCap(rs.getDate("ngayCap"));
+//                chungMinhThuModel.setNoiCap(rs.getString("noiCap"));
                 list.add(nhanKhauBean);
             }
             preparedStatement.close();
