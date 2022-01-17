@@ -107,46 +107,11 @@ public class CoSoVatChatService {
 		} catch (Exception e) {
             this.exceptionHandle(e.getMessage());
         }
-<<<<<<< HEAD
         coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(list);
-=======
 		System.out.print(list.size());
 		return coSoVatChatBean;
 	}
 	
-	public CoSoVatChatBean getCoSoVatChat(String tenCoSoVatChat) {
-		Connection connection;
-		CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
-		List<ListNguoiMuonCoSoVatChatDetailModel> listNguoiMuonCoSoVatChatDetailModels = new ArrayList<>();
-		coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(listNguoiMuonCoSoVatChatDetailModels);
-//		try {
-//			connection = MysqlConnection.getMysqlConnection();
-//			 
-//	        String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
-//	   			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE CAST(i.item_id AS string) = "
-//	   			 		 + id
-//	   			 		 + " GROUP BY i.item_id";
-//	        PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
-//	        ResultSet rs = preparedStatement.executeQuery();
-//	        int idCoSoVatChat = -1;
-//	        while(rs.next()) {
-//	        	CoSoVatChatModel coSoVatChat = coSoVatChatBean.getCoSoVatChatModel();
-//                idCoSoVatChat = rs.getInt("item_id");
-//                coSoVatChat.setId(idCoSoVatChat);
-//                coSoVatChat.setTenCoSoVatChat(rs.getString("item_name"));
-//                coSoVatChat.setSoLuong(rs.getInt("item_quantity"));
-//                coSoVatChat.setSoLuongMuon(rs.getInt("lended"));
-//                coSoVatChat.setSoLuongTrongKho(rs.getInt("remain"));
-//	        }
-//	        preparedStatement.close();
-//	        connection.close();
-//		} catch (Exception e) {
-//            this.exceptionHandle(e.getMessage());
-//        }
-        
->>>>>>> 74acf052588fa17e4f55c789d268ad5899c14136
-        return coSoVatChatBean;
-    }
     
      // lay danh sach co so vat chat
     public List<CoSoVatChatBean> getListCoSoVatChat() {
