@@ -20,7 +20,53 @@ public class CoSoVatChatService {
 	public CoSoVatChatBean getCoSoVatChatDetail(String tenCoSoVatChat) {
 		Connection connection;
 		CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
-		List<ListNguoiMuonCoSoVatChatDetailModel> list = coSoVatChatBean.getListNguoiMuonCoSoVatChatDetailModels();
+		List<ListNguoiMuonCoSoVatChatDetailModel> list = new ArrayList<>();
+		try {
+			connection = MysqlConnection.getMysqlConnection();
+	        String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(coalesce((ir.item_number),0)) AS lended, (i.item_quantity-COALESCE(sum(ir.item_number), 0)) AS remain "
+	   			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE i.item_name = '"
+	   			 		 + tenCoSoVatChat
+	   			 		 + "' GROUP BY i.item_id";
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+	        while(rs.next()) {
+	        	CoSoVatChatModel coSoVatChat = coSoVatChatBean.getCoSoVatChatModel();
+                coSoVatChat.setId(rs.getInt("item_id"));
+                coSoVatChat.setTenCoSoVatChat(rs.getString("item_name"));
+                coSoVatChat.setSoLuong(rs.getInt("item_quantity"));
+                coSoVatChat.setSoLuongMuon(rs.getInt("lended"));
+                coSoVatChat.setSoLuongTrongKho(rs.getInt("remain"));
+	        }
+	        
+	        query = "SELECT ir.item_number, r.user_name, s.time_start, s.time_end FROM itemregistered ir "
+	        	  + "LEFT JOIN registers r ON ir.user_id = r.user_id LEFT JOIN item i ON ir.item_id = i.item_id "
+	        	  + "LEFT JOIN schedule s ON ir.event_no = s.event_no WHERE item_name = '"
+	        	  + tenCoSoVatChat + "'";
+	        preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+	        rs = preparedStatement.executeQuery();
+	        
+	        while(rs.next()) {
+	        	
+	        	ListNguoiMuonCoSoVatChatDetailModel detail = new ListNguoiMuonCoSoVatChatDetailModel();
+	        	detail.setSoLuongMuon(rs.getInt("item_number"));
+	        	detail.setTenNguoiMuon(rs.getString("user_name"));
+	        	detail.setThoiGianMuon(rs.getString("time_start"));
+	        	detail.setThoiGianTra(rs.getString("time_end"));
+	        	list.add(detail);
+	        }
+	        coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(list);
+	        preparedStatement.close();
+	        connection.close();
+		} catch (Exception e) {
+            this.exceptionHandle(e.getMessage());
+        }
+        coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(list);
+		return coSoVatChatBean;
+	}
+	public CoSoVatChatBean getCoSoVatChat(String tenCoSoVatChat) {
+		Connection connection;
+		CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
+		List<ListNguoiMuonCoSoVatChatDetailModel> list = new ArrayList<>();
 		try {
 			connection = MysqlConnection.getMysqlConnection();
 			 
@@ -38,7 +84,6 @@ public class CoSoVatChatService {
                 coSoVatChat.setSoLuongMuon(rs.getInt("lended"));
                 coSoVatChat.setSoLuongTrongKho(rs.getInt("remain"));
 	        }
-	        preparedStatement.close();
 	        
 	        query = "SELECT ir.item_number, r.user_name, s.time_start, s.time_end FROM itemregistered ir "
 	        	  + "LEFT JOIN registers r ON ir.user_id = r.user_id LEFT JOIN item i ON ir.item_id = i.item_id "
@@ -56,46 +101,13 @@ public class CoSoVatChatService {
 	        	detail.setThoiGianTra(rs.getString("time_end"));
 	        	list.add(detail);
 	        }
-	        coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(list);
 	        preparedStatement.close();
-	        
+			System.out.println(list.size());
 	        connection.close();
 		} catch (Exception e) {
             this.exceptionHandle(e.getMessage());
         }
-		System.out.print(list.size());
-		return coSoVatChatBean;
-	}
-	public CoSoVatChatBean getCoSoVatChat(String tenCoSoVatChat) {
-		Connection connection;
-		CoSoVatChatBean coSoVatChatBean = new CoSoVatChatBean(); 
-		List<ListNguoiMuonCoSoVatChatDetailModel> listNguoiMuonCoSoVatChatDetailModels = new ArrayList<>();
-		coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(listNguoiMuonCoSoVatChatDetailModels);
-//		try {
-//			connection = MysqlConnection.getMysqlConnection();
-//			 
-//	        String query = "SELECT i.item_id, i.item_name, i.item_quantity, sum(ir.item_number) AS lended, (i.item_quantity-sum(ir.item_number)) AS remain "
-//	   			 		 + "FROM item i JOIN itemregistered ir ON i.item_id=ir.item_id WHERE CAST(i.item_id AS string) = "
-//	   			 		 + id
-//	   			 		 + " GROUP BY i.item_id";
-//	        PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
-//	        ResultSet rs = preparedStatement.executeQuery();
-//	        int idCoSoVatChat = -1;
-//	        while(rs.next()) {
-//	        	CoSoVatChatModel coSoVatChat = coSoVatChatBean.getCoSoVatChatModel();
-//                idCoSoVatChat = rs.getInt("item_id");
-//                coSoVatChat.setId(idCoSoVatChat);
-//                coSoVatChat.setTenCoSoVatChat(rs.getString("item_name"));
-//                coSoVatChat.setSoLuong(rs.getInt("item_quantity"));
-//                coSoVatChat.setSoLuongMuon(rs.getInt("lended"));
-//                coSoVatChat.setSoLuongTrongKho(rs.getInt("remain"));
-//	        }
-//	        preparedStatement.close();
-//	        connection.close();
-//		} catch (Exception e) {
-//            this.exceptionHandle(e.getMessage());
-//        }
-        
+        coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(list);
         return coSoVatChatBean;
     }
     

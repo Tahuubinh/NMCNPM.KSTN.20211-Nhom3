@@ -6,6 +6,7 @@ import models.PhongBanModel;
 import java.util.List;
 
 import models.CoSoVatChatModel;
+import models.ListMuonTraDetailModel;
 import models.MuonTraModel;
 import models.NguoiMuonModel;
 import models.ThoiGianModel;
@@ -91,6 +92,8 @@ public class MuonTraBean {
 	public void setListPhongBanModels(List<PhongBanModel> listPhongBanModels) {
 		this.listPhongBanModels = listPhongBanModels;
 	}
+
+
 
 	@Override
     public String toString() {

@@ -14,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -43,15 +44,18 @@ public class MuonTraPanelController {
     private MuonTraService muonTraService;
     private List<MuonTraBean> listMuonTraBeans;
     private ClassTableModel classTableModel = null;
+    private JTable table;
+    private JPopupMenu popupMenu;
     private final String[] COLUMNS = {"STT", "Tên người mượn", "CMND/TCC/HC", "Liên hệ", "Thời gian mượn", "Thời gian trả", "Cơ sở vật chất", "Số lượng"};
     private JFrame parentJFrame;
 
-    public MuonTraPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JDateChooser tuNgayJdc, JDateChooser denNgayJdc) {
+    public MuonTraPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JDateChooser tuNgayJdc, JDateChooser denNgayJdc, JPopupMenu popupMenu) {
         this.jpnView = jpnView;
         this.nguoiMuonJtfSearch = nguoiMuonJtfSearch;
         this.lienheJtfSearch = lienheJtfSearch;
         this.tuNgayJdc = tuNgayJdc;
         this.denNgayJdc = denNgayJdc;
+        this.popupMenu = popupMenu;
         classTableModel = new ClassTableModel();
         this.muonTraService = new MuonTraService();
         this.listMuonTraBeans = this.muonTraService.getListMuonTra();
@@ -122,7 +126,7 @@ public class MuonTraPanelController {
             listItem.add(MuonTra.getMuonTraModel());
         });
         DefaultTableModel model = classTableModel.setTableMuonTra(listItem, COLUMNS);
-        JTable table = new JTable(model) {
+        table = new JTable(model) {
             @Override
             public boolean editCellAt(int row, int column, EventObject e) {
                 return false;
@@ -132,7 +136,7 @@ public class MuonTraPanelController {
         
         // thiet ke bang
 
-        
+        table.setComponentPopupMenu(popupMenu);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));
         ((DefaultTableCellRenderer)table.getTableHeader().getDefaultRenderer())
@@ -226,6 +230,14 @@ public class MuonTraPanelController {
 
 	public void setdenNgayJdc(JDateChooser denNgayJdc) {
 		this.denNgayJdc = denNgayJdc;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
 	}
     
     

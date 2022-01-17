@@ -110,7 +110,7 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
         this.parentFrame.setEnabled(false);
         this.muonTraBeann = new MuonTraBean();
         initComponents();
-        setTitle("Thêm mới đối tượng đăng ký sử dụng cơ sở vật chất");
+        setTitle("Đăng ký sử dụng cơ sở vật chất / phòng ban");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         childController = new AddNewController();
         

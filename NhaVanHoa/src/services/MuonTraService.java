@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+
+import models.CoSoVatChatModel;
 import models.MuonTraModel;
+import models.PhongBanModel;
 
 
 /**
@@ -41,8 +44,7 @@ public class MuonTraService {
 			  		  + id;
 	        PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
 	        ResultSet rs1 = preparedStatement1.executeQuery();
-	        PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
-	        ResultSet rs2 = preparedStatement2.executeQuery();
+
 	        while(rs1.next()) {
 	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
 	        	muonTra.setStt(rs1.getInt("event_no"));
@@ -54,7 +56,9 @@ public class MuonTraService {
 	        	muonTra.setCoSoVatChat(rs1.getString("item_name"));
 	        	muonTra.setSoLuong(rs1.getInt("item_number"));
 	        }
-	        while(rs2.next()) {
+	        preparedStatement1 = (PreparedStatement)connection.prepareStatement(query2);
+	        rs1 = preparedStatement1.executeQuery();
+	        while(rs1.next()) {
 	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
 	        	muonTra.setStt(rs1.getInt("event_no"));
 	        	muonTra.setTenNguoiMuon(rs1.getString("user_name"));
@@ -66,7 +70,6 @@ public class MuonTraService {
 	        	muonTra.setSoLuong(1);
 	        }
 	        preparedStatement1.close();
-	        preparedStatement2.close();
 	        connection.close();
 		} catch (Exception e) {
             this.exceptionHandle(e.getMessage());
@@ -205,10 +208,51 @@ public class MuonTraService {
         return list;
     }
     
+    public boolean hoanTraCoSoVatChat() {
+		return false;
+    	
+    }
+    
+    // add cac gia tri nhan ve vao ListMuonTraDetail
+    public MuonTraBean getChiTietMuonTra(String tenNguoiMuon) {
+        MuonTraBean muonTraBean = new MuonTraBean();
+        List<CoSoVatChatModel> listCoSoVatChatModels = muonTraBean.getListCoSoVatChatModels();
+        List<PhongBanModel> listPhongBanModels = muonTraBean.getListPhongBanModels();
+
+        //viết truy vấn
+        return muonTraBean;
+    }
     /*
      * Ham sử lý ngoại lệ : thông báo ra lỗi nhận được
      */
+    public boolean huyLichMuon(String tenNguoiMuon) {
+		// TODO Auto-generated method stub
+		
+		return true;
+	}
+    
+    public boolean chinhSuaCoSoVatChat(String tenNguoiMuon, CoSoVatChatModel coSoVatChatModel) {
+    	
+		return true;	
+    }
+    
+    public boolean hoanTraCoSoVatChat(String tenNguoiMuon, CoSoVatChatModel coSoVatChatModel) {
+    	
+		return true;	
+    }
+    
+    public boolean chinhSuaPhongBan(String tenNguoiMuon, PhongBanModel coSoVatChatModel) {
+    	
+		return true;	
+    }
+    
+    public boolean hoanTraPhongBan(String tenNguoiMuon, PhongBanModel coSoVatChatModel) {
+    	
+		return true;	
+    }
     private void exceptionHandle(String message) {
         JOptionPane.showMessageDialog(null, message, "Warning", JOptionPane.ERROR_MESSAGE);
     }
+
+	
 }

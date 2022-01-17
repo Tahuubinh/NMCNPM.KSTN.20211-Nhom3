@@ -5,6 +5,8 @@ public class PhongBanModel {
 	private String tenPhongBan;
 	private String thoiGianSuDung;
 	private String lyDo;
+	private String thoiGianTraReal = "";
+	private int soLuongDaTra = 0;
 	public int getId() {
 		return id;
 	}
@@ -28,5 +30,17 @@ public class PhongBanModel {
 	}
 	public void setLyDo(String lyDo) {
 		this.lyDo = lyDo;
+	}
+	public String getThoiGianTraReal() {
+		return thoiGianTraReal;
+	}
+	public void setThoiGianTraReal(String thoiGianTraReal) {
+		this.thoiGianTraReal = thoiGianTraReal;
+	}
+	public int getSoLuongDaTra() {
+		return soLuongDaTra;
+	}
+	public void setSoLuongDaTra(int soLuongDaTra) {
+		this.soLuongDaTra = soLuongDaTra;
 	}
 }

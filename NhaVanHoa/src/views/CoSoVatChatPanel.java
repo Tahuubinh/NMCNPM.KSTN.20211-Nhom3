@@ -238,6 +238,7 @@ public class CoSoVatChatPanel extends javax.swing.JPanel {
 		}
 		
 		String tenCoSoVatChatDetail = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+//		System.out.println(tenCoSoVatChatDetail);
 		String tongSoLuong = xemChiTietTable.getModel().getValueAt(row, 2).toString();
 		String soLuongMuon = xemChiTietTable.getModel().getValueAt(row, 3).toString();
 		String soLuongTrongKho = xemChiTietTable.getModel().getValueAt(row, 4).toString();

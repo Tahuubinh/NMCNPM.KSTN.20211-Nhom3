@@ -7,7 +7,9 @@ public class CoSoVatChatModel {
 	private String donVi;
 	private int soLuongMuon;
 	private int soLuongTrongKho;
+	private int soLuongDaTra = 0;
 	private String lyDo;
+	private String thoiGianTraReal = "";
 	public int getId() {
 		return id;
 	}
@@ -49,6 +51,18 @@ public class CoSoVatChatModel {
 	}
 	public void setLyDo(String lyDo) {
 		this.lyDo = lyDo;
+	}
+	public String getThoiGianTraReal() {
+		return thoiGianTraReal;
+	}
+	public void setThoiGianTraReal(String thoiGianTraReal) {
+		this.thoiGianTraReal = thoiGianTraReal;
+	}
+	public int getSoLuongDaTra() {
+		return soLuongDaTra;
+	}
+	public void setSoLuongDaTra(int soLuongDaTra) {
+		this.soLuongDaTra = soLuongDaTra;
 	}
 	
 }

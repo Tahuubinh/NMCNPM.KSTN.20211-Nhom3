@@ -14,7 +14,7 @@ public class MuonTraModel {
 	private Timestamp thoiGianMuon;
     private Timestamp thoiGianTra;
     private String coSoVatChat;
-    private int soLuong;
+    private int soLuong = -1;
     
     
     public int getStt() {

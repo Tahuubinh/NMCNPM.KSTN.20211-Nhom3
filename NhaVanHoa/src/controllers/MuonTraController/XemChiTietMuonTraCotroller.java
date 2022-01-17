@@ -1,4 +1,4 @@
-package controllers.CoSoVatChatController;
+package controllers.MuonTraController;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -22,34 +22,38 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import Bean.CoSoVatChatBean;
+import Bean.MuonTraBean;
 import models.CoSoVatChatModel;
 import models.ListNguoiMuonCoSoVatChatDetailModel;
+import models.PhongBanModel;
 import services.CoSoVatChatService;
+import services.MuonTraService;
 import utility.ClassTableModel;
 
-public class XemChiTietCoSoVatChatCotroller {
+public class XemChiTietMuonTraCotroller {
 
 	 private JPanel jpnView;
 	    private JTextField searchJtf;
-	    private CoSoVatChatService coSoVatChatService;
-	    private CoSoVatChatBean CoSoVatChatBeans;
+	    private MuonTraService muonTraService;
+	    private MuonTraBean muonTraBean;
 	    private ClassTableModel classTableModel = null;
-	    private final String[] COLUMNS = {"STT", "Tên người mượn", "Số lượng", "Thời gian mượn", "Thời gian trả"};
+	    private final String[] COLUMNS = {"STT", "Tên", "Số lượng", "Đã trả", "Ngày trả"};
 	    private JFrame parentJFrame;
-	    private JLabel nhaTaiTroDetail;
-	    private JLabel tenCoSoVatChatDetail;
+	    private JLabel tenNguoiDangKySuDungDetail;
 	    private JTable table;
-	    
-	    public XemChiTietCoSoVatChatCotroller(JPanel jpnView, JLabel tenCoSoVatChatDetail) {
+	    private JPopupMenu popupMenu;
+	    private List<PhongBanModel> listPhongBan;
+	    private List<CoSoVatChatModel> listCoSoVatChat;
+	    public XemChiTietMuonTraCotroller(JPanel jpnView, JLabel tenNguoiDangKySuDungDetail, JPopupMenu popupMenu) {
 	        this.jpnView = jpnView;
-	        this.nhaTaiTroDetail = nhaTaiTroDetail;
 	        classTableModel = new ClassTableModel();
-	        this.coSoVatChatService = new CoSoVatChatService();
-	        this.CoSoVatChatBeans = this.coSoVatChatService.getCoSoVatChatDetail(tenCoSoVatChatDetail.getText());
+	        this.muonTraService = new MuonTraService();
+	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(tenNguoiDangKySuDungDetail.getText());
+	        this.popupMenu = popupMenu;
 	        initAction();
 	    }
 
-	    public XemChiTietCoSoVatChatCotroller() {
+	    public XemChiTietMuonTraCotroller() {
 	    }
 	    
 	    
@@ -65,8 +69,9 @@ public class XemChiTietCoSoVatChatCotroller {
 	    }
 	    
 	    public void setDataTable() {
-	        List<ListNguoiMuonCoSoVatChatDetailModel> listItem = this.CoSoVatChatBeans.getListNguoiMuonCoSoVatChatDetailModels();
-	        DefaultTableModel model = classTableModel.setTableCoSoVatChatDetail(listItem, COLUMNS);
+	        listPhongBan = this.muonTraBean.getListPhongBanModels();
+	        listCoSoVatChat = this.muonTraBean.getListCoSoVatChatModels();
+	        DefaultTableModel model = classTableModel.setTableMuonTraDetail(listCoSoVatChat, listPhongBan, COLUMNS);
 	        table = new JTable(model) {
 	            @Override
 	            public boolean editCellAt(int row, int column, EventObject e) {
@@ -75,7 +80,9 @@ public class XemChiTietCoSoVatChatCotroller {
 	            
 	        };
 	        // thiet ke bang
-	        
+	        table.setComponentPopupMenu(popupMenu);
+
+	  
 	        table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
 	        table.getTableHeader().setPreferredSize(new Dimension(100, 50));
 	        ((DefaultTableCellRenderer)table.getTableHeader().getDefaultRenderer())
@@ -116,7 +123,7 @@ public class XemChiTietCoSoVatChatCotroller {
 	    }
 	    
 	    public void refreshData() {
-	        this.CoSoVatChatBeans = this.coSoVatChatService.getCoSoVatChatDetail(this.tenCoSoVatChatDetail.getText());
+	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(this.tenNguoiDangKySuDungDetail.getText());
 	        setDataTable();
 	    }
 	    public JPanel getJpnView() {
@@ -143,4 +150,20 @@ public class XemChiTietCoSoVatChatCotroller {
 			this.table = table;
 		}
 
+		public List<PhongBanModel> getListPhongBan() {
+			return listPhongBan;
+		}
+
+		public void setListPhongBan(List<PhongBanModel> listPhongBan) {
+			this.listPhongBan = listPhongBan;
+		}
+
+		public List<CoSoVatChatModel> getListCoSoVatChat() {
+			return listCoSoVatChat;
+		}
+
+		public void setListCoSoVatChat(List<CoSoVatChatModel> listCoSoVatChat) {
+			this.listCoSoVatChat = listCoSoVatChat;
+		}
+		
 }

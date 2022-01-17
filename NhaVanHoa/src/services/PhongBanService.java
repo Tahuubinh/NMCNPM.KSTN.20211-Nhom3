@@ -119,7 +119,13 @@ public class PhongBanService {
         return list;
     }
     
-    public bool huyPhongBan(String tenPhongBan) {
+    public boolean huyPhongBan(String tenPhongBan) {
+        List<PhongBanBean> list = new ArrayList<>();
+        //viết truy vấn
+        return true;
+    }
+    
+    public boolean huyPhongBanBatBuoc(String tenPhongBan) {
         List<PhongBanBean> list = new ArrayList<>();
         //viết truy vấn
         return true;

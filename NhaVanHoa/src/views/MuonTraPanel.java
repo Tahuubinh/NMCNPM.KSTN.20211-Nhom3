@@ -1,8 +1,12 @@
 package views;
 
 import controllers.MuonTraPanelController;
+import services.MuonTraService;
+import services.PhongBanService;
 import services.StringService;
 import views.MuonTraFrame.DangKySuDungFrame;
+import views.MuonTraFrame.XemChiTietMuonTraFrame;
+import views.PhongBanFrame.DoiTenPhongBanFrame;
 
 import javax.swing.JFrame;
 
@@ -11,6 +15,9 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.Rectangle;
@@ -27,6 +34,7 @@ import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPopupMenu;
 
 /**
  *
@@ -43,7 +51,9 @@ public class MuonTraPanel extends javax.swing.JPanel {
     public MuonTraPanel(JFrame parentFrame) {
         this.parentJFrame = parentFrame;
         initComponents();
-      controller = new MuonTraPanelController(tablePanel, nguoiMuonJtfSearch, lienheJtfSearch, tuNgayJdc, denNgayJdc);
+      controller = new MuonTraPanelController(tablePanel, nguoiMuonJtfSearch, lienheJtfSearch, tuNgayJdc, denNgayJdc, popupMenu);
+        
+
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -68,6 +78,32 @@ public class MuonTraPanel extends javax.swing.JPanel {
     private void initComponents() {
         tablePanel = new javax.swing.JPanel();
         
+        popupMenu = new JPopupMenu();
+        addPopup(tablePanel, popupMenu);
+        
+        xemChiTiet = new JMenuItem("Xem chi tiết");
+        popupMenu.add(xemChiTiet);
+        xemChiTiet.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				xemChiTietActionPerformed(evt);
+			}
+
+		});
+        
+        huyMuon = new JMenuItem("Huỷ mượn");
+        popupMenu.add(huyMuon);
+        huyMuon.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				huyMuonActionPerformed(evt);
+			}
+
+		});
         addNewBtn = new javax.swing.JButton();
         addNewBtn.setBorder(null);
         addNewBtn.setIcon(new ImageIcon(MuonTraPanel.class.getResource("/Icons/add.png")));
@@ -251,7 +287,72 @@ public class MuonTraPanel extends javax.swing.JPanel {
     	controller.setData(tenNguoiMuon, lienHe, tuNgay, denNgay);
     }//GEN-LAST:event_jtfSearchActionPerformed
 
+    private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+    
+	private void xemChiTietActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+  		return;
+		}
+		String tenNguoiMuonDetail = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		String idDetail = xemChiTietTable.getModel().getValueAt(row, 2).toString();
+		String lienHeDetail = xemChiTietTable.getModel().getValueAt(row, 3).toString();
+		String thoiGianMuonDetail = xemChiTietTable.getModel().getValueAt(row, 4).toString();
+		String thoiGianTraDetail = xemChiTietTable.getModel().getValueAt(row, 5).toString();
+		XemChiTietMuonTraFrame xemChiTietMuonTraFrame = new XemChiTietMuonTraFrame(this.controller, this.parentJFrame, tenNguoiMuonDetail, idDetail, lienHeDetail, thoiGianMuonDetail, thoiGianTraDetail);
+		xemChiTietMuonTraFrame.setLocationRelativeTo(null);
+		xemChiTietMuonTraFrame.setResizable(false);
+		xemChiTietMuonTraFrame.setVisible(true);
+	}
+	
 
+	private void huyMuonActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+  		return;
+		}
+		String tenNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+        if (JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn hủy lịch mượn của " + tenNguoiMuon + " ??", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
+        	 try {
+             	MuonTraService muonTraService = new MuonTraService();
+             	if(muonTraService.huyLichMuon(tenNguoiMuon))
+                     JOptionPane.showMessageDialog(null, "Hủy thành công!!");
+                else {
+                    JOptionPane.showMessageDialog(null, "Đã quá lịch mượn, không thể hủy", "Warning", JOptionPane.WARNING_MESSAGE);
+
+                }
+                controller.refreshData();
+           
+             } catch (Exception e) {
+                 System.out.println(e.getMessage());
+                 JOptionPane.showMessageDialog(null, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+             }
+        }
+	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewBtn;
     private javax.swing.JTextField nguoiMuonJtfSearch;
@@ -262,4 +363,8 @@ public class MuonTraPanel extends javax.swing.JPanel {
     private JLabel denNgayJlb;
     private JDateChooser tuNgayJdc;
     private JDateChooser denNgayJdc;
+    private JPopupMenu popupMenu;
+    private JMenuItem xemChiTiet;
+	private JMenuItem hoanTra;
+	private JMenuItem huyMuon;
 }

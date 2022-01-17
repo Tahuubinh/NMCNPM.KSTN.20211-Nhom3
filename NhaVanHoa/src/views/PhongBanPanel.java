@@ -231,8 +231,15 @@ public class PhongBanPanel extends javax.swing.JPanel {
         if (JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn hủy phòng " + tenPhongBan + " ??", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
         	 try {
              	PhongBanService phongBanService = new PhongBanService();
-             	phongBanService.huyPhongBan(tenPhongBan);
+             	if(phongBanService.huyPhongBan(tenPhongBan))
                      JOptionPane.showMessageDialog(null, "Hủy thành công!!");
+                else {
+                	if(JOptionPane.showConfirmDialog(null, "Có phòng ban " + tenPhongBan + " có lịch sắp tới sử dụng, ban có muốn hủy ??", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
+                		if(phongBanService.huyPhongBanBatBuoc(tenPhongBan))
+                            JOptionPane.showMessageDialog(null, "Hủy thành công!!");
+                	}
+
+                }
                 controller.refreshData();
            
              } catch (Exception e) {
