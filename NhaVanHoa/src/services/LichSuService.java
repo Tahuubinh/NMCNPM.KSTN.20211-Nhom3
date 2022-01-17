@@ -26,11 +26,11 @@ public class LichSuService {
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
             String query1 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
-      			  + "FROM money m JOIN item i on m.item_id = i.item_id WHERE m.money_id ="
-      			  + id;
+      			  + "FROM money m JOIN item i on m.item_id = i.item_id WHERE m.money_id = '"
+      			  + id + "'";
             String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
-        			  + "FROM deleteditem d JOIN item i on d.item_id = i.item_id WHERE d.delete_id ="
-        			  + id;
+        			  + "FROM deleteditem d JOIN item i on d.item_id = i.item_id WHERE d.delete_id = '"
+        			  + id + "'";
             PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
             ResultSet rs1 = preparedStatement1.executeQuery();
             PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
@@ -70,9 +70,9 @@ public class LichSuService {
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
             String query1 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
-      			  + "FROM money m JOIN item i on m.item_id = i.item_id";
+      			  		  + "FROM money m JOIN item i on m.item_id = i.item_id";
             String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
-        			  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id";
+        			  	  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id";
             PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
             ResultSet rs1 = preparedStatement1.executeQuery();
             PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
@@ -123,11 +123,11 @@ public class LichSuService {
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
             String query1 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
-      			  + "FROM money m JOIN item i on m.item_id = i.item_id WHERE m.date = "
-      			  + thoiGian;
+      			  		  + "FROM money m JOIN item i on m.item_id = i.item_id WHERE m.date = '"
+      			  		  + thoiGian + "'";
             String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
-        			  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id WHERE d.date = "
-        			  + thoiGian;
+        			  	  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id WHERE d.date = '"
+        			  	  + thoiGian + "'";
             PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
             ResultSet rs1 = preparedStatement1.executeQuery();
             PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);

@@ -430,7 +430,10 @@ ALTER TABLE  gia_dinh
 --
 ALTER TABLE  ho_khau 
   ADD CONSTRAINT  ho_khau_ibfk_1  FOREIGN KEY ( idChuHo ) REFERENCES  nhan_khau  ( ID );
-
+ALTER TABLE ho_khau
+   DROP CONSTRAINT ho_khau_ibfk_1
+ , ADD  CONSTRAINT ho_khau_ibfk_1
+   FOREIGN KEY ( idChuHo ) REFERENCES  nhan_khau  ( ID ) ON DELETE CASCADE;
 --
 -- Các ràng buộc cho bảng  khai_tu 
 --
@@ -472,6 +475,14 @@ ALTER TABLE  thanh_vien_cua_ho
   ADD CONSTRAINT  thanh_vien_cua_ho_ibfk_1  FOREIGN KEY ( idNhanKhau ) REFERENCES  nhan_khau  ( ID ),
   ADD CONSTRAINT  thanh_vien_cua_ho_ibfk_2  FOREIGN KEY ( idHoKhau ) REFERENCES  ho_khau  ( ID );
 
+ALTER TABLE thanh_vien_cua_ho
+   DROP CONSTRAINT thanh_vien_cua_ho_ibfk_1
+ , ADD  CONSTRAINT thanh_vien_cua_ho_ibfk_1
+   FOREIGN KEY ( idNhanKhau ) REFERENCES  nhan_khau  ( ID ) ON DELETE CASCADE;
+ALTER TABLE thanh_vien_cua_ho
+   DROP CONSTRAINT thanh_vien_cua_ho_ibfk_2
+ , ADD  CONSTRAINT thanh_vien_cua_ho_ibfk_2
+   FOREIGN KEY ( idHoKhau ) REFERENCES  ho_khau  ( ID ) ON DELETE CASCADE;
 --
 -- Các ràng buộc cho bảng  tieu_su 
 --

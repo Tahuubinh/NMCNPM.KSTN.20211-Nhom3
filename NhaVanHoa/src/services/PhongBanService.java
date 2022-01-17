@@ -3,6 +3,7 @@ package services;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -120,6 +121,7 @@ public class PhongBanService {
     }
     
     public boolean huyPhongBan(String tenPhongBan) {
+<<<<<<< HEAD
         List<PhongBanBean> list = new ArrayList<>();
         //viết truy vấn
         return true;
@@ -127,7 +129,22 @@ public class PhongBanService {
     
     public boolean huyPhongBanBatBuoc(String tenPhongBan) {
         List<PhongBanBean> list = new ArrayList<>();
+=======
+>>>>>>> 74acf052588fa17e4f55c789d268ad5899c14136
         //viết truy vấn
+    	String query = "DELETE FROM infrastructure WHERE infra_name = '" + tenPhongBan + "'";
+    	Connection connection;
+		try {
+			connection = MysqlConnection.getMysqlConnection();
+			PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
+	    	st.execute();
+	    	st.close();
+		} catch (ClassNotFoundException e) {
+			return false;
+		} catch (SQLException e) {
+			return false;
+		}
+    	
         return true;
     }
     
