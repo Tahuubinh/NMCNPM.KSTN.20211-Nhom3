@@ -216,11 +216,25 @@ public class MuonTraService {
      */
     public MuonTraBean getChiTietMuonTra(String cccdNguoiMuon, String thoiGianMuon) {
         MuonTraBean muonTraBean = new MuonTraBean();
-        Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
         List<CoSoVatChatModel> listCoSoVatChatModels = muonTraBean.getListCoSoVatChatModels();
         List<PhongBanModel> listPhongBanModels = muonTraBean.getListPhongBanModels();
 
         //viết truy vấn
+        try {
+        	Connection connection = MysqlConnection.getMysqlConnection();
+        	String query1 = "SELECT i.item_name, i.item_quantity, (ir.item FROM item i LEFT JOIN deleteditem d ON i.item_id = d.item_id LEFT JOIN itemregistered ir ON "
+       		     + "i.item_id = ir.item_id LEFT JOIN registers r ON r.user_id = ir.user_id LEFT JOIN schedule s "
+       		     + "ON s.event_no = ir.event_no WHERE r.cccd = " + cccdNguoiMuon + " AND s.time_start = '"+ thoiGianMuon + "'";
+        	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
+        	ResultSet rs1 = st1.executeQuery();
+        	while(rs1.next()) {
+        		String query = "SELECT ";
+        	}
+	        st1.close();
+	        connection.close();
+		} catch (Exception e) {
+            this.exceptionHandle(e.getMessage());
+        }
         return muonTraBean;
     }
     /*
@@ -232,7 +246,20 @@ public class MuonTraService {
      */
     public boolean huyLichMuon(String cccdNguoiMuon, String thoiGianMuon) {
 		// TODO Auto-generated method stub
-		
+    	Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
+    	try {
+        	Connection connection = MysqlConnection.getMysqlConnection();
+        	String query1 = "DELETE FROM itemregistered WHERE r.cccd = " + cccdNguoiMuon + " AND s.time_start = '"+ timestamp + "'";
+        	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
+        	ResultSet rs1 = st1.executeQuery();
+        	while(rs1.next()) {
+        		String query = "SELECT ";
+        	}
+	        st1.close();
+	        connection.close();
+		} catch (Exception e) {
+            this.exceptionHandle(e.getMessage());
+        }
 		return true;
 	}
     

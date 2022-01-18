@@ -364,9 +364,9 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 				return;
 			}
 		}
-		ChinhSuaHoanTraFrame chinhSuaHoanTraFrame = new ChinhSuaHoanTraFrame(this.controller, parentJFrame, tenNguoiDangKyDetail.getText(), idDetail.getText(), thoiGianMuonDetail.getText(), tenCoSoVatChatPhongBan, soLuongDaHoanTra, isCoSoVatChat);
-		chinhSuaHoanTraFrame.setResizable(false);
-		chinhSuaHoanTraFrame.setVisible(true);
+		HoanTraFrame hoanTraFrame = new HoanTraFrame(this.controller, parentJFrame, tenNguoiDangKyDetail.getText(), idDetail.getText(), thoiGianMuonDetail.getText(), tenCoSoVatChatPhongBan, soLuongDaHoanTra, isCoSoVatChat);
+		hoanTraFrame.setResizable(false);
+		hoanTraFrame.setVisible(true);
 	}
 	
 	private void chinhSuaHoanTraActionPerformed(ActionEvent evt) {

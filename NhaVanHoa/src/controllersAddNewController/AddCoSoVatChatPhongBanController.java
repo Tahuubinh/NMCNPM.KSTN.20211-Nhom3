@@ -95,12 +95,13 @@ public class AddCoSoVatChatPhongBanController {
         table.validate();
         table.repaint();
         table.setFont(new Font("Arial", Font.PLAIN, 14));
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         table.getColumnModel().getColumn(1).setMaxWidth(80);
         table.getColumnModel().getColumn(1).setMinWidth(80);
         table.getColumnModel().getColumn(1).setPreferredWidth(80);
-        table.getColumnModel().getColumn(1).setCellRenderer( centerRenderer );
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        for(int i = 0; i < 2; ++i) 
+        	table.getColumnModel().getColumn(i).setCellRenderer( centerRenderer );
 
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(table);

@@ -72,6 +72,7 @@ public class ThemPhongBanFrame extends javax.swing.JFrame {
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
+        this.phongBanBean = new PhongBanBean();
         initComponents();
     	setIconImage(Toolkit.getDefaultToolkit().getImage(ThemPhongBanFrame.class.getResource("/Icons/house.png")));
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

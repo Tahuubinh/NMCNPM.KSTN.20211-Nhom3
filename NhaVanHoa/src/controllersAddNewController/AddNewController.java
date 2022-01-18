@@ -44,6 +44,7 @@ public class AddNewController {
         ResultSet rs1 = st1.executeQuery();
         while(rs1.next()) {
         	idNguoiMuon = rs1.getInt(1);
+        	break;
         }
         if(idNguoiMuon < 0) return false;
         
@@ -92,45 +93,62 @@ public class AddNewController {
     }
     
     //add thong tin co so vat chat vao database, neu add that bai tra ve false
-    public boolean addNewCoSoVatChat(CoSoVatChatBean coSoVatChatBean) throws SQLException, ClassNotFoundException{
+    @SuppressWarnings("resource")
+	public boolean addNewCoSoVatChat(CoSoVatChatBean coSoVatChatBean){
         CoSoVatChatModel coSoVatChatModel = coSoVatChatBean.getCoSoVatChatModel();
-        Connection connection = MysqlConnection.getMysqlConnection();
+        Connection connection;
+		try {
+		connection = MysqlConnection.getMysqlConnection();
         
         String query = "SELECT item_id FROM item WHERE item_name = '"
         			 + coSoVatChatModel.getTenCoSoVatChat()
         			 + "'";
-        PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement preparedStatement;
+
+			preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+		
         ResultSet rs = preparedStatement.executeQuery();
         int idCoSoVatChat = -1;
-        idCoSoVatChat = rs.getInt("item_id");
+        while(rs.next()) {
+            idCoSoVatChat = rs.getInt("item_id");
+            break;
+        }
         if (idCoSoVatChat > 0) {
         	String query1 = "UPDATE item SET item_quantity = item_quantity + " 
         				  + coSoVatChatModel.getSoLuong()
         				  + " WHERE item_name = '"
         				  + coSoVatChatModel.getTenCoSoVatChat() + "'";
-        	PreparedStatement preparedStatement1 = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
-        	preparedStatement1.execute();
-        	preparedStatement1.close();
+        	preparedStatement = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
+        	preparedStatement.execute();
         }
         else {
         	String query1 = "INSERT INTO item (item_name, item_quantity) "
         				  + "values (?, ?)";
-        	PreparedStatement preparedStatement1 = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
-        	preparedStatement1.setString(1, coSoVatChatModel.getTenCoSoVatChat());
-        	preparedStatement1.setInt(2, coSoVatChatModel.getSoLuong());
-        	preparedStatement1.executeUpdate();
-        	preparedStatement1.close();
+        	preparedStatement = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
+        	preparedStatement.setString(1, coSoVatChatModel.getTenCoSoVatChat());
+        	preparedStatement.setInt(2, coSoVatChatModel.getSoLuong());
+        	preparedStatement.executeUpdate();
         }
         String query2 = "INSERT INTO money (item_id, item_number, date, reason) "
         			  + "values ((SELECT item_id FROM item WHERE item_name = '"
         			  + coSoVatChatModel.getTenCoSoVatChat()
         			  + "'), ?, CURRENT_DATE, ?)";
-        PreparedStatement preparedStatement2 = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
-        preparedStatement2.setInt(2, coSoVatChatModel.getSoLuong());
-        preparedStatement2.setString(4, coSoVatChatModel.getLyDo());
-        preparedStatement2.close();
+        preparedStatement = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+        preparedStatement.setInt(1, coSoVatChatModel.getSoLuong());
+        preparedStatement.setString(2, coSoVatChatModel.getLyDo());
         preparedStatement.close();
         connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+		catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+			return false;
+		}
         return true;
     }
     
@@ -139,7 +157,7 @@ public class AddNewController {
         PhongBanModel phongBanModel = phongBanBean.getPhongBanModel();       
         Connection connection = MysqlConnection.getMysqlConnection();
         String query = "INSERT INTO infrastructure (infra_name, reason) "
-				  	 + "values ('?', ?)";
+				  	 + "values (?, ?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         preparedStatement.setString(1, phongBanModel.getTenPhongBan());
         preparedStatement.setString(2, phongBanModel.getLyDo());

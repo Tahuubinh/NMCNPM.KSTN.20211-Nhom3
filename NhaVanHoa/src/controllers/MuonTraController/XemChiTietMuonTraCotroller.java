@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
@@ -28,6 +29,7 @@ import models.ListNguoiMuonCoSoVatChatDetailModel;
 import models.PhongBanModel;
 import services.CoSoVatChatService;
 import services.MuonTraService;
+import services.TimeService;
 import utility.ClassTableModel;
 
 public class XemChiTietMuonTraCotroller {
@@ -45,11 +47,15 @@ public class XemChiTietMuonTraCotroller {
 	    private JPopupMenu popupMenu;
 	    private List<PhongBanModel> listPhongBan;
 	    private List<CoSoVatChatModel> listCoSoVatChat;
+	    private TimeService timeService;
 	    public XemChiTietMuonTraCotroller(JPanel jpnView, JLabel idDetail, JLabel thoiGianMuonDetail, JPopupMenu popupMenu) {
 	        this.jpnView = jpnView;
 	        classTableModel = new ClassTableModel();
 	        this.muonTraService = new MuonTraService();
-	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(idDetail.getText(), thoiGianMuonDetail.getText());
+	        TimeService timeService = new TimeService();
+	        Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(thoiGianMuonDetail.getText());
+	        String thoiGianMuon = timeService.convertToDate(thoiGianMuonTS);
+	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(idDetail.getText(), thoiGianMuon);
 	        this.popupMenu = popupMenu;
 	        initAction();
 	    }
@@ -97,7 +103,8 @@ public class XemChiTietMuonTraCotroller {
 	        table.getColumnModel().getColumn(0).setPreferredWidth(80);
 	        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
 	        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-	        table.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+	        for(int i = 0; i < 5; ++i) 
+	        	table.getColumnModel().getColumn(i).setCellRenderer( centerRenderer );
 	        table.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {

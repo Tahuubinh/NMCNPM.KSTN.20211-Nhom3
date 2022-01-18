@@ -10,6 +10,7 @@ import controllers.MuonTraController.XemChiTietMuonTraCotroller;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.EventObject;
 
@@ -21,6 +22,7 @@ import models.NguoiMuonModel;
 import models.NhaTaiTroModel;
 import models.ThoiGianModel;
 import services.MuonTraService;
+import services.TimeService;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -244,8 +246,11 @@ public class HoanTraFrame extends javax.swing.JFrame {
     private void addThongTinDangKyCoSoVatChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
     	if(validateValueInForm()) {
     		MuonTraService muonTraService = new MuonTraService();
+    		TimeService timeService = new TimeService();
     		int soLuongTra = Integer.parseInt(soLuongTraJtf.getText());
     		String tenCoSoVatChatPhongBan = tenCoSoVatChatPhongBanDetailJlb.getText();
+    		Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(this.thoiGianMuon);
+    		String thoiGianMuon = timeService.convertToDate(thoiGianMuonTS);
     		if(isCoSoVatChat > 0) {
     			CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
     			coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatPhongBan);
@@ -268,7 +273,7 @@ public class HoanTraFrame extends javax.swing.JFrame {
     		} else {
     			try {
     					if(JOptionPane.showConfirmDialog(null,tenCoSoVatChatPhongBan +" sẽ được bàn giao ?", "Question?", JOptionPane.YES_NO_OPTION) == 0) {
-                    		if(muonTraService.hoanTraPhongBanMuon(this.cccdNguoiMuon, tenCoSoVatChatPhongBan, this.thoiGianMuon))
+                    		if(muonTraService.hoanTraPhongBanMuon(this.cccdNguoiMuon, tenCoSoVatChatPhongBan, thoiGianMuon))
                                 {
                     				JOptionPane.showMessageDialog(null, "Bàn giao " + tenCoSoVatChatPhongBan + " thành công!!");
                                     close();

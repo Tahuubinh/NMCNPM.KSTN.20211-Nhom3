@@ -118,8 +118,23 @@ public class PhongBanService {
      * check lich su dung sap toi, neu co lich su dung, tra ve false
      */
     public boolean huyPhongBan(String tenPhongBan) {
-        List<PhongBanBean> list = new ArrayList<>();
-        //viết truy vấn
+    	//viết truy vấn
+        Connection connection;
+        String query = "SELECT * FROM infraregistered ir LEFT JOIN schedule s on s.event_no=ir.event_no WHERE infra_name = '"
+        			 + tenPhongBan + "' AND s.time_start > CURRENT_TIMESTAMP";
+        
+        
+        try {
+        	connection = MysqlConnection.getMysqlConnection();
+        	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = st.executeQuery();
+            if(rs.next()) return false;
+	        st.close();
+	        connection.close();
+		} catch (Exception e) {
+            this.exceptionHandle(e.getMessage());
+            return false;
+        }
         return true;
     }
     
@@ -127,28 +142,27 @@ public class PhongBanService {
      * xoa phong ban, bat ke co lich su dung
      */
     public boolean huyPhongBanBatBuoc(String tenPhongBan) {
-        List<PhongBanBean> list = new ArrayList<>();
-        //viết truy vấn
-    	String query = "DELETE FROM infrastructure WHERE infra_name = '" + tenPhongBan + "'";
-    	Connection connection;
-		try {
-			connection = MysqlConnection.getMysqlConnection();
-			PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-	    	st.execute();
-	    	st.close();
-		} catch (ClassNotFoundException e) {
-			return false;
-		} catch (SQLException e) {
-			return false;
-		}
-    	
-        return true;
+         //viết truy vấn
+     	String query = "DELETE FROM infrastructure WHERE infra_name = '" + tenPhongBan + "'";
+     	Connection connection;
+ 		try {
+ 			connection = MysqlConnection.getMysqlConnection();
+ 			PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
+ 	    	st.execute();
+ 	    	st.close();
+ 		} catch (ClassNotFoundException e) {
+ 			return false;
+ 		} catch (SQLException e) {
+ 			return false;
+ 		}
+     	
+         return true;
     }
     
-    public List<PhongBanBean> doiTenPhongBan(String tenPhongBan) {
-        List<PhongBanBean> list = new ArrayList<>();
+    public PhongBanBean doiTenPhongBan(String tenPhongBanCu, String tenPhongBan) {
+        PhongBanBean phongBanBean = new PhongBanBean();
         //viết truy vấn
-        return list;
+        return phongBanBean;
     }
     /*
      * Ham sử lý ngoại lệ : thông báo ra lỗi nhận được

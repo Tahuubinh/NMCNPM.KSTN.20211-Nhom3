@@ -109,12 +109,13 @@ public class PhongBanPanelController {
 	        table.getColumnModel().getColumn(0).setMaxWidth(80);
 	        table.getColumnModel().getColumn(0).setMinWidth(80);
 	        table.getColumnModel().getColumn(0).setPreferredWidth(80);
-	        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-	        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-	        table.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
 	        table.getColumnModel().getColumn(1).setMaxWidth(240);
 	        table.getColumnModel().getColumn(1).setMinWidth(240);
 	        table.getColumnModel().getColumn(1).setPreferredWidth(240);
+	        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+	        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+	        for(int i = 0; i < 3; ++i) 
+	        	table.getColumnModel().getColumn(i).setCellRenderer( centerRenderer );
 	        table.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {

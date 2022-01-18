@@ -101,7 +101,8 @@ public class LichSuPanelController {
         table.getColumnModel().getColumn(0).setPreferredWidth(80);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-        table.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        for(int i = 0; i < 5; ++i) 
+        	table.getColumnModel().getColumn(i).setCellRenderer( centerRenderer );
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -269,7 +269,7 @@ public class ThemSoLuongCoSoVatChatFrame extends javax.swing.JFrame {
     		
             try {
             	CoSoVatChatService coSoVatChatService = new CoSoVatChatService();
-            	coSoVatChatService.xoaCoSoVatChat(tenCoSoVatChatDetail.getText(),  Integer.parseInt(soLuongXoaJtf.getText()));
+            	coSoVatChatService.themSoLuongCoSoVatChat(tenCoSoVatChatDetail.getText(),  Integer.parseInt(soLuongXoaJtf.getText()));
                     JOptionPane.showMessageDialog(null, "Thêm thành công!!");
                     close();
                     parentController.refreshData();

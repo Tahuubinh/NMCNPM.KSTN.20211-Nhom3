@@ -226,7 +226,7 @@ public class CoSoVatChatService {
             connection.close();
         } catch (Exception e) {
 
-        	this.exceptionHandle(e.getMessage());
+//        	this.exceptionHandle(e.getMessage());
         }
     	
     }
@@ -239,15 +239,14 @@ public class CoSoVatChatService {
             			 + soLuongXoa + "WHERE item_name = '" + tenCoSoVatChat + "'"; 
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             preparedStatement.executeQuery();
-            preparedStatement.close();
             query = "DELETE FROM item WHERE item_quantity = 0";
-            PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-            st.executeQuery();
-            st.close();
+            preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            preparedStatement.executeQuery();
+            preparedStatement.close();
             connection.close();
         } catch (Exception e) {
 
-        	this.exceptionHandle(e.getMessage());
+//        	this.exceptionHandle(e.getMessage());
         }
     }
     

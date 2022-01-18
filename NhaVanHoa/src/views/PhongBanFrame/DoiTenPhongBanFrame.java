@@ -69,6 +69,7 @@ public class DoiTenPhongBanFrame extends javax.swing.JFrame {
         this.parentFrame.setEnabled(false);
         initComponents();
         this.tenPhongBanDetail.setText(tenPhongBanDetail);
+        this.tenPhongBanCu = tenPhongBanDetail;
     	pack();
     	setIconImage(Toolkit.getDefaultToolkit().getImage(ThemPhongBanFrame.class.getResource("/Icons/house.png")));
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -238,7 +239,7 @@ public class DoiTenPhongBanFrame extends javax.swing.JFrame {
     		this.phongBanBean.setPhongBanModel(phongBanModel);
             try {
             	PhongBanService phongBanService = new PhongBanService();
-            	phongBanService.doiTenPhongBan(tenPhongBanJtf.getText());
+            	phongBanService.doiTenPhongBan(tenPhongBanCu, tenPhongBanJtf.getText());
             	parentController.refreshData();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -264,5 +265,6 @@ public class DoiTenPhongBanFrame extends javax.swing.JFrame {
     private JTextField lyDoJtf;
     private JTextField tenPhongBanJtf;
     private JLabel tenPhongBanJlb;
+    private String tenPhongBanCu;
     private JLabel tenPhongBanDetail;
 }

@@ -10,6 +10,7 @@ import controllers.MuonTraController.XemChiTietMuonTraCotroller;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.EventObject;
 
@@ -21,6 +22,7 @@ import models.NguoiMuonModel;
 import models.NhaTaiTroModel;
 import models.ThoiGianModel;
 import services.MuonTraService;
+import services.TimeService;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -245,9 +247,12 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
     private void addThongTinDangKyCoSoVatChatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNewBtnActionPerformed
     	if(validateValueInForm()) {
     		MuonTraService muonTraService = new MuonTraService();
+    		TimeService timeService = new TimeService();
     		int soLuong = Integer.parseInt(soLuongHoanTraJtf.getText());
     		int soLuongDaTraBanDau = Integer.parseInt(soLuongDaHoanTraDetailJlb.getText());
     		String tenCoSoVatChatPhongBan = tenCoSoVatChatPhongBanDetailJlb.getText();
+    		Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(this.thoiGianMuon);
+    		String thoiGianMuon = timeService.convertToDate(thoiGianMuonTS);
     		if(soLuong == this.soLuongDaHoanTraNow) {
     			return;
     		}
@@ -257,7 +262,7 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
     			coSoVatChatModel.setSoLuongDaTra(soLuong);
     			try {
     					if(JOptionPane.showConfirmDialog(null,   " Thay đổi hoàn trả thành " + soLuong + " cái " + tenCoSoVatChatPhongBan , "Question",JOptionPane.YES_NO_OPTION) == 0) {
-                    		if(muonTraService.chinhSuaHoanTraCoSoVatChat(this.cccdNguoiMuon, coSoVatChatModel, this.thoiGianMuon))
+                    		if(muonTraService.chinhSuaHoanTraCoSoVatChat(this.cccdNguoiMuon, coSoVatChatModel, thoiGianMuon))
                                 {
                     				JOptionPane.showMessageDialog(null, "Chỉnh sửa hoàn trả thành công!!");
                                     close();
@@ -273,7 +278,7 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
     		} else {
     			try {
     					if(JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn không mượn  "+ tenCoSoVatChatPhongBan +" ?", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
-                    		if(muonTraService.chinhSuaHoanTraPhongBan(this.cccdNguoiMuon, tenCoSoVatChatPhongBan, this.thoiGianMuon))
+                    		if(muonTraService.chinhSuaHoanTraPhongBan(this.cccdNguoiMuon, tenCoSoVatChatPhongBan, thoiGianMuon))
                             {
                 				JOptionPane.showMessageDialog(null, "Xóa thành công!!");
                                 close();
