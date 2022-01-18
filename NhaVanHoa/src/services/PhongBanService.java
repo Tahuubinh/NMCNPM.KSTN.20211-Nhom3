@@ -120,12 +120,18 @@ public class PhongBanService {
         return list;
     }
     
+    /*
+     * check lich su dung sap toi, neu co lich su dung, tra ve false
+     */
     public boolean huyPhongBan(String tenPhongBan) {
         List<PhongBanBean> list = new ArrayList<>();
         //viết truy vấn
         return true;
     }
     
+    /*
+     * xoa phong ban, bat ke co lich su dung
+     */
     public boolean huyPhongBanBatBuoc(String tenPhongBan) {
         List<PhongBanBean> list = new ArrayList<>();
         //viết truy vấn
