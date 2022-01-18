@@ -109,11 +109,11 @@ public class ThongKePanelController {
         	setTableTamTru();
         }
         else if (status.equals("Chuyển đi")) {
-        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhauXoa(status);
+        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhauXoa(tuTuoi, denTuoi, gender, status, tuNam, denNam);
         	setTableChuyenDi();
         }
         else if (status.equals("Khai tử")) {
-        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhauXoa(status);
+        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhauXoa(tuTuoi, denTuoi, gender, status, tuNam, denNam);
         	setTableKhaiTu();
         }
         else {

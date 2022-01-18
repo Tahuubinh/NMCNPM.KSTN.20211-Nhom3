@@ -3,6 +3,8 @@ package utility;
 import Bean.HoKhauBean;
 import Bean.MemOfFamily;
 import Bean.NhanKhauBean;
+import models.QuanHeModel;
+
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -56,6 +58,32 @@ public class TableModelHoKhau {
             obj[0] = item.getNhanKhau().getNhanKhauModel().getHoTen();
             obj[1] = item.getNhanKhau().getNhanKhauModel().getNamSinh();
             obj[2] = item.getThanhVienCuaHoModel().getQuanHeVoiChuHo();
+            dtm.addRow(obj);
+        });
+        return dtm;
+    }
+    
+    public DefaultTableModel setTableQuanHe(List<QuanHeModel> listItem, String[] listColumn) {
+        final int columns = listColumn.length;
+        DefaultTableModel dtm = new DefaultTableModel()  {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return super.isCellEditable(row, column); //To change body of generated methods, choose Tools | Templates.
+            }
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnIndex == 5 ? Boolean.class : String.class;
+            }
+        };
+        dtm.setColumnIdentifiers(listColumn);
+        Object[] obj;
+        obj = new Object[columns];
+        listItem.forEach((QuanHeModel item) -> { 
+        	obj[0] = item.getID();
+            obj[1] = item.getHoTen();
+            obj[2] = item.getNamSinh();
+            obj[3] = item.getGioiTinh();
+            obj[4] = item.getQuanHeString();
             dtm.addRow(obj);
         });
         return dtm;

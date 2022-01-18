@@ -46,7 +46,7 @@ import javax.swing.border.LineBorder;
 public class XoaHoKhau extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField ngaytextField;
+	private com.toedter.calendar.JDateChooser ngaytextField;
     private JFrame parentJFrame = null;
     private JTable table;
     private HoKhauPanelController parentController;
@@ -97,8 +97,7 @@ public class XoaHoKhau extends JFrame {
 		
 		JLabel ngayLabel = new JLabel("Ngày:");
 		
-		ngaytextField = new JTextField();
-		ngaytextField.setColumns(10);
+		ngaytextField = new com.toedter.calendar.JDateChooser();
 		
 		JTextArea ly_dotextArea = new JTextArea();
 		ly_dotextArea.setLineWrap(true);

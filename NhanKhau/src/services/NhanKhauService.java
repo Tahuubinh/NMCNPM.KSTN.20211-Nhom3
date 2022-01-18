@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import models.ChungMinhThuModel;
 import models.GiaDinhModel;
 import models.NhanKhauModel;
+import models.QuanHeModel;
 import models.TieuSuModel;
 
 /**
@@ -214,6 +215,38 @@ public class NhanKhauService {
         return list;
     }
     
+    public List<QuanHeModel> getListKhongPhaiChuHo(int id) {
+        List<QuanHeModel> list = new ArrayList<>();
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            String query = "SELECT * \r\n"
+            		+ "FROM nhan_khau n, (\r\n"
+            		+ "	SELECT * FROM thanh_vien_cua_ho\r\n"
+            		+ "	WHERE idhokhau = " + id
+            		+ ") tv\r\n"
+            		+ "WHERE n.id = tv.idnhankhau";
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+        	System.out.println(rs);
+            while (rs.next()){
+            	QuanHeModel nhanKhau = new QuanHeModel();
+                nhanKhau.setID(rs.getInt("ID"));
+                nhanKhau.setHoTen(rs.getString("hoTen"));
+                nhanKhau.setGioiTinh(rs.getString("gioiTinh"));
+                nhanKhau.setNamSinh(rs.getDate("namSinh"));
+                nhanKhau.setTccString(rs.getString("tcc"));
+                nhanKhau.setQuanHeString(rs.getString("quanhevoichuho"));
+                list.add(nhanKhau);
+            }
+            preparedStatement.close();
+            connection.close();
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+    
     public List<NhanKhauBean> statisticNhanKhau(int TuTuoi, int denTuoi, String gender, String Status, int tuNam, int denNam) {
         List<NhanKhauBean> list = new ArrayList<>();
         
@@ -325,12 +358,25 @@ public class NhanKhauService {
         return list;
     }
     
-    public List<NhanKhauBean> statisticNhanKhauXoa(String lydoString) {
+    public List<NhanKhauBean> statisticNhanKhauXoa(int TuTuoi, int denTuoi, String gender, String lydoString, int tuNam, int denNam) {
         List<NhanKhauBean> list = new ArrayList<>();
         if (lydoString.equals("Chuyển đi")) {
         	lydoString = "Chuyển đi nơi khác";
         }
-        String query = "SELECT * FROM xoa_nhan_khau WHERE lydo = '" + lydoString + "'";
+        String query = "SELECT * FROM xoa_nhan_khau WHERE lydo = '" + lydoString + "' ";
+        query += " AND DATE_PART('year', AGE(CURRENT_DATE, namsinh))  >= "
+	                + TuTuoi
+	                + " \nAND DATE_PART('year', AGE(CURRENT_DATE, namsinh))  <= "
+	                + denTuoi;
+	    if (!gender.equalsIgnoreCase("Toàn Bộ")) {
+	        query += " AND gioitinh = '" + gender + "'";
+	    }
+	    
+        query += " AND (DATE_PART('year', ngayxoa) BETWEEN "
+                + tuNam
+                + " AND "
+                + denNam
+                + ")";
         
         query += " ORDER BY ngayxoa DESC";
         System.out.println(query);

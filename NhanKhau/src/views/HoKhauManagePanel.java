@@ -12,6 +12,7 @@ import views.HoKhauManagerFrame.FormDoiChuHo;
 import views.HoKhauManagerFrame.FormTachHoKhau;
 import views.HoKhauManagerFrame.FormThemHoKhau;
 import views.HoKhauManagerFrame.FormThemThanhVien;
+import views.HoKhauManagerFrame.FormXemChiTiet;
 import views.HoKhauManagerFrame.TachHoKhau;
 import views.HoKhauManagerFrame.ThemMoiHoKhau;
 import views.HoKhauManagerFrame.XoaHoKhau;
@@ -112,6 +113,14 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         
         popupMenu = new JPopupMenu();
         addPopup(tableJpn, popupMenu);
+        
+        XemMenuItem = new JMenuItem("Xem thông tin");
+        popupMenu.add(XemMenuItem);
+        XemMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	xemBtnActionPerformed(evt);
+            }
+        });
         
         JMenuItem doichuhoMenuItem = new JMenuItem("Đổi chủ hộ");
         popupMenu.add(doichuhoMenuItem);
@@ -282,6 +291,20 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         chuyenDiNoiKhac.setResizable(false);
         chuyenDiNoiKhac.setVisible(true);
     }//GEN-LAST:event_chuyenDiBtnActionPerformed
+    
+    private void xemBtnActionPerformed(java.awt.event.ActionEvent evt) {
+    	JTable tempJTable = controller.getHoKhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	FormXemChiTiet xem_chi_tiet = new FormXemChiTiet(this.parentFrame, tempJTable, controller);
+    	xem_chi_tiet.setLocationRelativeTo(null);
+    	xem_chi_tiet.setResizable(false);
+    	xem_chi_tiet.setVisible(true);
+    }
 
     private void themMoiBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themMoiBtnActionPerformed
     	//ThemMoiHoKhau themMoiHoKhau = new ThemMoiHoKhau(this.parentFrame);
@@ -351,6 +374,7 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
     private JPopupMenu popupMenu;
     private JMenuItem tachMenuItem;
     private JMenuItem themnhankhauMenuItem;
+    private JMenuItem XemMenuItem;
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {

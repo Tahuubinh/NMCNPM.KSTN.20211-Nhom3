@@ -1,6 +1,7 @@
 package services;
 
 import Bean.HoKhauBean;
+import Bean.NhanKhauBean;
 import controllers.LoginController;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -90,6 +91,31 @@ public class HoKhauService {
         preparedStatement.close();
         connection.close();
         return id;
+    }
+    
+    public NhanKhauModel getThongTinChuHo(int id) throws ClassNotFoundException, SQLException{
+        Connection connection = MysqlConnection.getMysqlConnection();
+        String query = "SELECT * FROM nhan_khau WHERE id = (\r\n"
+        		+ "	SELECT idchuho FROM ho_khau\r\n"
+        		+ "	WHERE id = \r\n"
+        		+ id + ")";
+        PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+        ResultSet rs = preparedStatement.executeQuery();
+        //System.err.println(query);
+
+        NhanKhauBean nhanKhauBean = new NhanKhauBean();
+        NhanKhauModel nhanKhau = nhanKhauBean.getNhanKhauModel();
+        if (rs.next()) {
+        	nhanKhau.setID(rs.getInt("ID"));
+        	System.err.println(rs.getString("hoTen"));
+        	nhanKhau.setHoTen(rs.getString("hoTen"));
+            nhanKhau.setGioiTinh(rs.getString("gioiTinh"));
+            nhanKhau.setNamSinh(rs.getDate("namSinh"));
+            nhanKhau.setTccString(rs.getString("tcc"));
+        }
+        preparedStatement.close();
+        connection.close();
+        return nhanKhau;
     }
     
     
@@ -501,4 +527,29 @@ public class HoKhauService {
             System.out.println(e.getMessage());
         }
     }
+    public void updateQuanHe(int id, String quanheString) {
+        String query = "UPDATE thanh_vien_cua_ho\r\n"
+        		+ "SET quanhevoichuho = ?\r\n"
+        		+ "WHERE idnhankhau = ?";
+        try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, quanheString);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
