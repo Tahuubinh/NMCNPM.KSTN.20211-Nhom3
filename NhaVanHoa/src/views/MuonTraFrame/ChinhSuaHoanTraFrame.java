@@ -71,7 +71,7 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
     /**
      * @wbp.parser.constructor
      */
-    public ChinhSuaHoanTraFrame(XemChiTietMuonTraCotroller parentController, JFrame parentJFrame, String tenNguoiHoanTra, String cccdNguoiMuon, String thoiGianMuon, String tenCoSoVatChatPhongBan, int soLuongDaHoanTra, int isCoSoVatChat) {
+    public ChinhSuaHoanTraFrame(XemChiTietMuonTraCotroller parentController, JFrame parentJFrame, String tenNguoiHoanTra, String cccdNguoiMuon, String thoiGianMuon, String thoiGianTraReal, String tenCoSoVatChatPhongBan, int soLuongMuon, int soLuongDaHoanTra, int isCoSoVatChat) {
     	setBackground(new Color(255, 228, 228));
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
@@ -84,6 +84,8 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
         this.soLuongDaHoanTraNow = soLuongDaHoanTra;
         this.cccdNguoiMuon = cccdNguoiMuon;
         this.thoiGianMuon = thoiGianMuon;
+        this.thoiGianTraReal = thoiGianTraReal;
+        this.soLuongMuon = soLuongMuon;
     	setIconImage(Toolkit.getDefaultToolkit().getImage(ChinhSuaHoanTraFrame.class.getResource("/Icons/house.png")));
     	setTitle("Chỉnh sửa cơ sở vật chất / phòng ban đã mượn");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -251,6 +253,7 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
     		int soLuong = Integer.parseInt(soLuongHoanTraJtf.getText());
     		int soLuongDaTraBanDau = Integer.parseInt(soLuongDaHoanTraDetailJlb.getText());
     		String tenCoSoVatChatPhongBan = tenCoSoVatChatPhongBanDetailJlb.getText();
+    		Timestamp thoiGianTraReal = Timestamp.valueOf(this.thoiGianTraReal);
     		Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(this.thoiGianMuon);
     		String thoiGianMuon = timeService.convertToDate(thoiGianMuonTS);
     		if(soLuong == this.soLuongDaHoanTraNow) {
@@ -260,6 +263,7 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
     			CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
     			coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatPhongBan);
     			coSoVatChatModel.setSoLuongDaTra(soLuong);
+    			coSoVatChatModel.setThoiGianTraReal(thoiGianTraReal);
     			try {
     					if(JOptionPane.showConfirmDialog(null,   " Thay đổi hoàn trả thành " + soLuong + " cái " + tenCoSoVatChatPhongBan , "Question",JOptionPane.YES_NO_OPTION) == 0) {
                     		if(muonTraService.chinhSuaHoanTraCoSoVatChat(this.cccdNguoiMuon, coSoVatChatModel, thoiGianMuon))
@@ -278,7 +282,7 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
     		} else {
     			try {
     					if(JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn không mượn  "+ tenCoSoVatChatPhongBan +" ?", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
-                    		if(muonTraService.chinhSuaHoanTraPhongBan(this.cccdNguoiMuon, tenCoSoVatChatPhongBan, thoiGianMuon))
+                    		if(muonTraService.chinhSuaHoanTraPhongBan(this.cccdNguoiMuon, tenCoSoVatChatPhongBan, thoiGianMuon, thoiGianTraReal))
                             {
                 				JOptionPane.showMessageDialog(null, "Xóa thành công!!");
                                 close();
@@ -328,8 +332,10 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
     private JLabel tenCoSoVatChatPhongBanDetailJlb;
     private String cccdNguoiMuon;
     private String thoiGianMuon;
+    private String thoiGianTraReal;
     private String tenNguoiHoanTra;
     private int isCoSoVatChat;
+    private int soLuongMuon;
     private int soLuongDaHoanTraNow;
     private JLabel changeSoLuongHoanTraJlb;
     private JLabel soLuongDaHoanTraDetailJlb;
