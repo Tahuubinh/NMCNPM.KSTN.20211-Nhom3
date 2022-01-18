@@ -135,11 +135,8 @@ public class MuonTraService {
     /*
      * ham tim kiem nhan khau theo ten, lien he, tu ngay, den ngay
      */
-    public List<MuonTraBean> search(String tenNguoiMuon, String lienHe, Timestamp tuNgayTimeStamp, Timestamp denNgayTimeStamp) {
+    public List<MuonTraBean> search(String tenNguoiMuon, String lienHe, Timestamp tuNgay, Timestamp denNgay) {
         List<MuonTraBean> list = new  ArrayList<>();
-        TimeService timeService = new TimeService();
-        String tuNgay = timeService.convertToDate(tuNgayTimeStamp);
-        String denNgay = timeService.convertToDate(denNgayTimeStamp);
         Connection connection;
         
         try {
@@ -149,27 +146,27 @@ public class MuonTraService {
 			    	  + "JOIN schedule s ON ir.event_no = s.event_no JOIN item i ON i.item_id = ir.item_id "
 			    	  + "WHERE r.user_name LIKE '%"
 			    	  + tenNguoiMuon
-			    	  + "%' AND CAST(r.user_phone as character) = "
+			    	  + "%' AND r.user_phone Like '%"
 			    	  + lienHe
-			    	  + " AND CAST(s.time_start as date) BETWEEN "
+			    	  + "%' AND (s.time_start BETWEEN '"
 			    	  + tuNgay
-			    	  + " AND "
-			    	  + denNgay;
+			    	  + "' AND '"
+			    	  + denNgay + "' )";
 			String query2 = "SELECT s.event_no, r.user_name, r.cccd, r.user_phone, s.time_start, s.time_end, i.infra_name "
 		  		  	  + "FROM registers r JOIN infraregistered ir ON r.user_id = ir.user_id "
 		  		  	  + "JOIN schedule s ON ir.event_no = s.event_no JOIN infrastructure i ON i.infra_id = ir.infra_id "
 		  		  	  + "WHERE r.user_name LIKE '%"
 			    	  + tenNguoiMuon
-			    	  + "%' AND CAST(r.user_phone as character) = "
+			    	  + "%' AND r.user_phone  Like '%"
 			    	  + lienHe
-			    	  + " AND CAST(s.time_start as date) BETWEEN "
+			    	  + "%' AND (s.time_start BETWEEN '"
 			    	  + tuNgay
-			    	  + " AND "
-			    	  + denNgay;
+			    	  + "' AND '"
+			    	  + denNgay + "' )";
 	        PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
+	        System.out.println(preparedStatement1);
 	        ResultSet rs1 = preparedStatement1.executeQuery();
-	        PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
-	        ResultSet rs2 = preparedStatement2.executeQuery();
+
 	        while(rs1.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
 	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
@@ -183,7 +180,9 @@ public class MuonTraService {
 	        	muonTra.setSoLuong(rs1.getInt("item_number"));
                 list.add(muonTraBean);
 	        }
-	        while(rs2.next()) {
+	         preparedStatement1 = (PreparedStatement)connection.prepareStatement(query2);
+	         rs1 = preparedStatement1.executeQuery();
+	        while(rs1.next()) {
 	        	MuonTraBean muonTraBean = new MuonTraBean(); 
 	        	MuonTraModel muonTra = muonTraBean.getMuonTraModel();
 	        	muonTra.setStt(rs1.getInt("event_no"));
@@ -197,7 +196,6 @@ public class MuonTraService {
                 list.add(muonTraBean);
 	        }
 	        preparedStatement1.close();
-	        preparedStatement2.close();
 	        connection.close();
 		} catch (Exception e) {
             this.exceptionHandle(e.getMessage());
