@@ -93,6 +93,18 @@ public class MuonTraPanel extends javax.swing.JPanel {
 
 		});
         
+        hoanTra = new JMenuItem("Hoàn trả toàn bộ");
+        popupMenu.add(hoanTra);
+        hoanTra.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				hoanTraActionPerformed(evt);
+			}
+
+		});
+        
         huyMuon = new JMenuItem("Huỷ mượn");
         popupMenu.add(huyMuon);
         huyMuon.addActionListener(new ActionListener() {
@@ -104,6 +116,8 @@ public class MuonTraPanel extends javax.swing.JPanel {
 			}
 
 		});
+        
+        
         addNewBtn = new javax.swing.JButton();
         addNewBtn.setBorder(null);
         addNewBtn.setIcon(new ImageIcon(MuonTraPanel.class.getResource("/Icons/add.png")));
@@ -325,7 +339,34 @@ public class MuonTraPanel extends javax.swing.JPanel {
 		xemChiTietMuonTraFrame.setVisible(true);
 	}
 	
-
+	
+	private void hoanTraActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				JTable xemChiTietTable = this.controller.getTable();
+				int row = xemChiTietTable.getSelectedRow();
+				if(row == -1) {
+		    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+		  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+		  		return;
+				}
+				String tenNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+				String cccdNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 2).toString();
+				String thoiGianMuon = xemChiTietTable.getModel().getValueAt(row, 4).toString();
+				  if (JOptionPane.showConfirmDialog(null, "Bạn sẽ hoàn trả toàn bộ cơ sở vật chất và phòng ban đã mượn của " + tenNguoiMuon + " ??", "Question??", JOptionPane.YES_NO_OPTION) == 0) {
+			        	 try {
+			             	MuonTraService muonTraService = new MuonTraService();
+			             	if(muonTraService.hoanTraToanBo(cccdNguoiMuon, thoiGianMuon))
+			                     JOptionPane.showMessageDialog(null, "Hoàn trả thành công!!");
+			                controller.refreshData();
+			           
+			             } catch (Exception e) {
+			                 System.out.println(e.getMessage());
+			                 JOptionPane.showMessageDialog(null, "Có lỗi xảy ra. Vui long kiểm tra lại!!", "Warning", JOptionPane.WARNING_MESSAGE);
+			             }
+			        }
+	}
+	
 	private void huyMuonActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
 		JTable xemChiTietTable = this.controller.getTable();
@@ -355,6 +396,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
              }
         }
 	}
+	
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addNewBtn;
     private javax.swing.JTextField nguoiMuonJtfSearch;

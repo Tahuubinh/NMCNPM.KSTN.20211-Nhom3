@@ -202,13 +202,16 @@ public class MuonTraService {
         }
         return list;
     }
-    
-    public boolean hoanTraCoSoVatChat() {
-		return false;
-    	
-    }
+
     
     // add cac gia tri nhan ve vao ListMuonTraDetail
+    /*
+     * Out put: ten csvc/phong ban, soLuongCSVC, soLuongDaTra, thoiGianTraReal
+     * kiem tra soLuongDaTra hien tai bang cach check thoiGianTraReal va check bang xoa trong database cua no, 
+     * neu coThoiGianTraReal va khong co thong tin trong bang xoa => tra du
+     * neu coThoiGianTraReal va  co thong tin trong bang xoa => so luong da tra = soLuongMuon - soLuongXoa
+     * neu khongCoThoiGianTraReal => chua tra
+     */
     public MuonTraBean getChiTietMuonTra(String cccdNguoiMuon, String thoiGianMuon) {
         MuonTraBean muonTraBean = new MuonTraBean();
         Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
@@ -221,35 +224,85 @@ public class MuonTraService {
     /*
      * Ham sử lý ngoại lệ : thông báo ra lỗi nhận được
      */
+    
+    /*
+     * huy lich muon hien tai theo cccd nguoi muon
+     */
     public boolean huyLichMuon(String cccdNguoiMuon, String thoiGianMuon) {
 		// TODO Auto-generated method stub
 		
 		return true;
 	}
     
+    /*
+     * ban giao toan bo csvc, phong ban theo cccd nguoi muon
+     */
+    public boolean hoanTraToanBo(String cccdNguoiMuon, String thoiGianMuon) {
+		// TODO Auto-generated method stub
+		
+		return true;
+	}
+    
+    /*
+     * input: cccd nguoi muon, coSoVatChatModel.tenCoSoVatChat, coSoVatChatModel.soLuongMuon, thoi gian muon
+     * tra ve false neu so luong duoc chinh sua > so luong con lai trong kho
+     */
     public boolean chinhSuaCoSoVatChatMuon(String cccdNguoiMuon, CoSoVatChatModel coSoVatChatModel, String thoiGianMuon) {
     	
 		return true;	
     }
     
+    /*
+     * huy ten csvc dang ky muon hien tai theo ten csvc va theo cccd nguoi muon
+     */
     public boolean huyMuonCoSoVatChat(String cccdNguoiMuon, String tenCoSoVatChat, String thoiGianMuon) {
     	
 		return true;	
     }
     
+    /*
+     * input: cccd nguoi muon, coSoVatChatModel.tenCoSoVatChat, coSoVatChatModel.soLuongDaTra, thoi gian muon, thoiGianDaTraReal = thoi gian hien tai
+     * so luong thieu = so luong da muon - so luong da tra, so luong thieu add vao bang xoa trong csdl, thoi gian add la thoi gian them hien tai
+     */
     public boolean hoanTraCoSoVatChatMuon(String cccdNguoiMuon, CoSoVatChatModel coSoVatChatModel, String thoiGianMuon) {
     	
 		return true;	
     }
     
+    /*
+     * huy ten phong ban dang ky muon hien tai theo ten phong ban va theo cccd nguoi muon
+     */
     public boolean huyMuonPhongBan(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon) {
     	
 		return true;	
     }
     
+    /*
+     * input: cccd nguoi muon, tenPhongBan , thoi gian muon, thoiGianDaTraReal = thoi gian hien tai
+     */
     public boolean hoanTraPhongBanMuon(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon) {
     	
 		return true;	
+    }
+    
+    /*
+     * input: cccd nguoi muon, coSoVatChatModel.tenCoSoVatChat, coSoVatChatModel.soLuongDaTra, thoi gian muon, thoiGianDaTraReal = thoi gian hien tai
+     * so luong thieu = so luong da muon - so luong da tra, so luong thieu add vao bang xoa trong csdl, thoi gian add la thoi gian them hien tai
+     * kiem tra soLuongDaTra hien tai truoc khi chinh sua, check thoi gian da tra real va check tai bang xoa de biet so luong da tra hien tai
+     * out put: giu nguyen thoi gian da tra neu soLuongDaTra > 0, thay doi thong tin o bang xoa trong csdl
+     */
+    
+    public boolean chinhSuaHoanTraCoSoVatChat(String cccdNguoiMuon, CoSoVatChatModel coSoVatChatModel, String thoiGianMuon) {
+    	return true;
+    }
+    
+    /*
+     * input: cccd nguoi muon, coSoVatChatModel.tenCoSoVatChat, coSoVatChatModel.soLuongDaTra, thoi gian muon, thoiGianDaTraReal = thoi gian hien tai
+     * out put: neu tenPhongBanMuon co thoiGianTraReal thi xoa thoiGianTraReal, va nguoc lai neu tenPhongBanMuon khong co thoiGianTraReal thi add
+     * thoiGianTraReal la thoiGianHienTai, thay doi thong tin o bang xoa trong csdl
+     */
+    public boolean chinhSuaHoanTraPhongBan(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon) {
+    	return true;
     }
     
     private void exceptionHandle(String message) {

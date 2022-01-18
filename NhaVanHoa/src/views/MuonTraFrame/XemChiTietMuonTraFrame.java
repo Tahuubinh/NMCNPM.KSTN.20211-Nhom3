@@ -97,6 +97,31 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 
 		});
         
+        hoanTra = new JMenuItem("Hoàn trả");
+        popupMenu.add(hoanTra);
+        hoanTra.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				hoanTraActionPerformed(evt);
+			}
+
+
+		});
+        
+        chinhSuaHoanTra = new JMenuItem("Chỉnh sửa hoàn trả");
+        popupMenu.add(chinhSuaHoanTra);
+        chinhSuaHoanTra.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent evt) {
+				// TODO Auto-generated method stub
+				chinhSuaHoanTraActionPerformed(evt);
+			}
+
+
+		});
     	pack();
         controller = new XemChiTietMuonTraCotroller(tablePanel, this.idDetail, this.thoiGianMuonDetail, this.popupMenu);
        
@@ -316,9 +341,37 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 				return;
 			}
 		}
-		ChinhSuaMuonTraFrame chinhSuaMuonTraFrame = new ChinhSuaMuonTraFrame(this.controller, parentJFrame, idDetail, thoiGianMuonDetail, tenCoSoVatChatPhongBan, soLuongMuon, isCoSoVatChat);
-		xemChiTietMuonTraFrame.setResizable(false);
-		xemChiTietMuonTraFrame.setVisible(true);
+		ChinhSuaMuonTraFrame chinhSuaMuonTraFrame = new ChinhSuaMuonTraFrame(this.controller, parentJFrame, idDetail.getText(), thoiGianMuonDetail.getText(), tenCoSoVatChatPhongBan, soLuongMuon, isCoSoVatChat);
+		chinhSuaMuonTraFrame.setResizable(false);
+		chinhSuaMuonTraFrame.setVisible(true);
+	}
+	
+	private void hoanTraActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+  		return;
+		}
+		int isCoSoVatChat = 1;
+		String tenCoSoVatChatPhongBan = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		int soLuongDaHoanTra =Integer.parseInt(xemChiTietTable.getModel().getValueAt(row, 3).toString());
+		for(int i = 0; i < this.listPhongBan.size(); ++i) {
+			if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
+				isCoSoVatChat = 0;
+				return;
+			}
+		}
+		ChinhSuaHoanTraFrame chinhSuaHoanTraFrame = new ChinhSuaHoanTraFrame(this.controller, parentJFrame, tenNguoiDangKyDetail.getText(), idDetail.getText(), thoiGianMuonDetail.getText(), tenCoSoVatChatPhongBan, soLuongDaHoanTra, isCoSoVatChat);
+		chinhSuaHoanTraFrame.setResizable(false);
+		chinhSuaHoanTraFrame.setVisible(true);
+	}
+	
+	private void chinhSuaHoanTraActionPerformed(ActionEvent evt) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -359,5 +412,5 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
     private JPopupMenu popupMenu;
     private JMenuItem chinhSua;
     private JMenuItem hoanTra;
-	
+	private JMenuItem chinhSuaHoanTra;
 }
