@@ -74,6 +74,8 @@ public class LichSuService {
       			  		  + "FROM money m JOIN item i on m.item_id = i.item_id";
             String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
         			  	  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id";
+            String query3 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
+			  		  	  + "FROM money m JOIN item i on m.item_id = i.item_id";
             PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
             ResultSet rs1 = preparedStatement1.executeQuery();
             PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);

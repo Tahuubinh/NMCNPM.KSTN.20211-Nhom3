@@ -48,13 +48,15 @@ public class AddNewController {
         }
         if(idNguoiMuon < 0) return false;
         
-        String query2 = "INSERT INTO schedule (time_start, time_end, real_time_end) values ('?', '?', ?)";
+        String query2 = "INSERT INTO schedule (time_start, time_end, real_time_end) values (?, ?, ?)";
         PreparedStatement st2 = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
+        
     	st2.setTimestamp(1, (Timestamp) thoiGianModel.getThoiGianMuon());
     	st2.setTimestamp(2, (Timestamp) thoiGianModel.getThoiGianTra());
     	st2.setTimestamp(3, null);
     	st2.executeUpdate();
-    	st2.close();
+    	ResultSet keys = st2.getGeneratedKeys();
+    	
         listCoSoVatChatModels.forEach(coSoVatChat ->{
         	int soLuongMuon = coSoVatChat.getSoLuongMuon();
         	String query3 = "INSERT INTO itemregistered (item_id, user_id, event_no, item_number) values "
@@ -63,9 +65,9 @@ public class AddNewController {
         				  + "', ?, ?, ?)";
         	try {
 				PreparedStatement st3 = connection.prepareStatement(query3);
-				st3.setInt(2, rs1.getInt(1));
-//				st3.setInt(3, );
-				st3.setInt(4, coSoVatChat.getSoLuongMuon());
+				st3.setInt(1, rs1.getInt(1));
+				st3.setInt(2, keys.getInt(1));
+				st3.setInt(3, coSoVatChat.getSoLuongMuon());
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -79,14 +81,15 @@ public class AddNewController {
         				  + "', ?, ?)";
         	try {
 				PreparedStatement st3 = connection.prepareStatement(query3);
-				st3.setInt(2, rs1.getInt(1));
-//				st3.setInt(3, );
+				st3.setInt(1, rs1.getInt(1));
+				st3.setInt(2, keys.getInt(1));
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				this.exceptionHandle(e.getMessage());
 			}
         });
+        st2.close();
         st1.close();
         connection.close();
         return true;
