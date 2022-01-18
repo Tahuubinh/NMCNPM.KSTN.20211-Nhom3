@@ -44,3 +44,15 @@ SELECT * FROM nhan_khau
   WHERE DATE_PART('year', AGE(CURRENT_DATE, namSinh))  >= -1 
 AND DATE_PART('year', AGE(CURRENT_DATE, namSinh))  <= 200 AND (DATE_PART('year', tam_tru.tuNgay) BETWEEN 0 AND 2100) 
 ORDER BY ngayTao DESC
+
+SELECT * FROM nhan_khau 
+ LEFT JOIN tam_tru ON nhan_khau.ID = tam_tru.idNhanKhau 
+ LEFT JOIN tam_vang ON nhan_khau.ID = tam_vang.idNhanKhau
+  WHERE DATE_PART('year', AGE(CURRENT_DATE, namSinh))  >= -1
+select * from tam_tru
+select * from khai_tu
+
+
+
+
+

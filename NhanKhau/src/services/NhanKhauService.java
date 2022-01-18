@@ -228,26 +228,26 @@ public class NhanKhauService {
         if (!gender.equalsIgnoreCase("Toàn Bộ")) {
             query += " AND nhan_khau.gioiTinh = '" + gender + "'";
         }
-        if (Status.equalsIgnoreCase("Toan bo")) {
+        if (Status.equalsIgnoreCase("Toàn bộ")) {
             query += " AND (tam_tru.denNgay >= CURRENT_DATE OR tam_tru.denNgay IS NULL)"
                     + " AND (tam_vang.denNgay <= CURRENT_DATE OR tam_vang.denNgay IS NULL)";
-        } else if (Status.equalsIgnoreCase("Thuong tru")) {
+        } else if (Status.equalsIgnoreCase("Thường trú")) {
             query += " AND tam_tru.denNgay IS NULL";
             
-        } else if (Status.equalsIgnoreCase("Tam tru")) {
+        } else if (Status.equalsIgnoreCase("Tạm trú")) {
             query += " AND (DATE_PART('year', tam_tru.tuNgay) BETWEEN "
                     + tuNam
                     + " AND "
                     + denNam
                     + ")";
-        } else if (Status.equalsIgnoreCase("Tam vang")) {
+        } else if (Status.equalsIgnoreCase("Tạm vắng")) {
             query += " AND (DATE_PART('year', tam_vang.tuNgay) BETWEEN "
                     + tuNam
                     + " AND "
                     + denNam
                     + ")";
         }
-        //query += " ORDER BY ngayTao ASC";
+        query += " ORDER BY ngayTao ASC";
         System.out.println(query);
          try {
             Connection connection = MysqlConnection.getMysqlConnection();
@@ -315,6 +315,35 @@ public class NhanKhauService {
                     nhanKhauBean.setListGiaDinhModels(listGiaDinhModels);
                     prst.close();
                 }
+                list.add(nhanKhauBean);
+            }
+            preparedStatement.close();
+        } catch (Exception e) {
+             System.out.println(e.getMessage());
+        }
+        
+        return list;
+    }
+    
+    public List<NhanKhauBean> statisticNhanKhauXoa(String lydoString) {
+        List<NhanKhauBean> list = new ArrayList<>();
+        
+        String query = "SELECT * FROM xoa_nhan_khau WHERE lydo = " + lydoString;
+        
+        query += " ORDER BY ngayxoa DESC";
+        System.out.println(query);
+         try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                NhanKhauBean  nhanKhauBean = new NhanKhauBean();
+                NhanKhauModel nhanKhau = nhanKhauBean.getNhanKhauModel();
+                nhanKhau.setHoTen(rs.getString("hoten"));
+                nhanKhau.setGioiTinh(rs.getString("gioitinh"));
+                nhanKhau.setNamSinh(rs.getDate("namsinh"));
+                nhanKhau.setNgayXoa(rs.getDate("ngayxoa"));
+                
                 list.add(nhanKhauBean);
             }
             preparedStatement.close();

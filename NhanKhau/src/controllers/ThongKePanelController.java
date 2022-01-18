@@ -8,6 +8,8 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.util.EventObject;
 import java.util.List;
+
+import javax.lang.model.element.Element;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -75,7 +77,7 @@ public class ThongKePanelController {
         int tuNam = 0;
         int denNam = 2100;
         String gender = (String)this.GenderJcb.getSelectedItem();
-        String status = StringService.covertToString((String)this.StatusJcb.getSelectedItem());
+        String status = (String)this.StatusJcb.getSelectedItem();
 
         try {
             if (!this.tuTuoiJtf.getText().trim().isEmpty()) {
@@ -97,12 +99,29 @@ public class ThongKePanelController {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(denTuoiJtf, "Vui lòng nhập đúng kiểu dữ liệu!!", "Warring", JOptionPane.ERROR_MESSAGE);
         }
-        this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhau(tuTuoi, denTuoi, gender, status, tuNam, denNam);
-        setDataTable();
+        if (status.equals("Tạm vắng")) {
+        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhau(tuTuoi, denTuoi, gender, status, tuNam, denNam);
+        	setTableTamvang();
+        } 
+        else if (status.equals("Tạm trú")) {
+        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhau(tuTuoi, denTuoi, gender, status, tuNam, denNam);
+        	setTableTamTru();
+        }
+        else if (status.equals("Chuyển đi")) {
+        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhauXoa(status);
+        	setTableTamvang();
+        }
+        else if (status.equals("Khai tử")) {
+        	
+        }
+        else {
+	        this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhau(tuTuoi, denTuoi, gender, status, tuNam, denNam);
+	        setTableNhanKhau();
+        }
     }
     
-    public void setDataTable() {
-        List<NhanKhauModel> listItem = new ArrayList<>();
+    public void setTableNhanKhau() {
+    	List<NhanKhauModel> listItem = new ArrayList<>();
         this.listNhanKhauBeans.forEach(nhankhau -> {
             listItem.add(nhankhau.getNhanKhauModel());
         });
@@ -114,9 +133,65 @@ public class ThongKePanelController {
             }
             
         };
+        table.setComponentPopupMenu(new JPopupMenu());
+        setDataTable();
+    }
+    
+    public void setTableTamTru() {
+    	List<NhanKhauModel> listItem = new ArrayList<>();
+        this.listNhanKhauBeans.forEach(nhankhau -> {
+            listItem.add(nhankhau.getNhanKhauModel());
+        });
+        DefaultTableModel model = classTableModel.setTableNhanKhau(listItem, COLUMNS);
+        table = new JTable(model) {
+            @Override
+            public boolean editCellAt(int row, int column, EventObject e) {
+                return false;
+            }
+            
+        };
+        table.setComponentPopupMenu(popupMenu);
+        setDataTable();
+    }
+    
+    public void setTableChuyenDi() {
+    	List<NhanKhauModel> listItem = new ArrayList<>();
+        this.listNhanKhauBeans.forEach(nhankhau -> {
+            listItem.add(nhankhau.getNhanKhauModel());
+        });
+        DefaultTableModel model = classTableModel.setTableNhanKhau(listItem, COLUMNS);
+        table = new JTable(model) {
+            @Override
+            public boolean editCellAt(int row, int column, EventObject e) {
+                return false;
+            }
+            
+        };
+        table.setComponentPopupMenu(new JPopupMenu());
+        setDataTable();
+    }
+    
+    public void setTableTamvang() {
+    	List<NhanKhauModel> listItem = new ArrayList<>();
+        this.listNhanKhauBeans.forEach(nhankhau -> {
+            listItem.add(nhankhau.getNhanKhauModel());
+        });
+        DefaultTableModel model = classTableModel.setTableNhanKhau(listItem, COLUMNS);
+        table = new JTable(model) {
+            @Override
+            public boolean editCellAt(int row, int column, EventObject e) {
+                return false;
+            }
+            
+        };
+        table.setComponentPopupMenu(new JPopupMenu());
+        setDataTable();
+    }
+    
+    public void setDataTable() {
         
         // thiet ke bang
-        table.setComponentPopupMenu(popupMenu);
+        
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));
         table.setRowHeight(50);

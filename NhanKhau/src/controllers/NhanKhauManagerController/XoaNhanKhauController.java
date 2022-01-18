@@ -4,8 +4,18 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
+
+import Bean.NhanKhauBean;
+import models.ChungMinhThuModel;
+import models.GiaDinhModel;
 import models.KhaiTuModel;
+import models.NhanKhauModel;
+import models.TieuSuModel;
 import services.MysqlConnection;
 
 /**
@@ -13,11 +23,35 @@ import services.MysqlConnection;
  * @author Hai
  */
 public class XoaNhanKhauController {
-    public boolean XoaNhanKhau(int id) {
+    public boolean XoaNhanKhau(int id, String lydoString, Date ngayMatDate, String soGiayString) {
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
-            String query = "DELETE FROM nhan_khau WHERE id = (?)";
+            String query = "SELECT * FROM nhan_khau WHERE id = (?)";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            String hotenString = "";
+            String gioitinhString = "";
+            Date ngaysinhDate = null;
+            while (rs.next()){
+                hotenString = rs.getString("hoTen");
+                gioitinhString = rs.getString("gioiTinh");
+                ngaysinhDate = rs.getDate("namSinh");
+            }
+            query = "INSERT INTO xoa_nhan_khau (hoTen, gioitinh, namSinh, ngayxoa, lydo, sogiay)" 
+                    + " values (?, ?, ?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, hotenString);
+            preparedStatement.setString(2, gioitinhString);
+            //java.sql.Date namSinh = new java.sql.Date(nhanKhau.getNamSinh().getTime());
+            preparedStatement.setDate(3, ngaysinhDate);
+            preparedStatement.setDate(4, ngayMatDate);
+            preparedStatement.setString(5, lydoString);
+            preparedStatement.setString(6, soGiayString);
+            preparedStatement.executeUpdate();
+            
+            query = "DELETE FROM nhan_khau WHERE id = (?)";
+            preparedStatement = connection.prepareStatement(query);
             preparedStatement.setInt(1, id);
 
             preparedStatement.executeUpdate();

@@ -34,7 +34,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         this.parentFrame = parentFrame;
         initComponents();
         this.controller = new ThongKePanelController(GenderJcb, StatusJcb, tuTuoiJtf, denTuoiJtf, tuNamJtf, denNamJtf, tableJpn, popupMenu);
-        this.controller.setDataTable();
+        this.controller.setData();
     }
 
     /**
@@ -89,7 +89,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         
         popupMenu = new JPopupMenu();
-        addPopup(tableJpn, popupMenu);
+        //addPopup(tableJpn, popupMenu);
         
         XoaMenuItem = new JMenuItem("Xóa");
         XoaMenuItem.addActionListener(new ActionListener() {
@@ -162,7 +162,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         GenderJcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toàn bộ", "Nam", "Nữ" }));
 
         StatusJcb.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        StatusJcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toàn bộ", "Thường trú", "Tạm trú", "Tạm vắng" }));
+        StatusJcb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Toàn bộ", "Thường trú", "Tạm trú", "Tạm vắng", "Chuyển đi", "Khai tử"}));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -310,6 +310,7 @@ public class ThongKePanel extends javax.swing.JPanel {
     			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
+    	System.err.println(row);
     	XoaThongKe xoaNhanKhau = new XoaThongKe(this.controller, this.parentFrame, tempJTable, row);
     	xoaNhanKhau.setLocationRelativeTo(null);
     	xoaNhanKhau.setResizable(false);

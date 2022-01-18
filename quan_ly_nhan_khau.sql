@@ -155,6 +155,16 @@ CREATE TABLE  khai_tu  (
    lyDoChet  varchar(100)    NULL
 )  ;
 
+CREATE TABLE  xoa_nhan_khau  (
+   ID  serial  NOT NULL,
+   soGiay  varchar(100)    NULL,
+   hoTen  varchar(100)    NULL,
+   namSinh  date  NULL,
+   gioiTinh  varchar(100)    NULL,
+   ngayXoa  date  NULL,
+   lyDo  varchar(100)    NULL
+);
+
 -- --------------------------------------------------------
 
 --
@@ -371,7 +381,8 @@ ALTER TABLE  ho_khau
 --
 ALTER TABLE  khai_tu 
   ADD PRIMARY KEY ( ID );
-
+ALTER TABLE  xoa_nhan_khau 
+  ADD PRIMARY KEY ( ID );
 --
 -- Chỉ mục cho bảng  nhan_khau 
 --
