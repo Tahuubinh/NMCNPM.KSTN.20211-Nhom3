@@ -113,14 +113,6 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         popupMenu = new JPopupMenu();
         addPopup(tableJpn, popupMenu);
         
-        tachMenuItem = new JMenuItem("Tách hộ khẩu");
-        popupMenu.add(tachMenuItem);
-        tachMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-            	tachHoKhauBtnActionPerformed(evt);
-            }
-        });
-        
         JMenuItem doichuhoMenuItem = new JMenuItem("Đổi chủ hộ");
         popupMenu.add(doichuhoMenuItem);
         doichuhoMenuItem.addActionListener(new java.awt.event.ActionListener() {
@@ -134,6 +126,14 @@ public class HoKhauManagePanel extends javax.swing.JPanel {
         themnhankhauMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
             	themThanhVienBtnActionPerformed(evt);
+            }
+        });
+        
+        tachMenuItem = new JMenuItem("Tách hộ khẩu");
+        popupMenu.add(tachMenuItem);
+        tachMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            	tachHoKhauBtnActionPerformed(evt);
             }
         });
         

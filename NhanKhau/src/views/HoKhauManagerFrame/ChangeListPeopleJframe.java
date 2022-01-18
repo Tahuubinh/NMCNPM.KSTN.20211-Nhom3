@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 /**
  *
@@ -39,7 +40,7 @@ public class ChangeListPeopleJframe extends javax.swing.JFrame {
         this.listMemberTemp = new ArrayList<>();
         this.listMemberTemp.addAll(listMember);
         this.parentJframe = parentJFrame;
-        this.controller = new ChangeListPeopleController(this.listMemberTemp, addBtn, removeBtn, jTextField1, PeopleTableJpn, MemTableJpn);
+        this.controller = new ChangeListPeopleController(this.listMemberTemp, addBtn, removeBtn, jTextField1, new JTextField(), PeopleTableJpn, MemTableJpn);
         this.parentJframe.setEnabled(false);
         this.addWindowListener(new WindowAdapter() {
             @Override

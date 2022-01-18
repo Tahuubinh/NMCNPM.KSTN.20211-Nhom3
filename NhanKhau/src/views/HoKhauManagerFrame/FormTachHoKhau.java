@@ -74,14 +74,19 @@ public class FormTachHoKhau extends JFrame {
         this.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                close();
+            	closeWithoutChange();
             }
             
         });
     }
     
     void close() {
-        this.parentJFrame.setEnabled(true);
+        this.parentJFrame.setEnabled(false);
+        dispose();
+    }
+    
+    void closeWithoutChange() {
+    	this.parentJFrame.setEnabled(true);
         dispose();
     }
 
@@ -134,6 +139,7 @@ public class FormTachHoKhau extends JFrame {
 		
 		dia_chi_textField = new JTextField();
 		dia_chi_textField.setColumns(10);
+		dia_chi_textField.setText((String)this.parenTable.getModel().getValueAt(parenTable.getSelectedRow(),2));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -237,10 +243,14 @@ public class FormTachHoKhau extends JFrame {
     	hoKhauBean.getHoKhauModel().setDiaChi(dia_chiString);
         try {
 			new HoKhauService().subThanhVien(id_nhan_khau, id_ho_khau);
-			new HoKhauService().addNew(hoKhauBean);
+			int id_ho_khau_moi = new HoKhauService().addHoKhau(hoKhauBean);
 			JOptionPane.showMessageDialog(null, "Tách hộ khẩu thành công!!");
 	        parentController.refreshData();
 	        quan_lycontroller.refreshData();
+	        FormTachNhanKhau tachNhanKhau = new FormTachNhanKhau(this.parentController, this.parentJFrame, this.parenTable, id_ho_khau_moi);
+	        tachNhanKhau.setLocationRelativeTo(null);
+	        tachNhanKhau.setResizable(false);
+	        tachNhanKhau.setVisible(true);
 	        close();
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
