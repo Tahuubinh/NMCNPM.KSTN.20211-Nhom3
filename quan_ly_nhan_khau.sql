@@ -125,10 +125,10 @@ CREATE TABLE  ho_khau  (
    lyDoChuyen  text    NULL,
    nguoiThucHien  int   NULL
 )  ;
-SELECT MAX(id)+1 FROM ho_khau
-CREATE SEQUENCE ho_khau_id_seq MINVALUE 100
-ALTER TABLE ho_khau ALTER id SET DEFAULT nextval('ho_khau_id_seq')
-ALTER SEQUENCE ho_khau_id_seq OWNED BY ho_khau.id
+SELECT MAX(id)+1 FROM ho_khau;
+CREATE SEQUENCE ho_khau_id_seq MINVALUE 100;
+ALTER TABLE ho_khau ALTER id SET DEFAULT nextval('ho_khau_id_seq');
+ALTER SEQUENCE ho_khau_id_seq OWNED BY ho_khau.id;
 --
 -- Đang đổ dữ liệu cho bảng  ho_khau 
 --
@@ -249,6 +249,11 @@ CREATE TABLE  tam_tru  (
    lyDo  text   NOT NULL
 )  ;
 
+SELECT MAX(id)+1 FROM tam_tru;
+CREATE SEQUENCE tam_tru_id_seq MINVALUE 100;
+ALTER TABLE tam_tru ALTER id SET DEFAULT nextval('tam_tru_id_seq');
+ALTER SEQUENCE tam_tru_id_seq OWNED BY tam_tru.id;
+
 ALTER TABLE tam_tru ALTER COLUMN lyDo DROP NOT NULL;
 
 
@@ -267,6 +272,11 @@ CREATE TABLE  tam_vang  (
    denNgay  date  NULL,
    lyDo  varchar(100)    NULL
 )  ;
+
+SELECT MAX(id)+1 FROM tam_vang;
+CREATE SEQUENCE tam_vang_id_seq MINVALUE 100;
+ALTER TABLE tam_vang ALTER id SET DEFAULT nextval('tam_vang_id_seq');
+ALTER SEQUENCE tam_vang_id_seq OWNED BY tam_vang.id;
 
 -- --------------------------------------------------------
 

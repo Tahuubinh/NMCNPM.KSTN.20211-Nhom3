@@ -56,7 +56,23 @@ SELECT * FROM xoa_nhan_khau WHERE lydo = 'Chuyển đi' ORDER BY ngayxoa DESC
 where lydochet
 insert into xoa_nhan_khau(idnhankhau)
 values (1)
+SELECT * FROM nhan_khau WHERE id = (
+	SELECT idchuho FROM ho_khau
+	WHERE id = 42
+)
 
+SELECT * FROM thanh_vien_cua_ho
+
+SELECT * 
+FROM nhan_khau n, (
+	SELECT * FROM thanh_vien_cua_ho
+	WHERE idhokhau = 42
+) tv
+WHERE n.id = tv.idnhankhau
+
+UPDATE thanh_vien_cua_ho
+SET quanhevoichuho = 'a'
+WHERE idnhankhau = 118
 
 
 
