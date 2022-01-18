@@ -1,13 +1,24 @@
 package views;
 
 import controllers.ThongKePanelController;
+import views.NhanKhauManagerFrame.XoaNhanKhau;
+import views.NhanKhauManagerFrame.XoaThongKe;
 
 import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.JFrame;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+
+import java.awt.Component;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,7 +33,7 @@ public class ThongKePanel extends javax.swing.JPanel {
     public ThongKePanel(JFrame parentFrame) {
         this.parentFrame = parentFrame;
         initComponents();
-        this.controller = new ThongKePanelController(GenderJcb, StatusJcb, tuTuoiJtf, denTuoiJtf, tuNamJtf, denNamJtf, tableJpn);
+        this.controller = new ThongKePanelController(GenderJcb, StatusJcb, tuTuoiJtf, denTuoiJtf, tuNamJtf, denNamJtf, tableJpn, popupMenu);
         this.controller.setDataTable();
     }
 
@@ -76,6 +87,17 @@ public class ThongKePanel extends javax.swing.JPanel {
         StatusJcb = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        
+        popupMenu = new JPopupMenu();
+        addPopup(tableJpn, popupMenu);
+        
+        XoaMenuItem = new JMenuItem("Xóa");
+        XoaMenuItem.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		xoaActionPerformed(e);
+        	}
+        });
+        popupMenu.add(XoaMenuItem);
 
         javax.swing.GroupLayout tableJpnLayout = new javax.swing.GroupLayout(tableJpn);
         tableJpn.setLayout(tableJpnLayout);
@@ -126,7 +148,7 @@ public class ThongKePanel extends javax.swing.JPanel {
         denNamJtf.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
 
         jButton1.setFont(new java.awt.Font("Tahoma", Font.BOLD, 14)); // NOI18N
-        jButton1.setText("Show");
+        jButton1.setText("Thống kê");
         jButton1.setBorderPainted(false);
         jButton1.setForeground(Color.WHITE);
         jButton1.setBackground(new Color(0, 160, 50));
@@ -229,7 +251,7 @@ public class ThongKePanel extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tableJpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tableJpn, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -260,5 +282,37 @@ public class ThongKePanel extends javax.swing.JPanel {
     private javax.swing.JPanel tableJpn;
     private javax.swing.JTextField tuNamJtf;
     private javax.swing.JTextField tuTuoiJtf;
+    private JPopupMenu popupMenu;
+    private JMenuItem XoaMenuItem;
     // End of variables declaration//GEN-END:variables
+	private static void addPopup(Component component, final JPopupMenu popup) {
+		component.addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			public void mouseReleased(MouseEvent e) {
+				if (e.isPopupTrigger()) {
+					showMenu(e);
+				}
+			}
+			private void showMenu(MouseEvent e) {
+				popup.show(e.getComponent(), e.getX(), e.getY());
+			}
+		});
+	}
+	private void xoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_khaiTuBtnActionPerformed
+    	JTable tempJTable = controller.getNhankhauTable();
+    	int row = tempJTable.getSelectedRow();
+    	if (row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+    	}
+    	XoaThongKe xoaNhanKhau = new XoaThongKe(this.controller, this.parentFrame, tempJTable, row);
+    	xoaNhanKhau.setLocationRelativeTo(null);
+    	xoaNhanKhau.setResizable(false);
+    	xoaNhanKhau.setVisible(true);
+    }//GEN-LAST:event_khaiTuBtnActionPerformed
 }

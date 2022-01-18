@@ -6,11 +6,13 @@ import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.List;
 import javax.swing.ButtonGroup;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -33,12 +35,14 @@ public class ThongKePanelController {
     private JTextField tuNamJtf;
     private JTextField denNamJtf;
     private JPanel jpnView;
+    private JPopupMenu popupMenu;
     private NhanKhauService nhanKhauService;
     private List<NhanKhauBean> listNhanKhauBeans;
+    private JTable table;
     private ClassTableModel classTableModel;
     private final String[] COLUMNS = {"ID", "Họ tên", "Ngày sinh", "Giới tính", "Địa chỉ hiện nay"};
 
-    public ThongKePanelController(JComboBox genderJcb, JComboBox statusJcb, JTextField tuTuoiJtf, JTextField denTuoiJtf, JTextField tuNamJtf, JTextField denNamJtf, JPanel jpnView) {
+    public ThongKePanelController(JComboBox genderJcb, JComboBox statusJcb, JTextField tuTuoiJtf, JTextField denTuoiJtf, JTextField tuNamJtf, JTextField denNamJtf, JPanel jpnView, JPopupMenu popupMenu) {
         this.GenderJcb = genderJcb;
         this.StatusJcb = statusJcb;
         this.tuTuoiJtf = tuTuoiJtf;
@@ -46,6 +50,7 @@ public class ThongKePanelController {
         this.tuNamJtf = tuNamJtf;
         this.denNamJtf = denNamJtf;
         this.jpnView = jpnView;
+        this.popupMenu = popupMenu;
         this.nhanKhauService = new NhanKhauService();
         this.listNhanKhauBeans = new ArrayList<>();
         this.listNhanKhauBeans = this.nhanKhauService.getListNhanKhau();
@@ -59,13 +64,17 @@ public class ThongKePanelController {
     public void setJpnView(JPanel jpnView) {
         this.jpnView = jpnView;
     }
+    
+    public JTable getNhankhauTable() {
+		return table;
+	}
 
     public void setData() {
         int tuTuoi = -1;
         int denTuoi = 200;
         int tuNam = 0;
         int denNam = 2100;
-        String gender = StringService.covertToString((String)this.GenderJcb.getSelectedItem());
+        String gender = (String)this.GenderJcb.getSelectedItem();
         String status = StringService.covertToString((String)this.StatusJcb.getSelectedItem());
 
         try {
@@ -98,10 +107,16 @@ public class ThongKePanelController {
             listItem.add(nhankhau.getNhanKhauModel());
         });
         DefaultTableModel model = classTableModel.setTableNhanKhau(listItem, COLUMNS);
-        JTable table = new JTable(model);
+        table = new JTable(model) {
+            @Override
+            public boolean editCellAt(int row, int column, EventObject e) {
+                return false;
+            }
+            
+        };
         
         // thiet ke bang
-        
+        table.setComponentPopupMenu(popupMenu);
         table.getTableHeader().setFont(new Font("Arial", Font.BOLD, 14));
         table.getTableHeader().setPreferredSize(new Dimension(100, 50));
         table.setRowHeight(50);

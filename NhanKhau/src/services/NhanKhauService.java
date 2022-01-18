@@ -225,7 +225,7 @@ public class NhanKhauService {
                     + TuTuoi
                     + " \nAND DATE_PART('year', AGE(CURRENT_DATE, namSinh))  <= "
                     + denTuoi;
-        if (!gender.equalsIgnoreCase("Toan Bo")) {
+        if (!gender.equalsIgnoreCase("Toàn Bộ")) {
             query += " AND nhan_khau.gioiTinh = '" + gender + "'";
         }
         if (Status.equalsIgnoreCase("Toan bo")) {
@@ -247,7 +247,7 @@ public class NhanKhauService {
                     + denNam
                     + ")";
         }
-        query += " ORDER BY ngayTao ASC";
+        //query += " ORDER BY ngayTao ASC";
         System.out.println(query);
          try {
             Connection connection = MysqlConnection.getMysqlConnection();
