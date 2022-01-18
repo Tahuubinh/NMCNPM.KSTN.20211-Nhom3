@@ -327,8 +327,10 @@ public class NhanKhauService {
     
     public List<NhanKhauBean> statisticNhanKhauXoa(String lydoString) {
         List<NhanKhauBean> list = new ArrayList<>();
-        
-        String query = "SELECT * FROM xoa_nhan_khau WHERE lydo = " + lydoString;
+        if (lydoString.equals("Chuyển đi")) {
+        	lydoString = "Chuyển đi nơi khác";
+        }
+        String query = "SELECT * FROM xoa_nhan_khau WHERE lydo = '" + lydoString + "'";
         
         query += " ORDER BY ngayxoa DESC";
         System.out.println(query);

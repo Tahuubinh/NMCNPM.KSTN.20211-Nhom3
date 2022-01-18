@@ -50,7 +50,12 @@ SELECT * FROM nhan_khau
  LEFT JOIN tam_vang ON nhan_khau.ID = tam_vang.idNhanKhau
   WHERE DATE_PART('year', AGE(CURRENT_DATE, namSinh))  >= -1
 select * from tam_tru
-select * from khai_tu
+select * from xoa_nhan_khau
+where lydo = 'Chuyển đi nơi khác'
+SELECT * FROM xoa_nhan_khau WHERE lydo = 'Chuyển đi' ORDER BY ngayxoa DESC
+where lydochet
+insert into xoa_nhan_khau(idnhankhau)
+values (1)
 
 
 

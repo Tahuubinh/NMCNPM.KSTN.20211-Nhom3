@@ -43,6 +43,7 @@ public class ThongKePanelController {
     private JTable table;
     private ClassTableModel classTableModel;
     private final String[] COLUMNS = {"ID", "Họ tên", "Ngày sinh", "Giới tính", "Địa chỉ hiện nay"};
+    private final String[] COLUMNS_DELETE = {"ID", "Họ tên", "Giới tính", "Ngày sinh", "Ngày xóa"};
 
     public ThongKePanelController(JComboBox genderJcb, JComboBox statusJcb, JTextField tuTuoiJtf, JTextField denTuoiJtf, JTextField tuNamJtf, JTextField denNamJtf, JPanel jpnView, JPopupMenu popupMenu) {
         this.GenderJcb = genderJcb;
@@ -109,10 +110,11 @@ public class ThongKePanelController {
         }
         else if (status.equals("Chuyển đi")) {
         	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhauXoa(status);
-        	setTableTamvang();
+        	setTableChuyenDi();
         }
         else if (status.equals("Khai tử")) {
-        	
+        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhauXoa(status);
+        	setTableKhaiTu();
         }
         else {
 	        this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhau(tuTuoi, denTuoi, gender, status, tuNam, denNam);
@@ -159,7 +161,24 @@ public class ThongKePanelController {
         this.listNhanKhauBeans.forEach(nhankhau -> {
             listItem.add(nhankhau.getNhanKhauModel());
         });
-        DefaultTableModel model = classTableModel.setTableNhanKhau(listItem, COLUMNS);
+        DefaultTableModel model = classTableModel.setTableNhanKhauXoa(listItem, COLUMNS_DELETE);
+        table = new JTable(model) {
+            @Override
+            public boolean editCellAt(int row, int column, EventObject e) {
+                return false;
+            }
+            
+        };
+        table.setComponentPopupMenu(new JPopupMenu());
+        setDataTable();
+    }
+    
+    public void setTableKhaiTu() {
+    	List<NhanKhauModel> listItem = new ArrayList<>();
+        this.listNhanKhauBeans.forEach(nhankhau -> {
+            listItem.add(nhankhau.getNhanKhauModel());
+        });
+        DefaultTableModel model = classTableModel.setTableNhanKhauXoa(listItem, COLUMNS_DELETE);
         table = new JTable(model) {
             @Override
             public boolean editCellAt(int row, int column, EventObject e) {
