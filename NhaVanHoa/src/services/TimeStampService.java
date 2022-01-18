@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
 
 import com.toedter.calendar.JDateChooser;
@@ -24,10 +25,13 @@ public class TimeStampService {
 		Timestamp t = null;		
 		return t;
 	}
+	@SuppressWarnings("deprecation")
 	public static void main(String[] args) throws ParseException {
 		JDateChooser date = new JDateChooser();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date d = date.getDate();
+		Calendar cal = Calendar.getInstance();
+		date.setDate(sdf.parse("2022-1-15"));
 		String str = sdf.format(d).toString();
 		Timestamp timestamp = Timestamp.valueOf(str + " 00:00:00");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH'h':mm'm,' dd 'tháng' MM', năm' yyyy");
@@ -39,7 +43,12 @@ public class TimeStampService {
 		String hh = str2.substring(0, 2);
 		String mn = str2.substring(4, 6);
 		String str3 = yy + "-" + mm + "-" + dd + " " + hh + ":" + mn + ":00";
-		System.out.println(sdf3.format(timestamp));
+		Calendar c = Calendar.getInstance();
+        c.setTime(d);
+        c.add(c.YEAR, 2);
+        d = c.getTime();
+        date.setDate(d);
+		System.out.println(date.getDate());
 		System.exit(0);
 	}
 }

@@ -111,6 +111,7 @@ public class LichSuPanel extends javax.swing.JPanel {
         
         thoiGianJdc = new JDateChooser();
         thoiGianJdc.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
+        thoiGianJdc.setDate(timeService.changeDateFromNow(-1, 0, 0));
         
         statusJcb = new JComboBox();
         statusJcb.setFont(new Font("Tahoma", Font.PLAIN, 14));

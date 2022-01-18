@@ -99,6 +99,12 @@ public class LichSuPanelController {
         table.getColumnModel().getColumn(0).setMaxWidth(80);
         table.getColumnModel().getColumn(0).setMinWidth(80);
         table.getColumnModel().getColumn(0).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setMaxWidth(280);
+        table.getColumnModel().getColumn(1).setMinWidth(280);
+        table.getColumnModel().getColumn(1).setPreferredWidth(280);
+        table.getColumnModel().getColumn(4).setMaxWidth(150);
+        table.getColumnModel().getColumn(4).setMinWidth(150);
+        table.getColumnModel().getColumn(4).setPreferredWidth(150);
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
         for(int i = 0; i < 5; ++i) 

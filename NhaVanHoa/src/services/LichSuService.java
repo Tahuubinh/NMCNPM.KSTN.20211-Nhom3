@@ -149,7 +149,6 @@ public class LichSuService {
                 System.out.println(rs1.getTimestamp("date"));
                 if(status == "Toàn bộ" || status == "Loại bỏ") list.add(lichSuBean);
             }
-            System.out.println("??");
             preparedStatement1.close();
             connection.close();
         } catch (Exception e) {
