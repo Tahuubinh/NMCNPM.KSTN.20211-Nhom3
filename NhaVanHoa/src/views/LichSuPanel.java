@@ -3,6 +3,7 @@ package views;
 import controllers.LichSuPanelController;
 import controllers.MuonTraPanelController;
 import services.StringService;
+import services.TimeService;
 
 import javax.swing.JFrame;
 
@@ -28,6 +29,7 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JComboBox;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
 
 /**
  *
@@ -43,6 +45,7 @@ public class LichSuPanel extends javax.swing.JPanel {
     
     public LichSuPanel(JFrame parentFrame) {
         this.parentJFrame = parentFrame;
+        this.timeService = new TimeService();
         initComponents();
         this.controller = new LichSuPanelController(tablePanel, thoiGianJdc, statusJcb);
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
@@ -153,10 +156,11 @@ public class LichSuPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed
-    	Date thoiGian = thoiGianJdc.getDate();
+    	Timestamp thoiGian = timeService.convertDateToTimestamp(thoiGianJdc.getDate());
     	String status = (String) statusJcb.getSelectedItem();
     	this.controller.setData(thoiGian, status);
     }//GEN-LAST:event_jtfSearchActionPerformed
+    private TimeService timeService;
     private javax.swing.JPanel tablePanel;
     private JLabel thoiGianJlb;
     private JDateChooser thoiGianJdc;

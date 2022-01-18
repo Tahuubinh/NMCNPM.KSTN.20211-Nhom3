@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EventObject;
@@ -28,6 +29,7 @@ import com.toedter.calendar.JDateChooser;
 import models.MuonTraModel;
 import services.MuonTraService;
 import services.StringService;
+import services.TimeService;
 import utility.ClassTableModel;
 
 /**
@@ -48,11 +50,12 @@ public class MuonTraPanelController {
     private JPopupMenu popupMenu;
     private final String[] COLUMNS = {"STT", "Tên người mượn", "CMND/TCC/HC", "Liên hệ", "Thời gian mượn", "Thời gian trả", "Cơ sở vật chất", "Số lượng"};
     private JFrame parentJFrame;
-
+    private TimeService timeService;
     public MuonTraPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JDateChooser tuNgayJdc, JDateChooser denNgayJdc, JPopupMenu popupMenu) {
         this.jpnView = jpnView;
         this.nguoiMuonJtfSearch = nguoiMuonJtfSearch;
         this.lienheJtfSearch = lienheJtfSearch;
+        this.timeService = new TimeService();
         this.tuNgayJdc = tuNgayJdc;
         this.denNgayJdc = denNgayJdc;
         this.popupMenu = popupMenu;
@@ -71,21 +74,21 @@ public class MuonTraPanelController {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 String key = nguoiMuonJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), tuNgayJdc.getDate(), denNgayJdc.getDate());
+                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), timeService.convertDateToTimestamp(tuNgayJdc.getDate()) , timeService.convertDateToTimestamp(denNgayJdc.getDate()));
                 setDataTable();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String key = nguoiMuonJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), tuNgayJdc.getDate(), denNgayJdc.getDate());
+                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), timeService.convertDateToTimestamp(tuNgayJdc.getDate()) , timeService.convertDateToTimestamp(denNgayJdc.getDate()));
                 setDataTable();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 String key = nguoiMuonJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), tuNgayJdc.getDate(), denNgayJdc.getDate());
+                listMuonTraBeans = muonTraService.search(key.trim(), lienheJtfSearch.getText(), timeService.convertDateToTimestamp(tuNgayJdc.getDate()) , timeService.convertDateToTimestamp(denNgayJdc.getDate()));
                 setDataTable();
             }
         });
@@ -94,28 +97,28 @@ public class MuonTraPanelController {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 String key = lienheJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), tuNgayJdc.getDate(), denNgayJdc.getDate());
+                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), timeService.convertDateToTimestamp(tuNgayJdc.getDate()) , timeService.convertDateToTimestamp(denNgayJdc.getDate()));
                 setDataTable();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 String key = lienheJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), tuNgayJdc.getDate(), denNgayJdc.getDate());
+                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), timeService.convertDateToTimestamp(tuNgayJdc.getDate()) , timeService.convertDateToTimestamp(denNgayJdc.getDate()));
                 setDataTable();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 String key = lienheJtfSearch.getText();
-                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), tuNgayJdc.getDate(), denNgayJdc.getDate());
+                listMuonTraBeans = muonTraService.search(nguoiMuonJtfSearch.getText(), key.trim(), timeService.convertDateToTimestamp(tuNgayJdc.getDate()) , timeService.convertDateToTimestamp(denNgayJdc.getDate()));
                 setDataTable();
             }
         });
     }
     //Khi an Filter, bien listMuonTraBeans se call muonTraService de thonn ke thon tin vua nhap
     //Chu y cac thong tin null
-    public void setData(String tenNguoiMuon, String lienHe, Date tuNgay, Date denNgay){
+    public void setData(String tenNguoiMuon, String lienHe, Timestamp tuNgay, Timestamp denNgay){
       this.listMuonTraBeans = this.muonTraService.search(tenNguoiMuon, lienHe, tuNgay, denNgay);
       setDataTable();
     }

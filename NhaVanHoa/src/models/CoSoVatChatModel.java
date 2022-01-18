@@ -1,5 +1,7 @@
 package models;
 
+import java.sql.Timestamp;
+
 public class CoSoVatChatModel {
 	private int id;
 	private String tenCoSoVatChat;
@@ -9,7 +11,7 @@ public class CoSoVatChatModel {
 	private int soLuongTrongKho;
 	private int soLuongDaTra = 0;
 	private String lyDo;
-	private String thoiGianTraReal = "";
+	private Timestamp thoiGianTraReal;
 	public int getId() {
 		return id;
 	}
@@ -52,10 +54,10 @@ public class CoSoVatChatModel {
 	public void setLyDo(String lyDo) {
 		this.lyDo = lyDo;
 	}
-	public String getThoiGianTraReal() {
+	public Timestamp getThoiGianTraReal() {
 		return thoiGianTraReal;
 	}
-	public void setThoiGianTraReal(String thoiGianTraReal) {
+	public void setThoiGianTraReal(Timestamp thoiGianTraReal) {
 		this.thoiGianTraReal = thoiGianTraReal;
 	}
 	public int getSoLuongDaTra() {
@@ -63,6 +65,9 @@ public class CoSoVatChatModel {
 	}
 	public void setSoLuongDaTra(int soLuongDaTra) {
 		this.soLuongDaTra = soLuongDaTra;
+	}
+	public void setThoiGianTraReal(String thoiGianTraRealTimeStamp) {
+		this.thoiGianTraReal = Timestamp.valueOf(thoiGianTraRealTimeStamp);
 	}
 	
 }

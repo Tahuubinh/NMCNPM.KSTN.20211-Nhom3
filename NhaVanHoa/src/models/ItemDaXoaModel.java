@@ -1,9 +1,11 @@
 package models;
 
+import java.sql.Timestamp;
+
 public class ItemDaXoaModel {
 	private int id;
 	private int idItem;
-	private String thoiGianXoa;
+	private Timestamp thoiGianXoa;
 	private String liDoXoa;
 	private int soLuong;
 	public int getId() {
@@ -18,10 +20,10 @@ public class ItemDaXoaModel {
 	public void setIdItem(int idItem) {
 		this.idItem = idItem;
 	}
-	public String getThoiGianXoa() {
+	public Timestamp getThoiGianXoa() {
 		return thoiGianXoa;
 	}
-	public void setThoiGianXoa(String thoiGianXoa) {
+	public void setThoiGianXoa(Timestamp thoiGianXoa) {
 		this.thoiGianXoa = thoiGianXoa;
 	}
 	public String getLiDoXoa() {
@@ -35,5 +37,8 @@ public class ItemDaXoaModel {
 	}
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
+	}
+	public void setThoiGianXoa(String thoiGianXoaTimeStamp) {
+		this.thoiGianXoa = Timestamp.valueOf(thoiGianXoaTimeStamp);
 	}
 }

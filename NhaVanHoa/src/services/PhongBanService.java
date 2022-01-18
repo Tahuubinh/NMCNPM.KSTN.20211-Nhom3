@@ -78,12 +78,6 @@ public class PhongBanService {
         return list;
     }
     
-    //danh sach co so vat chat phuc vu viec thong ke
-    public List<PhongBanBean> statisticPhongBan(String tenPhongBan) {
-        List<PhongBanBean> list = new ArrayList<>();
-        //viết truy vấn
-        return list;
-    }
     
     //danh sach co so vat chat phuc vu viec search
     public List<PhongBanBean> search(String tenPhongBan) {

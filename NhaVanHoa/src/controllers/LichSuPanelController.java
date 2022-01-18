@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EventObject;
@@ -65,8 +66,8 @@ public class LichSuPanelController {
     
     //Khi an Filter, bien listLichSuBeans se call LichSuService de thonn ke thon tin vua nhap
     //Chu y cac thong tin null
-    public void setData(Date thoiGian, String status){
-      this.listLichSuBeans = this.lichSuService.statisticLichSu(thoiGian, status);
+    public void setData(Timestamp thoiGian, String status){
+      this.listLichSuBeans = this.lichSuService.search(thoiGian, status);
       setDataTable();
     }
     

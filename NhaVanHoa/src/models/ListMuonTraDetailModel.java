@@ -1,11 +1,13 @@
 package models;
 
+import java.sql.Timestamp;
+
 public class ListMuonTraDetailModel {
 	private String tenCoSoVatChat;
 	private String tenPhongBan;
 	private int soLuongMuon = -1;
 	private int soLuongHoanTra;
-	private String thoiGianTraReal;
+	private Timestamp thoiGianTraReal;
 	public String getTenCoSoVatChat() {
 		return tenCoSoVatChat;
 	}
@@ -30,10 +32,10 @@ public class ListMuonTraDetailModel {
 	public void setSoLuongHoanTra(int soLuongHoanTra) {
 		this.soLuongHoanTra = soLuongHoanTra;
 	}
-	public String getThoiGianTraReal() {
+	public Timestamp getThoiGianTraReal() {
 		return thoiGianTraReal;
 	}
-	public void setThoiGianTraReal(String thoiGianTraReal) {
+	public void setThoiGianTraReal(Timestamp thoiGianTraReal) {
 		this.thoiGianTraReal = thoiGianTraReal;
 	}
 	

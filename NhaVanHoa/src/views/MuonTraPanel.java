@@ -4,6 +4,7 @@ import controllers.MuonTraPanelController;
 import services.MuonTraService;
 import services.PhongBanService;
 import services.StringService;
+import services.TimeService;
 import views.MuonTraFrame.DangKySuDungFrame;
 import views.MuonTraFrame.XemChiTietMuonTraFrame;
 import views.PhongBanFrame.DoiTenPhongBanFrame;
@@ -34,6 +35,8 @@ import javax.swing.border.LineBorder;
 import com.toedter.calendar.JDateChooser;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.Timestamp;
+
 import javax.swing.JPopupMenu;
 
 /**
@@ -50,6 +53,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
     
     public MuonTraPanel(JFrame parentFrame) {
         this.parentJFrame = parentFrame;
+        timeService = new TimeService();
         initComponents();
       controller = new MuonTraPanelController(tablePanel, nguoiMuonJtfSearch, lienheJtfSearch, tuNgayJdc, denNgayJdc, popupMenu);
         
@@ -149,7 +153,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
         SearchTImepanel.setBorder(new LineBorder(new Color(0, 0, 0)));
         SearchTImepanel.setBackground(Color.WHITE);
         
-        JButton filterJButton = new JButton("Lọc");
+        filterJButton = new JButton("Lọc");
         filterJButton.addMouseListener(new MouseAdapter() {
         	@Override
         	public void mouseEntered(MouseEvent e) {
@@ -295,8 +299,8 @@ public class MuonTraPanel extends javax.swing.JPanel {
     private void jtfSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfSearchActionPerformed
     	String tenNguoiMuon = StringService.covertToString(nguoiMuonJtfSearch.getText());
     	String lienHe = StringService.covertToString(lienheJtfSearch.getText());
-    	Date tuNgay = tuNgayJdc.getDate();
-    	Date denNgay = denNgayJdc.getDate();
+    	Timestamp tuNgay = timeService.convertDateToTimestamp(tuNgayJdc.getDate());
+    	Timestamp denNgay = timeService.convertDateToTimestamp(denNgayJdc.getDate());
     	System.out.println(tuNgay);
     	controller.setData(tenNguoiMuon, lienHe, tuNgay, denNgay);
     }//GEN-LAST:event_jtfSearchActionPerformed
@@ -398,6 +402,7 @@ public class MuonTraPanel extends javax.swing.JPanel {
 	}
 	
     // Variables declaration - do not modify//GEN-BEGIN:variables
+	private TimeService timeService;
     private javax.swing.JButton addNewBtn;
     private javax.swing.JTextField nguoiMuonJtfSearch;
     private javax.swing.JPanel tablePanel;
@@ -411,4 +416,5 @@ public class MuonTraPanel extends javax.swing.JPanel {
     private JMenuItem xemChiTiet;
 	private JMenuItem hoanTra;
 	private JMenuItem huyMuon;
+	private JButton filterJButton;
 }

@@ -1,6 +1,8 @@
 package models;
 import java.sql.Timestamp;
 
+import services.TimeService;
+
 
 /**
  *
@@ -15,7 +17,7 @@ public class MuonTraModel {
     private Timestamp thoiGianTra;
     private String coSoVatChat;
     private int soLuong = -1;
-    
+    private TimeService timeService = new TimeService();
     
     public int getStt() {
 		return stt;

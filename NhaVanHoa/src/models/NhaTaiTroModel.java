@@ -1,10 +1,12 @@
 package models;
 
+import java.sql.Timestamp;
+
 public class NhaTaiTroModel {
 	private int id;
 	private int idItem;
 	private int soLuong;
-	private String ngayTaiTro;
+	private Timestamp ngayTaiTro;
 	private String lyDo;
 	public String getLyDo() {
 		return lyDo;
@@ -30,11 +32,13 @@ public class NhaTaiTroModel {
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
-	public String getNgayTaiTro() {
+	public Timestamp getNgayTaiTro() {
 		return ngayTaiTro;
 	}
-	public void setNgayTaiTro(String ngayTaiTro) {
+	public void setNgayTaiTro(Timestamp ngayTaiTro) {
 		this.ngayTaiTro = ngayTaiTro;
 	}
-	
+	public void setNgayTaiTro(String ngayTaiTroTimeStamp) {
+		this.ngayTaiTro = Timestamp.valueOf(ngayTaiTroTimeStamp);
+	}
 }

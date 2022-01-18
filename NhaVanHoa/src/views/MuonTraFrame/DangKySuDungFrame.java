@@ -8,8 +8,10 @@ import controllers.MuonTraPanelController;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.EventObject;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -18,6 +20,7 @@ import models.PhongBanModel;
 import models.CoSoVatChatModel;
 import models.NguoiMuonModel;
 import models.ThoiGianModel;
+import services.TimeService;
 import utility.ClassTableModel;
 
 import javax.swing.JPanel;
@@ -40,6 +43,8 @@ import javax.swing.JTable;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
@@ -65,8 +70,22 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(true);
+        
+	    gioDjcb = new DefaultComboBoxModel();
+	    for(int i = 0; i < 24; ++i) {
+	    	if(i< 10) gioDjcb.addElement("0"+i);
+	    	else gioDjcb.addElement(i+"");
+	    }
+	    
+	    phutDjcb = new DefaultComboBoxModel();
+	    for(int i = 0; i < 60; ++i) {
+	    	if(i< 10) phutDjcb.addElement("0"+i);
+	    	else phutDjcb.addElement(i+"");
+	    }
+	    
         initComponents();
         controller = new MuonCoSoVatChatPhongBanFrame(tablePanel, this.parentFrame);
+        timeService = new TimeService();
         GroupLayout gl_tablePanel = new GroupLayout(tablePanel);
         gl_tablePanel.setHorizontalGroup(
         	gl_tablePanel.createParallelGroup(Alignment.TRAILING)
@@ -78,6 +97,7 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
         );
         tablePanel.setLayout(gl_tablePanel);
         controller.setDataTable();
+        initAction();
     	setIconImage(Toolkit.getDefaultToolkit().getImage(DangKySuDungFrame.class.getResource("/Icons/house.png")));
     	setTitle("Đăng ký sử dụng cơ sở vật chất / phòng ban");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -91,39 +111,80 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
             
         });
     }
-    
-    public DangKySuDungFrame(JFrame parentJFrame) {
-        this.parentController = new MuonTraPanelController(){
-            @Override
-            public void refreshData() {
-                // do nothing
-            }
 
-            @Override
-            public void initAction() {
-                // do nothing
-            }
-            
-            
-        };
-        this.parentFrame = parentJFrame;
-        this.parentFrame.setEnabled(false);
-        this.muonTraBeann = new MuonTraBean();
-        initComponents();
-        setTitle("Đăng ký sử dụng cơ sở vật chất / phòng ban");
-        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        childController = new AddNewController();
-        
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                if (JOptionPane.showConfirmDialog(null, "Are you sure to close??", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
-                    close();
-                }
-            }
-            
-        });
-    }
+    public void initAction(){
+		 gioMuonJcb.addKeyListener(new KeyAdapter() {
+				public void keyReleased(KeyEvent ke) {
+					LinkedList<String> filterNode = new LinkedList<String>();
+					for(int i = 0; i < gioDjcb.getSize(); ++i) {
+						if((gioDjcb.getElementAt(i)+"").contains(gioMuonJtf.getText())) {
+							filterNode.add(gioDjcb.getElementAt(i)+"");
+						}
+					}
+					if(filterNode.size() >0) {
+						gioMuonJcb.setModel(new DefaultComboBoxModel(filterNode.toArray()));
+						gioMuonJcb.setSelectedItem(gioMuonJtf.getText());
+						gioMuonJcb.showPopup();
+					} else {
+						gioMuonJcb.hidePopup();
+					}
+				}
+		});
+		 
+		 phutMuonJcb.addKeyListener(new KeyAdapter() {
+				public void keyReleased(KeyEvent ke) {
+					LinkedList<String> filterNode = new LinkedList<String>();
+					for(int i = 0; i < gioDjcb.getSize(); ++i) {
+						if((phutDjcb.getElementAt(i)+"").contains(phutMuonJtf.getText())) {
+							filterNode.add(gioDjcb.getElementAt(i)+"");
+						}
+					}
+					if(filterNode.size() >0) {
+						phutMuonJcb.setModel(new DefaultComboBoxModel(filterNode.toArray()));
+						phutMuonJcb.setSelectedItem(phutMuonJtf.getText());
+						phutMuonJcb.showPopup();
+					} else {
+						phutMuonJcb.hidePopup();
+					}
+				}
+		});
+		 
+		 gioTraJcb.addKeyListener(new KeyAdapter() {
+				public void keyReleased(KeyEvent ke) {
+					LinkedList<String> filterNode = new LinkedList<String>();
+					for(int i = 0; i < gioDjcb.getSize(); ++i) {
+						if((gioDjcb.getElementAt(i)+"").contains(gioTraJtf.getText())) {
+							filterNode.add(gioDjcb.getElementAt(i)+"");
+						}
+					}
+					if(filterNode.size() >0) {
+						gioTraJcb.setModel(new DefaultComboBoxModel(filterNode.toArray()));
+						gioTraJcb.setSelectedItem(gioTraJtf.getText());
+						gioTraJcb.showPopup();
+					} else {
+						gioTraJcb.hidePopup();
+					}
+				}
+		});
+		 
+		 phutTraJcb.addKeyListener(new KeyAdapter() {
+				public void keyReleased(KeyEvent ke) {
+					LinkedList<String> filterNode = new LinkedList<String>();
+					for(int i = 0; i < phutDjcb.getSize(); ++i) {
+						if((phutDjcb.getElementAt(i)+"").contains(phutTraJtf.getText())) {
+							filterNode.add(phutDjcb.getElementAt(i)+"");
+						}
+					}
+					if(filterNode.size() >0) {
+						phutTraJcb.setModel(new DefaultComboBoxModel(filterNode.toArray()));
+						phutTraJcb.setSelectedItem(phutTraJtf.getText());
+						phutTraJcb.showPopup();
+					} else {
+						phutTraJcb.hidePopup();
+					}
+				}
+		});
+	 }
     
     void close() {
         this.parentFrame.setEnabled(true);
@@ -226,8 +287,39 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
 			else phutComboBoxModel.addElement(i);
 		}
     	ngayMuonJdc = new JDateChooser();
+    	ngayMuonJdc.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
     	
     	ngayTraJdc = new JDateChooser();
+    	ngayTraJdc.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	
+    	gioMuonJcb = new JComboBox(gioDjcb);
+    	gioMuonJcb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	
+    	gioMuonJlb = new JLabel("Giờ");
+    	gioMuonJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		gioMuonJtf = (JTextField) gioMuonJcb.getEditor().getEditorComponent();
+
+    	phutMuonJcb = new JComboBox(phutDjcb);
+    	phutMuonJcb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	
+    	phuMuonJlb = new JLabel("Phút");
+    	phuMuonJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		phutMuonJtf = (JTextField) phutMuonJcb.getEditor().getEditorComponent();
+
+    	gioTraJcb = new JComboBox(gioDjcb);
+    	gioTraJcb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	
+    	giaTraJlb = new JLabel("Giờ");
+    	giaTraJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		gioTraJtf = (JTextField) gioTraJcb.getEditor().getEditorComponent();
+
+    	phutTraJcb = new JComboBox(phutDjcb);
+    	phutTraJcb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+    	
+    	phutTraJlb = new JLabel("Phút");
+    	phutTraJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		phutTraJtf = (JTextField) phutTraJcb.getEditor().getEditorComponent();
+
     	GroupLayout gl_DangKyCoSoVatChatPanel = new GroupLayout(DangKyCoSoVatChatPanel);
     	gl_DangKyCoSoVatChatPanel.setHorizontalGroup(
     		gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
@@ -244,23 +336,45 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     				.addGap(13)
     				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
     					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING, false)
+    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
     							.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    								.addComponent(idJtf, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
-    								.addGap(20))
+    								.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
+    									.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    										.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
+    											.addComponent(idJtf, GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+    											.addComponent(lienHeJtf, GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE))
+    										.addGap(20))
+    									.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    										.addComponent(tenNguoiMuonJtf, GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+    										.addGap(18)))
+    								.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
     							.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    								.addComponent(tenNguoiMuonJtf)
-    								.addGap(18)))
-    						.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-    					.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
-    						.addComponent(ngayMuonJdc, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE)
-    						.addComponent(lienHeJtf, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 293, GroupLayout.PREFERRED_SIZE))
-    					.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING, false)
-    						.addGroup(Alignment.LEADING, gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    							.addPreferredGap(ComponentPlacement.RELATED)
-    							.addComponent(ngayTraJdc, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-    						.addComponent(tablePanel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))
-    				.addContainerGap(17, Short.MAX_VALUE))
+    								.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
+    									.addComponent(ngayTraJdc, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+    									.addComponent(ngayMuonJdc, GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+    								.addPreferredGap(ComponentPlacement.UNRELATED)
+    								.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING, false)
+    									.addComponent(gioTraJcb, Alignment.TRAILING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+    									.addComponent(gioMuonJcb, Alignment.TRAILING, 0, 44, Short.MAX_VALUE))
+    								.addPreferredGap(ComponentPlacement.RELATED)
+    								.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
+    									.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    										.addComponent(gioMuonJlb)
+    										.addPreferredGap(ComponentPlacement.UNRELATED)
+    										.addComponent(phutMuonJcb, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+    										.addPreferredGap(ComponentPlacement.RELATED)
+    										.addComponent(phuMuonJlb, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+    									.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    										.addComponent(giaTraJlb, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+    										.addPreferredGap(ComponentPlacement.UNRELATED)
+    										.addComponent(phutTraJcb, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
+    										.addPreferredGap(ComponentPlacement.RELATED)
+    										.addComponent(phutTraJlb, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)))
+    								.addGap(77)))
+    						.addGap(17))
+    					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
+    						.addComponent(tablePanel, GroupLayout.PREFERRED_SIZE, 380, GroupLayout.PREFERRED_SIZE)
+    						.addContainerGap())))
     	);
     	gl_DangKyCoSoVatChatPanel.setVerticalGroup(
     		gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
@@ -271,36 +385,43 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
     							.addComponent(tenDangKyJlb)
     							.addComponent(tenNguoiMuonJtf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
-    							.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    								.addGap(13)
-    								.addComponent(idJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-    								.addGap(20)
-    								.addComponent(lienHeJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-    								.addGap(16)
-    								.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-    							.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    								.addGap(47)
-    								.addComponent(lienHeJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-    								.addGap(10)
-    								.addComponent(ngayMuonJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))))
+    						.addGap(13)
+    						.addComponent(idJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+    						.addGap(20)
+    						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
+    							.addComponent(lienHeJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+    							.addComponent(lienHeJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
     					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
     						.addGap(31)
     						.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
     							.addComponent(okButton, GroupLayout.PREFERRED_SIZE, 47, GroupLayout.PREFERRED_SIZE)
     							.addComponent(idJtf, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))))
-    				.addPreferredGap(ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
-    					.addComponent(lblNewLabel_1_3, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-    					.addComponent(ngayTraJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
-    				.addPreferredGap(ComponentPlacement.RELATED)
+    				.addGap(9)
     				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.TRAILING)
+    					.addComponent(lblNewLabel_1_2, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+    					.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
+    						.addComponent(phutMuonJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(phuMuonJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(gioMuonJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(gioMuonJlb))
+    					.addComponent(ngayMuonJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+    				.addGap(16)
+    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
+    					.addComponent(ngayTraJdc, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+    					.addComponent(lblNewLabel_1_3, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+    					.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.BASELINE)
+    						.addComponent(gioTraJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(giaTraJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(phutTraJcb, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+    						.addComponent(phutTraJlb, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)))
+    				.addGroup(gl_DangKyCoSoVatChatPanel.createParallelGroup(Alignment.LEADING)
     					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    						.addComponent(muonButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-    						.addGap(58))
+    						.addGap(68)
+    						.addComponent(muonButton, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
     					.addGroup(gl_DangKyCoSoVatChatPanel.createSequentialGroup()
-    						.addComponent(tablePanel, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-    						.addContainerGap())))
+    						.addPreferredGap(ComponentPlacement.UNRELATED)
+    						.addComponent(tablePanel, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)))
+    				.addContainerGap())
     	);
     	DangKyCoSoVatChatPanel.setLayout(gl_DangKyCoSoVatChatPanel);
     	pack();
@@ -321,8 +442,8 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     		nguoiMuonModel.setTenNguoiMuon(tenNguoiMuonJtf.getText());
     		nguoiMuonModel.setCccd(idJtf.getText());
     		nguoiMuonModel.setLienHe(lienHeJtf.getText());
-    		thoiGianModel.setThoiGianMuon(ngayMuonJdc.getDate());
-    		thoiGianModel.setThoiGianTra(ngayTraJdc.getDate());
+    		thoiGianModel.setThoiGianMuon(this.timeService.convertDateToTimestamp(ngayMuonJdc.getDate(), gioMuonJcb.getSelectedItem()+"", gioTraJcb.getSelectedItem()+""));
+    		thoiGianModel.setThoiGianTra(this.timeService.convertDateToTimestamp(ngayTraJdc.getDate(), gioMuonJcb.getSelectedItem()+"", gioTraJcb.getSelectedItem()+""));
     		this.muonTraBeann.setListCoSoVatChatModels(listCoSoVatChatModels);
     		this.muonTraBeann.setListPhongBanModels(listPhongBanModels);
     		this.muonTraBeann.setNguoiMuonModel(nguoiMuonModel);
@@ -364,6 +485,7 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
         }
         return true;
     }
+    private TimeService timeService;
     private MuonCoSoVatChatPhongBanFrame controller;
 	private MuonTraPanelController parentController;
     private JFrame parentFrame;
@@ -380,4 +502,18 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     private JDateChooser ngayTraJdc;
     private ClassTableModel classTableModel = null;
     private JPanel tablePanel;
+    private JComboBox gioMuonJcb;
+    private JLabel gioMuonJlb;
+    private JComboBox phutMuonJcb;
+    private JLabel phuMuonJlb;
+    private JComboBox gioTraJcb;
+    private JLabel giaTraJlb;
+    private JComboBox phutTraJcb;
+    private JLabel phutTraJlb;
+    private DefaultComboBoxModel gioDjcb;
+    private DefaultComboBoxModel phutDjcb;
+    private JTextField gioMuonJtf;
+    private JTextField phutMuonJtf;
+    private JTextField gioTraJtf;
+    private JTextField phutTraJtf;
 }

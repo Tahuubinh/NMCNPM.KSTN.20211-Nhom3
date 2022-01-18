@@ -13,6 +13,7 @@ import models.NguoiMuonModel;
 import models.PhongBanModel;
 import models.ThoiGianModel;
 import models.muonTra.AddMuonTraModel;
+import services.TimeService;
 
 /**
  *
@@ -22,6 +23,7 @@ import models.muonTra.AddMuonTraModel;
 public class ClassTableModel {
 
 	//table muon tra
+	private TimeService timeService = new TimeService();
 	private int i;
     public DefaultTableModel setTableMuonTra(List<MuonTraModel> listItem, String[] listColumn) {
         final int columns = listColumn.length;
@@ -45,8 +47,9 @@ public class ClassTableModel {
             obj[1] = item.getTenNguoiMuon();
             obj[2] = item.getid();
             obj[3] = item.getLienHe();
-            obj[4] = item.getThoiGianMuon();
-            obj[5] = item.getThoiGianTra();
+            
+            obj[4] = timeService.convertToDateShowInTable(item.getThoiGianMuon());
+            obj[5] = timeService.convertToDateShowInTable(item.getThoiGianTra());
             obj[6] = item.getCoSoVatChat();
             obj[7] = item.getSoLuong();
             dtm.addRow(obj);
@@ -119,7 +122,6 @@ public class ClassTableModel {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
             	if(columnIndex == 1 || columnIndex == 3) return Integer.class;
-            	else if (columnIndex == 4) return Date.class;
                 return String.class;
             }
         };
@@ -132,7 +134,7 @@ public class ClassTableModel {
             obj[1] = item.getLyDo();
             obj[2] = item.getDungCu();
             obj[3] = item.getSoLuong();
-            obj[4] = item.getThoiGian();
+            obj[4] = timeService.convertToDateShowInTable(item.getThoiGian());
             dtm.addRow(obj);
         });
         return dtm;
@@ -188,8 +190,8 @@ public class ClassTableModel {
         	obj[0] = i++;
         	obj[1] = nguoiMuon.getTenNguoiMuon();
         	obj[2] = nguoiMuon.getSoLuongMuon();
-        	obj[3] = nguoiMuon.getThoiGianMuon();
-        	obj[4] = nguoiMuon.getThoiGianTra();
+        	obj[3] = timeService.convertToDateShowInTable( nguoiMuon.getThoiGianMuon());
+        	obj[4] = timeService.convertToDateShowInTable(nguoiMuon.getThoiGianTra());
             dtm.addRow(obj);
         });
         return dtm;
@@ -217,7 +219,7 @@ public class ClassTableModel {
              obj[1] = item.getTenPhongBan();
              obj[2] = 1;
              obj[3] = item.getSoLuongDaTra();
-             obj[4] = item.getThoiGianTraReal();
+             obj[4] = timeService.convertToDateShowInTable(item.getThoiGianTraReal());
              dtm.addRow(obj);
          });
          listItemCoSoVatChat.forEach((CoSoVatChatModel item) -> {
@@ -225,7 +227,7 @@ public class ClassTableModel {
              obj[1] = item.getTenCoSoVatChat();
              obj[2] = item.getSoLuongMuon();
              obj[3] = item.getSoLuongDaTra();
-             obj[4] = item.getThoiGianTraReal();
+             obj[4] = timeService.convertToDateShowInTable(item.getThoiGianTraReal());
              dtm.addRow(obj);
          });
          return dtm;

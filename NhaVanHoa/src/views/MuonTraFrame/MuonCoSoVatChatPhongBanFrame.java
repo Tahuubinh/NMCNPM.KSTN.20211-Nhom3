@@ -315,7 +315,7 @@ public class MuonCoSoVatChatPhongBanFrame extends javax.swing.JFrame {
 	    	if(validateValueInForm()) {
 	    		if(checkCoSoVatChat) {
 	    			CoSoVatChatModel coSoVatChat = new CoSoVatChatModel();
-	    			coSoVatChat.setTenCoSoVatChat((String) tenCoSoVatChatPhongBanJcb.getSelectedItem());
+	    			coSoVatChat.setTenCoSoVatChat(tenCoSoVatChatPhongBanJcb.getSelectedItem()+"");
 	    			coSoVatChat.setSoLuong(Integer.parseInt(soLuongJtf.getText()));
 	    			listCoSoVatChatMuon.add(coSoVatChat);
 	    		} 

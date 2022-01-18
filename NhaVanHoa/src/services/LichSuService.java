@@ -4,6 +4,7 @@ import Bean.LichSuBean;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +43,7 @@ public class LichSuService {
                 lichSu.setLyDo(rs1.getString("reason"));
                 lichSu.setDungCu(rs1.getString("item_name"));
                 lichSu.setSoLuong(rs1.getInt("item_number"));
-                lichSu.setThoiGian(rs1.getDate("date"));
+                lichSu.setThoiGian(rs1.getTimestamp("date"));
             }
             while (rs2.next()){
             	LichSuBean lichSuBean = new LichSuBean(); 
@@ -51,7 +52,7 @@ public class LichSuService {
                 lichSu.setLyDo(rs2.getString("reason"));
                 lichSu.setDungCu(rs2.getString("item_name"));
                 lichSu.setSoLuong(rs2.getInt("item_number"));
-                lichSu.setThoiGian(rs2.getDate("date"));
+                lichSu.setThoiGian(rs2.getTimestamp("date"));
             }
             preparedStatement1.close();
             preparedStatement2.close();
@@ -84,7 +85,7 @@ public class LichSuService {
                 lichSu.setLyDo(rs1.getString("reason"));
                 lichSu.setDungCu(rs1.getString("item_name"));
                 lichSu.setSoLuong(rs1.getInt("item_number"));
-                lichSu.setThoiGian(rs1.getDate("date"));
+                lichSu.setThoiGian(rs1.getTimestamp("date"));
                 list.add(lichSuBean);
             }
             while (rs2.next()){
@@ -94,7 +95,7 @@ public class LichSuService {
                 lichSu.setLyDo(rs2.getString("reason"));
                 lichSu.setDungCu(rs2.getString("item_name"));
                 lichSu.setSoLuong(rs2.getInt("item_number"));
-                lichSu.setThoiGian(rs2.getDate("date"));
+                lichSu.setThoiGian(rs2.getTimestamp("date"));
                 list.add(lichSuBean);
             }
             preparedStatement1.close();
@@ -107,19 +108,14 @@ public class LichSuService {
         return list;
     }
     
-    //danh sach nguoi muon, phuc vu cho viec search
-    public List<LichSuBean> statisticLichSu(Date thoiGian, String status) {
-        List<LichSuBean> list = new ArrayList<>();
-        //viết truy vấn
-        
-        return list;
-    }
     
     /*
      * ham tim kiem nhan khau theo ten, lien he, tu ngay, den ngay
      */
-    public List<LichSuBean> search(Date thoiGian, String status) {
+    public List<LichSuBean> search(Timestamp timestamp, String status) {
         List<LichSuBean> list = new  ArrayList<>();
+        TimeService timeService = new TimeService();
+        String thoiGian = timeService.convertToDate(timestamp);
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
             String query1 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
@@ -128,10 +124,9 @@ public class LichSuService {
             String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
         			  	  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id WHERE d.date = '"
         			  	  + thoiGian + "'";
+
             PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
             ResultSet rs1 = preparedStatement1.executeQuery();
-            PreparedStatement preparedStatement2 = (PreparedStatement)connection.prepareStatement(query2);
-            ResultSet rs2 = preparedStatement2.executeQuery();
             while (rs1.next()){
             	LichSuBean lichSuBean = new LichSuBean(); 
                 LichSuModel lichSu = lichSuBean.getLichSuModel();
@@ -139,21 +134,25 @@ public class LichSuService {
                 lichSu.setLyDo(rs1.getString("reason"));
                 lichSu.setDungCu(rs1.getString("item_name"));
                 lichSu.setSoLuong(rs1.getInt("item_number"));
-                lichSu.setThoiGian(rs1.getDate("date"));
+                lichSu.setThoiGian(rs1.getTimestamp("date"));
                 if(status == "Toàn bộ" || status == "Đóng góp") list.add(lichSuBean);
             }
-            while (rs2.next()){
+            preparedStatement1 = (PreparedStatement)connection.prepareStatement(query2);
+            System.out.println(preparedStatement1);
+            rs1 = preparedStatement1.executeQuery();
+            while (rs1.next()){
             	LichSuBean lichSuBean = new LichSuBean(); 
                 LichSuModel lichSu = lichSuBean.getLichSuModel();
-                lichSu.setStt(rs2.getInt("delete_id"));
-                lichSu.setLyDo(rs2.getString("reason"));
-                lichSu.setDungCu(rs2.getString("item_name"));
-                lichSu.setSoLuong(rs2.getInt("item_number"));
-                lichSu.setThoiGian(rs2.getDate("date"));
+                lichSu.setStt(rs1.getInt("delete_id"));
+                lichSu.setLyDo(rs1.getString("reason"));
+                lichSu.setDungCu(rs1.getString("item_name"));
+                lichSu.setSoLuong(rs1.getInt("item_number"));
+                lichSu.setThoiGian(rs1.getTimestamp("date"));
+                System.out.println(rs1.getTimestamp("date"));
                 if(status == "Toàn bộ" || status == "Loại bỏ") list.add(lichSuBean);
             }
+            System.out.println("??");
             preparedStatement1.close();
-            preparedStatement2.close();
             connection.close();
         } catch (Exception e) {
 

@@ -1,13 +1,17 @@
 package models;
 
+import java.sql.Timestamp;
 import java.util.Date;
+
+import services.TimeService;
 
 public class LichSuModel {
 	private int stt;
 	private String lyDo;
 	private String dungCu;
 	private int soLuong;
-	private Date thoiGian;
+	private Timestamp thoiGian;
+	private TimeService timeService = new TimeService();
 	public int getStt() {
 		return stt;
 	}
@@ -32,10 +36,17 @@ public class LichSuModel {
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
 	}
-	public Date getThoiGian() {
+	public Timestamp getThoiGian() {
 		return thoiGian;
 	}
-	public void setThoiGian(Date thoiGian) {
+	public void setThoiGian(Timestamp thoiGian) {
 		this.thoiGian = thoiGian;
+	}
+	public void setThoiGian(String thoiGianTimeStamp) {
+		this.thoiGian = Timestamp.valueOf(thoiGianTimeStamp);
+	}
+	public void setThoiGian(java.sql.Date date) {
+		// TODO Auto-generated method stub
+		this.thoiGian = timeService.convertDatesqlToTimestamp(date);
 	}
 }

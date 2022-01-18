@@ -135,9 +135,11 @@ public class MuonTraService {
     /*
      * ham tim kiem nhan khau theo ten, lien he, tu ngay, den ngay
      */
-    public List<MuonTraBean> search(String tenNguoiMuon, String lienHe, Date tuNgay, Date denNgay) {
+    public List<MuonTraBean> search(String tenNguoiMuon, String lienHe, Timestamp tuNgayTimeStamp, Timestamp denNgayTimeStamp) {
         List<MuonTraBean> list = new  ArrayList<>();
-        
+        TimeService timeService = new TimeService();
+        String tuNgay = timeService.convertToDate(tuNgayTimeStamp);
+        String denNgay = timeService.convertToDate(denNgayTimeStamp);
         Connection connection;
         
         try {
