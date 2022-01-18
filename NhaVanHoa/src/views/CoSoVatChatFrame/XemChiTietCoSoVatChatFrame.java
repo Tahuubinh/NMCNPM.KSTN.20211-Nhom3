@@ -128,6 +128,7 @@ public class XemChiTietCoSoVatChatFrame extends javax.swing.JFrame {
         bangDanhSachNguoiMuonJlb.setFont(new Font("Tahoma", Font.PLAIN, 16));
         
         tablePanel = new JPanel();
+        tablePanel.setAutoscrolls(true);
 
         javax.swing.GroupLayout gl_xemChiTietPanel = new javax.swing.GroupLayout(xemChiTietPanel);
         gl_xemChiTietPanel.setHorizontalGroup(

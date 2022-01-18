@@ -253,24 +253,26 @@ public class MuonTraPanel extends javax.swing.JPanel {
         
         tuNgayJdc = new JDateChooser();
         tuNgayJdc.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
+        tuNgayJdc.setDate(timeService.changeDateFromNow(0, -1, 0));
         
         denNgayJdc = new JDateChooser();
         denNgayJdc.getSpinner().setFont(new Font("Tahoma", Font.PLAIN, 14));
+        denNgayJdc.setDate(timeService.changeDateFromNow(0, 1, 0));
         GroupLayout gl_SearchTImepanel = new GroupLayout(SearchTImepanel);
         gl_SearchTImepanel.setHorizontalGroup(
         	gl_SearchTImepanel.createParallelGroup(Alignment.LEADING)
         		.addGroup(gl_SearchTImepanel.createSequentialGroup()
         			.addGap(6)
-        			.addComponent(timeJLabel, GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-        			.addGap(18)
+        			.addComponent(timeJLabel, GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED)
         			.addComponent(tuNgayJlb)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(tuNgayJdc, GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE)
-        			.addGap(35)
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(tuNgayJdc, GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+        			.addGap(18)
         			.addComponent(denNgayJlb)
-        			.addPreferredGap(ComponentPlacement.UNRELATED)
-        			.addComponent(denNgayJdc, GroupLayout.PREFERRED_SIZE, 124, Short.MAX_VALUE)
-        			.addGap(9))
+        			.addPreferredGap(ComponentPlacement.RELATED)
+        			.addComponent(denNgayJdc, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+        			.addGap(12))
         );
         gl_SearchTImepanel.setVerticalGroup(
         	gl_SearchTImepanel.createParallelGroup(Alignment.TRAILING)
@@ -278,11 +280,11 @@ public class MuonTraPanel extends javax.swing.JPanel {
         			.addContainerGap()
         			.addGroup(gl_SearchTImepanel.createParallelGroup(Alignment.TRAILING)
         				.addComponent(denNgayJdc, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(denNgayJlb, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
         				.addComponent(tuNgayJdc, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
         				.addGroup(gl_SearchTImepanel.createParallelGroup(Alignment.BASELINE)
         					.addComponent(timeJLabel, GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-        					.addComponent(tuNgayJlb, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
-        				.addComponent(denNgayJlb, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        					.addComponent(tuNgayJlb, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
         SearchTImepanel.setLayout(gl_SearchTImepanel);

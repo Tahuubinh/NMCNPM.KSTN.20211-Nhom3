@@ -222,6 +222,7 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
     	thoiGianTraJlb.setFont(new Font("Tahoma", Font.PLAIN, 14));
     	
     	tablePanel = new JPanel();
+    	tablePanel.setAutoscrolls(true);
     	tablePanel.setBackground(new Color(255, 228, 228));
     	
     	DefaultComboBoxModel gioComboBoxModel = new DefaultComboBoxModel();

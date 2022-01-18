@@ -2,7 +2,10 @@ package services;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+
+import com.toedter.calendar.JDateChooser;
 
 public class TimeService {
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,5 +47,16 @@ public class TimeService {
 		String mn = str2.substring(4, 6);
 		String str3 = yy + "-" + mm + "-" + dd + " " + hh + ":" + mn + ":00";
 		return Timestamp.valueOf(str3);
+	}
+	
+	public Date changeDateFromNow(int year, int month, int date) {
+		Date d = new Date();
+		Calendar c = Calendar.getInstance();
+		c.setTime(d);
+		c.add(c.YEAR, year);
+		c.add(c.MONTH, month);
+		c.add(c.DATE, date);
+		d = c.getTime();
+		return d;
 	}
 }

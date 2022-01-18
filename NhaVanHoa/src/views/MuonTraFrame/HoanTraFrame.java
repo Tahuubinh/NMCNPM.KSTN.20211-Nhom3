@@ -247,6 +247,7 @@ public class HoanTraFrame extends javax.swing.JFrame {
     	if(validateValueInForm()) {
     		MuonTraService muonTraService = new MuonTraService();
     		TimeService timeService = new TimeService();
+    		int soLuongMuon = Integer.parseInt(soLuongMuonDetailJlb.getText());
     		int soLuongTra = Integer.parseInt(soLuongTraJtf.getText());
     		String tenCoSoVatChatPhongBan = tenCoSoVatChatPhongBanDetailJlb.getText();
     		Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(this.thoiGianMuon);
@@ -255,6 +256,7 @@ public class HoanTraFrame extends javax.swing.JFrame {
     			CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
     			coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatPhongBan);
     			coSoVatChatModel.setSoLuongDaTra(soLuongTra);
+    			coSoVatChatModel.setSoLuongMuon(soLuongMuon);
     			try {
 					if(JOptionPane.showConfirmDialog(null,this.tenNguoiMuon + " sẽ hoàn trả " + soLuongTra + " cái " + tenCoSoVatChatPhongBan , "Question?", JOptionPane.YES_NO_OPTION) == 0) {
                 		if(muonTraService.hoanTraCoSoVatChatMuon(cccdNguoiMuon, coSoVatChatModel, thoiGianMuon))

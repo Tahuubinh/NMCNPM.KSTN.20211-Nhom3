@@ -114,17 +114,15 @@ public class LichSuService {
     /*
      * ham tim kiem nhan khau theo ten, lien he, tu ngay, den ngay
      */
-    public List<LichSuBean> search(Timestamp timestamp, String status) {
+    public List<LichSuBean> search(Timestamp thoiGian, String status) {
         List<LichSuBean> list = new  ArrayList<>();
-        TimeService timeService = new TimeService();
-        String thoiGian = timeService.convertToDate(timestamp);
         try {
             Connection connection = MysqlConnection.getMysqlConnection();
             String query1 = "SELECT m.money_id, m.reason, i.item_name, m.item_number, m.date "
-      			  		  + "FROM money m JOIN item i on m.item_id = i.item_id WHERE m.date = '"
+      			  		  + "FROM money m JOIN item i on m.item_id = i.item_id WHERE m.date >= '"
       			  		  + thoiGian + "'";
             String query2 = "SELECT d.delete_id, d.reason, i.item_name, d.item_number, d.date "
-        			  	  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id WHERE d.date = '"
+        			  	  + "FROM deleteditem d JOIN item i ON d.item_id = i.item_id WHERE d.date >= '"
         			  	  + thoiGian + "'";
 
             PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
@@ -153,7 +151,6 @@ public class LichSuService {
                 System.out.println(rs1.getTimestamp("date"));
                 if(status == "Toàn bộ" || status == "Loại bỏ") list.add(lichSuBean);
             }
-            System.out.println("??");
             preparedStatement1.close();
             connection.close();
         } catch (Exception e) {

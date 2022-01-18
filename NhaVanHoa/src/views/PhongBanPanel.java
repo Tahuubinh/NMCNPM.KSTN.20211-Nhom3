@@ -82,6 +82,7 @@ public class PhongBanPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
         tablePanel = new javax.swing.JPanel();
+        tablePanel.setAutoscrolls(true);
         
         popupMenu = new JPopupMenu();
         addPopup(tablePanel, popupMenu);
