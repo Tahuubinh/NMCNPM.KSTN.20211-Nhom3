@@ -150,6 +150,7 @@ public class PhongBanService {
  			PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
  	    	st.execute();
  	    	st.close();
+ 	    	connection.close();
  		} catch (ClassNotFoundException e) {
  			return false;
  		} catch (SQLException e) {
@@ -162,6 +163,19 @@ public class PhongBanService {
     public PhongBanBean doiTenPhongBan(String tenPhongBanCu, String tenPhongBan) {
         PhongBanBean phongBanBean = new PhongBanBean();
         //viết truy vấn
+        String query = "UPDATE infrastructure SET infra_name = '" + tenPhongBan + "'WHERE infra_name = '" + tenPhongBanCu + "'";
+     	Connection connection;
+ 		try {
+ 			connection = MysqlConnection.getMysqlConnection();
+ 			PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
+ 	    	st.execute();
+ 	    	st.close();
+ 	    	connection.close();
+ 		} catch (ClassNotFoundException e) {
+ 			this.exceptionHandle(e.getMessage());
+ 		} catch (SQLException e) {
+ 			this.exceptionHandle(e.getMessage());
+ 		}
         return phongBanBean;
     }
     /*
