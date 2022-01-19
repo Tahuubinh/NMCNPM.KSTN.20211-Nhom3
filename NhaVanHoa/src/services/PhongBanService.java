@@ -120,7 +120,8 @@ public class PhongBanService {
     public boolean huyPhongBan(String tenPhongBan) {
     	//viết truy vấn
         Connection connection;
-        String query = "SELECT * FROM infraregistered ir LEFT JOIN schedule s on s.event_no=ir.event_no WHERE infra_name = '"
+        String query = "SELECT * FROM infraregistered ir LEFT JOIN schedule s on s.event_no=ir.event_no LEFT JOIN infrastructure i "
+        			 + "ON ir.infra_id = i.infra_id WHERE infra_name = '"
         			 + tenPhongBan + "' AND s.time_start >= CURRENT_TIMESTAMP";
         
         try {
