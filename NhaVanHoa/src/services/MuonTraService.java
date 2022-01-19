@@ -334,8 +334,8 @@ public class MuonTraService {
         	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
   	        ResultSet rs = st.executeQuery();
   	        int remain = rs.getInt(1);
-  	        String query2 = "SELECT ir.item_number FROM item i LEFT JOIN itemregistered ir ON i.item_id = ir.item_id WHERE i.item_name ="
-  	        			  + coSoVatChatModel.getTenCoSoVatChat() + " AND ir.user_id = (SELECT user_id FROM registers WHERE cccd = '"
+  	        String query2 = "SELECT ir.item_number FROM item i LEFT JOIN itemregistered ir ON i.item_id = ir.item_id WHERE i.item_name = '"
+  	        			  + coSoVatChatModel.getTenCoSoVatChat() + "' AND ir.user_id = (SELECT user_id FROM registers WHERE cccd = '"
   	        			  + cccdNguoiMuon + "') AND ir.event_no = (SELECT event_no FROM schedule WHERE time_start = '" + timestamp
   	        			  + "')";
   	        PreparedStatement st2 = (PreparedStatement)connection.prepareStatement(query2);
