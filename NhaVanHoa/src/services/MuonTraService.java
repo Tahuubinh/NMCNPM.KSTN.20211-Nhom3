@@ -350,7 +350,8 @@ public class MuonTraService {
         	String query1 = "UPDATE itemregistered SET item_number = " + coSoVatChatModel.getSoLuongMuon() 
         				  + " WHERE event_no IN (SELECT ir.event_no FROM itemregistered ir LEFT JOIN schedule s ON "
         			  	  + "ir.event_no = s.event_no WHERE s.time_start = '"+ thoiGianMuon + "' AND "
-        			  	  + "ir.user_id IN (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
+        			  	  + "ir.user_id IN (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "')) "
+        			  	  + "AND item_id IN (SELECT item_id FROM item WHERE item_name = '" + coSoVatChatModel.getTenCoSoVatChat() + "')";
           	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
         	System.out.println(st1);
           	st1.executeUpdate();
@@ -477,7 +478,7 @@ public class MuonTraService {
   	        String query1 = "DELETE FROM deleteditem WHERE item_id IN (SELECT item_id FROM item WHERE item_name = '" + coSoVatChatModel.getTenCoSoVatChat()
   	        			  + "') AND date_delete = '" + coSoVatChatModel.getThoiGianTraReal() + "'";
   	        PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
-          	st1s.executeUpdate();
+          	st1.executeUpdate();
 
   	        st1.close();
   	        connection.close();
