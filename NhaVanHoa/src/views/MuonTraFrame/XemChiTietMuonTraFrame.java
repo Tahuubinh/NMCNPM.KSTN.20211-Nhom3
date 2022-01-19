@@ -10,6 +10,7 @@ import controllers.MuonTraController.XemChiTietMuonTraCotroller;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -336,6 +337,12 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 		int isCoSoVatChat = 1;
 		String tenCoSoVatChatPhongBan = xemChiTietTable.getModel().getValueAt(row, 1).toString();
 		int soLuongMuon =Integer.parseInt(xemChiTietTable.getModel().getValueAt(row, 2).toString());
+		int soLuongDaHoanTra = Integer.parseInt(xemChiTietTable.getModel().getValueAt(row, 3).toString());
+		if(soLuongDaHoanTra > 0) {
+			JOptionPane.showMessageDialog(null, "Không thể chỉnh sửa hoàn trả khi đã hoàn trả!",
+	  			      "ERROR!", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		for(int i = 0; i < this.listPhongBan.size(); ++i) {
 			if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
 				isCoSoVatChat = 0;
@@ -372,7 +379,33 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 	
 	private void chinhSuaHoanTraActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
-		
+		// TODO Auto-generated method stub
+		JTable xemChiTietTable = this.controller.getTable();
+		int row = xemChiTietTable.getSelectedRow();
+		if(row == -1) {
+    		JOptionPane.showMessageDialog(null, "Hãy lựa chọn một hàng trước",
+  			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+    		return;
+		}
+		int isCoSoVatChat = 1;
+		String tenCoSoVatChatPhongBan = xemChiTietTable.getModel().getValueAt(row, 1).toString();
+		int soLuongMuon = Integer.parseInt(xemChiTietTable.getModel().getValueAt(row, 2).toString());
+		int soLuongDaHoanTra = Integer.parseInt(xemChiTietTable.getModel().getValueAt(row, 3).toString());
+		String thoiGianTraReal = xemChiTietTable.getModel().getValueAt(row, 4).toString();
+		if (soLuongDaHoanTra == 0) {
+			JOptionPane.showMessageDialog(null, "Không thể chỉnh sửa hoàn trả khi chưa hoàn trả!",
+	  			      "ERROR!", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		for(int i = 0; i < this.listPhongBan.size(); ++i) {
+			if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
+				isCoSoVatChat = 0;
+				return;
+			}
+		}
+		ChinhSuaHoanTraFrame chinhSuaHoanTraFrame = new ChinhSuaHoanTraFrame(this.controller, parentJFrame, tenNguoiDangKyDetail.getText(), idDetail.getText(), thoiGianMuonDetail.getText(), thoiGianTraReal, tenCoSoVatChatPhongBan, soLuongMuon, soLuongDaHoanTra, isCoSoVatChat);
+		chinhSuaHoanTraFrame.setResizable(false);
+		chinhSuaHoanTraFrame.setVisible(true);
 	}
 	
 	private static void addPopup(Component component, final JPopupMenu popup) {

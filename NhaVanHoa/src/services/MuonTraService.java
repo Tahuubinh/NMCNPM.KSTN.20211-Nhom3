@@ -497,8 +497,12 @@ public class MuonTraService {
      * out put: neu tenPhongBanMuon co thoiGianTraReal thi xoa thoiGianTraReal, va nguoc lai neu tenPhongBanMuon khong co thoiGianTraReal thi add
      * thoiGianTraReal la thoiGianHienTai, thay doi thong tin o bang xoa trong csdl
      */
+<<<<<<< HEAD
+    public boolean chinhSuaHoanTraPhongBan(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon, String thoiGianTraReal) {
+=======
     public boolean chinhSuaHoanTraPhongBan(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon) {
     	
+>>>>>>> 1c6506073947ead626b155ac3a622238c2840f2b
     	return true;
     }
     
