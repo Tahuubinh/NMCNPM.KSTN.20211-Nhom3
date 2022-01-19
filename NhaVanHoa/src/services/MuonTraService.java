@@ -234,7 +234,7 @@ public class MuonTraService {
         		coSoVatChatModel.setTenCoSoVatChat(rs1.getString(1));
         		coSoVatChatModel.setSoLuongMuon(rs1.getInt(2));
         		coSoVatChatModel.setThoiGianTraReal(rs1.getTimestamp(3));
-        		if (rs1.getTimestamp(3) == null) soLuongDaTra = 0;
+        		if (rs1.getTimestamp(3) == null) coSoVatChatModel.setSoLuongDaTra(0);
         		else {
             		System.out.println(rs1.getTimestamp(3));
         			String query2 = "SELECT item_number FROM deleteditem d LEFT JOIN item i ON d.item_id = i.item_id WHERE i.item_name = '"
@@ -249,6 +249,21 @@ public class MuonTraService {
     			listCoSoVatChatModels.add(coSoVatChatModel);
         	}
 	        st1.close();
+	        String query2 = "SELECT i.infra_name, s.real_time_end FROM infrastructure i "
+  				  		  + "LEFT JOIN infraregistered ir ON "
+  				  		  + "i.infra_id = ir.infra_id LEFT JOIN registers r ON r.user_id = ir.user_id LEFT JOIN schedule s "
+  				  		  + "ON s.event_no = ir.event_no WHERE r.cccd = " + cccdNguoiMuon + " AND s.time_start = '"+ thoiGianMuon + "'";
+	        PreparedStatement st2 = (PreparedStatement)connection.prepareStatement(query2);
+	        ResultSet rs2 = st2.executeQuery();
+	        while(rs2.next()) {
+	        	PhongBanModel phongBanModel = new PhongBanModel();
+	        	phongBanModel.setTenPhongBan(rs2.getString(1));
+	        	phongBanModel.setThoiGianTraReal(rs2.getTimestamp(2));
+	        	if (rs2.getTimestamp(2) == null) phongBanModel.setSoLuongDaTra(0);
+	        	else phongBanModel.setSoLuongDaTra(1);
+	        	listPhongBanModels.add(phongBanModel);
+	        }
+	        st2.close();
 	        connection.close();
 		} catch (Exception e) {
             this.exceptionHandle(e.getMessage());
