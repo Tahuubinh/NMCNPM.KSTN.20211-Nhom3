@@ -98,6 +98,8 @@ public class ThongKePanel extends javax.swing.JPanel {
         	}
         });
         popupMenu.add(XoaMenuItem);
+        
+        timeMenuItem = new JMenuItem("Xem thời gian");
 
         javax.swing.GroupLayout tableJpnLayout = new javax.swing.GroupLayout(tableJpn);
         tableJpn.setLayout(tableJpnLayout);
@@ -284,6 +286,7 @@ public class ThongKePanel extends javax.swing.JPanel {
     private javax.swing.JTextField tuTuoiJtf;
     private JPopupMenu popupMenu;
     private JMenuItem XoaMenuItem;
+    private JMenuItem timeMenuItem;
     // End of variables declaration//GEN-END:variables
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
@@ -310,7 +313,7 @@ public class ThongKePanel extends javax.swing.JPanel {
     			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
     		return;
     	}
-    	System.err.println(row);
+    	//System.err.println(row);
     	XoaThongKe xoaNhanKhau = new XoaThongKe(this.controller, this.parentFrame, tempJTable, row);
     	xoaNhanKhau.setLocationRelativeTo(null);
     	xoaNhanKhau.setResizable(false);

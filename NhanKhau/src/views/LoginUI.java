@@ -43,23 +43,23 @@ public class LoginUI extends javax.swing.JFrame {
 
     // dang nhap
     private void login() {
-//        String userName = txbUserName.getText();
-//        String password = String.valueOf(txbPasswd.getPassword());
-//        try {
-//            if (this.cont.login(userName, password)) {
+        String userName = txbUserName.getText();
+        String password = String.valueOf(txbPasswd.getPassword());
+        try {
+            if (this.cont.login(userName, password)) {
                 dispose();
                 MainFrame mainFrame = new MainFrame();
                 mainFrame.setLocationRelativeTo(null);
                 mainFrame.setResizable(false);
                 mainFrame.setVisible(true);
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "Sai thong tin dang nhap", "Warning", JOptionPane.WARNING_MESSAGE);
-//            }
-//        } catch ( ClassNotFoundException e) {
-//            JOptionPane.showMessageDialog(null, "ClassNotFoundException, vui lòng kiểm tra lại", "Warning!!", JOptionPane.ERROR_MESSAGE);
-//        } catch (SQLException e1) {
-//        	JOptionPane.showMessageDialog(null, "SQLException", "Warning!!", JOptionPane.ERROR_MESSAGE);
-//		}
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Sai thong tin dang nhap", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
+        } catch ( ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "ClassNotFoundException, vui lòng kiểm tra lại", "Warning!!", JOptionPane.ERROR_MESSAGE);
+        } catch (SQLException e1) {
+        	JOptionPane.showMessageDialog(null, "SQLException", "Warning!!", JOptionPane.ERROR_MESSAGE);
+		}
     }
             
     @SuppressWarnings("unchecked")

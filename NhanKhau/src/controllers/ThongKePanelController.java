@@ -44,6 +44,7 @@ public class ThongKePanelController {
     private ClassTableModel classTableModel;
     private final String[] COLUMNS = {"ID", "Họ tên", "Ngày sinh", "Giới tính", "Địa chỉ hiện nay"};
     private final String[] COLUMNS_DELETE = {"ID", "Họ tên", "Giới tính", "Ngày sinh", "Ngày xóa"};
+    private final String[] COLUMNS_TAM = {"ID", "Họ tên", "Ngày sinh", "Ngày bắt đầu", "Ngày kết thúc"};
 
     public ThongKePanelController(JComboBox genderJcb, JComboBox statusJcb, JTextField tuTuoiJtf, JTextField denTuoiJtf, JTextField tuNamJtf, JTextField denNamJtf, JPanel jpnView, JPopupMenu popupMenu) {
         this.GenderJcb = genderJcb;
@@ -69,7 +70,7 @@ public class ThongKePanelController {
     }
     
     public JTable getNhankhauTable() {
-		return table;
+		return this.table;
 	}
 
     public void setData() {
@@ -101,11 +102,11 @@ public class ThongKePanelController {
             JOptionPane.showMessageDialog(denTuoiJtf, "Vui lòng nhập đúng kiểu dữ liệu!!", "Warring", JOptionPane.ERROR_MESSAGE);
         }
         if (status.equals("Tạm vắng")) {
-        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhau(tuTuoi, denTuoi, gender, status, tuNam, denNam);
+        	this.listNhanKhauBeans = this.nhanKhauService.statisticTamVang(tuTuoi, denTuoi, gender, status, tuNam, denNam);
         	setTableTamvang();
         } 
         else if (status.equals("Tạm trú")) {
-        	this.listNhanKhauBeans = this.nhanKhauService.statisticNhanKhau(tuTuoi, denTuoi, gender, status, tuNam, denNam);
+        	this.listNhanKhauBeans = this.nhanKhauService.statisticTamTru(tuTuoi, denTuoi, gender, status, tuNam, denNam);
         	setTableTamTru();
         }
         else if (status.equals("Chuyển đi")) {
@@ -144,7 +145,7 @@ public class ThongKePanelController {
         this.listNhanKhauBeans.forEach(nhankhau -> {
             listItem.add(nhankhau.getNhanKhauModel());
         });
-        DefaultTableModel model = classTableModel.setTableNhanKhau(listItem, COLUMNS);
+        DefaultTableModel model = classTableModel.setTableTam(listItem, COLUMNS_TAM);
         table = new JTable(model) {
             @Override
             public boolean editCellAt(int row, int column, EventObject e) {
@@ -195,7 +196,7 @@ public class ThongKePanelController {
         this.listNhanKhauBeans.forEach(nhankhau -> {
             listItem.add(nhankhau.getNhanKhauModel());
         });
-        DefaultTableModel model = classTableModel.setTableNhanKhau(listItem, COLUMNS);
+        DefaultTableModel model = classTableModel.setTableTam(listItem, COLUMNS_TAM);
         table = new JTable(model) {
             @Override
             public boolean editCellAt(int row, int column, EventObject e) {

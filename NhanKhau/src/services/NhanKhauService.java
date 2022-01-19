@@ -402,6 +402,95 @@ public class NhanKhauService {
         return list;
     }
     
+    public List<NhanKhauBean> statisticTamTru(int TuTuoi, int denTuoi, String gender, String lydoString, int tuNam, int denNam) {
+        List<NhanKhauBean> list = new ArrayList<>();
+        String query = "select * from nhan_khau n, tam_tru tt\r\n"
+        		+ "where n.id = tt.idnhankhau";
+        query += " AND DATE_PART('year', AGE(CURRENT_DATE, namsinh))  >= "
+	                + TuTuoi
+	                + " \nAND DATE_PART('year', AGE(CURRENT_DATE, namsinh))  <= "
+	                + denTuoi;
+	    if (!gender.equalsIgnoreCase("Toàn Bộ")) {
+	        query += " AND gioitinh = '" + gender + "'";
+	    }
+	    
+        query += " AND (ngayxoa is NULL OR (DATE_PART('year', ngayxoa) BETWEEN "
+                + tuNam
+                + " AND "
+                + denNam
+                + "))";
+        
+        query += " ORDER BY denngay DESC";
+        System.out.println(query);
+         try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                NhanKhauBean  nhanKhauBean = new NhanKhauBean();
+                NhanKhauModel nhanKhau = nhanKhauBean.getNhanKhauModel();
+                nhanKhau.setID(rs.getInt("idnhankhau"));
+                nhanKhau.setHoTen(rs.getString("hoten"));
+                nhanKhau.setGioiTinh(rs.getString("gioitinh"));
+                nhanKhau.setNamSinh(rs.getDate("namsinh"));
+                nhanKhau.setNgayXoa(rs.getDate("ngayxoa"));
+                nhanKhau.setNgayChuyenDen(rs.getDate("tungay"));
+                nhanKhau.setNgayChuyenDi(rs.getDate("denngay"));
+                
+                list.add(nhanKhauBean);
+            }
+            preparedStatement.close();
+        } catch (Exception e) {
+             System.out.println(e.getMessage());
+        }
+        
+        return list;
+    }
+    
+    public List<NhanKhauBean> statisticTamVang(int TuTuoi, int denTuoi, String gender, String lydoString, int tuNam, int denNam) {
+        List<NhanKhauBean> list = new ArrayList<>();
+        String query = "select * from nhan_khau n, tam_vang tt\r\n"
+        		+ "where n.id = tt.idnhankhau";
+        query += " AND DATE_PART('year', AGE(CURRENT_DATE, namsinh))  >= "
+	                + TuTuoi
+	                + " \nAND DATE_PART('year', AGE(CURRENT_DATE, namsinh))  <= "
+	                + denTuoi;
+	    if (!gender.equalsIgnoreCase("Toàn Bộ")) {
+	        query += " AND gioitinh = '" + gender + "'";
+	    }
+	    
+	    query += " AND (ngayxoa is NULL OR (DATE_PART('year', ngayxoa) BETWEEN "
+                + tuNam
+                + " AND "
+                + denNam
+                + "))";
+        
+        query += " ORDER BY denngay DESC";
+        System.out.println(query);
+         try {
+            Connection connection = MysqlConnection.getMysqlConnection();
+            PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+                NhanKhauBean  nhanKhauBean = new NhanKhauBean();
+                NhanKhauModel nhanKhau = nhanKhauBean.getNhanKhauModel();
+                nhanKhau.setHoTen(rs.getString("hoten"));
+                nhanKhau.setGioiTinh(rs.getString("gioitinh"));
+                nhanKhau.setNamSinh(rs.getDate("namsinh"));
+                nhanKhau.setNgayXoa(rs.getDate("ngayxoa"));
+                nhanKhau.setNgayChuyenDen(rs.getDate("tungay"));
+                nhanKhau.setNgayChuyenDi(rs.getDate("denngay"));
+                
+                list.add(nhanKhauBean);
+            }
+            preparedStatement.close();
+        } catch (Exception e) {
+             System.out.println(e.getMessage());
+        }
+        
+        return list;
+    }
+    
     /*
      * ham tim kiem nhan khau theo ten
      */

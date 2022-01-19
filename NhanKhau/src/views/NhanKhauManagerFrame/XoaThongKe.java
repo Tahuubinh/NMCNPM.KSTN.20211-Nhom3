@@ -61,6 +61,7 @@ public class XoaThongKe extends JFrame {
         this.parentController = parentController;
         this.parentJFrame = parentJFrame;
         this.table = table;
+        this.row = row;
         initComponents();
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         parentJFrame.setEnabled(false);
@@ -189,9 +190,10 @@ public class XoaThongKe extends JFrame {
 		if (confirm == JOptionPane.YES_OPTION) {
 			XoaNhanKhauController controller = new XoaNhanKhauController();
 			try {
-				int id;
-				//System.err.println(table.getModel().getValueAt(table.getSelectedRow(),0));
-				id = (int) table.getModel().getValueAt(table.getSelectedRow(),0);
+				int id = 0;
+				//System.err.println(table.getSelectedRow());
+				id = (int) this.table.getModel().getValueAt(table.getSelectedRow(),0);
+				System.err.println((int) this.table.getModel().getValueAt(table.getSelectedRow(),0));
 				String lydoString = (String)this.lydocomboBox.getSelectedItem();
 				java.sql.Date ngayMatDate = new java.sql.Date(ngaytextField.getDate().getTime());
 				String soGiayString = (String)this.soGiaytextField.getText();
