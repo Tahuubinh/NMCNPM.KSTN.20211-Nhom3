@@ -316,7 +316,7 @@ public class MuonCoSoVatChatPhongBanFrame extends javax.swing.JFrame {
 	    		if(checkCoSoVatChat) {
 	    			CoSoVatChatModel coSoVatChat = new CoSoVatChatModel();
 	    			coSoVatChat.setTenCoSoVatChat(tenCoSoVatChatPhongBanJcb.getSelectedItem()+"");
-	    			coSoVatChat.setSoLuong(Integer.parseInt(soLuongJtf.getText()));
+	    			coSoVatChat.setSoLuongMuon(Integer.parseInt(soLuongJtf.getText()));
 	    			listCoSoVatChatMuon.add(coSoVatChat);
 	    		} 
 	    		if(checkPhongBan) {
@@ -324,6 +324,7 @@ public class MuonCoSoVatChatPhongBanFrame extends javax.swing.JFrame {
 	    			phongBan.setTenPhongBan((String) tenCoSoVatChatPhongBanJcb.getSelectedItem());
 	    			listPhongBanMuon.add(phongBan);
 	    		}
+                close();
 	    		setDataTable();
 	    	}
 	    }
@@ -389,9 +390,12 @@ public class MuonCoSoVatChatPhongBanFrame extends javax.swing.JFrame {
 					JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra", "Warning", JOptionPane.WARNING_MESSAGE);
 		            return false;
 				}
-	            JOptionPane.showMessageDialog(rootPane, "Số lượng " + tenCoSoVatChatPhongBanJcb.getSelectedItem() + "còn lại tối đa là: " + soLuong, "Warning", JOptionPane.WARNING_MESSAGE);
-	            soLuongJtf.setText(Integer.toString(soLuong));
-	            return false;
+				if(Integer.parseInt(soLuongJtf.getText()) > soLuong)
+				{
+		            JOptionPane.showMessageDialog(rootPane, "Số lượng " + tenCoSoVatChatPhongBanJcb.getSelectedItem() + "còn lại tối đa là: " + soLuong, "Warning", JOptionPane.WARNING_MESSAGE);
+		            soLuongJtf.setText(Integer.toString(soLuong));
+		            return false;
+				}
 	    	}
 	    	if(checkPhongBan && Integer.parseInt(soLuongJtf.getText()) > 1) {
 	            JOptionPane.showMessageDialog(rootPane, "Số lượng phòng ban phải là 1", "Warning", JOptionPane.INFORMATION_MESSAGE);
@@ -423,6 +427,7 @@ public class MuonCoSoVatChatPhongBanFrame extends javax.swing.JFrame {
 	    public List<PhongBanModel> getPhongBanMuon() {
 	    	return listPhongBan;
 	    }
+	    
 	    
 	    private JFrame parentJFrame;
 	    private MuonTraBean muonTraBeann;

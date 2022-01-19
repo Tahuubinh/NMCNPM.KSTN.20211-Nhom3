@@ -70,7 +70,8 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(true);
-        
+        this.muonTraBeann = new MuonTraBean();
+        this.childController = new AddNewController();
 	    gioDjcb = new DefaultComboBoxModel();
 	    for(int i = 0; i < 24; ++i) {
 	    	if(i< 10) gioDjcb.addElement("0"+i);
@@ -448,9 +449,11 @@ public class DangKySuDungFrame extends javax.swing.JFrame {
     		this.muonTraBeann.setListPhongBanModels(listPhongBanModels);
     		this.muonTraBeann.setNguoiMuonModel(nguoiMuonModel);
     		this.muonTraBeann.setThoiGianModel(thoiGianModel);
-    		
+        	System.out.println("???");
+
             try {
                 if(this.childController.addNewNguoiMuon(muonTraBeann)) {
+                	System.out.println("??");
                     JOptionPane.showMessageDialog(null, "Thêm thành công!!");
                     close();
                     parentController.refreshData();

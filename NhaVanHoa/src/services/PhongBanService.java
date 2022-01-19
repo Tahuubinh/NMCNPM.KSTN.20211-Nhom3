@@ -123,11 +123,11 @@ public class PhongBanService {
         String query = "SELECT * FROM infraregistered ir LEFT JOIN schedule s on s.event_no=ir.event_no WHERE infra_name = '"
         			 + tenPhongBan + "' AND s.time_start >= CURRENT_TIMESTAMP";
         
-        
         try {
         	connection = MysqlConnection.getMysqlConnection();
         	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-            st.executeUpdate();
+            System.out.println(st);
+            st.execute();
 	        st.close();
 	        connection.close();
 		} catch (Exception e) {

@@ -477,7 +477,7 @@ public class MuonTraService {
   	        String query1 = "DELETE FROM deleteditem WHERE item_id IN (SELECT item_id FROM item WHERE item_name = '" + coSoVatChatModel.getTenCoSoVatChat()
   	        			  + "') AND date_delete = '" + coSoVatChatModel.getThoiGianTraReal() + "'";
   	        PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
-          	st1s.executeUpdate();
+          	st1.executeUpdate();
 
   	        st1.close();
   	        connection.close();
