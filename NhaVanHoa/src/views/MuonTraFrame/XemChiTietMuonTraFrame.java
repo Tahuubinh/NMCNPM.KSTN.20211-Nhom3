@@ -24,6 +24,7 @@ import models.PhongBanModel;
 import models.CoSoVatChatModel;
 import models.NguoiMuonModel;
 import models.ThoiGianModel;
+import services.TimeService;
 import utility.ClassTableModel;
 
 import javax.swing.JPanel;
@@ -71,59 +72,20 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
     /**
      * @wbp.parser.constructor
      */
-    public XemChiTietMuonTraFrame(MuonTraPanelController parentController, JFrame parentJFrame, String tenNguoiDangKySuDungDetail, String idDetail, String lienHeDetail, String thoiGianDetail, String thoiGianTraDetail) {
+    public XemChiTietMuonTraFrame(MuonTraPanelController parentController, JFrame parentJFrame, String tenNguoiDangKySuDungDetail, String idDetail, String lienHeDetail, String thoiGianMuonDetail, String thoiGianTraDetail) {
     	setBackground(new Color(255, 228, 228));
     	this.parentController = parentController;
     	this.parentJFrame = parentJFrame;
         this.parentJFrame.setEnabled(true);
+        timeService = new TimeService();
         initComponents();
         this.tenNguoiDangKyDetail.setText(tenNguoiDangKySuDungDetail);
         this.idDetail.setText(idDetail);
         this.lienHeDetail.setText(lienHeDetail);
-        this.thoiGianMuonDetail.setText(thoiGianDetail);
-        this.thoiGianTraDetail.setText(thoiGianDetail);
+        this.thoiGianMuonDetail.setText(thoiGianMuonDetail);
+        this.thoiGianTraDetail.setText(thoiGianTraDetail);
         
-        popupMenu = new JPopupMenu();
-        addPopup(tablePanel, popupMenu);
-        
-        chinhSua = new JMenuItem("Chỉnh sửa");
-        popupMenu.add(chinhSua);
-        chinhSua.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				// TODO Auto-generated method stub
-				chinhSuaActionPerformed(evt);
-			}
-
-		});
-        
-        hoanTra = new JMenuItem("Hoàn trả");
-        popupMenu.add(hoanTra);
-        hoanTra.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				// TODO Auto-generated method stub
-				hoanTraActionPerformed(evt);
-			}
-
-
-		});
-        
-        chinhSuaHoanTra = new JMenuItem("Chỉnh sửa hoàn trả");
-        popupMenu.add(chinhSuaHoanTra);
-        chinhSuaHoanTra.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent evt) {
-				// TODO Auto-generated method stub
-				chinhSuaHoanTraActionPerformed(evt);
-			}
-
-
-		});
-    	pack();
+       
         controller = new XemChiTietMuonTraCotroller(tablePanel, this.idDetail, this.thoiGianMuonDetail, this.popupMenu);
        
         listCoSoVatChat = controller.getListCoSoVatChat();
@@ -309,6 +271,47 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
     				.addContainerGap())
     	);
     	DangKyCoSoVatChatPanel.setLayout(gl_DangKyCoSoVatChatPanel);
+    	 popupMenu = new JPopupMenu();
+         addPopup(tablePanel, popupMenu);
+         
+         chinhSua = new JMenuItem("Chỉnh sửa");
+         popupMenu.add(chinhSua);
+         chinhSua.addActionListener(new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent evt) {
+ 				// TODO Auto-generated method stub
+ 				chinhSuaActionPerformed(evt);
+ 			}
+
+ 		});
+         
+         hoanTra = new JMenuItem("Hoàn trả");
+         popupMenu.add(hoanTra);
+         hoanTra.addActionListener(new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent evt) {
+ 				// TODO Auto-generated method stub
+ 				hoanTraActionPerformed(evt);
+ 			}
+
+
+ 		});
+         
+         chinhSuaHoanTra = new JMenuItem("Chỉnh sửa hoàn trả");
+         popupMenu.add(chinhSuaHoanTra);
+         chinhSuaHoanTra.addActionListener(new ActionListener() {
+ 			
+ 			@Override
+ 			public void actionPerformed(ActionEvent evt) {
+ 				// TODO Auto-generated method stub
+ 				chinhSuaHoanTraActionPerformed(evt);
+ 			}
+
+
+ 		});
+     	pack();
     }// </editor-fold>//GEN-END:initComponents
     
 	private void chinhSuaActionPerformed(ActionEvent evt) {
@@ -320,19 +323,13 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
   			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
   		return;
 		}
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");  
-		try {
-			Date ngayMuon = simpleDateFormat.parse(thoiGianMuonDetail.getText());
-			Date now = new Date();
-			if(now.compareTo(ngayMuon) > 0) {
-	    		JOptionPane.showMessageDialog(null, "Đã quá lịch mượn, không thể chỉnh sửa",
-	    			      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
-	    		return;
-			}
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			System.out.print("Can't convert to timestamp");
-			e.printStackTrace();
+		Timestamp ngayMuon = timeService.convertDatetableToTimestamp(thoiGianMuonDetail.getText());
+		Date date = new Date();
+		Timestamp currentTimestamp = new Timestamp(date.getTime());
+		if(currentTimestamp.compareTo(ngayMuon) > 0) {
+			JOptionPane.showMessageDialog(null, "Đã quá lịch mượn, không thể chỉnh sửa",
+				      "Lỗi không chọn hàng!", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		int isCoSoVatChat = 1;
 		String tenCoSoVatChatPhongBan = xemChiTietTable.getModel().getValueAt(row, 1).toString();
@@ -343,12 +340,13 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 	  			      "ERROR!", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		for(int i = 0; i < this.listPhongBan.size(); ++i) {
-			if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
-				isCoSoVatChat = 0;
-				return;
+		if(listPhongBan != null)
+			for(int i = 0; i < this.listPhongBan.size(); ++i) {
+				if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
+					isCoSoVatChat = 0;
+					return;
+				}
 			}
-		}
 		ChinhSuaMuonTraFrame chinhSuaMuonTraFrame = new ChinhSuaMuonTraFrame(this.controller, parentJFrame, idDetail.getText(), thoiGianMuonDetail.getText(), tenCoSoVatChatPhongBan, soLuongMuon, isCoSoVatChat);
 		chinhSuaMuonTraFrame.setResizable(false);
 		chinhSuaMuonTraFrame.setVisible(true);
@@ -366,12 +364,13 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 		int isCoSoVatChat = 1;
 		String tenCoSoVatChatPhongBan = xemChiTietTable.getModel().getValueAt(row, 1).toString();
 		int soLuongDaHoanTra =Integer.parseInt(xemChiTietTable.getModel().getValueAt(row, 3).toString());
-		for(int i = 0; i < this.listPhongBan.size(); ++i) {
-			if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
-				isCoSoVatChat = 0;
-				return;
+		if(listPhongBan != null)
+			for(int i = 0; i < this.listPhongBan.size(); ++i) {
+				if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
+					isCoSoVatChat = 0;
+					return;
+				}
 			}
-		}
 		HoanTraFrame hoanTraFrame = new HoanTraFrame(this.controller, parentJFrame, tenNguoiDangKyDetail.getText(), idDetail.getText(), thoiGianMuonDetail.getText(), tenCoSoVatChatPhongBan, soLuongDaHoanTra, isCoSoVatChat);
 		hoanTraFrame.setResizable(false);
 		hoanTraFrame.setVisible(true);
@@ -397,12 +396,13 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 	  			      "ERROR!", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		for(int i = 0; i < this.listPhongBan.size(); ++i) {
-			if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
+		if(listPhongBan != null)
+			for(int i = 0; i < this.listPhongBan.size(); ++i) {
+				if(listPhongBan.get(i).getTenPhongBan().compareTo(tenCoSoVatChatPhongBan) == 0) {
 				isCoSoVatChat = 0;
 				return;
+				}
 			}
-		}
 		ChinhSuaHoanTraFrame chinhSuaHoanTraFrame = new ChinhSuaHoanTraFrame(this.controller, parentJFrame, tenNguoiDangKyDetail.getText(), idDetail.getText(), thoiGianMuonDetail.getText(), thoiGianTraReal, tenCoSoVatChatPhongBan, soLuongMuon, soLuongDaHoanTra, isCoSoVatChat);
 		chinhSuaHoanTraFrame.setResizable(false);
 		chinhSuaHoanTraFrame.setVisible(true);
@@ -426,6 +426,7 @@ public class XemChiTietMuonTraFrame extends javax.swing.JFrame {
 		});
 	}
     // check cac gia tri duoc nhap vao form
+	private TimeService timeService;
     private XemChiTietMuonTraCotroller controller;
 	private MuonTraPanelController parentController;
     private JFrame parentJFrame;

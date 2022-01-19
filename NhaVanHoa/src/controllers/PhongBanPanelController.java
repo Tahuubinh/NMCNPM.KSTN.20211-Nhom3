@@ -129,10 +129,10 @@ public class PhongBanPanelController {
 	        
 	        JScrollPane scroll = new JScrollPane();
 	        scroll.getViewport().add(table);
-	        scroll.setPreferredSize(new Dimension(1350, 400));
+	        scroll.setPreferredSize(new Dimension(1350, 330));
 	        jpnView.removeAll();
 	        jpnView.setLayout(new BorderLayout());
-	        jpnView.add(scroll, BorderLayout.CENTER);
+	        jpnView.add(scroll);
 	        jpnView.validate();
 	        jpnView.repaint();
 	    }

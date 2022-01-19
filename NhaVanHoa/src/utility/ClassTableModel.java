@@ -227,7 +227,8 @@ public class ClassTableModel {
              obj[1] = item.getTenCoSoVatChat();
              obj[2] = item.getSoLuongMuon();
              obj[3] = item.getSoLuongDaTra();
-             obj[4] = timeService.convertToDateShowInTable(item.getThoiGianTraReal());
+ 	         if(item.getThoiGianTraReal() == null) obj[4] = null;
+ 	         else obj[4] = timeService.convertToDateShowInTable(item.getThoiGianTraReal());
              dtm.addRow(obj);
          });
          return dtm;

@@ -10,6 +10,7 @@ import controllers.MuonTraController.XemChiTietMuonTraCotroller;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.EventObject;
 
@@ -21,6 +22,7 @@ import models.NguoiMuonModel;
 import models.NhaTaiTroModel;
 import models.ThoiGianModel;
 import services.MuonTraService;
+import services.TimeService;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -74,6 +76,7 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
+        timeService = new TimeService();
         this.muonTraBean = new MuonTraBean();
         initComponents();
         this.tenCoSoVatChatPhongBanDetailJlb.setText(tenCoSoVatChatPhongBan);
@@ -81,6 +84,7 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
         this.soLuongMuonNow = soLuongMuon;
         this.cccdNguoiMuon = cccdNguoiMuon;
         this.thoiGianMuon = thoiGianMuon;
+        this.isCoSoVatChat = isCoSoVatChat;
     	setIconImage(Toolkit.getDefaultToolkit().getImage(ChinhSuaMuonTraFrame.class.getResource("/Icons/house.png")));
     	setTitle("Chỉnh sửa cơ sở vật chất / phòng ban đã mượn");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -230,9 +234,11 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     	if(validateValueInForm()) {
     		MuonTraService muonTraService = new MuonTraService();
     		int soLuong = Integer.parseInt(soLuongMuonJtf.getText());
+    		Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(this.thoiGianMuon);
     		if(soLuong == this.soLuongMuonNow) {
     			return;
     		}
+    		System.out.println(isCoSoVatChat);
     		if(isCoSoVatChat > 0) {
     			CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
     			coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatPhongBanDetailJlb.getText());
@@ -240,7 +246,7 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     			try {
     				if(soLuong == 0) {
     					if(JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn không mượn bất cứ cái "+ coSoVatChatModel.getTenCoSoVatChat() +" nào ?", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
-                    		if(muonTraService.huyMuonCoSoVatChat(this.cccdNguoiMuon, coSoVatChatModel.getTenCoSoVatChat(), this.thoiGianMuon))
+                    		if(muonTraService.huyMuonCoSoVatChat(this.cccdNguoiMuon, coSoVatChatModel.getTenCoSoVatChat(), thoiGianMuonTS))
                                 {
                     				JOptionPane.showMessageDialog(null, "Xóa thành công!!");
                                     close();
@@ -249,7 +255,7 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
                     	}
     					return;
     				}
-                	if(muonTraService.chinhSuaCoSoVatChatMuon(cccdNguoiMuon, coSoVatChatModel, thoiGianMuon)) {
+                	if(muonTraService.chinhSuaCoSoVatChatMuon(cccdNguoiMuon, coSoVatChatModel, thoiGianMuonTS)) {
                         JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!!");
                         close();
                         parentController.refreshData();
@@ -265,7 +271,7 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     			String tenPhongBan = tenCoSoVatChatPhongBanDetailJlb.getText();
     			try {
     					if(JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn không mượn  "+ tenPhongBan +" ?", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
-                    		if(muonTraService.huyMuonPhongBan(this.cccdNguoiMuon, tenPhongBan, this.thoiGianMuon))
+                    		if(muonTraService.huyMuonPhongBan(this.cccdNguoiMuon, tenPhongBan, thoiGianMuonTS))
                             {
                 				JOptionPane.showMessageDialog(null, "Xóa thành công!!");
                                 close();
@@ -296,6 +302,7 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đúng định dạng số lượng", "Warning", JOptionPane.WARNING_MESSAGE);
                 return false;
     		}
+    		System.out.println(isCoSoVatChat);
         	if(isCoSoVatChat == 0 && soLuong > 1) {
                 JOptionPane.showMessageDialog(rootPane, "Số lượng phòng ban chỉ có 1", "Warning", JOptionPane.WARNING_MESSAGE);
                 return false;
@@ -308,6 +315,7 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
 		}
         return true;
     }
+    private TimeService timeService;
 	private XemChiTietMuonTraCotroller parentController;
     private JFrame parentFrame;
     private MuonTraBean muonTraBean;
