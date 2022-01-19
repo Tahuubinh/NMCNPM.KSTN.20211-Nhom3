@@ -281,8 +281,11 @@ public class ChinhSuaHoanTraFrame extends javax.swing.JFrame {
                 }
     		} else {
     			try {
+    				PhongBanModel phongBanModel = muonTraBean.getPhongBanModel();
+    				phongBanModel.setTenPhongBan(tenCoSoVatChatPhongBan);
+    				phongBanModel.setThoiGianTraReal(thoiGianTraReal);
     					if(JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn không mượn  "+ tenCoSoVatChatPhongBan +" ?", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
-                    		if(muonTraService.chinhSuaHoanTraPhongBan(this.cccdNguoiMuon, tenCoSoVatChatPhongBan, thoiGianMuon, thoiGianTraReal))
+                    		if(muonTraService.chinhSuaHoanTraPhongBan(this.cccdNguoiMuon, phongBanModel, thoiGianMuon))
                             {
                 				JOptionPane.showMessageDialog(null, "Xóa thành công!!");
                                 close();

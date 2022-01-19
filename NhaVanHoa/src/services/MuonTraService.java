@@ -213,38 +213,40 @@ public class MuonTraService {
      * neu coThoiGianTraReal va  co thong tin trong bang xoa => so luong da tra = soLuongMuon - soLuongXoa
      * neu khongCoThoiGianTraReal => chua tra
      */
-    public MuonTraBean getChiTietMuonTra(String cccdNguoiMuon, String thoiGianMuon) {
+    public MuonTraBean getChiTietMuonTra(String cccdNguoiMuon, Timestamp thoiGianMuon) {
         MuonTraBean muonTraBean = new MuonTraBean();
         List<CoSoVatChatModel> listCoSoVatChatModels = muonTraBean.getListCoSoVatChatModels();
         List<PhongBanModel> listPhongBanModels = muonTraBean.getListPhongBanModels();
-
         //viết truy vấn
         try {
         	Connection connection = MysqlConnection.getMysqlConnection();
-        	String query1 = "SELECT i.item_name, i.item_quantity, s.real_time_end FROM item i LEFT JOIN deleteditem d ON i.item_id = d.item_id "
-        				  + "LEFT JOIN itemregistered ir ON "
-        				  + "i.item_id = ir.item_id LEFT JOIN registers r ON r.user_id = ir.user_id LEFT JOIN schedule s "
-        				  + "ON s.event_no = ir.event_no WHERE r.cccd = " + cccdNguoiMuon + " AND s.time_start = '"+ thoiGianMuon + "'";
+        	String query1 = "SELECT i.item_name, i.item_quantity, s.real_time_end FROM item i  "
+        				  + "LEFT JOIN itemregistered ir ON i.item_id = ir.item_id "
+        				  + "LEFT JOIN registers r ON r.user_id = ir.user_id "
+        				  + "LEFT JOIN schedule s ON s.event_no = ir.event_no "
+        				  + "LEFT JOIN deleteditem d ON i.item_id = d.item_id AND d.date = s.real_time_end " 
+        				  + "WHERE r.cccd = '" + cccdNguoiMuon + "' AND s.time_start = '"+ thoiGianMuon + "'";
         	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
         	ResultSet rs1 = st1.executeQuery();
         	while(rs1.next()) {
         		int soLuongDaTra = rs1.getInt(2);
         		CoSoVatChatModel coSoVatChatModel = new CoSoVatChatModel();
         		coSoVatChatModel.setTenCoSoVatChat(rs1.getString(1));
-        		coSoVatChatModel.setSoLuong(rs1.getInt(2));
+        		coSoVatChatModel.setSoLuongMuon(rs1.getInt(2));
         		coSoVatChatModel.setThoiGianTraReal(rs1.getTimestamp(3));
         		if (rs1.getTimestamp(3) == null) coSoVatChatModel.setSoLuongDaTra(0);
         		else {
+            		System.out.println(rs1.getTimestamp(3));
         			String query2 = "SELECT item_number FROM deleteditem d LEFT JOIN item i ON d.item_id = i.item_id WHERE i.item_name = '"
         						  + rs1.getString(1)
         						  + "' AND d.date = '" + rs1.getTimestamp(3) + "'";
         			PreparedStatement st2 = (PreparedStatement)connection.prepareStatement(query2);
         			ResultSet rs2 = st2.executeQuery();
         			while(rs2.next()) soLuongDaTra-=rs2.getInt(1);
-        			coSoVatChatModel.setSoLuongDaTra(soLuongDaTra);
         			st2.close();
         		}
-        		listCoSoVatChatModels.add(coSoVatChatModel);
+    			coSoVatChatModel.setSoLuongDaTra(soLuongDaTra);
+    			listCoSoVatChatModels.add(coSoVatChatModel);
         	}
 	        st1.close();
 	        String query2 = "SELECT i.infra_name, s.real_time_end FROM infrastructure i "
@@ -324,8 +326,7 @@ public class MuonTraService {
      * input: cccd nguoi muon, coSoVatChatModel.tenCoSoVatChat, coSoVatChatModel.soLuongMuon, thoi gian muon
      * tra ve false neu so luong duoc chinh sua > so luong con lai trong kho
      */
-    public boolean chinhSuaCoSoVatChatMuon(String cccdNguoiMuon, CoSoVatChatModel coSoVatChatModel, String thoiGianMuon) {
-    	Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
+    public boolean chinhSuaCoSoVatChatMuon(String cccdNguoiMuon, CoSoVatChatModel coSoVatChatModel, Timestamp thoiGianMuon) {
     	try {
         	Connection connection = MysqlConnection.getMysqlConnection();
         	String query = "SELECT (i.item_quantity-COALESCE(sum(ir.item_number), 0)) FROM item i LEFT JOIN itemregistered ir "
@@ -336,18 +337,24 @@ public class MuonTraService {
   	        int remain = rs.getInt(1);
   	        String query2 = "SELECT ir.item_number FROM item i LEFT JOIN itemregistered ir ON i.item_id = ir.item_id WHERE i.item_name = '"
   	        			  + coSoVatChatModel.getTenCoSoVatChat() + "' AND ir.user_id = (SELECT user_id FROM registers WHERE cccd = '"
-  	        			  + cccdNguoiMuon + "') AND ir.event_no = (SELECT event_no FROM schedule WHERE time_start = '" + timestamp
-  	        			  + "')";
+  	        			  + cccdNguoiMuon + "') AND ir.event_no = (SELECT event_no FROM schedule WHERE time_start = '" + thoiGianMuon + "')";
   	        PreparedStatement st2 = (PreparedStatement)connection.prepareStatement(query2);
+	        System.out.println(st2);
 	        ResultSet rs2 = st2.executeQuery();
-	        int dangMuon = rs2.getInt(1);
+	        int dangMuon = 0;
+	        while(rs2.next()) rs2.getInt(1);
+	        System.out.println(remain + dangMuon);
+	        System.out.println(coSoVatChatModel.getSoLuongMuon());
 	        if(coSoVatChatModel.getSoLuongMuon() > remain + dangMuon) return false;
         	String query1 = "UPDATE itemregisters SET item_number = " + coSoVatChatModel.getSoLuongMuon() 
         				  + " WHERE event_no = (SELECT event_no FROM itemregistered ir LEFT JOIN schedule s ON "
-        			  	  + "ir.event_no = s.event_no WHERE s.time_start = '"+ timestamp + "' AND "
+        			  	  + "ir.event_no = s.event_no WHERE s.time_start = '"+ thoiGianMuon + "' AND "
         			  	  + "ir.user_id = (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
           	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
-  	        st1.executeQuery();
+          	rs2 = st1.executeQuery();
+          	if(rs2.next()) {
+          		
+          	}
   	        st1.close();
   	        connection.close();
 		} catch (Exception e) {
@@ -360,14 +367,13 @@ public class MuonTraService {
     /*
      * huy ten csvc dang ky muon hien tai theo ten csvc va theo cccd nguoi muon
      */
-    public boolean huyMuonCoSoVatChat(String cccdNguoiMuon, String tenCoSoVatChat, String thoiGianMuon) {
-    	Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
+    public boolean huyMuonCoSoVatChat(String cccdNguoiMuon, String tenCoSoVatChat, Timestamp thoiGianMuon) {
     	try {
     		Connection connection = MysqlConnection.getMysqlConnection();
     	    String query = "DELETE FROM itemregistered WHERE user_id = (SELECT user_id FROM registers WHERE cccd = '"
    				 		 + cccdNguoiMuon + "') AND item_id = (SELECT item_id FROM item WHERE item_name = '"
    				 		 + tenCoSoVatChat + "') AND event_no = (SELECT event_no FROM schedule WHERE time_start = '"
-   				 		 + timestamp + "')";
+   				 		 + thoiGianMuon + "')";
     	    PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
     	  	st.executeQuery();
     	  	st.close();
@@ -413,14 +419,13 @@ public class MuonTraService {
     /*
      * huy ten phong ban dang ky muon hien tai theo ten phong ban va theo cccd nguoi muon
      */
-    public boolean huyMuonPhongBan(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon) {
-    	Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
+    public boolean huyMuonPhongBan(String cccdNguoiMuon, String tenPhongBan, Timestamp thoiGianMuon) {
     	try {
     		Connection connection = MysqlConnection.getMysqlConnection();
     	    String query = "DELETE FROM infraregistered WHERE user_id = (SELECT user_id FROM registers WHERE cccd = '"
    				 		 + cccdNguoiMuon + "') AND infra_id = (SELECT infra_id FROM infrastructure WHERE infra_name = '"
    				 		 + tenPhongBan + "') AND event_no = (SELECT event_no FROM schedule WHERE time_start = '"
-   				 		 + timestamp + "')";
+   				 		 + thoiGianMuon + "')";
     	    PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
     	  	st.executeQuery();
     	  	st.close();
@@ -497,12 +502,9 @@ public class MuonTraService {
      * out put: neu tenPhongBanMuon co thoiGianTraReal thi xoa thoiGianTraReal, va nguoc lai neu tenPhongBanMuon khong co thoiGianTraReal thi add
      * thoiGianTraReal la thoiGianHienTai, thay doi thong tin o bang xoa trong csdl
      */
-<<<<<<< HEAD
-    public boolean chinhSuaHoanTraPhongBan(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon, String thoiGianTraReal) {
-=======
-    public boolean chinhSuaHoanTraPhongBan(String cccdNguoiMuon, String tenPhongBan, String thoiGianMuon) {
+
+    public boolean chinhSuaHoanTraPhongBan(String cccdNguoiMuon, PhongBanModel phongBanModel, String thoiGianMuon) {
     	
->>>>>>> 1c6506073947ead626b155ac3a622238c2840f2b
     	return true;
     }
     

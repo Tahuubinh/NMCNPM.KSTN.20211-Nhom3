@@ -48,7 +48,7 @@ public class MuonTraPanelController {
     private ClassTableModel classTableModel = null;
     private JTable table;
     private JPopupMenu popupMenu;
-    private final String[] COLUMNS = {"STT", "Tên người mượn", "CMND/TCC/HC", "Liên hệ", "Thời gian mượn", "Thời gian trả", "Cơ sở vật chất", "Số lượng"};
+    private final String[] COLUMNS = {"STT", "Tên người mượn", "CMND/TCC/HC", "Liên hệ", "Thời gian mượn", "Thời gian trả", "Cơ sở vật chất/Phòng ban", "Số lượng"};
     private JFrame parentJFrame;
     private TimeService timeService;
     public MuonTraPanelController(JPanel jpnView, JTextField nguoiMuonJtfSearch, JTextField lienheJtfSearch, JDateChooser tuNgayJdc, JDateChooser denNgayJdc, JPopupMenu popupMenu) {
@@ -185,7 +185,7 @@ public class MuonTraPanelController {
         
         JScrollPane scroll = new JScrollPane();
         scroll.getViewport().add(table);
-        scroll.setPreferredSize(new Dimension(1350, 400));
+        scroll.setPreferredSize(new Dimension(1350, 350));
         jpnView.removeAll();
         jpnView.setLayout(new BorderLayout());
         jpnView.add(scroll, BorderLayout.CENTER);

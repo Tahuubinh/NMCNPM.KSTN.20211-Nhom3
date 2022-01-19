@@ -50,8 +50,8 @@ public class CoSoVatChatService {
 	        	ListNguoiMuonCoSoVatChatDetailModel detail = new ListNguoiMuonCoSoVatChatDetailModel();
 	        	detail.setSoLuongMuon(rs.getInt("item_number"));
 	        	detail.setTenNguoiMuon(rs.getString("user_name"));
-	        	detail.setThoiGianMuon(rs.getString("time_start"));
-	        	detail.setThoiGianTra(rs.getString("time_end"));
+	        	detail.setThoiGianMuon(rs.getTimestamp("time_start"));
+	        	detail.setThoiGianTra(rs.getTimestamp("time_end"));
 	        	list.add(detail);
 	        }
 	        coSoVatChatBean.setListNguoiMuonCoSoVatChatDetailModels(list);
@@ -97,8 +97,8 @@ public class CoSoVatChatService {
 	        	ListNguoiMuonCoSoVatChatDetailModel detail = new ListNguoiMuonCoSoVatChatDetailModel();
 	        	detail.setSoLuongMuon(rs.getInt("item_number"));
 	        	detail.setTenNguoiMuon(rs.getString("user_name"));
-	        	detail.setThoiGianMuon(rs.getString("time_start"));
-	        	detail.setThoiGianTra(rs.getString("time_end"));
+	        	detail.setThoiGianMuon(rs.getTimestamp("time_start"));
+	        	detail.setThoiGianTra(rs.getTimestamp("time_end"));
 	        	list.add(detail);
 	        }
 	        preparedStatement.close();
