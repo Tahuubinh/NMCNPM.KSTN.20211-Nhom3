@@ -219,7 +219,8 @@ public class ClassTableModel {
              obj[1] = item.getTenPhongBan();
              obj[2] = 1;
              obj[3] = item.getSoLuongDaTra();
-             obj[4] = timeService.convertToDateShowInTable(item.getThoiGianTraReal());
+ 	         if(item.getThoiGianTraReal() == null) obj[4] = null;
+ 	         else obj[4] = timeService.convertToDateShowInTable(item.getThoiGianTraReal());
              dtm.addRow(obj);
          });
          listItemCoSoVatChat.forEach((CoSoVatChatModel item) -> {

@@ -156,7 +156,8 @@ public class CoSoVatChatService {
        			 		 + "WHERE i.item_name = '" + tenCoSoVatChat + "' GROUP BY ir.item_id, i.item_name, i.item_quantity";
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
             ResultSet rs = preparedStatement.executeQuery();
-            soLuong = rs.getInt("remain");
+            soLuong = 0;
+            while(rs.next())soLuong = rs.getInt("remain");
             preparedStatement.close();
             connection.close();
         } catch (Exception e) {
@@ -204,7 +205,7 @@ public class CoSoVatChatService {
              Connection connection = MysqlConnection.getMysqlConnection();
              String query = "DELETE FROM item WHERE item_id = "+ id; 
              PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
-             preparedStatement.executeQuery();
+             preparedStatement.executeUpdate();
              preparedStatement.close();
              connection.close();
          } catch (Exception e) {
@@ -221,7 +222,7 @@ public class CoSoVatChatService {
             String query = "UPDATE item SET item_quantity = item_quantity + "
             			 + soLuongXoa + "WHERE item_name = '"+ tenCoSoVatChat + "'"; 
             PreparedStatement preparedStatement = (PreparedStatement)connection.prepareStatement(query);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
         } catch (Exception e) {
@@ -241,7 +242,7 @@ public class CoSoVatChatService {
             preparedStatement.executeQuery();
             query = "DELETE FROM item WHERE item_quantity = 0";
             preparedStatement = (PreparedStatement)connection.prepareStatement(query);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             preparedStatement.close();
             connection.close();
         } catch (Exception e) {

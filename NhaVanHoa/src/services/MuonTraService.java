@@ -165,7 +165,6 @@ public class MuonTraService {
 			    	  + "' AND '"
 			    	  + denNgay + "' )";
 	        PreparedStatement preparedStatement1 = (PreparedStatement)connection.prepareStatement(query1);
-	        System.out.println(preparedStatement1);
 	        ResultSet rs1 = preparedStatement1.executeQuery();
 
 	        while(rs1.next()) {
@@ -220,7 +219,7 @@ public class MuonTraService {
         //viết truy vấn
         try {
         	Connection connection = MysqlConnection.getMysqlConnection();
-        	String query1 = "SELECT i.item_name, i.item_quantity, s.real_time_end FROM item i  "
+        	String query1 = "SELECT i.item_name, ir.item_number, s.real_time_end FROM item i  "
         				  + "LEFT JOIN itemregistered ir ON i.item_id = ir.item_id "
         				  + "LEFT JOIN registers r ON r.user_id = ir.user_id "
         				  + "LEFT JOIN schedule s ON s.event_no = ir.event_no "
@@ -234,9 +233,8 @@ public class MuonTraService {
         		coSoVatChatModel.setTenCoSoVatChat(rs1.getString(1));
         		coSoVatChatModel.setSoLuongMuon(rs1.getInt(2));
         		coSoVatChatModel.setThoiGianTraReal(rs1.getTimestamp(3));
-        		if (rs1.getTimestamp(3) == null) coSoVatChatModel.setSoLuongDaTra(0);
+        		if (rs1.getTimestamp(3) == null) soLuongDaTra = 0;
         		else {
-            		System.out.println(rs1.getTimestamp(3));
         			String query2 = "SELECT item_number FROM deleteditem d LEFT JOIN item i ON d.item_id = i.item_id WHERE i.item_name = '"
         						  + rs1.getString(1)
         						  + "' AND d.date = '" + rs1.getTimestamp(3) + "'";
@@ -252,7 +250,7 @@ public class MuonTraService {
 	        String query2 = "SELECT i.infra_name, s.real_time_end FROM infrastructure i "
   				  		  + "LEFT JOIN infraregistered ir ON "
   				  		  + "i.infra_id = ir.infra_id LEFT JOIN registers r ON r.user_id = ir.user_id LEFT JOIN schedule s "
-  				  		  + "ON s.event_no = ir.event_no WHERE r.cccd = " + cccdNguoiMuon + " AND s.time_start = '"+ thoiGianMuon + "'";
+  				  		  + "ON s.event_no = ir.event_no WHERE r.cccd = '" + cccdNguoiMuon + "' AND s.time_start = '"+ thoiGianMuon + "'";
 	        PreparedStatement st2 = (PreparedStatement)connection.prepareStatement(query2);
 	        ResultSet rs2 = st2.executeQuery();
 	        while(rs2.next()) {
@@ -283,14 +281,16 @@ public class MuonTraService {
     	try {
         	Connection connection = MysqlConnection.getMysqlConnection();
         	String query1 = "DELETE FROM itemregistered WHERE user_id = (SELECT user_id FROM registers WHERE cccd = '" 
-        				  + cccdNguoiMuon + "') AND event_no = (SELECT event_no FROM schedule WHERE time_start = '"+ timestamp + "')";
+        				  + cccdNguoiMuon + "') AND event_no IN (SELECT event_no FROM schedule WHERE time_start = '"+ timestamp + "')";
         	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
-        	st1.executeQuery();
+          	st1.executeUpdate();
+
 	        st1.close();
 	        String query2 = "DELETE FROM infraregistered WHERE user_id = (SELECT user_id FROM registers WHERE cccd = '" 
-  				  		  + cccdNguoiMuon + "') AND event_no = (SELECT event_no FROM schedule WHERE time_start = '"+ timestamp + "')";
+  				  		  + cccdNguoiMuon + "') AND event_no IN (SELECT event_no FROM schedule WHERE time_start = '"+ timestamp + "')";
 	        PreparedStatement st2 = (PreparedStatement)connection.prepareStatement(query2);
-	        st2.executeQuery();
+          	st2.executeUpdate();
+
 	        st2.close();	     	        
 	        connection.close();
 		} catch (Exception e) {
@@ -310,9 +310,10 @@ public class MuonTraService {
         	Connection connection = MysqlConnection.getMysqlConnection();
         	String query = "UPDATE schedule SET real_time_end = CURRENT_TIMESTAMP WHERE event_no = (SELECT event_no FROM itemregistered ir LEFT JOIN schedule s ON "
         			  + "ir.event_no = s.event_no WHERE s.time_start = '"+ timestamp + "' AND "
-        			  + "ir.user_id = (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
+        			  + "ir.user_id IN (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
           	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-  	        st.executeQuery();
+          	st.executeUpdate();
+
   	        st.close();
   	        connection.close();
 		} catch (Exception e) {
@@ -333,28 +334,26 @@ public class MuonTraService {
         				 + "ON i.item_id = ir.item_id WHERE i.item_name = '" + coSoVatChatModel.getTenCoSoVatChat() + "' GROUP BY "
         				 + "i.item_id";
         	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
+        	System.out.println(st);
   	        ResultSet rs = st.executeQuery();
-  	        int remain = rs.getInt(1);
+  	        int remain = 0;
+  	        while(rs.next())  remain = rs.getInt(1);
   	        String query2 = "SELECT ir.item_number FROM item i LEFT JOIN itemregistered ir ON i.item_id = ir.item_id WHERE i.item_name = '"
-  	        			  + coSoVatChatModel.getTenCoSoVatChat() + "' AND ir.user_id = (SELECT user_id FROM registers WHERE cccd = '"
-  	        			  + cccdNguoiMuon + "') AND ir.event_no = (SELECT event_no FROM schedule WHERE time_start = '" + thoiGianMuon + "')";
+  	        			  + coSoVatChatModel.getTenCoSoVatChat() + "' AND ir.user_id IN (SELECT user_id FROM registers WHERE cccd = '"
+  	        			  + cccdNguoiMuon + "') AND ir.event_no IN (SELECT event_no FROM schedule WHERE time_start = '" + thoiGianMuon + "')";
   	        PreparedStatement st2 = (PreparedStatement)connection.prepareStatement(query2);
-	        System.out.println(st2);
+        	System.out.println(st2);
 	        ResultSet rs2 = st2.executeQuery();
 	        int dangMuon = 0;
-	        while(rs2.next()) rs2.getInt(1);
-	        System.out.println(remain + dangMuon);
-	        System.out.println(coSoVatChatModel.getSoLuongMuon());
+	        while(rs2.next()) dangMuon = rs2.getInt(1);
 	        if(coSoVatChatModel.getSoLuongMuon() > remain + dangMuon) return false;
-        	String query1 = "UPDATE itemregisters SET item_number = " + coSoVatChatModel.getSoLuongMuon() 
-        				  + " WHERE event_no = (SELECT event_no FROM itemregistered ir LEFT JOIN schedule s ON "
+        	String query1 = "UPDATE itemregistered SET item_number = " + coSoVatChatModel.getSoLuongMuon() 
+        				  + " WHERE event_no IN (SELECT ir.event_no FROM itemregistered ir LEFT JOIN schedule s ON "
         			  	  + "ir.event_no = s.event_no WHERE s.time_start = '"+ thoiGianMuon + "' AND "
-        			  	  + "ir.user_id = (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
+        			  	  + "ir.user_id IN (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
           	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
-          	rs2 = st1.executeQuery();
-          	if(rs2.next()) {
-          		
-          	}
+        	System.out.println(st1);
+          	st1.executeUpdate();
   	        st1.close();
   	        connection.close();
 		} catch (Exception e) {
@@ -371,12 +370,12 @@ public class MuonTraService {
     	try {
     		Connection connection = MysqlConnection.getMysqlConnection();
     	    String query = "DELETE FROM itemregistered WHERE user_id = (SELECT user_id FROM registers WHERE cccd = '"
-   				 		 + cccdNguoiMuon + "') AND item_id = (SELECT item_id FROM item WHERE item_name = '"
-   				 		 + tenCoSoVatChat + "') AND event_no = (SELECT event_no FROM schedule WHERE time_start = '"
+   				 		 + cccdNguoiMuon + "') AND item_id IN (SELECT item_id FROM item WHERE item_name = '"
+   				 		 + tenCoSoVatChat + "') AND event_no IN (SELECT event_no FROM schedule WHERE time_start = '"
    				 		 + thoiGianMuon + "')";
     	    PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-    	  	st.executeQuery();
-    	  	st.close();
+          	st.executeUpdate();
+
     	  	connection.close();
     		} catch (Exception e) {
     	        this.exceptionHandle(e.getMessage());
@@ -395,18 +394,20 @@ public class MuonTraService {
     	Timestamp currentTimestamp = new Timestamp(date.getTime());
     	try {
         	Connection connection = MysqlConnection.getMysqlConnection();
-        	String query = "UPDATE schedule SET real_time_end = '" + currentTimestamp + "' WHERE event_no = (SELECT event_no FROM itemregistered ir LEFT JOIN schedule s ON "
+        	String query = "UPDATE schedule SET real_time_end = '" + currentTimestamp + "' WHERE event_no IN (SELECT event_no FROM itemregistered ir LEFT JOIN schedule s ON "
         			  	 + "ir.event_no = s.event_no WHERE s.time_start = '"+ timestamp + "' AND "
-        			  	 + "ir.user_id = (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
+        			  	 + "ir.user_id IN (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
           	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-  	        st.executeQuery();
+          	st.executeUpdate();
+
   	        st.close();
   	        String query1 = "INSERT INTO deleteditem (item_id, date_delete, reason, item_number) VALUES "
   	        			  + "((SELECT item_id FROM item WHERE item_name = '" + coSoVatChatModel.getTenCoSoVatChat() + "'), '"
   	        			  + currentTimestamp + "', concat((SELECT user_name FROM registers WHERE cccd = '" + cccdNguoiMuon + "'), ' làm mất'), ?)";
   	        PreparedStatement st1 = connection.prepareStatement(query1, Statement.RETURN_GENERATED_KEYS);
   	        st1.setInt(1, coSoVatChatModel.getSoLuongMuon() - coSoVatChatModel.getSoLuongDaTra());
-  	        st1.executeUpdate();
+          	st1.executeUpdate();
+
   	        st1.close();
   	        connection.close();
 		} catch (Exception e) {
@@ -422,13 +423,14 @@ public class MuonTraService {
     public boolean huyMuonPhongBan(String cccdNguoiMuon, String tenPhongBan, Timestamp thoiGianMuon) {
     	try {
     		Connection connection = MysqlConnection.getMysqlConnection();
-    	    String query = "DELETE FROM infraregistered WHERE user_id = (SELECT user_id FROM registers WHERE cccd = '"
-   				 		 + cccdNguoiMuon + "') AND infra_id = (SELECT infra_id FROM infrastructure WHERE infra_name = '"
-   				 		 + tenPhongBan + "') AND event_no = (SELECT event_no FROM schedule WHERE time_start = '"
+    	    String query = "DELETE FROM infraregistered WHERE user_id IN (SELECT user_id FROM registers WHERE cccd = '"
+   				 		 + cccdNguoiMuon + "') AND infra_id IN (SELECT infra_id FROM infrastructure WHERE infra_name = '"
+   				 		 + tenPhongBan + "') AND event_no IN (SELECT event_no FROM schedule WHERE time_start = '"
    				 		 + thoiGianMuon + "')";
     	    PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-    	  	st.executeQuery();
-    	  	st.close();
+  	        ResultSet rs = st.executeQuery();
+          	st.executeUpdate();
+
     	  	connection.close();
     		} catch (Exception e) {
     	        this.exceptionHandle(e.getMessage());
@@ -444,11 +446,12 @@ public class MuonTraService {
     	Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
     	try {
         	Connection connection = MysqlConnection.getMysqlConnection();
-        	String query = "UPDATE schedule SET real_time_end = CURRENT_TIMESTAMP WHERE event_no = (SELECT event_no FROM infraregistered ir LEFT JOIN schedule s ON "
+        	String query = "UPDATE schedule SET real_time_end = CURRENT_TIMESTAMP WHERE event_no IN (SELECT event_no FROM infraregistered ir LEFT JOIN schedule s ON "
         			  + "ir.event_no = s.event_no WHERE s.time_start = '"+ timestamp + "' AND "
-        			  + "ir.user_id = (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
+        			  + "ir.user_id IN (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
           	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-  	        st.executeQuery();
+          	st.executeUpdate();
+
   	        st.close();
   	        connection.close();
 		} catch (Exception e) {
@@ -471,10 +474,11 @@ public class MuonTraService {
     	Timestamp currentTimestamp = new Timestamp(date.getTime());
     	if (coSoVatChatModel.getSoLuongMuon() - coSoVatChatModel.getSoLuongDaTra() == 0) try {
         	Connection connection = MysqlConnection.getMysqlConnection();
-  	        String query1 = "DELETE FROM deleteditem WHERE item_id = (SELECT item_id FROM item WHERE item_name = '" + coSoVatChatModel.getTenCoSoVatChat()
+  	        String query1 = "DELETE FROM deleteditem WHERE item_id IN (SELECT item_id FROM item WHERE item_name = '" + coSoVatChatModel.getTenCoSoVatChat()
   	        			  + "') AND date_delete = '" + coSoVatChatModel.getThoiGianTraReal() + "'";
   	        PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
-  	        st1.executeQuery();
+          	st1s.executeUpdate();
+
   	        st1.close();
   	        connection.close();
 		} catch (Exception e) {
@@ -484,10 +488,11 @@ public class MuonTraService {
     	else try {
     		int lamMat = coSoVatChatModel.getSoLuongMuon() - coSoVatChatModel.getSoLuongDaTra();
         	Connection connection = MysqlConnection.getMysqlConnection();
-        	String query1 = "UPDATE deleteditem SET item_number = " + lamMat + " WHERE item_id = (SELECT item_id FROM item WHERE item_name = '" + coSoVatChatModel.getTenCoSoVatChat()
+        	String query1 = "UPDATE deleteditem SET item_number = " + lamMat + " WHERE item_id IN (SELECT item_id FROM item WHERE item_name = '" + coSoVatChatModel.getTenCoSoVatChat()
 			  			  + "') AND date_delete = '" + coSoVatChatModel.getThoiGianTraReal() + "'";
   	        PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
-  	        st1.executeQuery();
+          	st1.executeUpdate();
+
   	        st1.close();
   	        connection.close();
 		} catch (Exception e) {

@@ -238,11 +238,10 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
     		if(soLuong == this.soLuongMuonNow) {
     			return;
     		}
-    		System.out.println(isCoSoVatChat);
     		if(isCoSoVatChat > 0) {
     			CoSoVatChatModel coSoVatChatModel = muonTraBean.getCoSoVatChatModel();
     			coSoVatChatModel.setTenCoSoVatChat(tenCoSoVatChatPhongBanDetailJlb.getText());
-    			coSoVatChatModel.setSoLuong(soLuong);
+    			coSoVatChatModel.setSoLuongMuon(soLuong);
     			try {
     				if(soLuong == 0) {
     					if(JOptionPane.showConfirmDialog(null,"Bạn có chắc chắn không mượn bất cứ cái "+ coSoVatChatModel.getTenCoSoVatChat() +" nào ?", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
@@ -302,7 +301,6 @@ public class ChinhSuaMuonTraFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng nhập đúng định dạng số lượng", "Warning", JOptionPane.WARNING_MESSAGE);
                 return false;
     		}
-    		System.out.println(isCoSoVatChat);
         	if(isCoSoVatChat == 0 && soLuong > 1) {
                 JOptionPane.showMessageDialog(rootPane, "Số lượng phòng ban chỉ có 1", "Warning", JOptionPane.WARNING_MESSAGE);
                 return false;

@@ -52,6 +52,8 @@ public class XemChiTietMuonTraCotroller {
 	        this.jpnView = jpnView;
 	        classTableModel = new ClassTableModel();
 	        this.muonTraService = new MuonTraService();
+	        this.idDetail = idDetail;
+	        this.thoiGianMuonDetail = thoiGianMuonDetail;
 	        TimeService timeService = new TimeService();
 	        Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(thoiGianMuonDetail.getText());
 	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(idDetail.getText(), thoiGianMuonTS);
@@ -129,6 +131,7 @@ public class XemChiTietMuonTraCotroller {
 	    }
 	    
 	    public void refreshData() {
+	    	timeService = new TimeService();
 	        this.muonTraBean = this.muonTraService.getChiTietMuonTra(this.idDetail.getText(), timeService.convertDatetableToTimestamp(thoiGianMuonDetail.getText()) );
 	        setDataTable();
 	    }

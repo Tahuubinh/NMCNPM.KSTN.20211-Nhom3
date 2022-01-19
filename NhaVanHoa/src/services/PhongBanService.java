@@ -127,8 +127,7 @@ public class PhongBanService {
         try {
         	connection = MysqlConnection.getMysqlConnection();
         	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-            ResultSet rs = st.executeQuery();
-            if(rs.next()) return false;
+            st.executeUpdate();
 	        st.close();
 	        connection.close();
 		} catch (Exception e) {
@@ -148,7 +147,7 @@ public class PhongBanService {
  		try {
  			connection = MysqlConnection.getMysqlConnection();
  			PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
- 	    	st.execute();
+            st.executeUpdate();
  	    	st.close();
  	    	connection.close();
  		} catch (ClassNotFoundException e) {
@@ -168,7 +167,7 @@ public class PhongBanService {
  		try {
  			connection = MysqlConnection.getMysqlConnection();
  			PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
- 	    	st.execute();
+            st.executeUpdate();
  	    	st.close();
  	    	connection.close();
  		} catch (ClassNotFoundException e) {
