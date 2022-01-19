@@ -124,11 +124,13 @@ public class PhongBanService {
         			 + "ON ir.infra_id = i.infra_id WHERE infra_name = '"
         			 + tenPhongBan + "' AND s.time_start >= CURRENT_TIMESTAMP";
         
+        
         try {
         	connection = MysqlConnection.getMysqlConnection();
         	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
-            System.out.println(st);
-            st.execute();
+        	ResultSet rs = st.executeQuery();
+            while(rs.next()) return false;
+            huyPhongBanBatBuoc(tenPhongBan);
 	        st.close();
 	        connection.close();
 		} catch (Exception e) {

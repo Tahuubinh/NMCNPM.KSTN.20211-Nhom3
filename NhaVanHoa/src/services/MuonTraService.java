@@ -275,19 +275,18 @@ public class MuonTraService {
     /*
      * huy lich muon hien tai theo cccd nguoi muon
      */
-    public boolean huyLichMuon(String cccdNguoiMuon, String thoiGianMuon) {
+    public boolean huyLichMuon(String cccdNguoiMuon, Timestamp thoiGianMuon) {
 		// TODO Auto-generated method stub
-    	Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
     	try {
         	Connection connection = MysqlConnection.getMysqlConnection();
-        	String query1 = "DELETE FROM itemregistered WHERE user_id = (SELECT user_id FROM registers WHERE cccd = '" 
-        				  + cccdNguoiMuon + "') AND event_no IN (SELECT event_no FROM schedule WHERE time_start = '"+ timestamp + "')";
+        	String query1 = "DELETE FROM itemregistered WHERE user_id IN (SELECT user_id FROM registers WHERE cccd = '" 
+        				  + cccdNguoiMuon + "') AND event_no IN (SELECT event_no FROM schedule WHERE time_start = '"+ thoiGianMuon + "')";
         	PreparedStatement st1 = (PreparedStatement)connection.prepareStatement(query1);
           	st1.executeUpdate();
 
 	        st1.close();
-	        String query2 = "DELETE FROM infraregistered WHERE user_id = (SELECT user_id FROM registers WHERE cccd = '" 
-  				  		  + cccdNguoiMuon + "') AND event_no IN (SELECT event_no FROM schedule WHERE time_start = '"+ timestamp + "')";
+	        String query2 = "DELETE FROM infraregistered WHERE user_id IN (SELECT user_id FROM registers WHERE cccd = '" 
+  				  		  + cccdNguoiMuon + "') AND event_no IN (SELECT event_no FROM schedule WHERE time_start = '"+ thoiGianMuon + "')";
 	        PreparedStatement st2 = (PreparedStatement)connection.prepareStatement(query2);
           	st2.executeUpdate();
 
@@ -303,15 +302,15 @@ public class MuonTraService {
     /*
      * ban giao toan bo csvc, phong ban theo cccd nguoi muon
      */
-    public boolean hoanTraToanBo(String cccdNguoiMuon, String thoiGianMuon) {
+    public boolean hoanTraToanBo(String cccdNguoiMuon, Timestamp thoiGianMuon) {
 		// TODO Auto-generated method stub
-    	Timestamp timestamp = Timestamp.valueOf(thoiGianMuon);
     	try {
         	Connection connection = MysqlConnection.getMysqlConnection();
-        	String query = "UPDATE schedule SET real_time_end = CURRENT_TIMESTAMP WHERE event_no = (SELECT event_no FROM itemregistered ir LEFT JOIN schedule s ON "
-        			  + "ir.event_no = s.event_no WHERE s.time_start = '"+ timestamp + "' AND "
+        	String query = "UPDATE schedule SET real_time_end = CURRENT_TIMESTAMP WHERE event_no IN (SELECT ir.event_no FROM itemregistered ir LEFT JOIN schedule s ON "
+        			  + "ir.event_no = s.event_no WHERE s.time_start = '"+ thoiGianMuon + "' AND "
         			  + "ir.user_id IN (SELECT user_id FROM registers WHERE cccd = '" + cccdNguoiMuon + "'))";
           	PreparedStatement st = (PreparedStatement)connection.prepareStatement(query);
+          	System.out.println(st);
           	st.executeUpdate();
 
   	        st.close();

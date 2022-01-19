@@ -36,7 +36,7 @@ public class AddNewController {
         ThoiGianModel thoiGianModel = muonTraBean.getThoiGianModel();
         List<CoSoVatChatModel> listCoSoVatChatModels = muonTraBean.getListCoSoVatChatModels();
         List<PhongBanModel> listPhongBanModels = muonTraBean.getListPhongBanModels();
-        int idNguoiMuon=-1;
+        int idNguoiMuon=100;
         Connection connection = MysqlConnection.getMysqlConnection();
         String query1 = "SELECT user_id FROM registers WHERE user_name = '" + nguoiMuonModel.getTenNguoiMuon() 
         			 + "' AND cccd = '" + nguoiMuonModel.getCccd() + "'";
@@ -44,10 +44,10 @@ public class AddNewController {
         ResultSet rs1 = st1.executeQuery();
         while(rs1.next()) {
         	idNguoiMuon = rs1.getInt(1);
-        	break;
         }
-        if(idNguoiMuon < 0) return false;
-        
+        System.out.println(idNguoiMuon);
+//        if(idNguoiMuon < 0) return false;
+        final int id = idNguoiMuon;
         String query2 = "INSERT INTO schedule (time_start, time_end, real_time_end) values (?, ?, ?)";
         PreparedStatement st2 = connection.prepareStatement(query2, Statement.RETURN_GENERATED_KEYS);
         
@@ -56,39 +56,41 @@ public class AddNewController {
     	st2.setTimestamp(3, null);
     	st2.executeUpdate();
     	ResultSet keys = st2.getGeneratedKeys();
-    	
-        listCoSoVatChatModels.forEach(coSoVatChat ->{
-        	int soLuongMuon = coSoVatChat.getSoLuongMuon();
-        	String query3 = "INSERT INTO itemregistered (item_id, user_id, event_no, item_number) values "
-        				  + "((SELECT item_id FROM item WHERE item_name = '"
-        				  + coSoVatChat.getTenCoSoVatChat()
-        				  + "', ?, ?, ?)";
-        	try {
-				PreparedStatement st3 = connection.prepareStatement(query3);
-				st3.setInt(1, rs1.getInt(1));
-				st3.setInt(2, keys.getInt(1));
-				st3.setInt(3, coSoVatChat.getSoLuongMuon());
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				this.exceptionHandle(e.getMessage());
-			}
-        });
-        listPhongBanModels.forEach(phongBan ->{
-        	String query3 = "INSERT INTO itemregistered (infra_id, user_id, event_no) values "
-        				  + "((SELECT item_id FROM item WHERE item_name = '"
-        				  + phongBan.getTenPhongBan()
-        				  + "', ?, ?)";
-        	try {
-				PreparedStatement st3 = connection.prepareStatement(query3);
-				st3.setInt(1, rs1.getInt(1));
-				st3.setInt(2, keys.getInt(1));
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				this.exceptionHandle(e.getMessage());
-			}
-        });
+    	int key = 0;
+    	while(keys.next()) {
+	        listCoSoVatChatModels.forEach(coSoVatChat ->{
+	        	int soLuongMuon = coSoVatChat.getSoLuongMuon();
+	        	String query3 = "INSERT INTO itemregistered (item_id, user_id, event_no, item_number) values "
+	        				  + "((SELECT item_id FROM item WHERE item_name = '"
+	        				  + coSoVatChat.getTenCoSoVatChat()
+	        				  + "', ?, ?, ?)";
+	        	try {
+					PreparedStatement st3 = connection.prepareStatement(query3);
+					st3.setInt(1, id);
+					st3.setInt(2, keys.getInt(1));
+					st3.setInt(3, coSoVatChat.getSoLuongMuon());
+					st3.executeUpdate();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					this.exceptionHandle(e.getMessage());
+				}
+	        });
+	        listPhongBanModels.forEach(phongBan ->{
+	        	String query3 = "INSERT INTO itemregistered (infra_id, user_id, event_no) values "
+	        				  + "((SELECT item_id FROM item WHERE item_name = '"
+	        				  + phongBan.getTenPhongBan()
+	        				  + "', ?, ?)";
+	        	try {
+					PreparedStatement st3 = connection.prepareStatement(query3);
+					st3.setInt(1, id);
+					st3.setInt(2, keys.getInt(1));
+					st3.executeUpdate();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					this.exceptionHandle(e.getMessage());
+				}
+	        });
+    	}
         st2.close();
         st1.close();
         connection.close();

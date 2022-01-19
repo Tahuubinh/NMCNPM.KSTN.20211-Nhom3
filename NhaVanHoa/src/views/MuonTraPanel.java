@@ -359,10 +359,11 @@ public class MuonTraPanel extends javax.swing.JPanel {
 				String tenNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 1).toString();
 				String cccdNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 2).toString();
 				String thoiGianMuon = xemChiTietTable.getModel().getValueAt(row, 4).toString();
+				Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(thoiGianMuon);
 				  if (JOptionPane.showConfirmDialog(null, "Bạn sẽ hoàn trả toàn bộ cơ sở vật chất và phòng ban đã mượn của " + tenNguoiMuon + " ??", "Question??", JOptionPane.YES_NO_OPTION) == 0) {
 			        	 try {
 			             	MuonTraService muonTraService = new MuonTraService();
-			             	if(muonTraService.hoanTraToanBo(cccdNguoiMuon, thoiGianMuon))
+			             	if(muonTraService.hoanTraToanBo(cccdNguoiMuon, thoiGianMuonTS))
 			                     JOptionPane.showMessageDialog(null, "Hoàn trả thành công!!");
 			                controller.refreshData();
 			           
@@ -385,10 +386,11 @@ public class MuonTraPanel extends javax.swing.JPanel {
 		String tenNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 1).toString();
 		String cccdNguoiMuon = xemChiTietTable.getModel().getValueAt(row, 2).toString();
 		String thoiGianMuon = xemChiTietTable.getModel().getValueAt(row, 4).toString();
+		Timestamp thoiGianMuonTS = timeService.convertDatetableToTimestamp(thoiGianMuon);
         if (JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn hủy lịch mượn của " + tenNguoiMuon + " ??", "Warning!!", JOptionPane.YES_NO_OPTION) == 0) {
         	 try {
              	MuonTraService muonTraService = new MuonTraService();
-             	if(muonTraService.huyLichMuon(cccdNguoiMuon, thoiGianMuon))
+             	if(muonTraService.huyLichMuon(cccdNguoiMuon, thoiGianMuonTS))
                      JOptionPane.showMessageDialog(null, "Hủy thành công!!");
                 else {
                     JOptionPane.showMessageDialog(null, "Đã quá lịch mượn, không thể hủy", "Warning", JOptionPane.WARNING_MESSAGE);

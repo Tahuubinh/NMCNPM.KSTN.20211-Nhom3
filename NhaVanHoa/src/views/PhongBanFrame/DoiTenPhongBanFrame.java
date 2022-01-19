@@ -67,6 +67,7 @@ public class DoiTenPhongBanFrame extends javax.swing.JFrame {
     	this.parentController = parentController;
     	this.parentFrame = parentJFrame;
         this.parentFrame.setEnabled(false);
+        this.phongBanBean = new PhongBanBean();
         initComponents();
         this.tenPhongBanDetail.setText(tenPhongBanDetail);
         this.tenPhongBanCu = tenPhongBanDetail;
@@ -240,6 +241,7 @@ public class DoiTenPhongBanFrame extends javax.swing.JFrame {
             try {
             	PhongBanService phongBanService = new PhongBanService();
             	phongBanService.doiTenPhongBan(tenPhongBanCu, tenPhongBanJtf.getText());
+            	close();
             	parentController.refreshData();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
