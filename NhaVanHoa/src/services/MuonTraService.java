@@ -255,9 +255,9 @@ public class MuonTraService {
 	        ResultSet rs2 = st2.executeQuery();
 	        while(rs2.next()) {
 	        	PhongBanModel phongBanModel = new PhongBanModel();
-	        	phongBanModel.setTenPhongBan(rs1.getString(1));
-	        	phongBanModel.setThoiGianTraReal(rs1.getTimestamp(3));
-	        	if (rs1.getTimestamp(3) == null) phongBanModel.setSoLuongDaTra(0);
+	        	phongBanModel.setTenPhongBan(rs2.getString(1));
+	        	phongBanModel.setThoiGianTraReal(rs2.getTimestamp(2));
+	        	if (rs2.getTimestamp(2) == null) phongBanModel.setSoLuongDaTra(0);
 	        	else phongBanModel.setSoLuongDaTra(1);
 	        	listPhongBanModels.add(phongBanModel);
 	        }
