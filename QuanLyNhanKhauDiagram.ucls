@@ -1,0 +1,2072 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="Bean.DanhMucBean" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/Bean/DanhMucBean.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2353" y="1875"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="Bean.HoKhauBean" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/Bean/HoKhauBean.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="268" width="383" x="750" y="1737"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="Bean.NhanKhauBean" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/Bean/NhanKhauBean.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="336" width="365" x="296" y="4037"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="controllers.HoKhauPanelController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/HoKhauPanelController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-732" y="1847"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="controllers.HomeCotroller" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/HomeCotroller.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2776" y="1826"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="controllers.LoginController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/LoginController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-3043" y="1892"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="controllers.MainController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/MainController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2281" y="2269"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="controllers.MainController.LabelEvent" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/MainController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2572" y="2531"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="controllers.NhanKhauManagerPanelController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/NhanKhauManagerPanelController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-3352" y="4552"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="controllers.ThongKePanelController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/ThongKePanelController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="716" width="297" x="2836" y="4207"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="controllers.HoKhauManagerController.ChonChuHoMoiController" 
+    project="QuanLyNhanKhau" file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/ChonChuHoMoiController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2325" y="6538"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="controllers.HoKhauManagerController.ChonThanhVienController" 
+    project="QuanLyNhanKhau" file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/ChonThanhVienController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-950" y="6592"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="controllers.HoKhauManagerController.ChoosePeopleController" 
+    project="QuanLyNhanKhau" file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/ChoosePeopleController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-3185" y="5582"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="controllers.HoKhauManagerController.ChuyenDiNoiKhacController" 
+    project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/ChuyenDiNoiKhacController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-469" y="1099"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="controllers.HoKhauManagerController.QuanLyQuanHeController" 
+    project="QuanLyNhanKhau" file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/QuanLyQuanHeController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="450" width="218" x="1250" y="5594"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="controllers.HoKhauManagerController.QuanLyThanhVienController" 
+    project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/QuanLyThanhVienController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="516" width="225" x="1897" y="5442"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="controllers.HoKhauManagerController.TachHoKhauController" 
+    project="QuanLyNhanKhau" file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/TachHoKhauController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-709" y="2639"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="controllers.HoKhauManagerController.ThemMoiController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/ThemMoiController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-794" y="3587"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="controllers.NhanKhauManagerController.AddNewController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/NhanKhauManagerController/AddNewController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="946" y="759"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="controllers.NhanKhauManagerController.ChinhSuaController" 
+    project="QuanLyNhanKhau" file="/QuanLyNhanKhau/src/controllers/NhanKhauManagerController/ChinhSuaController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1433" y="1240"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="controllers.NhanKhauManagerController.DangKyTamTruController" 
+    project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/NhanKhauManagerController/DangKyTamTruController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1102" y="1636"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="controllers.NhanKhauManagerController.KhaiTuController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/NhanKhauManagerController/KhaiTuController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="941" y="923"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="controllers.NhanKhauManagerController.TieuSuController" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/NhanKhauManagerController/TieuSuController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="236" width="232" x="1757" y="4210"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="controllers.NhanKhauManagerController.XoaNhanKhauController" 
+    project="QuanLyNhanKhau" file="/QuanLyNhanKhau/src/controllers/NhanKhauManagerController/XoaNhanKhauController.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1354" y="987"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="models.ChungMinhThuModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/ChungMinhThuModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1445" y="2821"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="26" language="java" name="models.DinhChinhModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/DinhChinhModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1044" y="1302"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="models.GiaDinhModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/GiaDinhModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="516" width="197" x="1088" y="2426"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="models.KhaiTuModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/KhaiTuModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="466" width="195" x="-1368" y="-588"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="29" language="java" name="models.QuanHeModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/QuanHeModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1798" y="6206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="models.TamTruModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/TamTruModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1948" y="-811"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="models.TamVangModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/TamVangModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1970" y="-1431"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="32" language="java" name="models.ThanhVienCuaHoModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/ThanhVienCuaHoModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="249" width="192" x="616" y="2396"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="33" language="java" name="models.UserMoldel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/UserMoldel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2899" y="2179"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="quanlynhankhau.QuanLyNhanKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/quanlynhankhau/QuanLyNhanKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-3083" y="2386"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="services.HoKhauService" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/services/HoKhauService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-1478" y="2034"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="36" language="java" name="services.MysqlConnection" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/services/MysqlConnection.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2986" y="2581"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="37" language="java" name="services.NhanKhauService" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/services/NhanKhauService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="748" y="5332"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="controllers.HoKhauManagerController.ChangeListPeopleController" 
+    project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/controllers/HoKhauManagerController/ChangeListPeopleController.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2832" y="3357"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="39" language="java" name="models.TieuSuModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/TieuSuModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2419" y="3945"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="40" language="java" name="models.NhanKhauModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/NhanKhauModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2149" y="2798"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="41" language="java" name="Bean.MemOfFamily" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/Bean/MemOfFamily.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="178" width="305" x="-460" y="3110"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="42" language="java" name="models.HoKhauModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/models/HoKhauModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1786" y="1403"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="services.StringService" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/services/StringService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2524" y="1539"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="utility.ClassTableModel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/utility/ClassTableModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="748" y="5035"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="45" language="java" name="utility.TableModelHoKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/utility/TableModelHoKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="404" y="3344"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="46" language="java" name="views.HomePagePanel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HomePagePanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2810" y="1336"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="47" language="java" name="views.LoginUI" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/LoginUI.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-3197" y="1527"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="48" language="java" name="views.MainFrame" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/MainFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="304" width="153" x="-2297" y="1279"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="49" language="java" name="views.NhanKhauManagePanel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagePanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-3571" y="4000"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="50" language="java" name="views.ThongKePanel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/ThongKePanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3426" y="4475"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="51" language="java" name="views.HoKhauManagePanel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagePanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-110" y="487"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="52" language="java" name="views.HoKhauManagerFrame.ChangeListPeopleJframe" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/ChangeListPeopleJframe.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2943" y="4034"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="53" language="java" name="views.HoKhauManagerFrame.ChoosePeople" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/ChoosePeople.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-3351" y="5048"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="54" language="java" name="views.HoKhauManagerFrame.ChuyenDiNoiKhac" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/ChuyenDiNoiKhac.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="295" y="696"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="55" language="java" name="views.HoKhauManagerFrame.FormChonChuHo" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormChonChuHo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="392" width="173" x="1612" y="3533"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="56" language="java" name="views.TimKiemPanel" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/TimKiemPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="124" width="161" x="-2679" y="2138"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="57" language="java" name="views.HoKhauManagerFrame.FormChonChuHoMoi" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormChonChuHoMoi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="322" width="173" x="1638" y="2644"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="58" language="java" name="views.HoKhauManagerFrame.FormChonThanhVienMoi" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormChonThanhVienMoi.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="326" width="200" x="1739" y="3153"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="59" language="java" name="views.HoKhauManagerFrame.FormDoiChuHo" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormDoiChuHo.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="376" width="212" x="1958" y="4974"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="60" language="java" name="views.HoKhauManagerFrame.FormTachHoKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormTachHoKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="322" width="212" x="561" y="2695"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="61" language="java" name="views.HoKhauManagerFrame.FormTachNhanKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormTachNhanKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-2039" y="5773"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="62" language="java" name="views.HoKhauManagerFrame.FormThemHoKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormThemHoKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-395" y="6543"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="63" language="java" name="views.HoKhauManagerFrame.FormThemThanhVien" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormThemThanhVien.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3" y="6855"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="64" language="java" name="views.HoKhauManagerFrame.FormXemChiTiet" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/FormXemChiTiet.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="429" y="6970"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="65" language="java" name="views.HoKhauManagerFrame.TachHoKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/TachHoKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="946" y="6985"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="66" language="java" name="views.HoKhauManagerFrame.ThemMoiHoKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/ThemMoiHoKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="808" width="331" x="1116" y="6406"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="67" language="java" name="views.HoKhauManagerFrame.XoaHoKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/HoKhauManagerFrame/XoaHoKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="74" y="1690"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="68" language="java" name="views.infoViews.InfoJframe" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/infoViews/InfoJframe.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2593" y="4985"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="69" language="java" name="views.NhanKhauManagerFrame.AddNewPeopleJFrame" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/AddNewPeopleJFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2596" y="6004"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="70" language="java" name="views.NhanKhauManagerFrame.DangKyTamTru" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/DangKyTamTru.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="358" width="366" x="1748" y="6636"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="71" language="java" name="views.NhanKhauManagerFrame.DangKyTamVang" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/DangKyTamVang.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1729" y="7307"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="72" language="java" name="views.NhanKhauManagerFrame.DangKyTamVangJFrame" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/DangKyTamVangJFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2356" y="7222"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="73" language="java" name="views.NhanKhauManagerFrame.KhaiTuJFrame" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/KhaiTuJFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2842" y="7254"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="74" language="java" name="views.NhanKhauManagerFrame.ThemMoiNhanKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/ThemMoiNhanKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1542" y="7834"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="75" language="java" name="views.NhanKhauManagerFrame.TieuSuJFrame" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/TieuSuJFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2014" y="7950"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="76" language="java" name="views.NhanKhauManagerFrame.XemChiTietChinhSuaNhanKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/XemChiTietChinhSuaNhanKhau.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2539" y="7965"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="77" language="java" name="views.NhanKhauManagerFrame.XoaNhanKhau" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/XoaNhanKhau.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-3960" y="4875"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="78" language="java" name="views.NhanKhauManagerFrame.XoaThongKe" project="QuanLyNhanKhau" 
+    file="/QuanLyNhanKhau/src/views/NhanKhauManagerFrame/XoaThongKe.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3420" y="5029"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="79">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="80" name="controller"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="83" name="thanhVienSeclected">        
+        <position height="20" width="124" x="-452" y="2952"/>      
+      </attribute>      
+      <multiplicity id="84" minimum="0" maximum="1">        
+        <position height="18" width="27" x="-431" y="3051"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="76" navigable="false">      
+      <attribute id="86" name="nhanKhauModel"/>      
+      <multiplicity id="87" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="89" name="listNhanKhauBeans">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="90" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="70" navigable="false">      
+      <attribute id="92" name="controller"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="95" name="parent_controller"/>      
+      <multiplicity id="96" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="98" name="nhanKhauBean"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="101" name="listPeople">        
+        <position height="20" width="65" x="153" y="4096"/>      
+      </attribute>      
+      <multiplicity id="102" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="217" y="4116"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="104" name="chungMinhThuModel">        
+        <position height="0" width="0" x="133" y="-124"/>      
+      </attribute>      
+      <multiplicity id="105" minimum="0" maximum="1">        
+        <position height="0" width="0" x="133" y="-124"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="76" navigable="false">      
+      <attribute id="107" name="parentController"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="110" name="chuHo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="111" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="113" name="nhanKhauBeanTemp"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="115">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="116" name="controller"/>      
+      <multiplicity id="117" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="118">    
+    <end type="SOURCE" refId="51" navigable="false">      
+      <attribute id="119" name="controller">        
+        <position height="0" width="0" x="-351" y="-37"/>      
+      </attribute>      
+      <multiplicity id="120" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-351" y="-37"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="121">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="122" name="classTableModel">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="123" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="124">    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="125" name="controller"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="127">    
+    <end type="SOURCE" refId="63" navigable="false">      
+      <attribute id="128" name="controller"/>      
+      <multiplicity id="129" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="130">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="131" name="listDanhMuc">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="132" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="133">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="134" name="classTableModel">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="135" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="136">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="137" name="quan_lycontroller"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="140" name="quan_lycontroller"/>      
+      <multiplicity id="141" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="142">    
+    <end type="SOURCE" refId="69" navigable="false">      
+      <attribute id="143" name="nhanKhauBean"/>      
+      <multiplicity id="144" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="145">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="146" name="listNhanKhauModels">        
+        <position height="0" width="0" x="423" y="-1"/>      
+      </attribute>      
+      <multiplicity id="147" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="423" y="-1"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="148">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="149" name="memSelected">        
+        <position height="20" width="88" x="-674" y="3188"/>      
+      </attribute>      
+      <multiplicity id="150" minimum="0" maximum="1">        
+        <position height="18" width="27" x="-587" y="3191"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="151">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="152" name="listNhanKhauBeans">        
+        <position height="20" width="122" x="687" y="4278"/>      
+      </attribute>      
+      <multiplicity id="153" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="154">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="155" name="chuHo"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="157">    
+    <end type="SOURCE" refId="69" navigable="false">      
+      <attribute id="158" name="parentController"/>      
+      <multiplicity id="159" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="160">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="161" name="nhanKhauService">        
+        <position height="20" width="108" x="1045" y="5056"/>      
+      </attribute>      
+      <multiplicity id="162" minimum="0" maximum="1">        
+        <position height="18" width="27" x="484" y="5534"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="163">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="164" name="controller">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="165" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="38" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="166">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="167" name="listNhanKhauBeans">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="168" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="169">    
+    <end type="SOURCE" refId="75" navigable="false">      
+      <attribute id="170" name="nhanKhauBean"/>      
+      <multiplicity id="171" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="172">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="173" name="tableModelHoKhau">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="174" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="175">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="176" name="list">        
+        <position height="20" width="25" x="873" y="2064"/>      
+      </attribute>      
+      <multiplicity id="177" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="178">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="179" name="parent_controller"/>      
+      <multiplicity id="180" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="181">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="182" name="tableModelHoKhau">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="183" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="184">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="185" name="chuHoModel"/>      
+      <multiplicity id="186" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="187">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="188" name="classTableModel">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="189" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="190">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="191" name="peopleSelected">        
+        <position height="20" width="97" x="156" y="4145"/>      
+      </attribute>      
+      <multiplicity id="192" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="193">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="194" name="hoKhauMoi">        
+        <position height="20" width="73" x="1030" y="2144"/>      
+      </attribute>      
+      <multiplicity id="195" minimum="0" maximum="1">        
+        <position height="18" width="27" x="1029" y="2076"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="196">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="197" name="hoKhauService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="198" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="199">    
+    <end type="SOURCE" refId="74" navigable="false">      
+      <attribute id="200" name="parentController"/>      
+      <multiplicity id="201" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="202">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="203" name="nhanKhauBean"/>      
+      <multiplicity id="204" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="205">    
+    <end type="SOURCE" refId="77" navigable="false">      
+      <attribute id="206" name="parentController"/>      
+      <multiplicity id="207" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="208">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="209" name="list"/>      
+      <multiplicity id="210" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="211">    
+    <end type="SOURCE" refId="71" navigable="false">      
+      <attribute id="212" name="nhanKhauBean"/>      
+      <multiplicity id="213" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="214">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="215" name="nhanKhauService">        
+        <position height="20" width="108" x="471" y="5517"/>      
+      </attribute>      
+      <multiplicity id="216" minimum="0" maximum="1">        
+        <position height="18" width="27" x="135" y="5284"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="217">    
+    <end type="SOURCE" refId="71" navigable="false">      
+      <attribute id="218" name="parentController"/>      
+      <multiplicity id="219" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="220">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="221" name="tableModelHoKhau">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="222" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="223">    
+    <end type="SOURCE" refId="65" navigable="false">      
+      <attribute id="224" name="controller"/>      
+      <multiplicity id="225" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="226">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="227" name="listTieuSuModels">        
+        <position height="0" width="0" x="1016" y="192"/>      
+      </attribute>      
+      <multiplicity id="228" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="1016" y="192"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="39" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="229">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="230" name="nhanKhauBean"/>      
+      <multiplicity id="231" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="232">    
+    <end type="SOURCE" refId="49" navigable="false">      
+      <attribute id="233" name="controller">        
+        <position height="0" width="0" x="-590" y="2"/>      
+      </attribute>      
+      <multiplicity id="234" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-590" y="2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="235">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="236" name="classTableModel">        
+        <position height="0" width="0" x="208" y="237"/>      
+      </attribute>      
+      <multiplicity id="237" minimum="0" maximum="1">        
+        <position height="0" width="0" x="208" y="237"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="238">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="239" name="hoKhauService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="240" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="241">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="242" name="nhanKhauService">        
+        <position height="20" width="108" x="1118" y="5282"/>      
+      </attribute>      
+      <multiplicity id="243" minimum="0" maximum="1">        
+        <position height="18" width="27" x="274" y="5201"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="244">    
+    <end type="SOURCE" refId="64" navigable="false">      
+      <attribute id="245" name="quan_lycontroller"/>      
+      <multiplicity id="246" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="247">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="248" name="thanhVienHoMoiSeclected">        
+        <position height="20" width="161" x="-534" y="3031"/>      
+      </attribute>      
+      <multiplicity id="249" minimum="0" maximum="1">        
+        <position height="18" width="27" x="-425" y="2971"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="250">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <association id="251">    
+    <end type="SOURCE" refId="57" navigable="false">      
+      <attribute id="252" name="nhanKhauBean"/>      
+      <multiplicity id="253" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="254">    
+    <end type="SOURCE" refId="54" navigable="false">      
+      <attribute id="255" name="hoKhauBean"/>      
+      <multiplicity id="256" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="257">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="258" name="nhanKhauModel">        
+        <position height="0" width="0" x="423" y="-1"/>      
+      </attribute>      
+      <multiplicity id="259" minimum="0" maximum="1">        
+        <position height="0" width="0" x="423" y="-1"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="260">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="261" name="nhanKhauService">        
+        <position height="20" width="108" x="96" y="5306"/>      
+      </attribute>      
+      <multiplicity id="262" minimum="0" maximum="1">        
+        <position height="18" width="27" x="145" y="5440"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="263">    
+    <end type="SOURCE" refId="60" navigable="false">      
+      <attribute id="264" name="parentController"/>      
+      <multiplicity id="265" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="266">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="267" name="thanhVienCuaHoModel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="268" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="269">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="270" name="nhanKhauService">        
+        <position height="20" width="108" x="1077" y="5429"/>      
+      </attribute>      
+      <multiplicity id="271" minimum="0" maximum="1">        
+        <position height="18" width="27" x="1053" y="5283"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="272">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="273" name="list">        
+        <position height="20" width="25" x="633" y="3934"/>      
+      </attribute>      
+      <multiplicity id="274" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="627" y="3959"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="275">    
+    <end type="SOURCE" refId="46" navigable="false">      
+      <attribute id="276" name="cotroller">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="277" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="278">    
+    <end type="SOURCE" refId="61" navigable="false">      
+      <attribute id="279" name="parentController"/>      
+      <multiplicity id="280" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="281">    
+    <end type="SOURCE" refId="69" navigable="false">      
+      <attribute id="282" name="controller"/>      
+      <multiplicity id="283" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="284">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="285" name="nhanKhauBean">        
+        <position height="20" width="96" x="163" y="4341"/>      
+      </attribute>      
+      <multiplicity id="286" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="287">    
+    <end type="SOURCE" refId="63" navigable="false">      
+      <attribute id="288" name="nhanKhauBeanTemp"/>      
+      <multiplicity id="289" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="290">    
+    <end type="SOURCE" refId="63" navigable="false">      
+      <attribute id="291" name="nhanKhauBean"/>      
+      <multiplicity id="292" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="293">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="294" name="listThanhVienTrongHoMoi">        
+        <position height="20" width="155" x="-505" y="2989"/>      
+      </attribute>      
+      <multiplicity id="295" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="-416" y="3092"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="296">    
+    <end type="SOURCE" refId="62" navigable="false">      
+      <attribute id="297" name="controller"/>      
+      <multiplicity id="298" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="299">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="300" name="listThanhVien">        
+        <position height="20" width="86" x="-473" y="3075"/>      
+      </attribute>      
+      <multiplicity id="301" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="-434" y="3006"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="302">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="303" name="nhanKhauService">        
+        <position height="0" width="0" x="170" y="2"/>      
+      </attribute>      
+      <multiplicity id="304" minimum="0" maximum="1">        
+        <position height="0" width="0" x="170" y="2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="305">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="306" name="hoKhauSelected">        
+        <position height="20" width="103" x="958" y="2095"/>      
+      </attribute>      
+      <multiplicity id="307" minimum="0" maximum="1">        
+        <position height="18" width="27" x="1052" y="2125"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="308">    
+    <end type="SOURCE" refId="70" navigable="false">      
+      <attribute id="309" name="parentController"/>      
+      <multiplicity id="310" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="311">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="312" name="classTableModel">        
+        <position height="0" width="0" x="208" y="237"/>      
+      </attribute>      
+      <multiplicity id="313" minimum="0" maximum="1">        
+        <position height="0" width="0" x="208" y="237"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="314">    
+    <end type="SOURCE" refId="63" navigable="false">      
+      <attribute id="315" name="quan_lycontroller"/>      
+      <multiplicity id="316" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="317">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="318" name="tableModelHoKhau">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="319" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="320">    
+    <end type="SOURCE" refId="47" navigable="false">      
+      <attribute id="321" name="cont">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="322" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="323">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="324" name="listThanhVien">        
+        <position height="20" width="86" x="-563" y="3220"/>      
+      </attribute>      
+      <multiplicity id="325" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="326">    
+    <end type="SOURCE" refId="58" navigable="false">      
+      <attribute id="327" name="nhanKhauBeanTemp"/>      
+      <multiplicity id="328" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="329">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="330" name="tableModelHoKhau">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="331" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="332">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="333" name="listNhanKhauBeans">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="334" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="547" y="3985"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="335">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="336" name="tableModelHoKhau">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="337" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="338">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="339" name="nhanKhauService">        
+        <position height="20" width="108" x="117" y="5417"/>      
+      </attribute>      
+      <multiplicity id="340" minimum="0" maximum="1">        
+        <position height="18" width="27" x="1071" y="5084"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="341">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="342" name="hoKhauModel">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="343" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="42" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="344">    
+    <end type="SOURCE" refId="50" navigable="false">      
+      <attribute id="345" name="controller">        
+        <position height="0" width="0" x="1261" y="57"/>      
+      </attribute>      
+      <multiplicity id="346" minimum="0" maximum="1">        
+        <position height="0" width="0" x="1261" y="57"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="347">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="348" name="chuHo">        
+        <position height="0" width="0" x="423" y="-1"/>      
+      </attribute>      
+      <multiplicity id="349" minimum="0" maximum="1">        
+        <position height="0" width="0" x="423" y="-1"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="40" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="350">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="351" name="currentUser">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="352" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="353">    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="354" name="controller"/>      
+      <multiplicity id="355" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="356">    
+    <end type="SOURCE" refId="71" navigable="false">      
+      <attribute id="357" name="controller"/>      
+      <multiplicity id="358" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="359">    
+    <end type="SOURCE" refId="62" navigable="false">      
+      <attribute id="360" name="parentController"/>      
+      <multiplicity id="361" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="362">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="363" name="listHoKhau">        
+        <position height="20" width="71" x="1076" y="2095"/>      
+      </attribute>      
+      <multiplicity id="364" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="1076" y="2082"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="365">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="366" name="listNhanKhauBeans">        
+        <position height="20" width="122" x="313" y="3907"/>      
+      </attribute>      
+      <multiplicity id="367" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="368">    
+    <end type="SOURCE" refId="76" navigable="false">      
+      <attribute id="369" name="nhanKhauBean"/>      
+      <multiplicity id="370" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="371">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="372" name="controller"/>      
+      <multiplicity id="373" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="374">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="375" name="listNhanKhauBeans">        
+        <position height="0" width="0" x="883" y="186"/>      
+      </attribute>      
+      <multiplicity id="376" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="883" y="186"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="377">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="378" name="nhanKhauBean"/>      
+      <multiplicity id="379" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="380">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="381" name="hoKhauService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="382" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="383">    
+    <end type="SOURCE" refId="41" navigable="false">      
+      <attribute id="384" name="nhanKhau">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="385" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="386">    
+    <end type="SOURCE" refId="75" navigable="false">      
+      <attribute id="387" name="controller"/>      
+      <multiplicity id="388" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="389">    
+    <end type="SOURCE" refId="62" navigable="false">      
+      <attribute id="390" name="nhanKhauBean"/>      
+      <multiplicity id="391" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="392">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="393" name="listMember">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="394" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="395">    
+    <end type="SOURCE" refId="66" navigable="false">      
+      <attribute id="396" name="hoKhauBean"/>      
+      <multiplicity id="397" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="398">    
+    <end type="SOURCE" refId="59" navigable="false">      
+      <attribute id="399" name="nhanKhauBean"/>      
+      <multiplicity id="400" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="401">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="402" name="list">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="403" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="404">    
+    <end type="SOURCE" refId="72" navigable="false">      
+      <attribute id="405" name="tamVangModel"/>      
+      <multiplicity id="406" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="31" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="407">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="408" name="classTableModel">        
+        <position height="0" width="0" x="208" y="237"/>      
+      </attribute>      
+      <multiplicity id="409" minimum="0" maximum="1">        
+        <position height="0" width="0" x="208" y="237"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="410">    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="411" name="nhanKhauBeanTemp">        
+        <position height="20" width="127" x="739" y="4051"/>      
+      </attribute>      
+      <multiplicity id="412" minimum="0" maximum="1">        
+        <position height="18" width="27" x="746" y="4113"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="413">    
+    <end type="SOURCE" refId="78" navigable="false">      
+      <attribute id="414" name="parentController"/>      
+      <multiplicity id="415" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="416">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="417" name="classTableModel">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </attribute>      
+      <multiplicity id="418" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-33" y="5"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="45" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="419">    
+    <end type="SOURCE" refId="62" navigable="false">      
+      <attribute id="420" name="chuHo"/>      
+      <multiplicity id="421" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="422">    
+    <end type="SOURCE" refId="67" navigable="false">      
+      <attribute id="423" name="parentController"/>      
+      <multiplicity id="424" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="425">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="426" name="listGiaDinhModels">        
+        <position height="0" width="0" x="157" y="2"/>      
+      </attribute>      
+      <multiplicity id="427" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="157" y="2"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="428">    
+    <end type="SOURCE" refId="55" navigable="false">      
+      <attribute id="429" name="nhanKhauBean">        
+        <position height="20" width="96" x="748" y="4096"/>      
+      </attribute>      
+      <multiplicity id="430" minimum="0" maximum="1">        
+        <position height="18" width="27" x="780" y="4068"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="431">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="432" name="nhanKhauService">        
+        <position height="20" width="108" x="161" y="5199"/>      
+      </attribute>      
+      <multiplicity id="433" minimum="0" maximum="1">        
+        <position height="18" width="27" x="1039" y="5411"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="434">    
+    <end type="SOURCE" refId="53" navigable="false">      
+      <attribute id="435" name="nhanKhauBeanTemp"/>      
+      <multiplicity id="436" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="437">    
+    <end type="SOURCE" refId="38" navigable="false">      
+      <attribute id="438" name="listMember">        
+        <position height="20" width="72" x="-575" y="3172"/>      
+      </attribute>      
+      <multiplicity id="439" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="-500" y="3175"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="440">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="441" name="hoKhauService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="442" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="443">    
+    <end type="SOURCE" refId="60" navigable="false">      
+      <attribute id="444" name="quan_lycontroller"/>      
+      <multiplicity id="445" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="446">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="447" name="hoKhauService">        
+        <position height="20" width="94" x="-1294" y="1840"/>      
+      </attribute>      
+      <multiplicity id="448" minimum="0" maximum="1">        
+        <position height="18" width="27" x="-1279" y="1864"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="449">    
+    <end type="SOURCE" refId="70" navigable="false">      
+      <attribute id="450" name="nhanKhauBean"/>      
+      <multiplicity id="451" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="452">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="453" name="listThanhVienCuaHo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="454" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="455">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="456" name="nhanKhauBean">        
+        <position height="20" width="96" x="511" y="3963"/>      
+      </attribute>      
+      <multiplicity id="457" minimum="0" maximum="1">        
+        <position height="18" width="27" x="615" y="4003"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="458">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="459" name="hoKhauBean">        
+        <position height="20" width="82" x="767" y="2089"/>      
+      </attribute>      
+      <multiplicity id="460" minimum="0" maximum="1">        
+        <position height="18" width="27" x="820" y="2070"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="461">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="462" name="hoKhauService">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="463" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="35" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="464">    
+    <end type="SOURCE" refId="52" navigable="false">      
+      <attribute id="465" name="listMemberTemp">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="466" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="41" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="467">    
+    <end type="SOURCE" refId="76" navigable="false">      
+      <attribute id="468" name="controller"/>      
+      <multiplicity id="469" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
